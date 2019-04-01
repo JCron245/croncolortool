@@ -5,26 +5,80 @@
   "dependencies": {
     "@types/jest": "24.0.11",
     "@types/node": "11.12.2",
-    "@types/react": "16.8.10",
+    "@types/react-copy-to-clipboard": "^4.2.6",
     "@types/react-dom": "16.8.3",
+    "braces": "^2.3.2",
+    "chroma-js": "^2.0.3",
+    "classnames": "^2.2.6",
+    "materialize-css": "^1.0.0",
+    "node-sass": "^4.11.0",
+    "primeicons": "^1.0.0",
+    "primereact": "^3.1.1",
     "react": "^16.8.6",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8",
+    "react-transition-group": "^2.5.1",
     "typescript": "3.4.1"
+  },
+  "devDependencies": {
+    "@types/chroma-js": "^1.4.1",
+    "@types/react": "^16.8.10",
+    "@typescript-eslint/eslint-plugin": "^1.5.0",
+    "@typescript-eslint/parser": "^1.5.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.4"
+  },
+  "browserslist": [
+    ">0.6%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "engines": {
+    "node": ">=7.0.0"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "plugin:@typescript-eslint/recommended",
+      "react-app",
+      "plugin:prettier/recommended"
+    ],
+    "plugins": [
+      "@typescript-eslint",
+      "react"
+    ],
+    "rules": {
+      "indent": "off",
+      "no-unused-vars": 0,
+      "@typescript-eslint/indent": [
+        "error",
+        "tab"
+      ],
+      "@typescript-eslint/no-explicit-any": 0,
+      "@typescript-eslint/explicit-member-accessibility": 0,
+      "@typescript-eslint/prefer-interface": 0,
+      "@typescript-eslint/no-use-before-define": 0
+    }
+  },
+  "prettier": {
+    "printWidth": 90,
+    "tabWidth": 2,
+    "useTabs": true,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": true,
+    "arrowParens": "avoid"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  }
 }
