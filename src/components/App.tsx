@@ -11,17 +11,11 @@ interface AppState {
 
 class App extends Component<{}, AppState> {
 	state: AppState = {
-		hexData: [
-			chroma.random().hex(),
-			chroma.random().hex(),
-			chroma.random().hex(),
-			chroma.random().hex()
-		],
-		count: 4
+		hexData: [chroma.random().hex(), chroma.random().hex(), chroma.random().hex()],
+		count: 3
 	};
 
 	createSwatch = (color: string) => {
-		console.log(color);
 		return <Swatch color={color} count={this.state.count} key={color} />;
 	};
 
