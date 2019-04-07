@@ -1,76 +1,193 @@
+@import './breakpoints.scss';
+
 .swatch {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
 	flex-basis: 0;
 	flex-grow: 1;
-	min-width: 14%;
-	border-right: 2px solid #473333;
-	overflow: hidden;
 	font-family: 'Roboto', sans-serif;
-}
-
-.swatch:last-of-type {
-	border-right: none;
-}
-
-.colorInput {
-	border: none;
-	font-size: 1.75vw;
-	padding: 0;
-	margin: 0;
-	text-align: center;
-	text-transform: uppercase;
-}
-
-.accordionHeader {
-	margin: 0;
-}
-
-.accordionContent {
-	background-color: transparent;
-}
-
-.grid {
-	display: grid;
-	grid-template-columns: 25% 75%;
-	margin: 0;
-	padding: 0.25vw 0.25vw 0.5vw 0.25vw;
-	width: 100%;
-}
-
-.gridKey {
-	font-size: 1vw;
-	text-align: left;
-	padding: 0.1rem 0;
-}
-
-.gridValue {
-	display: flex;
-	justify-content: flex-end;
-	font-size: 0.95vw;
-	padding: 0.1rem 0;
-	text-transform: uppercase;
-	> span {
-		margin-right: auto;
+	min-height: 50%;
+	min-width: 16%;
+	@include medium-down {
+		min-width: 30%;
 	}
-	> button.p-button.p-component.copyButton.p-button-icon-only {
-		width: 1.75vw;
+	@include extra-small-down {
+		min-width: 49%;
+		height: 50%;
 	}
-}
-
-.copyButton {
-	background-color: #473333;
-	color: #e1ddd7;
-	border: none;
-	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12),
-		0 1px 5px 0 rgba(0, 0, 0, 0.2);
-	font-size: 1vw;
-	padding: 0;
-	width: 3vw;
-	height: 2rem;
-}
-
-.copyButton:hover {
-	background-color: #614d4d;
+	.controls {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		margin-bottom: auto;
+		> span {
+			cursor: pointer;
+			padding: 0.25rem;
+			margin-left: 0.5rem;
+			> svg {
+				@include extra-small-down {
+					width: 1rem;
+					height: 1rem;
+				}
+			}
+		}
+	}
+	.box-outer {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		.box-head {
+			flex: 1;
+			align-items: center;
+			display: flex;
+			justify-content: center;
+			max-height: 3rem;
+			.arrow {
+				> svg {
+					transform: rotate(0deg);
+					transition: transform 0.2s linear;
+					&.spin {
+						transform: rotate(180deg);
+						transition: transform 0.2s linear;
+					}
+				}
+			}
+			> label {
+				align-items: center;
+				border-bottom: 1px solid;
+				display: flex;
+				font-size: 1vw;
+				user-select: none;
+				.colorInput {
+					border: none;
+					font-size: 1.75vw;
+					padding: 0;
+					margin: 0;
+					text-align: center;
+					text-transform: uppercase;
+				}
+				@include extra-large-up {
+					font-size: 0.5vw;
+					.colorInput {
+						font-size: 1vw;
+					}
+				}
+				@include extra-small-down {
+					margin: 1rem 0.25rem;
+					font-size: 3vw;
+					.colorInput {
+						font-size: 4vw;
+					}
+				}
+			}
+			> div {
+				display: flex;
+				cursor: copy;
+				padding: 0.5rem;
+				> svg {
+					width: 1.25rem;
+					height: 1.25rem;
+				}
+				@include extra-small-down {
+					padding: 0.5rem 0.25rem;
+					> svg {
+						width: 0.75rem;
+						height: 0.75rem;
+					}
+				}
+			}
+		}
+		.box-inner {
+			border-radius: 0.35rem 0.35rem 0 0;
+			flex: 0;
+			height: auto;
+			margin: 0.5rem auto 0 auto;
+			max-width: 350px;
+			overflow: hidden;
+			transition: flex 0.35s linear;
+			width: 82%;
+			dl {
+				display: flex;
+				flex-direction: column;
+				margin: 0.5rem auto;
+				max-width: 300px;
+				dt {
+					display: flex;
+					justify-content: space-between;
+					font-size: 1.25vw;
+					margin: 0;
+					min-width: 49%;
+					padding: 0.25rem;
+					span {
+						font-family: inherit;
+					}
+				}
+				dd {
+					display: flex;
+					justify-content: center;
+					font-size: 1.25vw;
+					margin: 0 0 1rem 0;
+					min-width: 49%;
+					button {
+						align-items: center;
+						background-color: #473333;
+						border: none;
+						box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+						color: #e1ddd7;
+						cursor: pointer;
+						display: flex;
+						font-size: 1.25vw;
+						margin: 0 0.5vw;
+						transition: background-color 0.175s linear;
+						&:hover {
+							background-color: #614d4d;
+							transition: background-color 0.175s linear;
+						}
+					}
+					&:last-child {
+						margin: 0;
+					}
+				}
+			}
+			&.box-open {
+				max-height: 50vh;
+				transition: flex 0.35s linear;
+				padding-bottom: 1rem;
+				flex: 1;
+			}
+			@include extra-large-up {
+				margin-top: 1rem;
+				max-width: 450px;
+				dl {
+					max-width: 400px;
+					dt {
+						font-size: 0.75vw;
+					}
+					dd {
+						font-size: 0.75vw;
+						button {
+							font-size: 0.75vw;
+						}
+					}
+				}
+			}
+			@include extra-small-down {
+				max-width: 250px;
+				width: 90%;
+				dl {
+					max-width: 200px;
+					dt {
+						font-size: 3vw;
+					}
+					dd {
+						font-size: 3vw;
+						button {
+							font-size: 3vw;
+						}
+					}
+				}
+			}
+		}
+	}
 }

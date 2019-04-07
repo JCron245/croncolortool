@@ -1,14 +1,15 @@
 import React, { ReactElement, Component } from 'react';
 import chroma from 'chroma-js';
-import { Accordion, AccordionTab } from 'primereact/accordion';
 import '../scss/Swatch.scss';
 import ReactDOM from 'react-dom';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { Button } from 'primereact/button';
+import { ChevronDown, Clipboard, XSquare, RefreshCw } from 'react-feather';
 
 interface SwatchProps {
 	color?: string;
-	count?: number;
+	remove?: any;
+	randomize?: any;
+	index?: number;
 }
 
 interface SwatchState {
@@ -21,27 +22,41 @@ interface SwatchState {
 	contrastColorHex?: string;
 	contrastColorRGB?: string;
 	doubleContrast?: string;
-	count?: number;
+	show?: boolean;
+	index?: number;
 }
 
 export class Swatch extends Component<SwatchProps, SwatchState> {
 	constructor(props: any) {
 		super(props);
 		if (this.props.color) {
-			this.state = this.buildStateObject(this.props.color, this.props.count);
+			this.state = this.buildStateObject(this.props.color);
 		}
 	}
 
-	static getDerivedStateFromProps(props: any, state: any): any {
-		if (props.count !== state.count) {
+	
+	static getDerivedStateFromProps = (props: any, state: any) => {
+		if (props.index !== state.index) {
 			return {
-				count: props.count
+				index: props.index
 			};
+		}
+		if (props.color !== state.colorString) {
+			return {
+				colorString: props.color
+			}
 		}
 		return null;
 	}
 
-	buildStateObject(color: string, count?: number): any {
+	componentDidUpdate(prevProps: any) {
+		if (prevProps.color !== this.props.color) {
+			let newState = this.buildStateObject(this.props.color || '');
+			this.setState( newState )
+		}
+	}
+
+	buildStateObject(color: string): any {
 		let colorString: string;
 		if (color.charAt(0) === '#') {
 			colorString = color.substr(1);
@@ -67,7 +82,8 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 			contrastColorHex: contrastColorHex,
 			contrastColorRGB: contrastColorRGB,
 			doubleContrast: this.findContrastingColor(contrastColorHex),
-			count: count ? count : this.props.count
+			show: this.state ? (this.state.show ? this.state.show : false) : false,
+			index: this.props.index
 		};
 		this.updateContrastStyle(contrastColorHex);
 		return stateObj;
@@ -111,21 +127,19 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 
 	findContrastingColor = (color: string) => {
 		let array = [
-			{ hex: '#EFEFEA', contrast: chroma.contrast(color, '#EFEFEA') },
-			{ hex: '#10100A', contrast: chroma.contrast(color, '#10100A') }
+			{ hex: '#E1DDD7', contrast: chroma.contrast(color, '#E1DDD7') },
+			{ hex: '#161d1d', contrast: chroma.contrast(color, '#161d1d') },
+			{ hex: '#7C7D7A', contrast: chroma.contrast(color, '#7C7D7A') }
 		];
-		array = array.sort(
-			(a: { hex: string; contrast: number }, b: { hex: string; contrast: number }) => {
-				if (a.contrast > b.contrast) return -1;
-				if (a.contrast < b.contrast) return 1;
-				return 0;
-			}
-		);
+		array = array.sort((a: { hex: string; contrast: number }, b: { hex: string; contrast: number }) => {
+			if (a.contrast > b.contrast) return -1;
+			if (a.contrast < b.contrast) return 1;
+			return 0;
+		});
 		return array[0].hex;
 	};
 
 	stopProp = (event: any) => {
-		event.preventDefault();
 		event.stopPropagation();
 	};
 
@@ -134,109 +148,119 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 			backgroundColor: this.state.hexColorString
 		};
 
-		let inputStyle: React.CSSProperties = {
+		let contrastStyle: React.CSSProperties = {
 			backgroundColor: this.state.hexColorString,
 			color: this.state.contrastColorHex
 		};
 
-		let gridStyle: React.CSSProperties = {
+		let boxStyle: React.CSSProperties = {
 			color: this.state.doubleContrast,
-			backgroundColor: `rgba(${this.state.contrastColorRGB},.95)`
+			backgroundColor: `rgba(${this.state.contrastColorRGB})`
 		};
 
-		if (this.state.count) {
-			if (this.state.count < 5) {
-				gridStyle.gridTemplateColumns = '25% 75%';
-			} else {
-				gridStyle.gridTemplateColumns = '100%';
-				gridStyle.gridTemplateRows = '1fr';
-			}
-		}
+		let showClass = this.state.show ? 'box-inner box-open' : 'box-inner';
+		let spinArrow = this.state.show ? 'spin' : '';
 
 		return (
 			<div style={swatchStyle} className="swatch">
-				<Accordion>
-					<AccordionTab
-						headerClassName="accordionHeader"
-						contentClassName="accordionContent"
-						header={
+				<div className="controls" style={contrastStyle}>
+					<span onClick={ () => this.props.randomize(this.state.index)}>
+						<RefreshCw />
+					</span>
+					{this.props.remove && <span onClick={ () => this.props.remove(this.state.index)}>
+						<XSquare />
+					</span>}
+				</div>
+				<div
+					style={contrastStyle}
+					className="box-outer"
+					onClick={$event => {
+						this.setState({ show: !this.state.show });
+					}}>
+					<div className="box-head">
+						<div className="arrow">
+							<ChevronDown className={spinArrow} />
+						</div>
+						<label onClick={this.stopProp}>
+							hex:
 							<input
 								spellCheck={false}
 								size={this.state.value ? this.state.value.length : 1}
-								style={inputStyle}
+								style={contrastStyle}
 								value={this.state.value}
 								onClick={this.stopProp}
 								onChange={this.handleChange}
 								className="colorInput"
 							/>
-						}>
-						<dl className="grid" style={gridStyle}>
-							{this.state.colorName !== '' && <dt className="gridKey">Name:</dt>}
+						</label>
+						<div onClick={this.stopProp}>
+							<CopyToClipboard text={this.state.hexColorString ? this.state.hexColorString.substr(1) : ''}>
+								<Clipboard />
+							</CopyToClipboard>
+						</div>
+					</div>
+					<div style={boxStyle} className={showClass} onClick={this.stopProp}>
+						<dl style={boxStyle}>
+							{this.state.colorName !== '' && <dt>Name:</dt>}
 							{this.state.colorName !== '' && (
-								<dd className="gridValue">
+								<dd>
 									<span>{this.state.colorName}</span>
 								</dd>
 							)}
-							<dt className="gridKey">Hex:</dt>
-							<dd className="gridValue">
+							<dt>
+								<span>Hex:</span>
 								<span>{this.state.hexColorString}</span>
-								<CopyToClipboard
-									text={
-										this.state.hexColorString ? this.state.hexColorString.substr(1) : ''
-									}>
-									<Button
-										className="copyButton"
-										title="Click To Copy Hex"
-										icon="pi pi-check"
-									/>
+							</dt>
+							<dd>
+								<CopyToClipboard text={this.state.hexColorString ? this.state.hexColorString.substr(1) : ''}>
+									<button title={`Click To Copy Hex - ${this.state.hexColorString ? this.state.hexColorString.substr(1) : ''}`}>
+										<Clipboard />
+									</button>
 								</CopyToClipboard>
 								<CopyToClipboard text={this.state.hexColorString || ''}>
-									<Button
-										label="hex#"
-										className="copyButton"
-										title={`Click To Copy Hex CSS - ${this.state.hexColorString}`}
-									/>
+									<button title={`Click To Copy Hex CSS - ${this.state.hexColorString}`}>
+										hex#
+										<Clipboard />
+									</button>
 								</CopyToClipboard>
 							</dd>
-							<dt className="gridKey">RGB:</dt>
-							<dd className="gridValue">
+							<dt>
+								<span>RGB:</span>
 								<span>{this.state.rgbColorString}</span>
+							</dt>
+							<dd>
 								<CopyToClipboard text={this.state.rgbColorString || ''}>
-									<Button
-										className="copyButton"
-										title="Click To Copy RGB"
-										icon="pi pi-check"
-									/>
+									<button title={`Click To Copy RGB - ${this.state.rgbColorString}`}>
+										<Clipboard />
+									</button>
 								</CopyToClipboard>
 								<CopyToClipboard text={`rgb(${this.state.rgbColorString})` || ''}>
-									<Button
-										label="rgb()"
-										className="copyButton"
-										title={`Click To Copy RGB CSS - rgb(${this.state.rgbColorString})`}
-									/>
+									<button title={`Click To Copy RGB CSS - rgb(${this.state.rgbColorString})`}>
+										rgb()
+										<Clipboard />
+									</button>
 								</CopyToClipboard>
 							</dd>
-							<dt className="gridKey">HSL:</dt>
-							<dd className="gridValue">
+							<dt>
+								<span>HSL:</span>
 								<span>{this.state.hslColorString}</span>
+							</dt>
+							<dd>
 								<CopyToClipboard text={this.state.hslColorString || ''}>
-									<Button
-										className="copyButton"
-										title="Click To Copy HSL"
-										icon="pi pi-check"
-									/>
+									<button title="Click To Copy HSL">
+										<Clipboard />
+									</button>
 								</CopyToClipboard>
 								<CopyToClipboard text={`hsl(${this.state.hslColorString})` || ''}>
-									<Button
-										label="hsl()"
-										className="copyButton"
-										title={`Click To Copy HSL CSS - hsl(${this.state.hslColorString})`}
-									/>
+									<button title={`Click To Copy HSL CSS - hsl(${this.state.hslColorString})`}>
+										hsl()
+										<Clipboard />
+									</button>
 								</CopyToClipboard>
 							</dd>
 						</dl>
-					</AccordionTab>
-				</Accordion>
+					</div>
+				</div>
 			</div>
 		);
 	}

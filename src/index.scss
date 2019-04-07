@@ -1,7 +1,19 @@
+// Override default variables before the import
+$body-bg: #000;
+
+// Import Bootstrap and its default variables - This goes last
+// @import '~bootstrap/scss/bootstrap.scss';
+// @import '~primereact/resources/primereact.min.css';
+// @import '~primeicons/primeicons.css';
+
+@import '~bootstrap/scss/bootstrap.scss';
+@import './scss/breakpoints.scss';
+
 html {
 	height: 100vh;
 	overflow: hidden;
 }
+
 body {
 	height: 100vh;
 	margin: 0;
@@ -28,10 +40,18 @@ main {
 	font-family: 'Roboto', sans-serif;
 }
 
+td,
 dd,
+dt,
+dl,
 code {
 	font-family: 'Roboto Mono', monospace !important;
-	> * {
+
+	>* {
 		font-family: 'Roboto Mono', monospace !important;
 	}
+}
+
+dd {
+	margin-inline-start: unset;
 }

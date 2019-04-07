@@ -3,36 +3,39 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/jest": "24.0.11",
-    "@types/node": "11.12.2",
-    "@types/react-copy-to-clipboard": "^4.2.6",
-    "@types/react-dom": "16.8.3",
+    "bootstrap": "^4.3.1",
     "braces": "^2.3.2",
     "chroma-js": "^2.0.3",
     "classnames": "^2.2.6",
     "materialize-css": "^1.0.0",
     "node-sass": "^4.11.0",
     "primeicons": "^1.0.0",
-    "primereact": "^3.1.1",
+    "primereact": "^3.1.2",
     "react": "^16.8.6",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.8.6",
+    "react-feather": "^1.1.6",
     "react-scripts": "2.1.8",
-    "react-transition-group": "^2.5.1",
-    "typescript": "3.4.1"
+    "react-toasts": "^3.0.2",
+    "react-transition-group": "^2.9.0",
+    "typescript": "^3.4.1"
   },
   "devDependencies": {
     "@types/chroma-js": "^1.4.1",
-    "@types/react": "^16.8.10",
-    "@typescript-eslint/eslint-plugin": "^1.5.0",
-    "@typescript-eslint/parser": "^1.5.0",
+    "@types/jest": "24.0.11",
+    "@types/node": "11.12.2",
+    "@types/react-copy-to-clipboard": "^4.2.6",
+    "@types/react-dom": "16.8.3",
+    "@types/react": "^16.8.12",
+    "@typescript-eslint/eslint-plugin": "^1.6.0",
+    "@typescript-eslint/parser": "^1.6.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-prettier": "^3.0.1",
     "prettier": "^1.16.4"
   },
   "browserslist": [
-    ">0.6%",
+    ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
@@ -65,7 +68,7 @@
     }
   },
   "prettier": {
-    "printWidth": 90,
+    "printWidth": 140,
     "tabWidth": 2,
     "useTabs": true,
     "semi": true,
@@ -78,7 +81,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test"
   }
 }
