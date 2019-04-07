@@ -18,7 +18,7 @@
     "react-scripts": "2.1.8",
     "react-toasts": "^3.0.2",
     "react-transition-group": "^2.9.0",
-    "typescript": "^3.4.1"
+    "typescript": "^3.4.2"
   },
   "devDependencies": {
     "@types/chroma-js": "^1.4.1",
@@ -35,10 +35,7 @@
     "prettier": "^1.16.4"
   },
   "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
+    ">0.185%"
   ],
   "engines": {
     "node": ">=7.0.0"
