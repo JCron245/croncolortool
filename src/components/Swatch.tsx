@@ -185,7 +185,7 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 							hex:
 							<input
 								spellCheck={false}
-								size={this.state.value ? this.state.value.length : 1}
+								size={this.state.value ? this.state.value.length + 1 : 1}
 								style={contrastStyle}
 								value={this.state.value}
 								onClick={this.stopProp}

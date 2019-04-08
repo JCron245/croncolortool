@@ -11,11 +11,13 @@ $body-bg: #000;
 
 html {
 	height: 100vh;
+	height: calc(var(--vh, 1vh) * 100);
 	overflow: hidden;
 }
 
 body {
 	height: 100vh;
+	height: calc(var(--vh, 1vh) * 100);
 	margin: 0;
 	padding: 0;
 	-webkit-font-smoothing: antialiased;
