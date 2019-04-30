@@ -3,6 +3,8 @@ import Swatch from './Swatch';
 import logo from '../images/logo.svg';
 import chroma from 'chroma-js';
 import '../scss/App.scss';
+import { SwatchExtended } from './SwatchExtended';
+import ReactGA from 'react-ga';
 
 interface AppState {
 	multiHexData: string[];
@@ -19,8 +21,8 @@ class App extends Component<{}, AppState> {
 		multiHexData: [chroma.random().hex(), chroma.random().hex(), chroma.random().hex()],
 		singleHexData: '#0FADED',
 		count: 3,
-		multi: true,
-		single: false,
+		multi: false,
+		single: true,
 		isMobile: window.innerWidth < 480,
 		maxSwatch: window.innerWidth < 480 ? 4 : 12
 	};
@@ -82,6 +84,11 @@ class App extends Component<{}, AppState> {
 			this.setState({ singleHexData: String(chroma.random()) });
 		}
 	};
+	
+	initializeReactGA = () => {
+		ReactGA.initialize('UA-139332644-1');
+		ReactGA.pageview(window.location.pathname + this.state.multi ? 'multi' : 'single');
+	}
 
 	render(): ReactElement {
 		// First we get the viewport height and we multiple it by 1% to get a value for a vh unit
@@ -101,19 +108,19 @@ class App extends Component<{}, AppState> {
 				</nav>
 				<ul className="nav nav-pills nav-justified">
 					<li className="nav-item">
-						<a className={'nav-link ' + (this.state.single && 'active')} href="#" onClick={this.enableSingle}>
+						<button className={'nav-link ' + (this.state.single && 'active')} onClick={this.enableSingle}>
 							Single Color Mode
-						</a>
+						</button>
 					</li>
 					<li className="nav-item">
-						<a className={'nav-link ' + (this.state.multi && 'active')} href="#" onClick={this.enableMulti}>
+						<button className={'nav-link ' + (this.state.multi && 'active')} onClick={this.enableMulti}>
 							Color Swatch
-						</a>
+						</button>
 					</li>
 				</ul>
 				<main>
 					{this.state.multi && <div className="row">{this.createSwatches(this.state.multiHexData)}</div>}
-					{this.state.single && <Swatch color={this.state.singleHexData} key={'#0faded'} index={1} randomize={this.randomizeSwatch} />}
+					{this.state.single && <SwatchExtended color={this.state.singleHexData} key={'#0faded'} />}
 				</main>
 			</div>
 		);

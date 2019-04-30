@@ -39,8 +39,10 @@
     background-color: #161d1d;
     border-bottom: .25rem solid #161d1d;
     .nav-link {
+			border: none;
       background-color: #473333;
-      color: #E1DDD7;
+			color: #E1DDD7;
+			width: 100%;
     }
     .nav-link.active {
       background-color: #E1DDD7;

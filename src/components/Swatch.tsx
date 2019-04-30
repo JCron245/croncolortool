@@ -34,7 +34,6 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 		}
 	}
 
-	
 	static getDerivedStateFromProps = (props: any, state: any) => {
 		if (props.index !== state.index) {
 			return {
@@ -44,19 +43,19 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 		if (props.color !== state.colorString) {
 			return {
 				colorString: props.color
-			}
+			};
 		}
 		return null;
-	}
+	};
 
-	componentDidUpdate(prevProps: any) {
+	componentDidUpdate = (prevProps: any): void => {
 		if (prevProps.color !== this.props.color) {
 			let newState = this.buildStateObject(this.props.color || '');
-			this.setState( newState )
+			this.setState(newState);
 		}
-	}
+	};
 
-	buildStateObject(color: string): any {
+	buildStateObject = (color: string): any => {
 		let colorString: string;
 		if (color.charAt(0) === '#') {
 			colorString = color.substr(1);
@@ -87,9 +86,9 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 		};
 		this.updateContrastStyle(contrastColorHex);
 		return stateObj;
-	}
+	};
 
-	updateContrastStyle(contrastColor: string): void {
+	updateContrastStyle = (contrastColor: string): void => {
 		try {
 			const node = ReactDOM.findDOMNode(this);
 			if (node instanceof HTMLElement) {
@@ -101,18 +100,18 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 		} catch (e) {
 			// ignore for now
 		}
-	}
+	};
 
-	trimHSL(hslArr: number[]): string {
-		let arr = hslArr.map(function(val) {
+	trimHSL = (hslArr: number[]): string => {
+		let arr = hslArr.map((val: number) => {
 			return Number(val.toFixed(2));
 		});
 		return arr.toString();
-	}
+	};
 
-	componentDidMount(): void {
+	componentDidMount = (): void => {
 		this.updateContrastStyle(this.state.contrastColorHex || '');
-	}
+	};
 
 	handleChange = (event: any): void => {
 		let isValid = chroma.valid(event.target.value);
@@ -143,7 +142,7 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 		event.stopPropagation();
 	};
 
-	public render(): ReactElement {
+	render = (): ReactElement => {
 		let swatchStyle: React.CSSProperties = {
 			backgroundColor: this.state.hexColorString
 		};
@@ -162,14 +161,16 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 		let spinArrow = this.state.show ? 'spin' : '';
 
 		return (
-			<div style={swatchStyle} className="swatch">
+			<section style={swatchStyle} className="swatch">
 				<div className="controls" style={contrastStyle}>
-					<span onClick={ () => this.props.randomize(this.state.index)}>
+					<span onClick={() => this.props.randomize(this.state.index)}>
 						<RefreshCw />
 					</span>
-					{this.props.remove && <span onClick={ () => this.props.remove(this.state.index)}>
-						<XSquare />
-					</span>}
+					{this.props.remove && (
+						<span onClick={() => this.props.remove(this.state.index)}>
+							<XSquare />
+						</span>
+					)}
 				</div>
 				<div
 					style={contrastStyle}
@@ -261,9 +262,9 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 						</dl>
 					</div>
 				</div>
-			</div>
+			</section>
 		);
-	}
+	};
 }
 
 export default Swatch;

@@ -1,0 +1,96 @@
+@import './breakpoints.scss';
+
+.swatchExtended {
+	display: grid;
+	grid-template-columns: 40% 60%;
+	height: 100%;
+	width: 100%;
+	section.color {
+		border-right: 1px solid #161d1d;
+		height: 100%;
+	}
+	aside.info {
+		align-items: center;
+		background-color: #161d1d;
+		border: 1px solid #161d1d;
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		font-family: 'Roboto', sans-serif;
+		height: 100%;
+		padding: 1rem;
+		label {
+			align-items: center;
+			color: #e1ddd7;
+			display: flex;
+			font-size: 2vw;
+			margin: 0 auto;
+			user-select: none;
+			width: 50%;
+			.colorInput {
+				border: none;
+				border-radius: 1rem;
+				font-size: 1.75vw;
+				padding: 0;
+                margin: 0 0 2rem 0;
+                padding: 1rem;
+				text-align: center;
+				text-transform: uppercase;
+				width: 100%;
+			}
+			.infoReadonlyInput {
+				background-color: #161d1d;
+				border: none;
+				color: #e1ddd7;
+				font-size: 1.75vw;
+				padding: 0;
+				margin: 0 0 0 1rem;
+				text-align: right;
+				text-transform: uppercase;
+				width: 100%;
+			}
+			@include extra-large-up {
+				font-size: 1vw;
+				.colorInput,
+				.infoReadonlyInput {
+					font-size: 1vw;
+				}
+			}
+			@include extra-small-down {
+				margin: 1rem 0.25rem;
+				font-size: 3.5vw;
+				.colorInput,
+				.infoReadonlyInput {
+					font-size: 4.5vw;
+				}
+			}
+        }
+        .boxes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 1rem;
+            width: 75%;
+            .lightAndDark, .saturations {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+                height: fit-content;
+                margin-top: 1rem;
+                
+                p {
+                    color: #e1ddd7;
+                    margin: 0;
+                }
+                label {
+                    margin: 0;
+                    width: 100%;
+                    input {
+                        padding: 1rem;
+                        margin: 0;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+	}
+}

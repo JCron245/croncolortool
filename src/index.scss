@@ -49,11 +49,16 @@ dl,
 code {
 	font-family: 'Roboto Mono', monospace !important;
 
-	>* {
+	> * {
 		font-family: 'Roboto Mono', monospace !important;
 	}
 }
 
 dd {
 	margin-inline-start: unset;
+}
+
+a:focus,
+button:focus {
+	outline: thin dotted #0FADED;
 }
