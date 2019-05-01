@@ -10,14 +10,15 @@ $body-bg: #000;
 @import './scss/breakpoints.scss';
 
 html {
-	height: 100vh;
-	height: calc(var(--vh, 1vh) * 100);
-	overflow: hidden;
+	min-height: 100vh;
+	min-height: calc(var(--vh, 1vh) * 100);
+	height: 100%;
 }
 
 body {
-	height: 100vh;
-	height: calc(var(--vh, 1vh) * 100);
+	min-height: 100vh;
+	min-height: calc(var(--vh, 1vh) * 100);
+	height: 100%;
 	margin: 0;
 	padding: 0;
 	-webkit-font-smoothing: antialiased;
@@ -60,5 +61,5 @@ dd {
 
 a:focus,
 button:focus {
-	outline: thin dotted #0FADED;
+	outline: thin dotted #0faded;
 }

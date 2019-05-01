@@ -3,12 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/rc-tooltip": "^3.7.1",
+    "@types/tinycolor2": "^1.4.1",
     "bootstrap": "^4.3.1",
     "chroma-js": "^2.0.3",
     "classnames": "^2.2.6",
     "node-sass": "^4.12.0",
     "primeicons": "^1.0.0",
     "primereact": "^3.1.2",
+    "rc-tooltip": "^3.7.3",
     "react": "^16.8.6",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.8.6",
@@ -16,7 +19,9 @@
     "react-ga": "^2.5.7",
     "react-scripts": "3.0.0",
     "react-toasts": "^3.0.3",
+    "react-tooltip": "^3.10.0",
     "react-transition-group": "^2.9.0",
+    "tinycolor2": "^1.4.1",
     "typescript": "^3.4.5"
   },
   "devDependencies": {
@@ -26,6 +31,7 @@
     "@types/react": "^16.8.15",
     "@types/react-copy-to-clipboard": "^4.2.6",
     "@types/react-dom": "16.8.3",
+    "@types/react-tooltip": "^3.9.2",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
     "eslint": "^5.16.0",
