@@ -28,10 +28,12 @@ class App extends Component<{}, AppState> {
 	};
 
 	enableMulti = () => {
+		ReactGA.pageview(window.location.pathname + window.location.search + '-multi');
 		this.setState({ multi: true, single: false });
 	};
 
 	enableSingle = () => {
+		ReactGA.pageview(window.location.pathname + window.location.search + '-single');
 		this.setState({ multi: false, single: true });
 	};
 
@@ -84,11 +86,6 @@ class App extends Component<{}, AppState> {
 			this.setState({ singleHexData: String(chroma.random()) });
 		}
 	};
-	
-	initializeReactGA = () => {
-		ReactGA.initialize('UA-139332644-1');
-		ReactGA.pageview(window.location.pathname + this.state.multi ? 'multi' : 'single');
-	}
 
 	render(): ReactElement {
 		// First we get the viewport height and we multiple it by 1% to get a value for a vh unit

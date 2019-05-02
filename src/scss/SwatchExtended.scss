@@ -79,9 +79,9 @@
 			background-color: #3C4444;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
-			grid-template-rows: repeat(2, 1fr);
+			grid-template-rows: repeat(2, auto);
 			grid-gap: 1rem;
-			padding: 1rem;
+			padding: 0 1rem 1rem 1rem;
             width: 75%;
 			@include extra-small-down {
 				grid-template-columns: 1fr 1fr;

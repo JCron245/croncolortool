@@ -1,0 +1,102 @@
+{
+    "analgous": {
+        "en": {
+            "description": "Analogous colors (also called Dominance Harmony) color scheme are groups of colors that are adjacent to each other on the color wheel, with one being the dominant color, which tends to be a primary or secondary color, and two on either side complementing, which tend to be tertiary. The term analogous refers to the having analogy, or corresponding to something in particular. An analogous color scheme creates a rich, monochromatic look. It’s best used with either warm or cool colors, creating a look that has a certain temperature as well as proper color harmony. While this is true, the scheme also lacks contrast and is less vibrant than complementary schemes. Red, reddish-orange, orange, yellow-orange is one example of a set of analogous colors.",
+            "label": "analgous"
+        },
+        "es": {
+            "description": "",
+            "label": ""
+        }
+    },
+    "monochromatic": {
+        "en": {
+            "description": "Monochromatic colors are all the colors (tints, tones, and shades) of a single hue. Monochromatic color schemes are derived from a single base hue, and extended using its shades, tones and tints (that is, a hue modified by the addition of black, gray (black + white) and white. As a result, the energy is more subtle and peaceful due to a lack of contrast of hue.",
+            "label": "monochromatic"
+        },
+        "es": {
+            "description": "",
+            "label": ""
+        }
+    },
+    "complementary": {
+        "en": {
+            "description": "Complementary colors are pairs of colors which, when combined or mixed, cancel each other out (lose hue) by producing a grayscale color like white or black. When placed next to each other, they create the strongest contrast for those two colors. Complementary colors may also be called 'opposite colors.'",
+            "label": "complementary"
+        },
+        "es": {
+            "description": "",
+            "label": ""
+        }
+    },
+    "split": {
+        "en": {
+            "description": "The split-complementary (also called 'Compound Harmony') color scheme is a variation of the complementary color scheme. In addition to the base color, it uses the two 'Analogous' colors adjacent to its complement. Split-complementary color scheme has the same strong visual contrast as the complementary color scheme, but has less pressure.",
+            "label": "split complementary"
+        },
+        "es": {
+            "description": "",
+            "label": ""
+        }
+    },
+    "triadic": {
+        "en": {
+            "description": "The triadic color scheme uses three colors equally spaced around the color wheel. The easiest way to place them on the wheel is by using a triangle of equal sides. Triadic color schemes tend to be quite vibrant, even when using pale or unsaturated versions of hues, offers a higher degree of contrast while at the same time retains the color harmony. This scheme is very popular among artists because it offers strong visual contrast while retaining balance, and color richness. The triadic scheme is not as contrasting as the complementary scheme, but it is easier to accomplish balance and harmony with these colors. The primary colors are an example of a triadic color scheme.",
+            "label": "triadic"
+        },
+        "es": {
+            "description": "",
+            "label": ""
+        }
+    },
+    "tetradic": {
+        "en": {
+            "description": "The tetradic (double complementary) colors scheme is the richest of all the schemes because it uses four colors arranged into two complementary color pairs. This scheme is hard to harmonize and requires a color to be dominant or subdue the colors. If all four colors are used in equal amounts, the scheme may look unbalanced.",
+            "label": "tetradic"
+        },
+        "es": {
+            "description": "",
+            "label": ""
+        }
+    },
+    "lighter": {
+        "en": {
+            "description": "",
+            "label": ""
+        },
+        "es": {
+            "description": "",
+            "label": ""
+        }
+    },
+    "darker": {
+        "en": {
+            "description": "",
+            "label": ""
+        },
+        "es": {
+            "description": "",
+            "label": ""
+        }
+    },
+    "saturated": {
+        "en": {
+            "description": "",
+            "label": ""
+        },
+        "es": {
+            "description": "",
+            "label": ""
+        }
+    },
+    "desaturation": {
+        "en": {
+            "description": "",
+            "label": ""
+        },
+        "es": {
+            "description": "",
+            "label": ""
+        }
+    }
+}

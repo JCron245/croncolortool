@@ -2,9 +2,9 @@ import React, { ReactElement, Component } from 'react';
 import chroma from 'chroma-js';
 import '../scss/SwatchExtended.scss';
 import tinycolor from 'tinycolor2';
-import ReactTooltip from 'react-tooltip';
 import { HelpCircle } from 'react-feather';
 import { OverlayPanel } from 'primereact/overlaypanel';
+import strings from '../assets/strings.json';
 
 interface SwatchExtendedProps {
 	color?: string;
@@ -13,16 +13,23 @@ interface SwatchExtendedProps {
 interface SwatchExtendedState {
 	colorString?: string;
 	hexColorString?: string;
-	value?: string;
+	inputValue?: string;
 	rgbColorString?: string;
 	hslColorString?: string;
 	colorName?: string;
 	contrastColorHex?: string;
-	contrastColorRGB?: string;
 	doubleContrast?: string;
 	temperature?: number | string;
-	brights?: any;
-	saturation?: any;
+	lights?: string[];
+	darks?: string[];
+	saturation?: string[];
+	desaturation?: string[];
+	analogousCollection?: any[];
+	monochromaticCollection?: any[];
+	complement?: string[];
+	splitComplementCollection?: any[];
+	triadCollection?: any[];
+	tetradCollection?: any[];
 }
 
 export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtendedState> {
@@ -34,111 +41,105 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 	}
 
 	buildStateObject = (color: string): any => {
-		let colorString: string;
-		if (color.charAt(0) === '#') {
-			colorString = color.substr(1);
-		} else {
-			colorString = color;
-		}
+		let colorString: string = color.charAt(0) === '#' ? color.substr(1) : color;
 		// Chroma Object
 		let chromaColor = chroma(color);
 		// Color Name If It Has One
 		let colorName = chromaColor.name();
-		// Contrast Colors in HEX and RGB
+		// Color Hex
+		let colorHex = chromaColor.hex();
+		// Contrast Colors in HEX
 		let contrastColorHex: string = this.findContrastingColor(colorString);
-		let contrastColorRGB: string = chroma(contrastColorHex)
-			.rgb()
-			.toString();
 		// Color temperature
 		let colorTemperature: number = chroma(colorString).temperature();
 		// brighten
 
 		let stateObj: SwatchExtendedState = {
 			colorString: colorString,
-			hexColorString: chromaColor.hex(),
-			value: colorString,
+			hexColorString: colorHex,
+			inputValue: colorString,
 			rgbColorString: chromaColor
 				.rgb()
 				.toString()
 				.replace(/,/g, ', '),
 			hslColorString: this.trimHSL(chromaColor.hsl()),
-			colorName: colorName !== chromaColor.hex() ? colorName : undefined,
+			colorName: colorName !== colorHex ? colorName : undefined,
 			contrastColorHex: contrastColorHex,
-			contrastColorRGB: contrastColorRGB,
 			doubleContrast: this.findContrastingColor(contrastColorHex),
 			temperature: colorTemperature <= 30000 ? colorTemperature : undefined,
-			brights: this.createShadeArray(color, chromaColor.hex()),
-			saturation: this.createSaturationArray(color, chromaColor.hex())
+			lights: this.createLightArray(color),
+			darks: this.createDarkArray(color),
+			saturation: this.createSaturationArray(color),
+			desaturation: this.createDesaturationArray(color),
+			analogousCollection: tinycolor(colorHex).analogous(),
+			monochromaticCollection: tinycolor(colorHex).monochromatic(),
+			complement: [
+				colorHex,
+				tinycolor(colorHex)
+					.complement()
+					.toHexString()
+			],
+			splitComplementCollection: tinycolor(colorHex).splitcomplement(),
+			triadCollection: tinycolor(colorHex).triad(),
+			tetradCollection: tinycolor(colorHex).tetrad()
 		};
 		return stateObj;
 	};
 
-	createShadeArray = (color: string, hex: string): any[] => {
+	createLightArray = (color: string): any[] => {
 		let shades = [];
-		for (let i = 1; i < 8; i += 1) {
-			let shade = chroma(color)
-				.brighten(i)
-				.toString();
-			if (shade === '#ffffff') {
-				shades.push(shade);
+		for (let i = 0; i < 15; i++) {
+			let lightened = tinycolor(color)
+				.lighten(i * 5)
+				.toHexString();
+			shades.push(lightened);
+			if (lightened === '#ffffff') {
 				break;
 			}
-			shades.push(shade);
 		}
-		shades = shades.reverse();
-		shades.push(hex);
-		for (let i = 1; i < 8; i += 1) {
-			let shade = chroma(color)
-				.darken(i)
-				.toString();
-			if (shade === '#000000') {
-				shades.push(shade);
-				break;
-			}
-			shades.push(shade);
-		}
-
 		return shades;
 	};
 
-	createSaturationArray = (color: string, hex: string): any[] => {
-		let colors = [];
-		let iter = 0.5;
-		for (let i = iter; i < 8; i += iter) {
-			let desat = chroma(color)
-				.desaturate(i)
-				.toString();
-			let deltaE = chroma.deltaE(
-				desat,
-				chroma(color)
-					.desaturate(i - iter >= 0 ? i - iter : 0)
-					.toString()
-			);
-			console.log(desat, deltaE);
-			if (desat === '#000000' || (i !== iter && deltaE < 1.25) || desat === hex) {
+	createDarkArray = (color: string): any[] => {
+		let shades = [];
+		for (let i = 0; i < 15; i++) {
+			let darkened = tinycolor(color)
+				.darken(i * 5)
+				.toHexString();
+			shades.push(darkened);
+			if (darkened === '#000000') {
 				break;
 			}
-			colors.push(desat);
 		}
-		colors = colors.reverse();
-		colors.push(hex);
-		for (let i = iter; i < 8; i += iter) {
-			let sat = chroma(color)
-				.saturate(i)
-				.toString();
-			let deltaE = chroma.deltaE(
-				sat,
-				chroma(color)
-					.saturate(i - iter >= 0 ? i - iter : 0)
-					.toString()
-			);
-			console.log(sat, deltaE);
-			if (sat === '#ffffff' || (i !== iter && deltaE < 1.25) || sat === hex) {
+		return shades;
+	};
+
+	createSaturationArray = (color: string): any[] => {
+		let shades: any[] | string[] = [];
+		for (let i = 0; i < 15; i++) {
+			let saturated = tinycolor(color)
+				.saturate(i * 10)
+				.toHexString();
+			if (i !== 0 && saturated === shades[i - 1]) {
 				break;
 			}
-			colors.push(sat);
+			shades.push(saturated);
 		}
-		return colors;
+		return shades;
+	};
+
+	createDesaturationArray = (color: string): any[] => {
+		let shades: any[] | string[] = [];
+		for (let i = 0; i < 15; i++) {
+			let desaturated = tinycolor(color)
+				.desaturate(i * 10)
+				.toHexString();
+			if (i !== 0 && desaturated === shades[i - 1]) {
+				break;
+			}
+			shades.push(desaturated);
+		}
+		return shades;
 	};
 
 	findContrastingColor = (color: string): string => {
@@ -149,10 +150,8 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 
 	trimHSL = (hslArr: number[]): string => {
 		let arr = hslArr.map((val: number) => {
-			// Something is wrong with chroma and occasionally I am seeing
-			// a nan value here. Upon investigation it seems to only occur sometimes
-			// when the HUE value is 0, thus intercepting here and converting it to a 0
-			// this will require further testing to ensure our HSL values are accurate!
+			// Something is wrong with chroma and occasionally I am seeing a nan value here. Upon investigation it seems to only occur sometimes
+			// when the HUE value is 0, thus intercepting here and converting it to a 0 this will require further testing to ensure our HSL values are accurate!
 			if (isNaN(val)) {
 				val = 0;
 			}
@@ -167,64 +166,9 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 			this.setState(this.buildStateObject(event.target.value));
 		} else {
 			this.setState({
-				value: event.target.value
+				inputValue: event.target.value
 			});
 		}
-	};
-
-	ShadeBar = (props: any) => {
-		const color = this.state.brights ? this.state.brights[props.num] : null;
-		return (
-			<label>
-				<input
-					readOnly
-					style={{ backgroundColor: color, color: this.findContrastingColor(color) }}
-					value={color}
-					className="infoReadonlyInput"
-				/>
-			</label>
-		);
-	};
-
-	ShadeBox = () => {
-		let boxContents = [];
-		for (let i = 0; i < this.state.brights.length; i++) {
-			boxContents.push(<this.ShadeBar num={i} key={i} />);
-		}
-		return (
-			<div className="barGroup">
-				<div>Brightened</div>
-				<div className="contents">{boxContents}</div>
-				<div>Darkened</div>
-			</div>
-		);
-	};
-
-	SaturationBar = (props: any) => {
-		return (
-			<label>
-				<input
-					readOnly
-					style={{ backgroundColor: this.state.saturation[props.num], color: this.findContrastingColor(this.state.saturation[props.num]) }}
-					value={this.state.saturation[props.num]}
-					className="infoReadonlyInput"
-				/>
-			</label>
-		);
-	};
-
-	SaturationBox = () => {
-		let boxContents = [];
-		for (let i = 0; i < this.state.saturation.length; i++) {
-			boxContents.push(<this.SaturationBar num={i} key={i} />);
-		}
-		return (
-			<div className="barGroup">
-				<div>Desaturated</div>
-				<div className="contents">{boxContents}</div>
-				<div>Saturated</div>
-			</div>
-		);
 	};
 
 	InfoBox = (props: any) => {
@@ -239,6 +183,33 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 		return null;
 	};
 
+	ColorBox = (arr: any[], label: string, info?: string) => {
+		let boxContents = [];
+		let op: OverlayPanel | null;
+
+		for (let i = 0; i < arr.length; i++) {
+			let item = typeof arr[i] === 'string' ? arr[i] : arr[i].toHexString();
+			boxContents.push(<this.ColorBar color={item} key={i} />);
+		}
+
+		return (
+			<div className="barGroup">
+				<div>
+					<HelpCircle className="helpCircle" onClick={e => (op ? op.toggle(e) : 0)} />
+					<OverlayPanel ref={el => (op = el)}>
+						<p>
+							<span>{label}</span>
+							<br />
+							{info}
+						</p>
+					</OverlayPanel>
+					{label}
+				</div>
+				{boxContents}
+			</div>
+		);
+	};
+
 	ColorBar = (props: any) => {
 		return (
 			<label>
@@ -249,99 +220,6 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 					className="infoReadonlyInput"
 				/>
 			</label>
-		);
-	};
-
-	AnalogousBox = () => {
-		let boxContents = [];
-		const colors = tinycolor(this.state.hexColorString).analogous();
-		for (let i = 0; i < colors.length; i++) {
-			boxContents.push(<this.ColorBar color={colors[i].toHexString()} key={i} />);
-		}
-		return (
-			<div className="barGroup">
-				<div>Analogous</div>
-				{boxContents}
-			</div>
-		);
-	};
-
-	MonochromaticBox = () => {
-		let boxContents = [];
-		const colors = tinycolor(this.state.hexColorString).monochromatic();
-		for (let i = 0; i < colors.length; i++) {
-			boxContents.push(<this.ColorBar color={colors[i].toHexString()} key={i} />);
-		}
-		return (
-			<div className="barGroup">
-				<div>Monochromatic</div>
-				{boxContents}
-			</div>
-		);
-	};
-
-	SplitcomplementBox = () => {
-		let boxContents = [];
-		const colors = tinycolor(this.state.hexColorString).splitcomplement();
-		for (let i = 0; i < colors.length; i++) {
-			boxContents.push(<this.ColorBar color={colors[i].toHexString()} key={i} />);
-		}
-		return (
-			<div className="barGroup">
-				<div>Split Complement</div>
-				{boxContents}
-			</div>
-		);
-	};
-
-	TriadBox = () => {
-		let op: OverlayPanel | null;
-		let boxContents = [];
-		const colors = tinycolor(this.state.hexColorString).triad();
-		for (let i = 0; i < colors.length; i++) {
-			boxContents.push(<this.ColorBar color={colors[i].toHexString()} key={i} />);
-		}
-		return (
-			<div className="barGroup">
-				<div>
-					<HelpCircle className="helpCircle" onClick={e => (op ? op.toggle(e) : 0)} />
-					<OverlayPanel ref={el => (op = el)}>
-						<p>
-							<span>Triad</span><br/>A triadic color scheme uses colors that are evenly spaced around the color wheel. Triadic color harmonies tend to be
-							quite vibrant, even if you use pale or unsaturated versions of your hues. To use a triadic harmony successfully, the colors
-							should be carefully balanced - let one color dominate and use the two others for accent.
-						</p>
-					</OverlayPanel>
-					Triad
-				</div>
-				{boxContents}
-			</div>
-		);
-	};
-
-	TetradBox = () => {
-		let boxContents = [];
-		const colors = tinycolor(this.state.hexColorString).tetrad();
-		for (let i = 0; i < colors.length; i++) {
-			boxContents.push(<this.ColorBar color={colors[i].toHexString()} key={i} />);
-		}
-		return (
-			<div className="barGroup">
-				<div>
-					Tetrad
-				</div>
-				{boxContents}
-			</div>
-		);
-	};
-
-	ComplementBox = () => {
-		const color = tinycolor(this.state.hexColorString).complement();
-		return (
-			<div className="barGroup">
-				<div>Complement</div>
-				{<this.ColorBar color={color.toHexString()} key={color.toHexString()} />}
-			</div>
 		);
 	};
 
@@ -360,23 +238,24 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 				<section style={colorStyle} className="color" />
 				<aside className="info">
 					<label>
-						<input spellCheck={false} style={inputStyle} value={this.state.value} onChange={this.handleChange} className="colorInput" />
+						<input spellCheck={false} style={inputStyle} value={this.state.inputValue} onChange={this.handleChange} className="colorInput" />
 					</label>
 					<this.InfoBox label="NAME" value={this.state.colorName} />
 					<this.InfoBox label="HEX" value={this.state.hexColorString} />
 					<this.InfoBox label="RGB" value={this.state.rgbColorString} />
 					<this.InfoBox label="HSL" value={this.state.hslColorString} />
 					<this.InfoBox label="TEMPERATURE" value={this.state.temperature} />
-					{/*Create our column of 'shades'? */}
 					<div className="boxes">
-						{this.ShadeBox()}
-						{this.SaturationBox()}
-						{this.AnalogousBox()}
-						{this.MonochromaticBox()}
-						{this.ComplementBox()}
-						{this.SplitcomplementBox()}
-						{this.TriadBox()}
-						{this.TetradBox()}
+						{this.ColorBox(this.state.lights || [], 'Lighter')}
+						{this.ColorBox(this.state.darks || [], 'Darker')}
+						{this.ColorBox(this.state.saturation || [], 'Saturated', strings.saturated.en.description)}
+						{this.ColorBox(this.state.desaturation || [], 'Desaturated', strings.desaturation.en.description)}
+						{this.ColorBox(this.state.monochromaticCollection || [], 'Monochromatic', strings.monochromatic.en.description)}
+						{this.ColorBox(this.state.analogousCollection || [], 'Analgous', strings.analgous.en.description)}
+						{this.ColorBox(this.state.complement || [], 'Complementary', strings.complementary.en.description)}
+						{this.ColorBox(this.state.splitComplementCollection || [], 'Split Complement', strings.split.en.description)}
+						{this.ColorBox(this.state.triadCollection || [], 'Triadic', strings.triadic.en.description)}
+						{this.ColorBox(this.state.tetradCollection || [], 'Tetradic', strings.tetradic.en.description)}
 					</div>
 				</aside>
 			</div>
