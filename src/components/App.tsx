@@ -19,7 +19,7 @@ interface AppState {
 class App extends Component<{}, AppState> {
 	state: AppState = {
 		multiHexData: [chroma.random().hex(), chroma.random().hex(), chroma.random().hex()],
-		singleHexData: '#0FADED',
+		singleHexData: chroma.random().hex(),
 		count: 3,
 		multi: false,
 		single: true,
@@ -42,6 +42,10 @@ class App extends Component<{}, AppState> {
 	};
 
 	createSwatches = (colors: string[]): any => {
+		ReactGA.event({
+			category: 'Swatch',
+			action: 'Add'
+		});
 		return colors.map(this.createSwatch);
 	};
 
@@ -74,7 +78,15 @@ class App extends Component<{}, AppState> {
 			let colors = this.state.multiHexData;
 			colors.splice(index, 1);
 			this.setState({ multiHexData: colors });
+			ReactGA.event({
+				category: 'Swatch',
+				action: 'Remove'
+			});
 		}
+		ReactGA.event({
+			category: 'Swatch',
+			action: 'Remove - LAST'
+		});
 	};
 
 	randomizeSwatch = (index: number) => {
@@ -82,6 +94,10 @@ class App extends Component<{}, AppState> {
 			let colors = this.state.multiHexData;
 			colors[index] = String(chroma.random());
 			this.setState({ multiHexData: colors });
+			ReactGA.event({
+				category: 'Color Change - Multi',
+				action: 'Randomize'
+			});
 		} else {
 			this.setState({ singleHexData: String(chroma.random()) });
 		}

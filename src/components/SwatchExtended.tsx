@@ -143,9 +143,9 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 	};
 
 	findContrastingColor = (color: string): string => {
-		const lightContrast = chroma.contrast(color, '#E1DDD7');
-		const darkContrast = chroma.contrast(color, '#161d1d');
-		return lightContrast > darkContrast ? '#E1DDD7' : '#161d1d';
+		const lightContrast = chroma.contrast(color, '#F7F6F4');
+		const darkContrast = chroma.contrast(color, '#0B0E0E');
+		return lightContrast > darkContrast ? '#F7F6F4' : '#0B0E0E';
 	};
 
 	trimHSL = (hslArr: number[]): string => {
