@@ -11,6 +11,7 @@ interface SwatchExtendedProps {
 }
 
 interface SwatchExtendedState {
+	isSingleClick?: boolean;
 	colorString?: string;
 	hexColorString?: string;
 	inputValue?: string;
@@ -33,6 +34,8 @@ interface SwatchExtendedState {
 }
 
 export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtendedState> {
+	private singleClick: any;
+
 	constructor(props: any) {
 		super(props);
 		if (this.props.color) {
@@ -55,6 +58,7 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 		// brighten
 
 		let stateObj: SwatchExtendedState = {
+			isSingleClick: false,
 			colorString: colorString,
 			hexColorString: colorHex,
 			inputValue: colorString,
@@ -194,7 +198,7 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 
 		return (
 			<div className="barGroup">
-				<div>
+				<div className="barGroupInner">
 					<HelpCircle className="helpCircle" onClick={e => (op ? op.toggle(e) : 0)} />
 					<OverlayPanel ref={el => (op = el)}>
 						<p>
@@ -218,9 +222,33 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 					style={{ backgroundColor: props.color, color: this.findContrastingColor(props.color) }}
 					value={props.color}
 					className="infoReadonlyInput"
+					onClick={this.SingleClick}
+					onDoubleClick={this.DoubleClick}
 				/>
 			</label>
 		);
+	};
+
+	SingleClick = (event: React.MouseEvent) => {
+		/** React does some interesting stuff with "synthetic events" */
+		let savedEvent = event;
+		let savedTarget = savedEvent.currentTarget as HTMLInputElement;
+		/**/
+		this.singleClick = true;
+		setTimeout(() => {
+			if (this.singleClick) {
+				navigator.clipboard.writeText(savedTarget.value);
+			}
+		}, 275);
+	};
+
+	DoubleClick = (event: React.MouseEvent): void => {
+		this.singleClick = false;
+		/** React does some interesting stuff with "synthetic events" */
+		let savedEvent = event;
+		let savedTarget = savedEvent.currentTarget as HTMLInputElement;
+		/**/
+		this.setState( this.buildStateObject(savedTarget.value))
 	};
 
 	public render(): ReactElement {
@@ -238,7 +266,13 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 				<section style={colorStyle} className="color" />
 				<aside className="info">
 					<label>
-						<input spellCheck={false} style={inputStyle} value={this.state.inputValue} onChange={this.handleChange} className="colorInput" />
+						<input
+							spellCheck={false}
+							style={inputStyle}
+							value={this.state.inputValue}
+							onChange={this.handleChange}
+							className="colorInput"
+						/>
 					</label>
 					<this.InfoBox label="NAME" value={this.state.colorName} />
 					<this.InfoBox label="HEX" value={this.state.hexColorString} />

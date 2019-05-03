@@ -6,7 +6,11 @@
 	grid-template-columns: 25% 75%;
 	height: 100%;
 	@include extra-large-up {
+		grid-template-columns: 20% 80%;
 		height: auto;
+	}
+	@include extra-small-down {
+		grid-template-columns: 15% 85%;
 	}
 	width: 100%;
 	section.color {
@@ -78,29 +82,49 @@
         .boxes {
 			background-color: #3C4444;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-			grid-template-rows: repeat(2, auto);
+            grid-template-columns: repeat(4, 1fr);
+			grid-template-rows: repeat(3, auto);
 			grid-gap: 1rem;
 			padding: 0 1rem 1rem 1rem;
-            width: 75%;
+			width: 90%;
+			@include extra-large-up {
+				grid-template-columns: repeat(5, 1fr);
+				grid-template-rows: repeat(2, auto);
+			}
+			@include extra-extra-large-up {
+				grid-template-columns: repeat(10, 1fr);
+				grid-template-rows: repeat(2, auto);
+			}
+			@include medium-down {
+				width: 100%;
+			}
 			@include extra-small-down {
 				grid-template-columns: 1fr 1fr;
 				grid-template-rows: auto;
 				padding: .5rem;
-				width: 100%;
 			}
             .barGroup {
                 display: flex;
                 flex-direction: column;
                 flex-grow: 1;
                 height: fit-content;
-                margin-top: 1rem;
+				margin-top: 1rem;
+				@include extra-small-down {
+					margin-top: 0;
+				}
                 .contents {
 					height: 100%;
 				}
-                div {
-                    color: #e1ddd7;
-                    margin: 0;
+                div.barGroupInner {
+					align-items: center;
+					color: #e1ddd7;
+					display: flex;
+					font-size: 1.315vw;
+					justify-content: center;
+					margin: 0;
+					@include extra-extra-large-up {
+						font-size: .65vw;
+					}
 					@include extra-small-down {
 						font-size: 3.5vw;
 					}
@@ -130,7 +154,10 @@
 					width: 1rem;
 					height: 1rem;
 					margin-right: .5rem;
-
+					@include extra-extra-large-up {
+						height: 1.25rem;
+						width: 1.25rem;
+					}
 				}
             }
         }
