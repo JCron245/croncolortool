@@ -9,7 +9,7 @@
 		grid-template-columns: 20% 80%;
 		height: auto;
 	}
-	@include extra-small-down {
+	@include small-down {
 		grid-template-columns: 15% 85%;
 	}
 	width: 100%;
@@ -27,17 +27,36 @@
 		font-family: 'Roboto', sans-serif;
 		height: 100%;
 		padding: 1rem;
-		@include extra-small-down {
+		@include medium-down {
 			padding: .5rem;
 		}
 		> div.InfoBox {
 			align-items: center;
 			display: flex;
 			margin: 0 auto;
-			width: 50%;
+			@include extra-large-up {
+				width: 50%;
+			}
+			@include extra-extra-large-up {
+				width: 30%;
+			}
+			@include large-down {
+				width: 90%;
+			}
+			@include medium-down {
+				width: 100%;
+			}
 			svg {
 				color: #807C77;
-				margin-right: .5rem;
+				height: 1rem;
+				margin-bottom: .2rem;
+				margin-right: .25rem;
+				width: 1rem;
+				@include medium-down {
+					height: .85rem;
+					margin-bottom: .1rem;
+					width: .85rem;
+				}
 			}
 			label {
 				margin: 0;
@@ -48,9 +67,11 @@
 			align-items: center;
 			color: #e1ddd7;
 			display: flex;
-			font-size: 2vw;
 			user-select: none;
 			width: 60%;
+			@include extra-extra-large-up {
+				width: 30%;
+			}
 			@include extra-small-down {
 				width: 100%;
 			}
@@ -70,17 +91,24 @@
 				border: none;
 				color: #e1ddd7;
 				font-size: 1.75vw;
-				padding: 0;
+				padding: .25rem 0;
 				margin: 0 0 0 1rem;
 				text-align: right;
 				text-transform: uppercase;
 				width: 100%;
 			}
-			@include extra-large-up {
+			@include extra-extra-large-up {
 				font-size: .9vw;
 				.colorInput,
 				.infoReadonlyInput {
 					font-size: .9vw;
+				}
+			}
+			@include large-down {
+				font-size: 2vw;
+				.colorInput,
+				.infoReadonlyInput {
+					font-size: 2vw;
 				}
 			}
 			@include extra-small-down {
@@ -109,6 +137,8 @@
 				grid-template-rows: repeat(2, auto);
 			}
 			@include medium-down {
+				grid-gap: .5rem;
+				padding: 0 .5rem .5rem .5rem;
 				width: 100%;
 			}
 			@include extra-small-down {
@@ -132,7 +162,7 @@
 					align-items: center;
 					color: #e1ddd7;
 					display: flex;
-					font-size: 1.315vw;
+					font-size: 1.7vw;
 					justify-content: center;
 					margin: 0;
 					@include extra-extra-large-up {
@@ -166,6 +196,11 @@
 					@include extra-extra-large-up {
 						height: 1.25rem;
 						width: 1.25rem;
+					}
+					@include medium-down {
+						height: .9rem;
+						margin-right: .25rem;
+						width: .9rem;
 					}
 				}
             }
