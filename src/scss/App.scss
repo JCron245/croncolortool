@@ -40,7 +40,10 @@
 	}
 	ul.nav {
     background-color: #161d1d;
-    border-bottom: .25rem solid #161d1d;
+		border-bottom: thin solid #161d1d;
+		@include small-down {
+			border-bottom: thin solid #161d1d;
+		}
     .nav-link {
 			border: none;
       background-color: #473333;
