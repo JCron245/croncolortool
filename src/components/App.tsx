@@ -1,6 +1,6 @@
 import React, { Component, ReactElement } from 'react';
 import Swatch from './Swatch';
-import logo from '../images/logo.svg';
+import logo from '../assets/images/logo.svg';
 import chroma from 'chroma-js';
 import '../scss/App.scss';
 import { SwatchExtended } from './SwatchExtended';
@@ -82,11 +82,12 @@ class App extends Component<{}, AppState> {
 				category: 'Swatch',
 				action: 'Remove'
 			});
+		} else {
+			ReactGA.event({
+				category: 'Swatch',
+				action: 'Remove - LAST'
+			});
 		}
-		ReactGA.event({
-			category: 'Swatch',
-			action: 'Remove - LAST'
-		});
 	};
 
 	randomizeSwatch = (index: number) => {

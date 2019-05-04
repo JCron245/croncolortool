@@ -5,6 +5,8 @@ import tinycolor from 'tinycolor2';
 import { HelpCircle } from 'react-feather';
 import { OverlayPanel } from 'primereact/overlaypanel';
 import strings from '../assets/strings.json';
+import Utilities from '../utilities/utilities';
+import ReactGA from 'react-ga';
 
 interface SwatchExtendedProps {
 	color?: string;
@@ -52,7 +54,7 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 		// Color Hex
 		let colorHex = chromaColor.hex();
 		// Contrast Colors in HEX
-		let contrastColorHex: string = this.findContrastingColor(colorString);
+		let contrastColorHex: string = Utilities.findContrastingColor(colorString);
 		// Color temperature
 		let colorTemperature: number = chroma(colorString).temperature();
 		// brighten
@@ -66,10 +68,10 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 				.rgb()
 				.toString()
 				.replace(/,/g, ', '),
-			hslColorString: this.trimHSL(chromaColor.hsl()),
+			hslColorString: Utilities.trimHSL(chromaColor.hsl()),
 			colorName: colorName !== colorHex ? colorName : undefined,
 			contrastColorHex: contrastColorHex,
-			doubleContrast: this.findContrastingColor(contrastColorHex),
+			doubleContrast: Utilities.findContrastingColor(contrastColorHex),
 			temperature: colorTemperature <= 30000 ? colorTemperature : undefined,
 			lights: this.createLightArray(color),
 			darks: this.createDarkArray(color),
@@ -146,27 +148,13 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 		return shades;
 	};
 
-	findContrastingColor = (color: string): string => {
-		const lightContrast = chroma.contrast(color, '#F7F6F4');
-		const darkContrast = chroma.contrast(color, '#0B0E0E');
-		return lightContrast > darkContrast ? '#F7F6F4' : '#0B0E0E';
-	};
-
-	trimHSL = (hslArr: number[]): string => {
-		let arr = hslArr.map((val: number) => {
-			// Something is wrong with chroma and occasionally I am seeing a nan value here. Upon investigation it seems to only occur sometimes
-			// when the HUE value is 0, thus intercepting here and converting it to a 0 this will require further testing to ensure our HSL values are accurate!
-			if (isNaN(val)) {
-				val = 0;
-			}
-			return Number(val.toFixed(2));
-		});
-		return arr.toString().replace(/,/g, ', ');
-	};
-
 	handleChange = (event: any): void => {
 		let isValid = chroma.valid(event.target.value);
 		if (isValid) {
+			ReactGA.event({
+				category: 'Swatch - Single',
+				action: 'Color Change'
+			});
 			this.setState(this.buildStateObject(event.target.value));
 		} else {
 			this.setState({
@@ -176,50 +164,67 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 	};
 
 	InfoBox = (props: any) => {
+		let op: OverlayPanel | null;
 		if (props.value) {
 			return (
-				<label>
-					{props.label}:
-					<input readOnly value={props.value} className="infoReadonlyInput" type="text" />
-				</label>
+				<div className="InfoBox">
+					<HelpCircle className="helpCircle" onClick={e => (op ? op.toggle(e) : 0)} />
+					<OverlayPanel ref={el => (op = el)}>
+						<p>
+							<span>{props.label}</span>
+							<br />
+							<br />
+							{props.info}
+						</p>
+					</OverlayPanel>
+					<label>
+						{props.label}:
+						<input readOnly value={props.value} className="infoReadonlyInput" type="text" />
+					</label>
+				</div>
 			);
 		}
 		return null;
 	};
 
-	ColorBox = (arr: any[], label: string, info?: string) => {
-		let boxContents = [];
-		let op: OverlayPanel | null;
+	// ColorBox = (arr: any[], label: string, info?: string) => {
+	ColorBox = (props: any) => {
+		if (props) {
+			let boxContents = [];
+			let op: OverlayPanel | null;
 
-		for (let i = 0; i < arr.length; i++) {
-			let item = typeof arr[i] === 'string' ? arr[i] : arr[i].toHexString();
-			boxContents.push(<this.ColorBar color={item} key={i} />);
-		}
+			for (let i = 0; i < props.array.length; i++) {
+				let item = typeof props.array[i] === 'string' ? props.array[i] : props.array[i].toHexString();
+				boxContents.push(<this.ColorBar color={item} key={i} />);
+			}
 
-		return (
-			<div className="barGroup">
-				<div className="barGroupInner">
-					<HelpCircle className="helpCircle" onClick={e => (op ? op.toggle(e) : 0)} />
-					<OverlayPanel ref={el => (op = el)}>
-						<p>
-							<span>{label}</span>
-							<br />
-							{info}
-						</p>
-					</OverlayPanel>
-					{label}
+			return (
+				<div className="barGroup">
+					<div className="barGroupInner">
+						<HelpCircle className="helpCircle" onClick={e => (op ? op.toggle(e) : 0)} />
+						<OverlayPanel ref={el => (op = el)}>
+							<p>
+								<span>{props.label}</span>
+								<br />
+								<br />
+								{props.info}
+							</p>
+						</OverlayPanel>
+						{props.label}
+					</div>
+					{boxContents}
 				</div>
-				{boxContents}
-			</div>
-		);
+			);
+		}
+		return null;
 	};
 
 	ColorBar = (props: any) => {
 		return (
-			<label>
+			<label title={`Hex Color ${props.color}`} aria-label={`Hex Color ${props.color}`}>
 				<input
 					readOnly
-					style={{ backgroundColor: props.color, color: this.findContrastingColor(props.color) }}
+					style={{ backgroundColor: props.color, color: Utilities.findContrastingColor(props.color) }}
 					value={props.color}
 					className="infoReadonlyInput"
 					onClick={this.SingleClick}
@@ -243,12 +248,13 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 	};
 
 	DoubleClick = (event: React.MouseEvent): void => {
+		event.stopPropagation();
 		this.singleClick = false;
 		/** React does some interesting stuff with "synthetic events" */
 		let savedEvent = event;
 		let savedTarget = savedEvent.currentTarget as HTMLInputElement;
 		/**/
-		this.setState( this.buildStateObject(savedTarget.value))
+		this.setState(this.buildStateObject(savedTarget.value));
 	};
 
 	public render(): ReactElement {
@@ -275,21 +281,21 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 						/>
 					</label>
 					<this.InfoBox label="NAME" value={this.state.colorName} />
-					<this.InfoBox label="HEX" value={this.state.hexColorString} />
-					<this.InfoBox label="RGB" value={this.state.rgbColorString} />
+					<this.InfoBox label="HEX" value={this.state.hexColorString} info={strings.hex.en.description} />
+					<this.InfoBox label="RGB" value={this.state.rgbColorString} info={strings.rgb.en.description} />
 					<this.InfoBox label="HSL" value={this.state.hslColorString} />
 					<this.InfoBox label="TEMPERATURE" value={this.state.temperature} />
 					<div className="boxes">
-						{this.ColorBox(this.state.lights || [], 'Lighter')}
-						{this.ColorBox(this.state.darks || [], 'Darker')}
-						{this.ColorBox(this.state.saturation || [], 'Saturated', strings.saturated.en.description)}
-						{this.ColorBox(this.state.desaturation || [], 'Desaturated', strings.desaturation.en.description)}
-						{this.ColorBox(this.state.monochromaticCollection || [], 'Monochromatic', strings.monochromatic.en.description)}
-						{this.ColorBox(this.state.analogousCollection || [], 'Analgous', strings.analgous.en.description)}
-						{this.ColorBox(this.state.complement || [], 'Complementary', strings.complementary.en.description)}
-						{this.ColorBox(this.state.splitComplementCollection || [], 'Split Complement', strings.split.en.description)}
-						{this.ColorBox(this.state.triadCollection || [], 'Triadic', strings.triadic.en.description)}
-						{this.ColorBox(this.state.tetradCollection || [], 'Tetradic', strings.tetradic.en.description)}
+						<this.ColorBox array={this.state.lights} label="Lighter" />
+						<this.ColorBox array={this.state.darks} label="Darker" />
+						<this.ColorBox array={this.state.saturation} label="Saturated" info={strings.saturated.en.description} />
+						<this.ColorBox array={this.state.desaturation} label="Desaturated" info={strings.desaturation.en.description} />
+						<this.ColorBox array={this.state.complement} label="Complementary" info={strings.complementary.en.description} />
+						<this.ColorBox array={this.state.splitComplementCollection} label="Split Complement" info={strings.split.en.description} />
+						<this.ColorBox array={this.state.triadCollection} label="Triadic" info={strings.triadic.en.description} />
+						<this.ColorBox array={this.state.tetradCollection} label="Tetradic" info={strings.tetradic.en.description} />
+						<this.ColorBox array={this.state.monochromaticCollection} label="Monochromatic" info={strings.monochromatic.en.description} />
+						<this.ColorBox array={this.state.analogousCollection} label="Analgous" info={strings.analgous.en.description} />
 					</div>
 				</aside>
 			</div>

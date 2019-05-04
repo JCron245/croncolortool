@@ -1,10 +1,8 @@
 {
   "name": "croncolortool",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
-    "@types/rc-tooltip": "^3.7.1",
-    "@types/tinycolor2": "^1.4.1",
     "bootstrap": "^4.3.1",
     "chroma-js": "^2.0.3",
     "classnames": "^2.2.6",
@@ -32,6 +30,8 @@
     "@types/react-copy-to-clipboard": "^4.2.6",
     "@types/react-dom": "16.8.3",
     "@types/react-tooltip": "^3.9.2",
+    "@types/rc-tooltip": "^3.7.1",
+    "@types/tinycolor2": "^1.4.1",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
     "eslint": "^5.16.0",
@@ -40,7 +40,7 @@
     "prettier": "^1.17.0"
   },
   "browserslist": [
-    ">0.185%"
+    ">0.2%"
   ],
   "engines": {
     "node": ">=7.0.0"

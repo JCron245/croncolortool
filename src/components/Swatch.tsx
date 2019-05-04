@@ -4,6 +4,7 @@ import '../scss/Swatch.scss';
 import ReactDOM from 'react-dom';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { ChevronDown, Clipboard, XSquare, RefreshCw } from 'react-feather';
+import Utilities from '../utilities/utilities';
 
 interface SwatchProps {
 	color?: string;
@@ -67,7 +68,7 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 		// Color Name If It Has One
 		let colorName = chromaColor.name();
 		// Contrast Colors in HEX and RGB
-		let contrastColorHex: string = this.findContrastingColor(colorString);
+		let contrastColorHex: string = Utilities.findContrastingColor(colorString);
 		let contrastColorRGB: string = chroma(contrastColorHex)
 			.rgb()
 			.toString();
@@ -76,11 +77,11 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 			hexColorString: chromaColor.hex(),
 			value: colorString,
 			rgbColorString: chromaColor.rgb().toString(),
-			hslColorString: this.trimHSL(chromaColor.hsl()),
+			hslColorString: Utilities.trimHSL(chromaColor.hsl()),
 			colorName: colorName !== chromaColor.hex() ? colorName : '',
 			contrastColorHex: contrastColorHex,
 			contrastColorRGB: contrastColorRGB,
-			doubleContrast: this.findContrastingColor(contrastColorHex),
+			doubleContrast: Utilities.findContrastingColor(contrastColorHex),
 			show: this.state ? (this.state.show ? this.state.show : false) : false,
 			index: this.props.index
 		};
@@ -102,13 +103,6 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 		}
 	};
 
-	trimHSL = (hslArr: number[]): string => {
-		let arr = hslArr.map((val: number) => {
-			return Number(val.toFixed(2));
-		});
-		return arr.toString();
-	};
-
 	componentDidMount = (): void => {
 		this.updateContrastStyle(this.state.contrastColorHex || '');
 	};
@@ -122,20 +116,6 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 				value: event.target.value
 			});
 		}
-	};
-
-	findContrastingColor = (color: string) => {
-		let array = [
-			{ hex: '#E1DDD7', contrast: chroma.contrast(color, '#E1DDD7') },
-			{ hex: '#161d1d', contrast: chroma.contrast(color, '#161d1d') },
-			{ hex: '#7C7D7A', contrast: chroma.contrast(color, '#7C7D7A') }
-		];
-		array = array.sort((a: { hex: string; contrast: number }, b: { hex: string; contrast: number }) => {
-			if (a.contrast > b.contrast) return -1;
-			if (a.contrast < b.contrast) return 1;
-			return 0;
-		});
-		return array[0].hex;
 	};
 
 	stopProp = (event: any) => {

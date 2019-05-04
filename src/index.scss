@@ -1,12 +1,26 @@
 // Override default variables before the import
 $body-bg: #000;
 
+@font-face {
+    font-family: 'Roboto';
+    src: url('./assets/fonts/Roboto-Regular.woff2') format('woff2'),
+        url('./assets/fonts/Roboto-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 // Import Bootstrap and its default variables - This goes last
-// @import '~bootstrap/scss/bootstrap.scss';
 // @import '~primereact/resources/primereact.min.css';
 // @import '~primeicons/primeicons.css';
 
-@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/reboot';
+@import '~bootstrap/scss/nav';
+@import '~bootstrap/scss/navbar';
+@import '~bootstrap/scss/buttons';
+@import '~bootstrap/scss/grid';
 @import './scss/breakpoints.scss';
 
 html, body {

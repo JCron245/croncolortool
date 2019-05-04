@@ -30,14 +30,27 @@
 		@include extra-small-down {
 			padding: .5rem;
 		}
+		> div.InfoBox {
+			align-items: center;
+			display: flex;
+			margin: 0 auto;
+			width: 50%;
+			svg {
+				color: #807C77;
+				margin-right: .5rem;
+			}
+			label {
+				margin: 0;
+				width: 100%;
+			}
+		}
 		label {
 			align-items: center;
 			color: #e1ddd7;
 			display: flex;
 			font-size: 2vw;
-			margin: 0 auto;
 			user-select: none;
-			width: 50%;
+			width: 60%;
 			@include extra-small-down {
 				width: 100%;
 			}
@@ -145,10 +158,6 @@
 						font-size: 3.5vw;
 					}
 				}
-				.p-overlaypanel {
-					background-color: #473333;
-					text-align: left;
-				}
 				.helpCircle {
 					color: #807C77;
 					width: 1rem;
@@ -161,5 +170,17 @@
 				}
             }
         }
+	}
+	div.p-overlaypanel {
+		background-color: #473333;
+		color: #e1ddd7;
+		text-align: left;
+		>div.p-overlaypanel-content {
+			p {
+				span {
+					font-weight: bold;
+				}
+			}
+		}
 	}
 }
