@@ -37,6 +37,7 @@ interface SwatchExtendedState {
 
 export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtendedState> {
 	private singleClick: any;
+	private pickerChangeLimiter: number = 0;
 
 	constructor(props: any) {
 		super(props);
@@ -95,7 +96,7 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 		let shades = [];
 		for (let i = 0; i < 15; i++) {
 			let lightened = tinycolor(color)
-				.lighten(i * 5)
+				.lighten(i * 7.5)
 				.toHexString();
 			shades.push(lightened);
 			if (lightened === '#ffffff') {
@@ -109,7 +110,7 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 		let shades = [];
 		for (let i = 0; i < 15; i++) {
 			let darkened = tinycolor(color)
-				.darken(i * 5)
+				.darken(i * 7.5)
 				.toHexString();
 			shades.push(darkened);
 			if (darkened === '#000000') {
@@ -120,10 +121,10 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 	};
 
 	createSaturationArray = (color: string): any[] => {
-		let shades: any[] | string[] = [];
+		let shades: any[] = [];
 		for (let i = 0; i < 15; i++) {
 			let saturated = tinycolor(color)
-				.saturate(i * 10)
+				.saturate(i * 7.5)
 				.toHexString();
 			if (i !== 0 && saturated === shades[i - 1]) {
 				break;
@@ -134,10 +135,10 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 	};
 
 	createDesaturationArray = (color: string): any[] => {
-		let shades: any[] | string[] = [];
+		let shades: any[] = [];
 		for (let i = 0; i < 15; i++) {
 			let desaturated = tinycolor(color)
-				.desaturate(i * 10)
+				.desaturate(i * 7.5)
 				.toHexString();
 			if (i !== 0 && desaturated === shades[i - 1]) {
 				break;
@@ -145,6 +146,15 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 			shades.push(desaturated);
 		}
 		return shades;
+	};
+
+	handleChangeLimited = (event: any): void => {
+		this.pickerChangeLimiter++;
+		if (this.pickerChangeLimiter % 3 === 0) {
+			return;
+		} else {
+			this.handleChange(event);
+		}
 	};
 
 	handleChange = (event: any): void => {
@@ -260,7 +270,12 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 		return (
 			<div className="swatchExtended">
 				<section style={colorStyle} className="color" />
-				<SketchPicker disableAlpha={true} color={ this.state.hexColorString } onChange={ this.handleChange }/>
+				<SketchPicker
+					disableAlpha={true}
+					color={this.state.hexColorString}
+					onChange={this.handleChangeLimited}
+					onChangeComplete={this.handleChange}
+				/>
 				<aside className="info">
 					<div className="additional">
 						<this.InfoBox label="NAME" value={this.state.colorName} />
