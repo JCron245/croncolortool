@@ -7,6 +7,7 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 import strings from '../assets/strings.json';
 import Utilities from '../utilities/utilities';
 import ReactGA from 'react-ga';
+import { SketchPicker } from 'react-color';
 
 interface SwatchExtendedProps {
 	color?: string;
@@ -16,7 +17,6 @@ interface SwatchExtendedState {
 	isSingleClick?: boolean;
 	colorString?: string;
 	hexColorString?: string;
-	inputValue?: string;
 	rgbColorString?: string;
 	hslColorString?: string;
 	colorName?: string;
@@ -63,7 +63,6 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 			isSingleClick: false,
 			colorString: colorString,
 			hexColorString: colorHex,
-			inputValue: colorString,
 			rgbColorString: chromaColor
 				.rgb()
 				.toString()
@@ -149,17 +148,13 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 	};
 
 	handleChange = (event: any): void => {
-		let isValid = chroma.valid(event.target.value);
+		let isValid = chroma.valid(event.hex);
 		if (isValid) {
 			ReactGA.event({
 				category: 'Swatch - Single',
 				action: 'Color Change'
 			});
-			this.setState(this.buildStateObject(event.target.value));
-		} else {
-			this.setState({
-				inputValue: event.target.value
-			});
+			this.setState(this.buildStateObject(event.hex));
 		}
 	};
 
@@ -262,29 +257,17 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 			backgroundColor: this.state.hexColorString
 		};
 
-		let inputStyle: React.CSSProperties = {
-			backgroundColor: this.state.hexColorString,
-			color: this.state.contrastColorHex
-		};
-
 		return (
 			<div className="swatchExtended">
 				<section style={colorStyle} className="color" />
+				<SketchPicker disableAlpha={true} color={ this.state.hexColorString } onChange={ this.handleChange }/>
 				<aside className="info">
-					<label>
-						<input
-							spellCheck={false}
-							style={inputStyle}
-							value={this.state.inputValue}
-							onChange={this.handleChange}
-							className="colorInput"
-						/>
-					</label>
-					<this.InfoBox label="NAME" value={this.state.colorName} />
-					<this.InfoBox label="HEX" value={this.state.hexColorString} info={strings.hex.en.description} />
-					<this.InfoBox label="RGB" value={this.state.rgbColorString} info={strings.rgb.en.description} />
-					<this.InfoBox label="HSL" value={this.state.hslColorString} />
-					<this.InfoBox label="TEMPERATURE" value={this.state.temperature} />
+					<div className="additional">
+						<this.InfoBox label="NAME" value={this.state.colorName} />
+						<this.InfoBox label="HEX" value={this.state.hexColorString} />
+						<this.InfoBox label="HSL" value={this.state.hslColorString} />
+						<this.InfoBox label="TEMPERATURE" value={this.state.temperature} />
+					</div>
 					<div className="boxes">
 						<this.ColorBox array={this.state.lights} label="Lighter" />
 						<this.ColorBox array={this.state.darks} label="Darker" />
