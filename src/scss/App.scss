@@ -1,6 +1,7 @@
 @import './breakpoints.scss';
 
 .app {
+	background-color: #161d1d;
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
@@ -43,6 +44,7 @@
 		border-bottom: thin solid #161d1d;
 		@include small-down {
 			border-bottom: thin solid #161d1d;
+			margin-bottom: .5rem;
 		}
     .nav-link {
 			border: none;

@@ -246,7 +246,7 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 		/**/
 		this.singleClick = true;
 		setTimeout(() => {
-			if (this.singleClick) {
+			if (this.singleClick && navigator.clipboard) {
 				navigator.clipboard.writeText(savedTarget.value);
 			}
 		}, 275);
