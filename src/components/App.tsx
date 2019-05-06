@@ -5,6 +5,7 @@ import chroma from 'chroma-js';
 import '../scss/App.scss';
 import { SwatchExtended } from './SwatchExtended';
 import ReactGA from 'react-ga';
+import { Navbar, Nav, Button } from 'react-bootstrap';
 
 interface AppState {
 	multiHexData: string[];
@@ -111,27 +112,29 @@ class App extends Component<{}, AppState> {
 		document.documentElement.style.setProperty('--vh', `${vh}px`);
 		return (
 			<div className="app">
-				<nav className="navbar">
-					<img src={logo} className="app-logo" alt="logo" />
-					<p>Cron Color Tool</p>
-					{this.state.multi && (
-						<button onClick={this.addSwatch} disabled={this.state.multiHexData.length === this.state.maxSwatch ? true : false}>
-							Add Swatch
-						</button>
-					)}
-				</nav>
-				<ul className="nav nav-pills nav-justified">
-					<li className="nav-item">
-						<button className={'nav-link ' + (this.state.single && 'active')} onClick={this.enableSingle}>
-							Single Color Mode
-						</button>
-					</li>
-					<li className="nav-item">
-						<button className={'nav-link ' + (this.state.multi && 'active')} onClick={this.enableMulti}>
-							Color Swatch
-						</button>
-					</li>
-				</ul>
+				<Navbar expand="lg">
+					<Navbar.Brand href="#">
+						<img src={logo} className="app-logo" alt="logo" style={{ maxHeight: '35px' }} />
+						<span>Cron Color Tool</span>
+					</Navbar.Brand>
+					<Navbar.Toggle aria-controls="basic-navbar-nav" />
+					<Navbar.Collapse id="basic-navbar-nav">
+						<Nav className="mr-auto" variant="pills" defaultActiveKey="#single">
+							<Nav.Link href="#single" onClick={this.enableSingle}>
+								Single Color
+							</Nav.Link>
+							<Nav.Link href="#multi" onClick={this.enableMulti}>
+								Color Swatch
+							</Nav.Link>
+							{this.state.multi && (
+								<Button className="page-action" onClick={this.addSwatch} variant="success" disabled={this.state.multiHexData.length === this.state.maxSwatch}>
+									Add Swatch
+								</Button>
+							)}
+						</Nav>
+					</Navbar.Collapse>
+				</Navbar>
+
 				<main>
 					{this.state.multi && <div className="row">{this.createSwatches(this.state.multiHexData)}</div>}
 					{this.state.single && <SwatchExtended color={this.state.singleHexData} />}

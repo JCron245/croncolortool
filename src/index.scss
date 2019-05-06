@@ -16,12 +16,16 @@ $body-bg: #000;
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/root';
 @import '~bootstrap/scss/reboot';
 @import '~bootstrap/scss/nav';
 @import '~bootstrap/scss/navbar';
 @import '~bootstrap/scss/buttons';
+@import '~bootstrap/scss/transitions';
+@import '~bootstrap/scss/dropdown';
 @import '~bootstrap/scss/grid';
 @import './scss/breakpoints.scss';
+
 
 html, body {
 	min-height: 100vh;
@@ -65,9 +69,4 @@ code {
 
 dd {
 	margin-inline-start: unset;
-}
-
-a:focus,
-button:focus {
-	outline: thin dotted #0faded;
 }

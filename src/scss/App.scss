@@ -11,51 +11,46 @@
 	padding: 0;
 	text-align: center;
 	nav.navbar {
-		background-color: #161d1d;
-    color: #E1DDD7;
+		background-color: #473333;
 		.app-logo {
 			animation: App-logo-spin infinite 18s linear;
-			height: 3.5vh;
 			pointer-events: none;
-    }
-    p {
-      margin: 0;
-    }
-		> button {
-			background-color: #473333;
-			border: none;
-			box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-      color: #E1DDD7;
-			cursor: pointer;
-			transition: background-color 0.175s linear;
-			&:hover {
-				background-color: #614d4d;
-				transition: background-color 0.1s linear;
-			}
-			&:disabled {
-				background-color: #614d4d;
-        box-shadow: none;
-        cursor: default;
+		}
+		.navbar-brand {
+			span {
+				color: #fff;
+				font-size: 1.5rem;
+				margin-left: 0.25rem;
+				vertical-align: sub;
 			}
 		}
-	}
-	ul.nav {
-    background-color: #161d1d;
-		border-bottom: thin solid #161d1d;
-		@include small-down {
-			border-bottom: thin solid #161d1d;
-			margin-bottom: .5rem;
-		}
-    .nav-link {
-			border: none;
-      background-color: #473333;
-			color: #E1DDD7;
+		.navbar-nav {
 			width: 100%;
-    }
-    .nav-link.active {
-      background-color: #E1DDD7;
-      color: #161d1d;
-    }
+			.nav-link {
+				color: #e1ddd7;
+				&:hover {
+					color: #e1ddd7;
+				}
+				&.active {
+					background-color: #0069d9;
+					color: #e1ddd7;
+					&:hover {
+						color: #e1ddd7;
+					}
+				}
+			}
+			.page-action {
+				box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+				color: #161d1d;
+				margin-left: auto;
+				&:disabled {
+					box-shadow: none;
+				}
+				@include medium-down {
+					width: 50%;
+				}
+			}
+		}
 	}
 	main {
 		display: flex;
