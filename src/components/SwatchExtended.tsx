@@ -8,6 +8,7 @@ import strings from '../assets/strings.json';
 import Utilities from '../utilities/utilities';
 import ReactGA from 'react-ga';
 import { SketchPicker } from 'react-color';
+import { Popover, OverlayTrigger } from 'react-bootstrap';
 
 interface SwatchExtendedProps {
 	color?: string;
@@ -19,6 +20,7 @@ interface SwatchExtendedState {
 	hexColorString?: string;
 	rgbColorString?: string;
 	hslColorString?: string;
+	hsvColorString?: string;
 	colorName?: string;
 	contrastColorHex?: string;
 	doubleContrast?: string;
@@ -38,6 +40,26 @@ interface SwatchExtendedState {
 export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtendedState> {
 	private singleClick: any;
 	private pickerChangeLimiter: number = 0;
+	presetColors: any = [
+		{ color: '#FFF', title: 'White' },
+		{ color: '#C0C0C0', title: 'Silver' },
+		{ color: '#808080', title: 'Gray' },
+		{ color: '#000', title: 'Black' },
+		{ color: '#FF0000', title: 'Red' },
+		{ color: '#800000', title: 'Maroon' },
+		{ color: '#FFFF00', title: 'Yellow' },
+		{ color: '#FFD700', title: 'Gold' },
+		{ color: '#808000', title: 'Olive' },
+		{ color: '#00FF00', title: 'Lime' },
+		{ color: '#008000', title: 'Green' },
+		{ color: '#00FFFF', title: 'Aqua' },
+		{ color: '#008080', title: 'Teal' },
+		{ color: '#0000FF', title: 'Blue' },
+		{ color: '#0FADED', title: '0FADED' },
+		{ color: '#000080', title: 'Navy' },
+		{ color: '#FF00FF', title: 'Fuschia' },
+		{ color: '#800080', title: 'Purple' }
+	];
 
 	constructor(props: any) {
 		super(props);
@@ -50,6 +72,8 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 		let colorString: string = color.charAt(0) === '#' ? color.substr(1) : color;
 		// Chroma Object
 		let chromaColor = chroma(color);
+		// Tiny Color
+		let tinyColor = tinycolor(colorString);
 		// Color Name If It Has One
 		let colorName = chromaColor.name();
 		// Color Hex
@@ -64,30 +88,23 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 			isSingleClick: false,
 			colorString: colorString,
 			hexColorString: colorHex,
-			rgbColorString: chromaColor
-				.rgb()
-				.toString()
-				.replace(/,/g, ', '),
-			hslColorString: Utilities.trimHSL(chromaColor.hsl()),
+			rgbColorString: tinyColor.toRgbString(),
+			hslColorString: tinyColor.toHslString(),
+			hsvColorString: tinyColor.toHsvString(),
 			colorName: colorName !== colorHex ? colorName : undefined,
 			contrastColorHex: contrastColorHex,
 			doubleContrast: Utilities.findContrastingColor(contrastColorHex),
-			temperature: colorTemperature <= 30000 ? colorTemperature : undefined,
+			temperature: colorTemperature <= 27000 ? colorTemperature : undefined,
 			lights: this.createLightArray(color),
 			darks: this.createDarkArray(color),
 			saturation: this.createSaturationArray(color),
 			desaturation: this.createDesaturationArray(color),
-			analogousCollection: tinycolor(colorHex).analogous(),
-			monochromaticCollection: tinycolor(colorHex).monochromatic(),
-			complement: [
-				colorHex,
-				tinycolor(colorHex)
-					.complement()
-					.toHexString()
-			],
-			splitComplementCollection: tinycolor(colorHex).splitcomplement(),
-			triadCollection: tinycolor(colorHex).triad(),
-			tetradCollection: tinycolor(colorHex).tetrad()
+			analogousCollection: tinyColor.analogous(),
+			monochromaticCollection: tinyColor.monochromatic(),
+			complement: [colorHex, tinyColor.complement().toHexString()],
+			splitComplementCollection: tinyColor.splitcomplement(),
+			triadCollection: tinyColor.triad(),
+			tetradCollection: tinyColor.tetrad()
 		};
 		return stateObj;
 	};
@@ -169,19 +186,19 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 	};
 
 	InfoBox = (props: any) => {
-		let op: OverlayPanel | null;
 		if (props.value) {
 			return (
 				<div className="InfoBox">
-					<HelpCircle className="helpCircle" onClick={e => (op ? op.toggle(e) : 0)} />
-					<OverlayPanel ref={el => (op = el)}>
-						<p>
-							<span>{props.label}</span>
-							<br />
-							<br />
-							{props.info}
-						</p>
-					</OverlayPanel>
+					<OverlayTrigger
+						trigger={['click', 'hover']}
+						placement="right"
+						overlay={
+							<Popover id="popover-basic" title={props.label}>
+								{props.info}
+							</Popover>
+						}>
+						<HelpCircle className="helpCircle" />
+					</OverlayTrigger>
 					<label>
 						{props.label}:
 						<input readOnly value={props.value} className="infoReadonlyInput" type="text" />
@@ -196,7 +213,6 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 	ColorBox = (props: any) => {
 		if (props) {
 			let boxContents = [];
-			let op: OverlayPanel | null;
 
 			for (let i = 0; i < props.array.length; i++) {
 				let item = typeof props.array[i] === 'string' ? props.array[i] : props.array[i].toHexString();
@@ -206,15 +222,16 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 			return (
 				<div className="barGroup">
 					<div className="barGroupInner">
-						<HelpCircle className="helpCircle" onClick={e => (op ? op.toggle(e) : 0)} />
-						<OverlayPanel ref={el => (op = el)}>
-							<p>
-								<span>{props.label}</span>
-								<br />
-								<br />
-								{props.info}
-							</p>
-						</OverlayPanel>
+						<OverlayTrigger
+							trigger={['click', 'hover']}
+							placement="bottom"
+							overlay={
+								<Popover id="popover-basic" title={props.label}>
+									{props.info}
+								</Popover>
+							}>
+							<HelpCircle className="helpCircle" />
+						</OverlayTrigger>
 						{props.label}
 					</div>
 					{boxContents}
@@ -271,6 +288,7 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 			<div className="swatchExtended">
 				<section style={colorStyle} className="color" />
 				<SketchPicker
+					presetColors={this.presetColors}
 					disableAlpha={true}
 					color={this.state.hexColorString}
 					onChange={this.handleChangeLimited}
@@ -279,9 +297,9 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 				<aside className="info">
 					<div className="additional">
 						<this.InfoBox label="NAME" value={this.state.colorName} />
-						<this.InfoBox label="HEX" value={this.state.hexColorString} />
-						<this.InfoBox label="HSL" value={this.state.hslColorString} />
-						<this.InfoBox label="TEMPERATURE" value={this.state.temperature} />
+						<this.InfoBox label="HSL" value={this.state.hslColorString} info={strings.hsl.en.description} />
+						<this.InfoBox label="HSV" value={this.state.hsvColorString} info={strings.hsv.en.description} />
+						<this.InfoBox label="TEMPERATURE" value={this.state.temperature} info={strings.temperature.en.description} />
 					</div>
 					<div className="boxes">
 						<this.ColorBox array={this.state.lights} label="Lighter" />

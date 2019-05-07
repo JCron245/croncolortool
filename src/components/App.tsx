@@ -6,6 +6,7 @@ import '../scss/App.scss';
 import { SwatchExtended } from './SwatchExtended';
 import ReactGA from 'react-ga';
 import { Navbar, Nav, Button } from 'react-bootstrap';
+import { PlusCircle } from 'react-feather';
 
 interface AppState {
 	multiHexData: string[];
@@ -25,7 +26,7 @@ class App extends Component<{}, AppState> {
 		multi: false,
 		single: true,
 		isMobile: window.innerWidth < 480,
-		maxSwatch: window.innerWidth < 480 ? 4 : 12
+		maxSwatch: window.innerWidth < 992 ? (window.innerWidth < 480 ? 4 : 6) : 12
 	};
 
 	enableMulti = () => {
@@ -113,9 +114,9 @@ class App extends Component<{}, AppState> {
 		return (
 			<div className="app">
 				<Navbar expand="lg">
-					<Navbar.Brand href="#">
+					<Navbar.Brand href="#single">
 						<img src={logo} className="app-logo" alt="logo" style={{ maxHeight: '35px' }} />
-						<span>Cron Color Tool</span>
+						<span>Cron Color Tool<sup>alpha</sup></span>
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
@@ -126,7 +127,7 @@ class App extends Component<{}, AppState> {
 							<Nav.Link href="#multi" onClick={this.enableMulti}>
 								Color Swatch
 							</Nav.Link>
-							{this.state.multi && (
+							{this.state.multi && window.innerWidth >= 992 && (
 								<Button className="page-action" onClick={this.addSwatch} variant="success" disabled={this.state.multiHexData.length === this.state.maxSwatch}>
 									Add Swatch
 								</Button>
@@ -134,6 +135,12 @@ class App extends Component<{}, AppState> {
 						</Nav>
 					</Navbar.Collapse>
 				</Navbar>
+				
+				{this.state.multi && window.innerWidth <= 992 && 
+					(<Button variant="success" className="addSwatch" onClick={this.addSwatch} style={{ display: this.state.multiHexData.length === this.state.maxSwatch ? 'none': 'inline-block'}}>
+						<PlusCircle />
+					</Button>)
+				}
 
 				<main>
 					{this.state.multi && <div className="row">{this.createSwatches(this.state.multiHexData)}</div>}

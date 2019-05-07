@@ -9,10 +9,6 @@ $body-bg: #000;
     font-style: normal;
 }
 
-// Import Bootstrap and its default variables - This goes last
-// @import '~primereact/resources/primereact.min.css';
-// @import '~primeicons/primeicons.css';
-
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
@@ -24,6 +20,7 @@ $body-bg: #000;
 @import '~bootstrap/scss/transitions';
 @import '~bootstrap/scss/dropdown';
 @import '~bootstrap/scss/grid';
+@import '~bootstrap/scss/popover';
 @import './scss/breakpoints.scss';
 
 
