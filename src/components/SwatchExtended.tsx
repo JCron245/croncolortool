@@ -3,7 +3,6 @@ import chroma from 'chroma-js';
 import '../scss/SwatchExtended.scss';
 import tinycolor from 'tinycolor2';
 import { HelpCircle } from 'react-feather';
-import { OverlayPanel } from 'primereact/overlaypanel';
 import strings from '../assets/strings.json';
 import Utilities from '../utilities/utilities';
 import ReactGA from 'react-ga';
@@ -84,7 +83,7 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 		let colorTemperature: number = chroma(colorString).temperature();
 		// brighten
 
-		let stateObj: SwatchExtendedState = {
+		return {
 			isSingleClick: false,
 			colorString: colorString,
 			hexColorString: colorHex,
@@ -106,7 +105,6 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 			triadCollection: tinyColor.triad(),
 			tetradCollection: tinyColor.tetrad()
 		};
-		return stateObj;
 	};
 
 	createLightArray = (color: string): any[] => {
@@ -185,7 +183,7 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 		}
 	};
 
-	InfoBox = (props: any) => {
+	InfoBox = (props: any): ReactElement | null => {
 		if (props.value) {
 			return (
 				<div className="InfoBox">
@@ -210,7 +208,7 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 	};
 
 	// ColorBox = (arr: any[], label: string, info?: string) => {
-	ColorBox = (props: any) => {
+	ColorBox = (props: any): ReactElement | null => {
 		if (props) {
 			let boxContents = [];
 
@@ -241,7 +239,7 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 		return null;
 	};
 
-	ColorBar = (props: any) => {
+	ColorBar = (props: any): ReactElement | null => {
 		return (
 			<label title={`Hex Color ${props.color}`} aria-label={`Hex Color ${props.color}`}>
 				<input
@@ -256,13 +254,13 @@ export class SwatchExtended extends Component<SwatchExtendedProps, SwatchExtende
 		);
 	};
 
-	SingleClick = (event: React.MouseEvent) => {
+	SingleClick = (event: React.MouseEvent): void => {
 		/** React does some interesting stuff with "synthetic events" */
 		let savedEvent = event;
 		let savedTarget = savedEvent.currentTarget as HTMLInputElement;
 		/**/
 		this.singleClick = true;
-		setTimeout(() => {
+		setTimeout((): void => {
 			if (this.singleClick && navigator.clipboard) {
 				navigator.clipboard.writeText(savedTarget.value);
 			}

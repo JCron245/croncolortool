@@ -29,17 +29,17 @@ class App extends Component<{}, AppState> {
 		maxSwatch: window.innerWidth < 992 ? (window.innerWidth < 480 ? 4 : 6) : 12
 	};
 
-	enableMulti = () => {
+	enableMulti = (): void => {
 		ReactGA.pageview(window.location.pathname + window.location.search + '-multi');
 		this.setState({ multi: true, single: false });
 	};
 
-	enableSingle = () => {
+	enableSingle = (): void => {
 		ReactGA.pageview(window.location.pathname + window.location.search + '-single');
 		this.setState({ multi: false, single: true });
 	};
 
-	createSwatch = (color: string, index: number) => {
+	createSwatch = (color: string, index: number): ReactElement => {
 		return <Swatch color={color} key={color} index={index} remove={this.removeSwatch} randomize={this.randomizeSwatch} />;
 	};
 
@@ -51,7 +51,7 @@ class App extends Component<{}, AppState> {
 		return colors.map(this.createSwatch);
 	};
 
-	addSwatch = () => {
+	addSwatch = (): void => {
 		if (this.state.multiHexData.length < this.state.maxSwatch) {
 			let arr = [...this.state.multiHexData];
 			arr.push(chroma.random().hex());
@@ -63,7 +63,7 @@ class App extends Component<{}, AppState> {
 		}
 	};
 
-	onWindowResize = () => {
+	onWindowResize = (): void => {
 		this.setState({ isMobile: window.innerWidth < 480 });
 	};
 
@@ -75,7 +75,7 @@ class App extends Component<{}, AppState> {
 		window.removeEventListener('resize', this.onWindowResize);
 	}
 
-	removeSwatch = (index: number) => {
+	removeSwatch = (index: number): void => {
 		if (this.state.multiHexData.length > 1) {
 			let colors = this.state.multiHexData;
 			colors.splice(index, 1);
@@ -92,7 +92,7 @@ class App extends Component<{}, AppState> {
 		}
 	};
 
-	randomizeSwatch = (index: number) => {
+	randomizeSwatch = (index: number): void => {
 		if (this.state.multi) {
 			let colors = this.state.multiHexData;
 			colors[index] = String(chroma.random());
@@ -116,7 +116,9 @@ class App extends Component<{}, AppState> {
 				<Navbar expand="lg">
 					<Navbar.Brand href="#single">
 						<img src={logo} className="app-logo" alt="logo" style={{ maxHeight: '35px' }} />
-						<span>Cron Color Tool<sup>alpha</sup></span>
+						<span>
+							Cron Color Tool<sup>alpha</sup>
+						</span>
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
@@ -135,12 +137,16 @@ class App extends Component<{}, AppState> {
 						</Nav>
 					</Navbar.Collapse>
 				</Navbar>
-				
-				{this.state.multi && window.innerWidth <= 992 && 
-					(<Button variant="success" className="addSwatch" onClick={this.addSwatch} style={{ display: this.state.multiHexData.length === this.state.maxSwatch ? 'none': 'inline-block'}}>
+
+				{this.state.multi && window.innerWidth <= 992 && (
+					<Button
+						variant="success"
+						className="addSwatch"
+						onClick={this.addSwatch}
+						style={{ display: this.state.multiHexData.length === this.state.maxSwatch ? 'none' : 'inline-block' }}>
 						<PlusCircle />
-					</Button>)
-				}
+					</Button>
+				)}
 
 				<main>
 					{this.state.multi && <div className="row">{this.createSwatches(this.state.multiHexData)}</div>}

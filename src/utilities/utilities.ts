@@ -8,14 +8,17 @@ export default class {
 	};
 
 	static trimHSL = (hslArr: number[]): string => {
-		let arr = hslArr.map((val: number) => {
-			// Something is wrong with chroma and occasionally I am seeing a nan value here. Upon investigation it seems to only occur sometimes
-			// when the HUE value is 0, thus intercepting here and converting it to a 0 this will require further testing to ensure our HSL values are accurate!
-			if (isNaN(val)) {
-				val = 0;
+		let arr = hslArr.map(
+			(val: number): number => {
+				// Something is wrong with chroma and occasionally I am seeing a nan value here. Upon investigation it seems
+				// to only occur sometimes when the HUE value is 0, thus intercepting here and converting it to a 0 this will
+				// require further testing to ensure our HSL values are accurate!
+				if (isNaN(val)) {
+					val = 0;
+				}
+				return Number(val.toFixed(2));
 			}
-			return Number(val.toFixed(2));
-		});
+		);
 		return arr.toString().replace(/,/g, ', ');
 	};
 }

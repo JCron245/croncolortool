@@ -118,7 +118,7 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 		}
 	};
 
-	stopProp = (event: any) => {
+	stopProp = (event: any): void => {
 		event.stopPropagation();
 	};
 
@@ -143,11 +143,11 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 		return (
 			<section style={swatchStyle} className="swatch">
 				<div className="controls" style={contrastStyle}>
-					<span onClick={() => this.props.randomize(this.state.index)}>
+					<span onClick={(): void => this.props.randomize(this.state.index)}>
 						<RefreshCw />
 					</span>
 					{this.props.remove && (
-						<span onClick={() => this.props.remove(this.state.index)}>
+						<span onClick={(): void => this.props.remove(this.state.index)}>
 							<XSquare />
 						</span>
 					)}
@@ -155,12 +155,12 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 				<div
 					style={contrastStyle}
 					className="box-outer"
-					onClick={$event => {
+					onClick={(): void => {
 						this.setState({ show: !this.state.show });
 					}}>
 					<div className="box-head">
 						<div className="arrow">
-							<ChevronDown className={spinArrow} />
+							<ChevronDown className={spinArrow}/>
 						</div>
 						<label onClick={this.stopProp}>
 							hex:
@@ -229,13 +229,13 @@ export class Swatch extends Component<SwatchProps, SwatchState> {
 							<dd>
 								<CopyToClipboard text={this.state.hslColorString || ''}>
 									<button title="Click To Copy HSL">
-										<Clipboard />
+										<Clipboard/>
 									</button>
 								</CopyToClipboard>
 								<CopyToClipboard text={`hsl(${this.state.hslColorString})` || ''}>
 									<button title={`Click To Copy HSL CSS - hsl(${this.state.hslColorString})`}>
 										hsl()
-										<Clipboard />
+										<Clipboard/>
 									</button>
 								</CopyToClipboard>
 							</dd>
