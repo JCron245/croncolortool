@@ -1,0 +1,26 @@
+.color-box {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	> div {
+		border: 1px solid #49515f;
+		box-shadow: 0px 1px 8px 1px rgba(125, 125, 125, 0.25);
+	}
+
+	.color-bar {
+		align-items: center;
+		border: none;
+		justify-content: center;
+		display: flex;
+		height: 3.5rem;
+		padding: 0;
+		width: 100%;
+		p {
+			font-family: "Roboto mono", monospace;
+			font-weight: bold;
+			font-size: 0.9rem;
+			margin: 0;
+			text-transform: uppercase;
+		}
+	}
+}

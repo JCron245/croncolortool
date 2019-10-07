@@ -1,0 +1,22 @@
+.color-mode-controls {
+	display: flex;
+	justify-content: flex-end;
+	button {
+		border: none;
+		background-color: #9e9e9e;
+		color: #000;
+		margin: 0.25rem;
+		font-size: 0.85rem;
+		height: 2.75rem;
+		width: 2.75rem;
+		border-radius: 50%;
+		text-transform: uppercase;
+		&:active,
+		&:focus {
+			outline: none;
+		}
+		&.active {
+			font-weight: bold;
+		}
+	}
+}

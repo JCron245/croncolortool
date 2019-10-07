@@ -1,0 +1,33 @@
+.extended-swatch {
+	display: grid;
+	flex-grow: 1;
+	grid-gap: 0.25rem;
+	grid-template-columns: 500px auto;
+	grid-template-rows: 490px auto;
+	padding: 0.5rem;
+
+	.picker-box {
+		grid-column: 1/2;
+		grid-row: 1/2;
+		height: 376px;
+	}
+	> .viewing-box {
+		grid-column: 1/2;
+		grid-row: 2/3;
+	}
+	> .info-box {
+		background-color: transparent;
+		grid-column: 2/3;
+		grid-row: 1/3;
+		text-align: center;
+		.color-box-grid {
+			color: #e1ddd7;
+			display: grid;
+			grid-gap: 1rem;
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+			padding: 1rem 0.5rem 1rem 0.25rem;
+			text-transform: capitalize;
+			width: 100%;
+		}
+	}
+}
