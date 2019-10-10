@@ -68,7 +68,7 @@ const MyColorPicker: FC<MyColorPicker> = (props: MyColorPicker) => {
 	};
 
 	return (
-		<div className="custom-picker">
+		<>
 			<ChromePicker
 				color={props.colorInput.hexString}
 				disableAlpha={true}
@@ -109,7 +109,7 @@ const MyColorPicker: FC<MyColorPicker> = (props: MyColorPicker) => {
 					onChange={inputChange}
 				/>
 			</div>
-		</div>
+		</>
 	);
 };
 

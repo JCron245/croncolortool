@@ -32,7 +32,7 @@ export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 	};
 
 	return (
-		<div>
+		<>
 			<button
 				onClick={singleClick}
 				value={props.value}
@@ -51,7 +51,7 @@ export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 				containerId={props.hex + props.groupName}
 				position={toast.POSITION.BOTTOM_RIGHT}
 			/>
-		</div>
+		</>
 	);
 };
 
