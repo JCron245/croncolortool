@@ -16,7 +16,8 @@ import {
 	createMonochromaticArray,
 	createAnalogousArray
 } from "../../utils/color-utils";
-import { ColorMode } from "../color-mode/color-mode";
+import { ColorMode } from "../color-controls/color-mode";
+import ColorSaver from "../color-controls/color-saver";
 
 const ExtendedSwatch: FC = () => {
 	const store: State = useSelector((store: State) => store);
@@ -49,6 +50,10 @@ const ExtendedSwatch: FC = () => {
 			{/* Box of various color information - shades etc */}
 			<div className="info-box">
 				<ColorMode />
+				<ColorSaver
+					color={store.currentColor.hexString}
+					contrastColor={store.currentColor.contrastColor}
+				/>
 				<div className="color-box-grid">
 					<ColorBox
 						name="lighter"

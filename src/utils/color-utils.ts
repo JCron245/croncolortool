@@ -3,7 +3,7 @@ import tinycolor from "tinycolor2";
 
 export const createLightArray = (color: string): string[] => {
 	let shades = [];
-	for (let i = 0; i < 7; i++) {
+	for (let i = 0; i < 8; i++) {
 		let lightened = chroma(color)
 			.brighten(i * 0.75)
 			.hex();
@@ -17,7 +17,7 @@ export const createLightArray = (color: string): string[] => {
 
 export const createDarkArray = (color: string): string[] => {
 	let shades = [];
-	for (let i = 0; i < 7; i++) {
+	for (let i = 0; i < 8; i++) {
 		let darkened = chroma(color)
 			.darken(i * 0.75)
 			.hex();
@@ -32,7 +32,7 @@ export const createDarkArray = (color: string): string[] => {
 export const createSaturationArray = (color: string): string[] => {
 	let shades: any[] = [];
 	let saturation = chroma(color).hsl()[1];
-	for (let i = 0; i < 7; i++) {
+	for (let i = 0; i < 8; i++) {
 		let saturated = chroma(color)
 			.saturate(saturation * i * 1.75)
 			.hex();
@@ -47,7 +47,7 @@ export const createSaturationArray = (color: string): string[] => {
 export const createDesaturationArray = (color: string): string[] => {
 	let shades: any[] = [];
 	let saturation = chroma(color).hsl()[1];
-	for (let i = 0; i < 7; i++) {
+	for (let i = 0; i < 8; i++) {
 		let desaturated = chroma(color)
 			.desaturate(saturation * i * 0.75)
 			.hex();
