@@ -1,59 +1,64 @@
-import React, { FC, useCallback } from "react";
-import Select from "react-select";
-import "./color-saver.scss";
-import { useDispatch } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
-import { css } from "glamor";
+import React, { FC } from 'react';
+import Select from 'react-select';
+import './color-saver.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { css } from 'glamor';
+import { setColor } from '../../redux/actions/colorAction';
+import { State } from '../../redux/interfaces';
 
 interface ColorSaver {
 	color: string;
 	contrastColor: string;
 }
 
-const initialSave = [{ value: "#0faded", label: "#0faded" }];
+const initialSave = [{ value: '#0faded', label: '#0faded' }];
 
 export const ColorSaver: FC<ColorSaver> = (props: ColorSaver) => {
+	const store: State = useSelector((store: State) => store);
 	const dispatch = useDispatch();
 
-	const selectColor = useCallback(
-		event => {
-			console.log(event);
-			return dispatch({ type: "newColor", color: event.value });
-		},
-		[dispatch]
-	);
+	const selectColor = (event: any) => dispatch(setColor(event.value));
 
-	let colors = localStorage.getItem("saved-colors") || undefined;
+	let colors = localStorage.getItem('saved-colors') || undefined;
 	let parsedColors: { value: string; label: string }[] = colors
 		? JSON.parse(colors)
 		: initialSave;
 
-	const saveColor = (event: any) => {
-		parsedColors.push({ value: `${props.color}`, label: `${props.color}` });
-		localStorage.setItem("saved-colors", JSON.stringify(parsedColors));
+	let currentValue = { value: store.hex, label: store.hex };
 
-		toast(`${props.color.toUpperCase()} copied to clipboard!`, {
-			containerId: `${props.color}-saver`,
+	const saveColor = () => {
+		let toastMsg = '';
+		if (!parsedColors.find(color => color.value === props.color)) {
+			parsedColors.push({ value: `${props.color}`, label: `${props.color}` });
+			localStorage.setItem('saved-colors', JSON.stringify(parsedColors));
+			toastMsg = `${props.color.toUpperCase()} Saved to localstorage!`;
+		} else {
+			toastMsg = `${props.color.toUpperCase()} Is already saved to localstorage!`;
+		}
+
+		toast(toastMsg, {
+			containerId: 'toasts-container',
 			autoClose: 1500,
 			closeButton: false,
 			type: toast.TYPE.SUCCESS,
 			className: css({
-				backgroundColor: props.color,
-				color: props.contrastColor,
-				border: `1px solid ${props.contrastColor}`
+				backgroundColor: store.hex,
+				color: store.contrastColor,
+				border: `1px solid ${store.contrastColor}`,
+				textAlign: 'center'
 			})
 		});
 	};
 
 	return (
 		<div className="color-saver-controls">
-			<Select options={parsedColors} onChange={selectColor} />
-			<button onClick={saveColor}>Save</button>
-			<ToastContainer
-				containerId={`${props.color}-saver`}
-				hideProgressBar={true}
-				position={toast.POSITION.BOTTOM_RIGHT}
+			<Select
+				options={parsedColors}
+				onChange={selectColor}
+				value={currentValue}
 			/>
+			<button onClick={saveColor}>Save</button>
 		</div>
 	);
 };
