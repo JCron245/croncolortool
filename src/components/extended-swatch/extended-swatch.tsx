@@ -29,17 +29,11 @@ const ExtendedSwatch: FC = () => {
 				<MyColorPicker colorInput={store.hex} />
 			</div>
 			{/* Empty div for 'viewing' the color */}
-			<div
-				className="viewing-box"
-				style={{ backgroundColor: store.hex }}
-			></div>
+			<div className="viewing-box" style={{ backgroundColor: store.hex }}></div>
 			{/* Box of various color information - shades etc */}
 			<div className="info-box">
 				<ColorMode />
-				<ColorSaver
-					color={store.hex}
-					contrastColor={store.contrastColor}
-				/>
+				<ColorSaver color={store.hex} contrastColor={store.contrastColor} />
 				<div className="color-box-grid">
 					<ColorBox
 						name="lighter"

@@ -17,11 +17,14 @@ export const ColorBox: FC<ColorBox> = (props: ColorBox) => {
 			<p>{props.name}</p>
 			<div>
 				{props.colors.map((color: string, index: number) => {
-					const value = props.show === 'hex' ? color : props.show === 'rgb'
-						? chroma(color)
-								.rgb()
-								.toString()
-						: cleanHSL(chroma(color).hsl());
+					const value =
+						props.show === "hex"
+							? color
+							: props.show === "rgb"
+							? chroma(color)
+									.rgb()
+									.toString()
+							: cleanHSL(chroma(color).hsl());
 					const contrast = findContrastingColor(color);
 					return (
 						<ColorBar

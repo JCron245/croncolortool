@@ -3,7 +3,7 @@ import { CustomPicker, ChromePicker } from "react-color";
 import "./custom-picker.scss";
 import chroma from "chroma-js";
 import { useDispatch, useSelector } from "react-redux";
-import { setColor } from '../../redux/actions/colorAction';
+import { setColor } from "../../redux/actions/colorAction";
 import { State } from "../../redux/interfaces";
 import { EditableInput } from "react-color/lib/components/common";
 
@@ -28,8 +28,8 @@ const MyColorPicker: FC<any> = (props: any) => {
 		} else {
 			return;
 		}
-		colorChange({hex: chroma(newRgb).hex()});
-	}
+		colorChange({ hex: chroma(newRgb).hex() });
+	};
 
 	return (
 		<>
@@ -40,27 +40,9 @@ const MyColorPicker: FC<any> = (props: any) => {
 				onChangeComplete={colorChange}
 			/>
 			<div className="editable-section">
-				<label>
-					<EditableInput
-						label="r"
-						value={rgb[0]}
-						onChange={rgbChange}
-					/>
-					</label>
-				<label>
-				<EditableInput
-					label="g"
-					value={rgb[1]}
-					onChange={rgbChange}
-				/>
-				</label>
-				<label>
-				<EditableInput
-					label="b"
-					value={rgb[2]}
-					onChange={rgbChange}
-				/>
-				</label>
+				<EditableInput label="r" value={rgb[0]} onChange={rgbChange} />
+				<EditableInput label="g" value={rgb[1]} onChange={rgbChange} />
+				<EditableInput label="b" value={rgb[2]} onChange={rgbChange} />
 			</div>
 		</>
 	);

@@ -18,7 +18,7 @@ export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 		if (navigator.clipboard) {
 			navigator.clipboard.writeText(savedTarget.value);
 			toast(`${savedTarget.value.toUpperCase()} copied to clipboard!`, {
-				containerId: 'toasts-container',
+				containerId: "toasts-container",
 				autoClose: 1500,
 				closeButton: false,
 				type: toast.TYPE.SUCCESS,
@@ -26,27 +26,27 @@ export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 					backgroundColor: props.hex,
 					color: props.contrastColor,
 					border: `1px solid ${props.contrastColor}`,
-					textAlign: 'center'
+					textAlign: "center"
 				})
 			});
 		}
 	};
 
+	const colorBarStyle = {
+		outlineColor: props.contrastColor,
+		backgroundColor: props.hex,
+		color: props.contrastColor
+	};
+
 	return (
-		<>
-			<button
-				onClick={singleClick}
-				value={props.value}
-				className="color-bar"
-				style={{
-					outlineColor: props.contrastColor,
-					backgroundColor: props.hex,
-					color: props.contrastColor
-				}}
-			>
-				<p>{props.value}</p>
-			</button>
-		</>
+		<button
+			onClick={singleClick}
+			value={props.value}
+			className="color-bar"
+			style={colorBarStyle}
+		>
+			<p>{props.value}</p>
+		</button>
 	);
 };
 

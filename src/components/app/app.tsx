@@ -13,7 +13,7 @@ const App: React.FC = () => {
 			<ToastContainer
 				hideProgressBar={true}
 				enableMultiContainer
-				containerId='toasts-container'
+				containerId="toasts-container"
 				position={toast.POSITION.BOTTOM_RIGHT}
 			/>
 		</div>
