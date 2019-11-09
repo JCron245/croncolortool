@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { css } from "glamor";
 
@@ -18,14 +18,15 @@ export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 		if (navigator.clipboard) {
 			navigator.clipboard.writeText(savedTarget.value);
 			toast(`${savedTarget.value.toUpperCase()} copied to clipboard!`, {
-				containerId: props.hex + props.groupName,
+				containerId: 'toasts-container',
 				autoClose: 1500,
 				closeButton: false,
 				type: toast.TYPE.SUCCESS,
 				className: css({
 					backgroundColor: props.hex,
 					color: props.contrastColor,
-					border: `1px solid ${props.contrastColor}`
+					border: `1px solid ${props.contrastColor}`,
+					textAlign: 'center'
 				})
 			});
 		}
@@ -45,12 +46,6 @@ export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 			>
 				<p>{props.value}</p>
 			</button>
-			<ToastContainer
-				hideProgressBar={true}
-				enableMultiContainer
-				containerId={props.hex + props.groupName}
-				position={toast.POSITION.BOTTOM_RIGHT}
-			/>
 		</>
 	);
 };

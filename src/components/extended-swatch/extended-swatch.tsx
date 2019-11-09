@@ -1,7 +1,7 @@
-import React, { useCallback, FC } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { FC } from "react";
+import { useSelector } from "react-redux";
 import "./extended-swatch.scss";
-import { State } from "../state/index";
+import { State } from "../../redux/interfaces";
 import { ColorBox } from "./color-bars/color-box";
 import MyColorPicker from "../custom-picker/custom-picker";
 import {
@@ -21,89 +21,75 @@ import ColorSaver from "../color-controls/color-saver";
 
 const ExtendedSwatch: FC = () => {
 	const store: State = useSelector((store: State) => store);
-	const show = {
-		hex: store.mode.showHEX,
-		hsl: store.mode.showHSL,
-		rgb: store.mode.showRGB
-	};
-
-	const dispatch = useDispatch();
-
-	const dragChange = useCallback(
-		event => {
-			return dispatch({ type: "newColor", color: event.hex });
-		},
-		[dispatch]
-	);
 
 	return (
 		<div className="extended-swatch">
 			{/* Color Picker Box */}
 			<div className="picker-box">
-				<MyColorPicker colorInput={store.currentColor} onChange={dragChange} />
+				<MyColorPicker colorInput={store.hex} />
 			</div>
 			{/* Empty div for 'viewing' the color */}
 			<div
 				className="viewing-box"
-				style={{ backgroundColor: store.currentColor.hexString }}
+				style={{ backgroundColor: store.hex }}
 			></div>
 			{/* Box of various color information - shades etc */}
 			<div className="info-box">
 				<ColorMode />
 				<ColorSaver
-					color={store.currentColor.hexString}
-					contrastColor={store.currentColor.contrastColor}
+					color={store.hex}
+					contrastColor={store.contrastColor}
 				/>
 				<div className="color-box-grid">
 					<ColorBox
 						name="lighter"
-						show={show}
-						colors={createLightArray(store.currentColor.hexString)}
+						show={store.mode}
+						colors={createLightArray(store.hex)}
 					/>
 					<ColorBox
 						name="darker"
-						show={show}
-						colors={createDarkArray(store.currentColor.hexString)}
+						show={store.mode}
+						colors={createDarkArray(store.hex)}
 					/>
 					<ColorBox
 						name="saturated"
-						show={show}
-						colors={createSaturationArray(store.currentColor.hexString)}
+						show={store.mode}
+						colors={createSaturationArray(store.hex)}
 					/>
 					<ColorBox
 						name="desaturated"
-						show={show}
-						colors={createDesaturationArray(store.currentColor.hexString)}
+						show={store.mode}
+						colors={createDesaturationArray(store.hex)}
 					/>
 					<ColorBox
 						name="analgous"
-						show={show}
-						colors={createAnalogousArray(store.currentColor.hexString)}
+						show={store.mode}
+						colors={createAnalogousArray(store.hex)}
 					/>
 					<ColorBox
 						name="complementary"
-						show={show}
-						colors={createComplementArray(store.currentColor.hexString)}
+						show={store.mode}
+						colors={createComplementArray(store.hex)}
 					/>
 					<ColorBox
 						name="split complement"
-						show={show}
-						colors={createSplitComplementArray(store.currentColor.hexString)}
+						show={store.mode}
+						colors={createSplitComplementArray(store.hex)}
 					/>
 					<ColorBox
 						name="triadic"
-						show={show}
-						colors={createTriadArray(store.currentColor.hexString)}
+						show={store.mode}
+						colors={createTriadArray(store.hex)}
 					/>
 					<ColorBox
 						name="tetradic"
-						show={show}
-						colors={createTetradArray(store.currentColor.hexString)}
+						show={store.mode}
+						colors={createTetradArray(store.hex)}
 					/>
 					<ColorBox
 						name="monochromatic"
-						show={show}
-						colors={createMonochromaticArray(store.currentColor.hexString)}
+						show={store.mode}
+						colors={createMonochromaticArray(store.hex)}
 					/>
 				</div>
 			</div>

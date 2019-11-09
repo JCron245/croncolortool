@@ -1,52 +1,60 @@
-import React, { FC, useCallback } from "react";
+import React, { FC } from "react";
 import "./color-mode.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { State } from "../state";
+import { State } from "../../redux/interfaces";
+import { setMode } from "../../redux/actions/colorAction";
+import { toast } from "react-toastify";
+import { css } from "glamor";
 
 export const ColorMode: FC = () => {
 	const store: State = useSelector((store: State) => store);
-
 	const dispatch = useDispatch();
 
-	const changeMode = useCallback(
-		event => {
-			const savedEvent = event;
-			return dispatch({ type: savedEvent.currentTarget.value });
-		},
-		[dispatch]
-	);
+	const changeMode = (event: any) => {
+		const savedEvent = event;
+		if (event.currentTarget.value) {
+			dispatch(setMode(savedEvent.currentTarget.value));
+
+			toast(
+				`Color mode switched to ${savedEvent.currentTarget.value.toUpperCase()}`,
+				{
+					containerId: "toasts-container",
+					autoClose: 1500,
+					closeButton: false,
+					type: toast.TYPE.SUCCESS,
+					className: css({
+						backgroundColor: store.hex,
+						color: store.contrastColor,
+						border: `1px solid ${store.contrastColor}`,
+						textAlign: "center"
+					})
+				}
+			);
+		}
+	};
 
 	const activeStyle = {
-		backgroundColor: store.currentColor.hexString,
-		color: store.currentColor.contrastColor
+		backgroundColor: store.hex,
+		color: store.contrastColor
 	};
 
 	return (
 		<div className="color-mode-controls">
 			<button
-				value="showHEX"
+				value="hex"
 				onClick={changeMode}
-				className={store.mode.showHEX ? "hex active" : "hex"}
+				className={store.mode === "hex" ? "hex active" : "hex"}
 				title="switch to hex"
-				style={store.mode.showHEX ? activeStyle : {}}
+				style={store.mode === "hex" ? activeStyle : {}}
 			>
 				Hex
 			</button>
 			<button
-				value="showHSL"
+				value="rgb"
 				onClick={changeMode}
-				className={store.mode.showHSL ? "hsl active" : "hsl"}
-				title="switch to hsl"
-				style={store.mode.showHSL ? activeStyle : {}}
-			>
-				Hsl
-			</button>
-			<button
-				value="showRGB"
-				onClick={changeMode}
-				className={store.mode.showRGB ? "rgb active" : "rgb"}
+				className={store.mode === "rgb" ? "rgb active" : "rgb"}
 				title="switch to rgb"
-				style={store.mode.showRGB ? activeStyle : {}}
+				style={store.mode === "rgb" ? activeStyle : {}}
 			>
 				Rgb
 			</button>
