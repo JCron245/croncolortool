@@ -1,9 +1,9 @@
-import React, { FC } from "react";
-import { useSelector } from "react-redux";
-import "./extended-swatch.scss";
-import { State } from "../../redux/interfaces";
-import { ColorBox } from "./color-bars/color-box";
-import MyColorPicker from "../custom-picker/custom-picker";
+import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
+import './extended-swatch.scss';
+import { State } from '../../redux/interfaces';
+import { ColorBox } from './color-bars/color-box';
+import MyColorPicker from '../custom-picker/custom-picker';
 import {
 	createLightArray,
 	createDarkArray,
@@ -15,9 +15,9 @@ import {
 	createTetradArray,
 	createMonochromaticArray,
 	createAnalogousArray
-} from "../../utils/color-utils";
-import { ColorMode } from "../color-controls/color-mode";
-import ColorSaver from "../color-controls/color-saver";
+} from '../../utils/color-utils';
+import { ColorMode } from '../color-controls/color-mode';
+import ColorSaver from '../color-controls/color-saver';
 
 const ExtendedSwatch: FC = () => {
 	const store: State = useSelector((store: State) => store);

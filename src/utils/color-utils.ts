@@ -1,5 +1,5 @@
-import chroma from "chroma-js";
-import tinycolor from "tinycolor2";
+import chroma from 'chroma-js';
+import tinycolor from 'tinycolor2';
 
 export const createLightArray = (color: string): string[] => {
 	let shades = [];
@@ -8,7 +8,7 @@ export const createLightArray = (color: string): string[] => {
 			.brighten(i * 0.75)
 			.hex();
 		shades.push(lightened);
-		if (lightened === "#ffffff") {
+		if (lightened === '#ffffff') {
 			break;
 		}
 	}
@@ -22,7 +22,7 @@ export const createDarkArray = (color: string): string[] => {
 			.darken(i * 0.75)
 			.hex();
 		shades.push(darkened);
-		if (darkened === "#000000") {
+		if (darkened === '#000000') {
 			break;
 		}
 	}
@@ -99,9 +99,9 @@ export const createTetradArray = (color: string): any[] => {
 };
 
 export const findContrastingColor = (color: string): string => {
-	return chroma.contrast(color, "#FFF") > chroma.contrast(color, "#000")
-		? "#FFF"
-		: "#000";
+	return chroma.contrast(color, '#FFF') > chroma.contrast(color, '#000')
+		? '#FFF'
+		: '#000';
 };
 
 export const cleanHSL = (color: any[]): string => {

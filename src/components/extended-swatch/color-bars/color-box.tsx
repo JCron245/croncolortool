@@ -1,9 +1,9 @@
-import React, { FC } from "react";
-import ColorBar from "./color-bar";
-import "./color-box.scss";
-import chroma from "chroma-js";
-import { cleanHSL } from "../../../utils/color-utils";
-import { findContrastingColor } from "../../../utils/color-utils";
+import React, { FC } from 'react';
+import ColorBar from './color-bar';
+import './color-box.scss';
+import chroma from 'chroma-js';
+import { cleanHSL } from '../../../utils/color-utils';
+import { findContrastingColor } from '../../../utils/color-utils';
 
 interface ColorBox {
 	colors: string[];
@@ -18,9 +18,9 @@ export const ColorBox: FC<ColorBox> = (props: ColorBox) => {
 			<div>
 				{props.colors.map((color: string, index: number) => {
 					const value =
-						props.show === "hex"
+						props.show === 'hex'
 							? color
-							: props.show === "rgb"
+							: props.show === 'rgb'
 							? chroma(color)
 									.rgb()
 									.toString()

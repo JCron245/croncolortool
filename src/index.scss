@@ -30,14 +30,14 @@ body {
 	background-color: #fff;
 	-webkit-text-size-adjust: 100%;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
-[tabindex="-1"]:focus:not(:focus-visible) {
+[tabindex='-1']:focus:not(:focus-visible) {
 	outline: 0 !important;
 }
 
@@ -187,8 +187,8 @@ pre,
 code,
 kbd,
 samp {
-	font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-		"Courier New", monospace;
+	font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+		'Courier New', monospace;
 	font-size: 1em;
 }
 
@@ -208,7 +208,7 @@ pre code {
 
 code {
 	color: #e83e8c;
-	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
 	font-size: 87.5%;
 	word-wrap: break-word;
@@ -305,16 +305,16 @@ select {
 }
 
 button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
+[type='button'],
+[type='reset'],
+[type='submit'] {
 	-webkit-appearance: button;
 }
 
 button:not(:disabled),
-[type="button"]:not(:disabled),
-[type="reset"]:not(:disabled),
-[type="submit"]:not(:disabled) {
+[type='button']:not(:disabled),
+[type='reset']:not(:disabled),
+[type='submit']:not(:disabled) {
 	cursor: pointer;
 }
 
@@ -323,10 +323,10 @@ button:not(:disabled),
 	border-style: none;
 }
 
-input[type="date"],
-input[type="time"],
-input[type="datetime-local"],
-input[type="month"] {
+input[type='date'],
+input[type='time'],
+input[type='datetime-local'],
+input[type='month'] {
 	-webkit-appearance: textfield;
 }
 
@@ -368,7 +368,7 @@ progress {
 	line-height: 0;
 }
 
-[type="search"] {
+[type='search'] {
 	outline-offset: -2px;
 	-webkit-appearance: textfield;
 }

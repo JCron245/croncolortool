@@ -3,7 +3,7 @@
 	border-radius: 0 !important;
 	box-sizing: border-box !important;
 	box-shadow: none !important;
-	font-family: "Roboto Mono", sans-serif !important;
+	font-family: 'Roboto Mono', sans-serif !important;
 	padding: 0 !important;
 	width: 100% !important;
 	span {
@@ -20,7 +20,7 @@
 			input {
 				border: none !important;
 				border-radius: 2px !important;
-				font-family: "Roboto Mono", monospace;
+				font-family: 'Roboto Mono', monospace;
 				font-size: 1rem !important;
 				height: 21px !important;
 				margin-top: 0.5rem !important;
@@ -47,7 +47,7 @@
 		border: none !important;
 		margin: 0 !important;
 		input {
-			font-family: "Roboto Mono", monospace;
+			font-family: 'Roboto Mono', monospace;
 			font-size: 0.9rem !important;
 			text-align: center;
 			width: 100% !important;
@@ -74,7 +74,7 @@
 	> div {
 		display: flex;
 		flex-direction: column;
-		font-family: "Roboto Mono", monospace;
+		font-family: 'Roboto Mono', monospace;
 		flex-grow: 1;
 		max-width: 32%;
 		input {

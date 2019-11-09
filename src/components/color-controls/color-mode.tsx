@@ -1,10 +1,10 @@
-import React, { FC } from "react";
-import "./color-mode.scss";
-import { useSelector, useDispatch } from "react-redux";
-import { State } from "../../redux/interfaces";
-import { setMode } from "../../redux/actions/colorAction";
-import { toast } from "react-toastify";
-import { css } from "glamor";
+import React, { FC } from 'react';
+import './color-mode.scss';
+import { useSelector, useDispatch } from 'react-redux';
+import { State } from '../../redux/interfaces';
+import { setMode } from '../../redux/actions/colorAction';
+import { toast } from 'react-toastify';
+import { css } from 'glamor';
 
 export const ColorMode: FC = () => {
 	const store: State = useSelector((store: State) => store);
@@ -18,7 +18,7 @@ export const ColorMode: FC = () => {
 			toast(
 				`Color mode switched to ${savedEvent.currentTarget.value.toUpperCase()}`,
 				{
-					containerId: "toasts-container",
+					containerId: 'toasts-container',
 					autoClose: 1500,
 					closeButton: false,
 					type: toast.TYPE.SUCCESS,
@@ -26,7 +26,7 @@ export const ColorMode: FC = () => {
 						backgroundColor: store.hex,
 						color: store.contrastColor,
 						border: `1px solid ${store.contrastColor}`,
-						textAlign: "center"
+						textAlign: 'center'
 					})
 				}
 			);
@@ -43,18 +43,18 @@ export const ColorMode: FC = () => {
 			<button
 				value="hex"
 				onClick={changeMode}
-				className={store.mode === "hex" ? "hex active" : "hex"}
+				className={store.mode === 'hex' ? 'hex active' : 'hex'}
 				title="switch to hex"
-				style={store.mode === "hex" ? activeStyle : {}}
+				style={store.mode === 'hex' ? activeStyle : {}}
 			>
 				Hex
 			</button>
 			<button
 				value="rgb"
 				onClick={changeMode}
-				className={store.mode === "rgb" ? "rgb active" : "rgb"}
+				className={store.mode === 'rgb' ? 'rgb active' : 'rgb'}
 				title="switch to rgb"
-				style={store.mode === "rgb" ? activeStyle : {}}
+				style={store.mode === 'rgb' ? activeStyle : {}}
 			>
 				Rgb
 			</button>

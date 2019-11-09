@@ -1,11 +1,11 @@
-import React, { FC } from "react";
-import { CustomPicker, ChromePicker } from "react-color";
-import "./custom-picker.scss";
-import chroma from "chroma-js";
-import { useDispatch, useSelector } from "react-redux";
-import { setColor } from "../../redux/actions/colorAction";
-import { State } from "../../redux/interfaces";
-import { EditableInput } from "react-color/lib/components/common";
+import React, { FC } from 'react';
+import { CustomPicker, ChromePicker } from 'react-color';
+import './custom-picker.scss';
+import chroma from 'chroma-js';
+import { useDispatch, useSelector } from 'react-redux';
+import { setColor } from '../../redux/actions/colorAction';
+import { State } from '../../redux/interfaces';
+import { EditableInput } from 'react-color/lib/components/common';
 
 const MyColorPicker: FC<any> = (props: any) => {
 	const store: State = useSelector((store: State) => store);

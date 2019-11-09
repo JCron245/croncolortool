@@ -1,7 +1,7 @@
-import React from "react";
-import "./app.scss";
-import ExtendedSwatch from "../extended-swatch/extended-swatch";
-import { ToastContainer, toast } from "react-toastify";
+import React from 'react';
+import './app.scss';
+import ExtendedSwatch from '../extended-swatch/extended-swatch';
+import { ToastContainer, toast } from 'react-toastify';
 
 const App: React.FC = () => {
 	return (
