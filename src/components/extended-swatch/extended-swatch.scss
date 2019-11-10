@@ -29,5 +29,20 @@
 			text-transform: capitalize;
 			width: 100%;
 		}
+		.controls {
+			align-items: center;
+			display: flex;
+			justify-content: flex-start;
+			width: 100%;
+			.color-saver-controls {
+				display: flex;
+				justify-content: space-between;
+				margin-left: auto;
+				width: 60%;
+				> div {
+					flex-grow: 0.85;
+				}
+			}
+		}
 	}
 }
