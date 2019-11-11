@@ -1,0 +1,36 @@
+.contrast-checker {
+	align-items: center;
+	display: flex;
+	color: #fff;
+	flex-grow: 1;
+	justify-content: center;
+	.test-box {
+		background-color: #473333;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr;
+		height: 40vh;
+		width: 75vw;
+		.colors {
+			display: flex;
+			height: 100%;
+			flex-direction: column;
+			justify-content: space-around;
+			padding: 1rem;
+		}
+		.results {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			height: 100%;
+			padding: 1rem;
+			.result-boxes {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				p {
+					margin: 0;
+				}
+			}
+		}
+	}
+}

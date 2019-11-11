@@ -103,11 +103,3 @@ export const findContrastingColor = (color: string): string => {
 		? '#FFF'
 		: '#000';
 };
-
-export const cleanHSL = (color: any[]): string => {
-	if (!isNaN(color[0])) color[0] = color[0].toFixed(1);
-	color[1] = color[1].toFixed(2);
-	color[2] = color[2].toFixed(2);
-	color.length = 3;
-	return color.toString();
-};

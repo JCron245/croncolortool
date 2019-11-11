@@ -32,8 +32,10 @@ const ExtendedSwatch: FC = () => {
 			<div className="viewing-box" style={{ backgroundColor: store.hex }}></div>
 			{/* Box of various color information - shades etc */}
 			<div className="info-box">
-				<ColorMode />
-				<ColorSaver color={store.hex} contrastColor={store.contrastColor} />
+				<div className="controls">
+					<ColorMode />
+					<ColorSaver color={store.hex} contrastColor={store.contrastColor} />
+				</div>
 				<div className="color-box-grid">
 					<ColorBox
 						name="lighter"

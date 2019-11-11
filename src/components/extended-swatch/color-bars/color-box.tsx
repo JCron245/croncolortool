@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import ColorBar from './color-bar';
 import './color-box.scss';
 import chroma from 'chroma-js';
-import { cleanHSL } from '../../../utils/color-utils';
 import { findContrastingColor } from '../../../utils/color-utils';
 
 interface ColorBox {
@@ -20,11 +19,9 @@ export const ColorBox: FC<ColorBox> = (props: ColorBox) => {
 					const value =
 						props.show === 'hex'
 							? color
-							: props.show === 'rgb'
-							? chroma(color)
+							: chroma(color)
 									.rgb()
-									.toString()
-							: cleanHSL(chroma(color).hsl());
+									.toString();
 					const contrast = findContrastingColor(color);
 					return (
 						<ColorBar

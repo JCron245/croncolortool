@@ -29,5 +29,11 @@
 			text-transform: capitalize;
 			width: 100%;
 		}
+		.controls {
+			align-items: center;
+			display: flex;
+			justify-content: flex-start;
+			width: 100%;
+		}
 	}
 }
