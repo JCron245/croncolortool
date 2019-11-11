@@ -61,8 +61,25 @@ export const ColorSaver: FC<ColorSaver> = (props: ColorSaver) => {
 	const deleteColor = () => {
 		let toastMsg = '';
 		if (parsedColors.find(c => c.value === store.hex)) {
+			toastMsg = `${store.hex} deleted!`;
+			parsedColors = parsedColors.filter(c => c.value !== store.hex);
+			localStorage.setItem('saved-colors', JSON.stringify(parsedColors));
+		} else {
+			toastMsg = 'Unable to delete!';
 		}
-		//
+		toast(toastMsg, {
+			containerId: 'toasts-container',
+			autoClose: 1500,
+			closeButton: false,
+			type: toast.TYPE.SUCCESS,
+			className: css({
+				backgroundColor: store.hex,
+				color: store.contrastColor,
+				border: `1px solid ${store.contrastColor}`,
+				textAlign: 'center'
+			})
+		});
+		selectColor(parsedColors[0] || { value: '#0FADED' });
 	};
 
 	return (
@@ -71,6 +88,8 @@ export const ColorSaver: FC<ColorSaver> = (props: ColorSaver) => {
 				options={parsedColors}
 				onChange={selectColor}
 				value={currentValue}
+				classNamePrefix={'color-saver-control-select'}
+				noOptionsMessage={() => 'No colors saved'}
 			/>
 			<button className="btn save-btn" onClick={saveColor}>
 				Save
