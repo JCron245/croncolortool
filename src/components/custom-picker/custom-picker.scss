@@ -23,14 +23,21 @@
 				font-family: 'Roboto Mono', monospace;
 				font-size: 1rem !important;
 				height: 21px !important;
+				line-height: 1rem !important;
 				margin-top: 0.5rem !important;
 				text-align: center !important;
 				width: 100% !important;
+				// Extra small devices (portrait phones, less than 576px)
+				@media (max-width: 575.98px) {
+					margin-top: 0 !important;
+					min-height: 21px;
+				}
 			}
 			span {
 				color: #d1cac1 !important;
 				font-size: 1.25rem !important;
-				margin: 0.4rem 0 0 0 !important;
+				line-height: 1.25rem !important;
+				margin: 0 !important;
 				text-align: center;
 				text-transform: uppercase;
 			}
@@ -71,6 +78,11 @@
 	display: flex;
 	justify-content: space-between;
 	margin-top: 1rem;
+	flex-wrap: wrap;
+	// Extra small devices (portrait phones, less than 576px)
+	@media (max-width: 575.98px) {
+		margin-top: 0.25rem;
+	}
 	> div {
 		display: flex;
 		flex-direction: column;
@@ -92,5 +104,27 @@
 			text-align: center;
 			text-transform: uppercase;
 		}
+	}
+}
+
+.hsl-sliders {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	font-family: 'Roboto Mono', monospace;
+	margin-top: 0.2rem;
+	.rangeslider {
+		background-color: #d1cac1;
+		margin: 20px 0 10px 0;
+	}
+	.rangeslider__fill {
+		background-color: #473333;
+	}
+	> label {
+		color: #d1cac1;
+		font-size: 1.25rem;
+		min-width: 31%;
+		text-align: center;
+		text-transform: uppercase;
 	}
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './app.scss';
 import ExtendedSwatch from '../extended-swatch/extended-swatch';
 import { ToastContainer, toast } from 'react-toastify';

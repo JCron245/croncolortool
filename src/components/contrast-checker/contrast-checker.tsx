@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
 import './contrast-checker.scss';
 import chroma from 'chroma-js';
-import tinycolor from 'tinycolor2';
 
 const ContrastChecker: FC = () => {
 	const [inputOneValue, setInputOneValue] = useState('#0FADED');
