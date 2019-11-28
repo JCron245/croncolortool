@@ -28,8 +28,6 @@ const ExtendedSwatch: FC = () => {
 			<div className="picker-box">
 				<MyColorPicker colorInput={store.hex} />
 			</div>
-			{/* Empty div for 'viewing' the color */}
-			<div className="viewing-box" style={{ backgroundColor: store.hex }}></div>
 			{/* Box of various color information - shades etc */}
 			<div className="info-box">
 				<div className="controls">

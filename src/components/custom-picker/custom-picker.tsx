@@ -6,7 +6,6 @@ import chroma from 'chroma-js';
 import { useDispatch, useSelector } from 'react-redux';
 import { setColor } from '../../redux/actions/colorAction';
 import { State } from '../../redux/interfaces';
-import { EditableInput } from 'react-color/lib/components/common';
 import tinycolor from 'tinycolor2';
 
 const MyColorPicker: FC<any> = (props: any) => {
@@ -21,27 +20,36 @@ const MyColorPicker: FC<any> = (props: any) => {
 		dispatch(setColor(color.hex));
 	};
 
-	const rgbChange = (event: any) => {
-		let newRgb = rgb;
-		if (event.r && event.r >= 0 && event.r <= 255) {
-			newRgb[0] = Number(event.r);
-		} else if (event.g && event.g >= 0 && event.g <= 255) {
-			newRgb[1] = Number(event.g);
-		} else if (event.b && event.b >= 0 && event.b <= 255) {
-			newRgb[2] = Number(event.b);
-		} else {
-			return;
+	const rgbChange = (event: any, part: string) => {
+		switch (part) {
+			case 'r':
+				rgb[0] = event;
+				break;
+			case 'g':
+				rgb[1] = event;
+				break;
+			case 'b':
+				rgb[2] = event;
+				break;
+			default:
+				break;
 		}
-		colorChange({ hex: chroma(newRgb).hex() });
+		colorChange({ hex: chroma(rgb).hex() });
 	};
 
-	const hslChange = (event: any) => {
-		if (event.h && event.h >= 0 && event.h <= 359) {
-			hsl.h = Number(event.h);
-		} else if (event.s && event.s >= 0 && event.s <= 100) {
-			hsl.s = Number(event.s) / 100;
-		} else if (event.l && event.l >= 0 && event.l <= 100) {
-			hsl.l = Number(event.l) / 100;
+	const hslChange = (event: any, part: string) => {
+		switch (part) {
+			case 'h':
+				hsl.h = event;
+				break;
+			case 's':
+				hsl.s = event / 100;
+				break;
+			case 'l':
+				hsl.l = event / 100;
+				break;
+			default:
+				break;
 		}
 		colorChange({ hex: tinycolor(hsl).toHex() });
 	};
@@ -54,29 +62,86 @@ const MyColorPicker: FC<any> = (props: any) => {
 				onChange={colorChange}
 				onChangeComplete={colorChange}
 			/>
-			<div className="editable-section">
-				<EditableInput label="r" value={rgb[0]} onChange={rgbChange} />
-				<EditableInput label="g" value={rgb[1]} onChange={rgbChange} />
-				<EditableInput label="b" value={rgb[2]} onChange={rgbChange} />
-			</div>
-			<div className="editable-section">
-				<EditableInput
-					dragMax="359"
-					label="h"
-					value={Math.round(hsl.h)}
-					onChange={hslChange}
+			<label className="slider-label">
+				R: {rgb[0]}
+				<input
+					type="range"
+					min="0"
+					max="255"
+					className="slider"
+					value={rgb[0]}
+					onChange={e => {
+						rgbChange(e.target.value, 'r');
+					}}
 				/>
-				<EditableInput
-					label="s"
-					value={Math.round(hsl.s * 100)}
-					onChange={hslChange}
+			</label>
+			<label className="slider-label">
+				G: {rgb[1]}
+				<input
+					type="range"
+					min="0"
+					max="255"
+					className="slider"
+					value={rgb[1]}
+					onChange={e => {
+						rgbChange(e.target.value, 'g');
+					}}
 				/>
-				<EditableInput
-					label="l"
-					value={Math.round(hsl.l * 100)}
-					onChange={hslChange}
+			</label>
+			<label className="slider-label">
+				B: {rgb[2]}
+				<input
+					type="range"
+					min="0"
+					max="255"
+					className="slider"
+					value={rgb[2]}
+					onChange={e => {
+						rgbChange(e.target.value, 'b');
+					}}
 				/>
-			</div>
+			</label>
+			<label className="slider-label">
+				H: {Math.floor(hsl.h)}
+				<input
+					type="range"
+					min="0"
+					max="359"
+					className="slider"
+					value={Math.floor(hsl.h)}
+					onChange={e => {
+						hslChange(e.target.value, 'h');
+					}}
+				/>
+			</label>
+			<label className="slider-label">
+				S: {Math.floor(hsl.s * 100)}%
+				<input
+					type="range"
+					min="0"
+					max="100"
+					className="slider"
+					value={Math.floor(hsl.s * 100)}
+					onChange={e => {
+						hslChange(e.target.value, 's');
+					}}
+				/>
+			</label>
+			<label className="slider-label">
+				L: {Math.floor(hsl.l * 100)}%
+				<input
+					type="range"
+					min="0"
+					max="100"
+					className="slider"
+					value={Math.floor(hsl.l * 100)}
+					onChange={e => {
+						hslChange(e.target.value, 'l');
+					}}
+				/>
+			</label>
+			{/* Empty div for 'viewing' the color */}
+			<div className="viewing-box" style={{ backgroundColor: store.hex }}></div>
 		</>
 	);
 };

@@ -7,6 +7,7 @@ import { css } from 'glamor';
 import { setColor } from '../../redux/actions/colorAction';
 import { State } from '../../redux/interfaces';
 import chroma from 'chroma-js';
+import tinycolor from 'tinycolor2';
 
 interface ColorSaver {
 	color: string;
@@ -28,7 +29,13 @@ export const ColorSaver: FC<ColorSaver> = (props: ColorSaver) => {
 		.rgb()
 		.toString();
 
-	const value = store.mode === 'hex' ? store.hex : rgb;
+	const hsl = tinycolor(store.hex).toHsl();
+	const hslString = `${Math.floor(hsl.h)}, ${Math.floor(
+		hsl.s * 100
+	)}%, ${Math.floor(hsl.l * 100)}%`;
+
+	const value =
+		store.mode === 'hex' ? store.hex : store.mode === 'rgb' ? rgb : hslString;
 	let currentValue = { value, label: value };
 
 	const saveColor = () => {

@@ -58,6 +58,15 @@ export const ColorMode: FC = () => {
 			>
 				Rgb
 			</button>
+			<button
+				value="hsl"
+				onClick={changeMode}
+				className={store.mode === 'hsl' ? 'hsl active' : 'hsl'}
+				title="switch to hsl"
+				style={store.mode === 'hsl' ? activeStyle : {}}
+			>
+				Hsl
+			</button>
 		</div>
 	);
 };

@@ -3,6 +3,7 @@ import ColorBar from './color-bar';
 import './color-box.scss';
 import chroma from 'chroma-js';
 import { findContrastingColor } from '../../../utils/color-utils';
+import tinycolor from 'tinycolor2';
 
 interface ColorBox {
 	colors: string[];
@@ -11,17 +12,26 @@ interface ColorBox {
 }
 
 export const ColorBox: FC<ColorBox> = (props: ColorBox) => {
+	const showValue = (color: any) => {
+		if (props.show === 'hsl') {
+			let hsl = tinycolor(color).toHsl();
+			return `${Math.floor(hsl.h)}, ${Math.floor(hsl.s * 100)}%, ${Math.floor(
+				hsl.l * 100
+			)}%`;
+		}
+		return props.show === 'hex'
+			? color
+			: chroma(color)
+					.rgb()
+					.toString();
+	};
+
 	return (
 		<div className="color-box">
 			<p>{props.name}</p>
 			<div>
 				{props.colors.map((color: string, index: number) => {
-					const value =
-						props.show === 'hex'
-							? color
-							: chroma(color)
-									.rgb()
-									.toString();
+					const value = showValue(color);
 					const contrast = findContrastingColor(color);
 					return (
 						<ColorBar
