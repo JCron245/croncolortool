@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { CustomPicker, ChromePicker } from 'react-color';
-import '../../../node_modules/react-rangeslider/umd/rangeslider.min.css';
 import './custom-picker.scss';
 import chroma from 'chroma-js';
 import { useDispatch, useSelector } from 'react-redux';
