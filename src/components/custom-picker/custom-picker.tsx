@@ -50,7 +50,7 @@ const MyColorPicker: FC<any> = (props: any) => {
 			default:
 				break;
 		}
-		colorChange({ hex: tinycolor(hsl).toHex() });
+		colorChange({ hex: `#${tinycolor(hsl).toHex()}` });
 	};
 
 	return (
