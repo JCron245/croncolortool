@@ -3,15 +3,14 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './app.scss';
 import ExtendedSwatch from '../extended-swatch/extended-swatch';
 import { ToastContainer, toast } from 'react-toastify';
-import logo from '../../assets/colorwheel.svg';
+import logo from '../../assets/cron-color-logo.png';
 
 const App: React.FC = () => {
 	return (
 		<Router>
 			<main className="app">
 				<header className="app-header">
-					<img src={logo} className="app-logo" alt="logo" style={{ maxHeight: '35px' }} />
-					<p className="app-header-title">Cron Color</p>
+					<img src={logo} className="app-logo" alt="Cron Color Logo" />
 					<nav className="nav">
 						<ul className="nav-list">
 							{/* <li>

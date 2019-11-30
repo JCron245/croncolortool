@@ -14,10 +14,10 @@
 	color: #e1ddd7;
 	display: flex;
 	font-family: 'Roboto', sans-serif;
-	justify-content: center;
-	padding: 0.5rem 1rem;
+	justify-content: flex-start;
+	padding: 0.2rem 1rem 0.5rem 1rem;
 	.app-logo {
-		animation: App-logo-spin infinite 18s linear;
+		height: 4rem;
 		margin-right: 0.5rem;
 		pointer-events: none;
 	}

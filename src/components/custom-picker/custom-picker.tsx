@@ -62,7 +62,7 @@ const MyColorPicker: FC<any> = (props: any) => {
 					type="range"
 					min="0"
 					max="255"
-					className="slider"
+					className="slider red"
 					value={rgb[0]}
 					onChange={e => {
 						rgbChange(e.target.value, 'r');
@@ -75,7 +75,7 @@ const MyColorPicker: FC<any> = (props: any) => {
 					type="range"
 					min="0"
 					max="255"
-					className="slider"
+					className="slider green"
 					value={rgb[1]}
 					onChange={e => {
 						rgbChange(e.target.value, 'g');
@@ -88,7 +88,7 @@ const MyColorPicker: FC<any> = (props: any) => {
 					type="range"
 					min="0"
 					max="255"
-					className="slider"
+					className="slider blue"
 					value={rgb[2]}
 					onChange={e => {
 						rgbChange(e.target.value, 'b');
@@ -101,7 +101,7 @@ const MyColorPicker: FC<any> = (props: any) => {
 					type="range"
 					min="0"
 					max="359"
-					className="slider"
+					className="slider hue"
 					value={Math.floor(hsl.h)}
 					onChange={e => {
 						hslChange(e.target.value, 'h');
@@ -114,7 +114,7 @@ const MyColorPicker: FC<any> = (props: any) => {
 					type="range"
 					min="0"
 					max="100"
-					className="slider"
+					className="slider saturation"
 					value={Math.floor(hsl.s * 100)}
 					onChange={e => {
 						hslChange(e.target.value, 's');
@@ -127,7 +127,7 @@ const MyColorPicker: FC<any> = (props: any) => {
 					type="range"
 					min="0"
 					max="100"
-					className="slider"
+					className="slider lightness"
 					value={Math.floor(hsl.l * 100)}
 					onChange={e => {
 						hslChange(e.target.value, 'l');
