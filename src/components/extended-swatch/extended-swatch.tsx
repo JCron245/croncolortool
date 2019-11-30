@@ -44,7 +44,7 @@ const ExtendedSwatch: FC = () => {
 				</div>
 				<div className="controls">
 					<ColorMode />
-					<ColorSaver color={store.hex} contrastColor={store.contrastColor} />
+					<ColorSaver />
 				</div>
 			</div>
 		</div>
