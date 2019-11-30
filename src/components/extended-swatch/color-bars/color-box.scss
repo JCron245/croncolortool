@@ -8,9 +8,6 @@
 		border: 1px solid #49515f;
 		box-shadow: 0 1px 8px 1px rgba(238, 110, 110, 0.25);
 	}
-	.box-title {
-		margin: 0;
-	}
 
 	.color-bar {
 		align-items: center;
@@ -18,17 +15,12 @@
 		justify-content: center;
 		display: flex;
 		height: 3.75rem;
-		padding: 0;
 		width: 100%;
 		.color-bar-title {
 			font-family: 'Roboto mono', monospace;
 			font-size: 0.95rem;
-			margin: 0;
 			text-transform: uppercase;
 		}
-	}
-	// Large devices (desktops, less than 1200px)
-	@media (max-width: 1199.98px) {
 	}
 	// Medium devices (tablets, less than 992px)
 	@media (max-width: 991.98px) {

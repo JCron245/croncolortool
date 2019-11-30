@@ -2,9 +2,9 @@ import chroma from 'chroma-js';
 import tinycolor from 'tinycolor2';
 
 export const createLightArray = (color: string): string[] => {
-	let shades = [];
+	const shades = [];
 	for (let i = 0; i < 8; i++) {
-		let lightened = chroma(color)
+		const lightened = chroma(color)
 			.brighten(i * 0.75)
 			.hex();
 		shades.push(lightened);
@@ -16,9 +16,9 @@ export const createLightArray = (color: string): string[] => {
 };
 
 export const createDarkArray = (color: string): string[] => {
-	let shades = [];
+	const shades = [];
 	for (let i = 0; i < 8; i++) {
-		let darkened = chroma(color)
+		const darkened = chroma(color)
 			.darken(i * 0.75)
 			.hex();
 		shades.push(darkened);
@@ -30,13 +30,13 @@ export const createDarkArray = (color: string): string[] => {
 };
 
 export const createSaturationArray = (color: string): string[] => {
-	let shades: any[] = [];
-	let saturation = chroma(color).hsl()[1];
+	const shades: any[] = [];
+	const saturation = chroma(color).hsl()[1];
 	for (let i = 0; i < 8; i++) {
-		let saturated = chroma(color)
+		const saturated = chroma(color)
 			.saturate(saturation * i * 1.75)
 			.hex();
-		if (i !== 0 && saturated === shades[i - 1]) {
+		if (saturated === shades[i - 1]) {
 			break;
 		}
 		shades.push(saturated);
@@ -45,13 +45,13 @@ export const createSaturationArray = (color: string): string[] => {
 };
 
 export const createDesaturationArray = (color: string): string[] => {
-	let shades: any[] = [];
-	let saturation = chroma(color).hsl()[1];
+	const shades: any[] = [];
+	const saturation = chroma(color).hsl()[1];
 	for (let i = 0; i < 8; i++) {
-		let desaturated = chroma(color)
+		const desaturated = chroma(color)
 			.desaturate(saturation * i * 0.75)
 			.hex();
-		if (i !== 0 && desaturated === shades[i - 1]) {
+		if (desaturated === shades[i - 1]) {
 			break;
 		}
 		shades.push(desaturated);

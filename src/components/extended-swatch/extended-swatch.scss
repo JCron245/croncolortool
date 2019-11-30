@@ -3,12 +3,6 @@
 	flex-grow: 1;
 	height: 100%;
 	padding: 0.5rem;
-
-	.picker-box {
-		display: flex;
-		flex-direction: column;
-		min-width: 580px;
-	}
 	.info-box {
 		display: flex;
 		flex-direction: column;
@@ -32,46 +26,12 @@
 			width: 100%;
 		}
 	}
-}
 
-// Large devices (desktops, less than 1920px)
-@media (max-width: 1919.98px) {
-	.extended-swatch {
-		.picker-box {
-			min-width: 500px;
-		}
-	}
-}
-
-// Large devices (desktops, less than 1200px)
-@media (max-width: 1199.98px) {
-	.extended-swatch {
-		.picker-box {
-			min-width: 40vw;
-		}
-	}
-}
-
-// Medium devices (tablets, less than 992px)
-@media (max-width: 991.98px) {
-	.extended-swatch {
-		.picker-box {
-			min-width: 40vw;
-		}
-	}
-}
-
-// Small devices (landscape phones, less than 768px)
-@media (max-width: 767.98px) {
-	.extended-swatch {
+	// Small devices (landscape phones, less than 768px)
+	@media (max-width: 767.98px) {
 		flex-direction: column;
-		.picker-box {
-			min-width: 100%;
-		}
 		.info-box {
 			align-items: center;
-			display: flex;
-			flex-direction: column;
 			.controls {
 				display: block;
 				position: sticky;
@@ -79,5 +39,25 @@
 				width: 90%;
 			}
 		}
+	}
+}
+
+.picker-box {
+	display: flex;
+	flex-direction: column;
+	min-width: 580px;
+
+	// Large devices (desktops, less than 1920px)
+	@media (max-width: 1919.98px) {
+		min-width: 500px;
+	}
+
+	// Large devices (desktops, less than 1200px)
+	@media (max-width: 1199.98px) {
+		min-width: 40vw;
+	}
+	// Small devices (landscape phones, less than 768px)
+	@media (max-width: 767.98px) {
+		min-width: 100%;
 	}
 }

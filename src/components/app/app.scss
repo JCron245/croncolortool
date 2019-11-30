@@ -13,7 +13,7 @@
 	background-color: #473333;
 	color: #e1ddd7;
 	display: flex;
-	font-family: 'Roboto mono', monospace;
+	font-family: 'Roboto', sans-serif;
 	justify-content: center;
 	padding: 0.5rem 1rem;
 	.app-logo {
@@ -63,14 +63,8 @@
 	0% {
 		transform: rotate(0deg);
 	}
-	25% {
-		transform: rotate(180deg);
-	}
 	50% {
 		transform: rotate(360deg);
-	}
-	75% {
-		transform: rotate(180deg);
 	}
 	100% {
 		transform: rotate(0deg);
