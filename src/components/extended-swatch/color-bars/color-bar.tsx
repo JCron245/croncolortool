@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
 import copy from 'clipboard-copy';
+import ReactGA from 'react-ga';
 
 interface ColorBar {
 	hex: string;
@@ -17,6 +18,11 @@ export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 		let savedTarget = savedEvent.currentTarget as HTMLInputElement;
 		copy(savedTarget.value.toUpperCase()).then(
 			success => {
+				ReactGA.event({
+					category: 'Color Copy',
+					action: 'Color copied',
+					value: savedTarget.value
+				});
 				toast(`${savedTarget.value.toUpperCase()} copied to clipboard!`, {
 					containerId: 'toasts-container',
 					autoClose: 1500,

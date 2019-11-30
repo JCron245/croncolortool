@@ -49,8 +49,9 @@ export const ColorSaver: FC<ColorSaver> = (props: ColorSaver) => {
 			localStorage.setItem('saved-colors', JSON.stringify(parsedColors));
 			toastMsg = `${store.hex.toUpperCase()} Saved!`;
 			ReactGA.event({
-				category: 'save',
-				action: store.hex
+				category: 'Color Saver',
+				action: 'Saved a color',
+				value: store.hex
 			});
 		} else {
 			toastMsg = `${store.hex.toUpperCase()} Is already saved!`;
@@ -76,6 +77,11 @@ export const ColorSaver: FC<ColorSaver> = (props: ColorSaver) => {
 			toastMsg = `${store.hex} deleted!`;
 			parsedColors = parsedColors.filter(c => c.value !== store.hex);
 			localStorage.setItem('saved-colors', JSON.stringify(parsedColors));
+			ReactGA.event({
+				category: 'Color Saver',
+				action: 'Deleted a color',
+				value: store.hex
+			});
 		} else {
 			toastMsg = 'Unable to delete!';
 		}
