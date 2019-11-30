@@ -51,7 +51,7 @@ export const ColorSaver: FC<ColorSaver> = (props: ColorSaver) => {
 			ReactGA.event({
 				category: 'Color Saver',
 				action: 'Saved a color',
-				value: store.hex
+				label: store.hex
 			});
 		} else {
 			toastMsg = `${store.hex.toUpperCase()} Is already saved!`;
@@ -80,7 +80,7 @@ export const ColorSaver: FC<ColorSaver> = (props: ColorSaver) => {
 			ReactGA.event({
 				category: 'Color Saver',
 				action: 'Deleted a color',
-				value: store.hex
+				label: store.hex
 			});
 		} else {
 			toastMsg = 'Unable to delete!';

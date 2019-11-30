@@ -21,7 +21,7 @@ export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 				ReactGA.event({
 					category: 'Color Copy',
 					action: 'Color copied',
-					value: savedTarget.value
+					label: savedTarget.value
 				});
 				toast(`${savedTarget.value.toUpperCase()} copied to clipboard!`, {
 					containerId: 'toasts-container',

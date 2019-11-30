@@ -18,7 +18,7 @@ export const ColorMode: FC = () => {
 			ReactGA.event({
 				category: 'Color Mode',
 				action: 'changed mode',
-				value: event.currentTarget.value
+				label: event.currentTarget.value
 			});
 			toast(
 				`Color mode switched to ${savedEvent.currentTarget.value.toUpperCase()}`,
