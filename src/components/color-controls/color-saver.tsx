@@ -8,6 +8,7 @@ import { setColor } from '../../redux/actions/colorAction';
 import { State } from '../../redux/interfaces';
 import chroma from 'chroma-js';
 import tinycolor from 'tinycolor2';
+import ReactGA from 'react-ga';
 
 interface ColorSaver {
 	color: string;
@@ -47,6 +48,10 @@ export const ColorSaver: FC<ColorSaver> = (props: ColorSaver) => {
 			});
 			localStorage.setItem('saved-colors', JSON.stringify(parsedColors));
 			toastMsg = `${store.hex.toUpperCase()} Saved!`;
+			ReactGA.event({
+				category: 'save',
+				action: store.hex
+			});
 		} else {
 			toastMsg = `${store.hex.toUpperCase()} Is already saved!`;
 		}

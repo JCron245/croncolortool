@@ -5,6 +5,7 @@ import { State } from '../../redux/interfaces';
 import { setMode } from '../../redux/actions/colorAction';
 import { toast } from 'react-toastify';
 import { css } from 'glamor';
+import ReactGA from 'react-ga';
 
 export const ColorMode: FC = () => {
 	const store: State = useSelector((store: State) => store);
@@ -14,7 +15,10 @@ export const ColorMode: FC = () => {
 		const savedEvent = event;
 		if (event.currentTarget.value) {
 			dispatch(setMode(savedEvent.currentTarget.value));
-
+			ReactGA.event({
+				category: 'mode',
+				action: event.currentTarget.value
+			});
 			toast(
 				`Color mode switched to ${savedEvent.currentTarget.value.toUpperCase()}`,
 				{

@@ -8,7 +8,7 @@ import logo from '../../assets/colorwheel.svg';
 const App: React.FC = () => {
 	return (
 		<Router>
-			<div className="app">
+			<main className="app">
 				<header className="app-header">
 					<img
 						src={logo}
@@ -42,7 +42,7 @@ const App: React.FC = () => {
 					containerId="toasts-container"
 					position={toast.POSITION.TOP_RIGHT}
 				/>
-			</div>
+			</main>
 		</Router>
 	);
 };

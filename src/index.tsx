@@ -7,6 +7,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { colorReducer } from './redux/reducers/colorReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import ReactGA from 'react-ga';
 
 const store = createStore(colorReducer, composeWithDevTools());
 
@@ -16,6 +17,8 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById('root')
 );
+
+ReactGA.initialize('UA-139332644-1');
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
