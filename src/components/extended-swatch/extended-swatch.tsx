@@ -30,10 +30,6 @@ const ExtendedSwatch: FC = () => {
 			</div>
 			{/* Box of various color information - shades etc */}
 			<div className="info-box">
-				<div className="controls">
-					<ColorMode />
-					<ColorSaver color={store.hex} contrastColor={store.contrastColor} />
-				</div>
 				<div className="color-box-grid">
 					<ColorBox
 						name="lighter"
@@ -85,6 +81,10 @@ const ExtendedSwatch: FC = () => {
 						show={store.mode}
 						colors={createMonochromaticArray(store.hex)}
 					/>
+				</div>
+				<div className="controls">
+					<ColorMode />
+					<ColorSaver color={store.hex} contrastColor={store.contrastColor} />
 				</div>
 			</div>
 		</div>

@@ -21,40 +21,40 @@
 		margin-right: 0.5rem;
 		pointer-events: none;
 	}
-	p {
+	.app-header-title {
 		font-size: 1.75rem;
 		line-height: 1.75rem;
 		margin: 0 auto 0 0;
 	}
-	nav {
+	.nav {
 		align-items: center;
 		display: flex;
 		height: 100%;
-	}
-	ul {
-		display: flex;
-		list-style: none;
-		margin: 0;
-		li {
-			font-size: 1rem;
-			margin-right: 0.5rem;
-			a {
-				background-color: #0faded;
-				border-radius: 0.5rem;
-				box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-					0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-				color: #000;
-				display: block;
-				font-weight: bold;
-				margin: 0;
-				padding: 0.25rem 0.75rem;
-			}
-			a:hover {
-				text-decoration: none;
-			}
-			a:active {
-				background-color: #0089c7;
-				box-shadow: none;
+		.nav-list {
+			display: flex;
+			list-style: none;
+			margin: 0;
+			li {
+				font-size: 1rem;
+				margin-right: 0.5rem;
+				a {
+					background-color: #0faded;
+					border-radius: 0.5rem;
+					box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+						0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+					color: #000;
+					display: block;
+					font-weight: bold;
+					margin: 0;
+					padding: 0.25rem 0.75rem;
+				}
+				a:hover {
+					text-decoration: none;
+				}
+				a:active {
+					background-color: #0089c7;
+					box-shadow: none;
+				}
 			}
 		}
 	}

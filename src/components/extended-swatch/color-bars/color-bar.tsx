@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
+import copy from 'clipboard-copy';
 
 interface ColorBar {
 	hex: string;
@@ -12,24 +13,27 @@ interface ColorBar {
 
 export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 	const singleClick = (event: any) => {
-		/** React does some interesting stuff with "synthetic events" */
 		let savedEvent = event;
 		let savedTarget = savedEvent.currentTarget as HTMLInputElement;
-		if (navigator.clipboard) {
-			navigator.clipboard.writeText(savedTarget.value);
-			toast(`${savedTarget.value.toUpperCase()} copied to clipboard!`, {
-				containerId: 'toasts-container',
-				autoClose: 1500,
-				closeButton: false,
-				type: toast.TYPE.SUCCESS,
-				className: css({
-					backgroundColor: props.hex,
-					color: props.contrastColor,
-					border: `1px solid ${props.contrastColor}`,
-					textAlign: 'center'
-				})
-			});
-		}
+		copy(savedTarget.value.toUpperCase()).then(
+			success => {
+				toast(`${savedTarget.value.toUpperCase()} copied to clipboard!`, {
+					containerId: 'toasts-container',
+					autoClose: 1500,
+					closeButton: false,
+					type: toast.TYPE.SUCCESS,
+					className: css({
+						backgroundColor: props.hex,
+						color: props.contrastColor,
+						border: `2px solid ${props.contrastColor}`,
+						textAlign: 'center'
+					})
+				});
+			},
+			err => {
+				console.error('[ERROR] ', err);
+			}
+		);
 	};
 
 	const colorBarStyle = {
@@ -44,8 +48,9 @@ export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 			value={props.value}
 			className="color-bar"
 			style={colorBarStyle}
+			type="button"
 		>
-			<p>{props.value}</p>
+			<p className="color-bar-title">{props.value}</p>
 		</button>
 	);
 };

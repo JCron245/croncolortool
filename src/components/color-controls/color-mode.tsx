@@ -43,7 +43,9 @@ export const ColorMode: FC = () => {
 			<button
 				value="hex"
 				onClick={changeMode}
-				className={store.mode === 'hex' ? 'hex active' : 'hex'}
+				className={
+					store.mode === 'hex' ? 'mode-control active' : 'mode-control'
+				}
 				title="switch to hex"
 				style={store.mode === 'hex' ? activeStyle : {}}
 			>
@@ -52,7 +54,9 @@ export const ColorMode: FC = () => {
 			<button
 				value="rgb"
 				onClick={changeMode}
-				className={store.mode === 'rgb' ? 'rgb active' : 'rgb'}
+				className={
+					store.mode === 'rgb' ? 'mode-control active' : 'mode-control'
+				}
 				title="switch to rgb"
 				style={store.mode === 'rgb' ? activeStyle : {}}
 			>
@@ -61,7 +65,9 @@ export const ColorMode: FC = () => {
 			<button
 				value="hsl"
 				onClick={changeMode}
-				className={store.mode === 'hsl' ? 'hsl active' : 'hsl'}
+				className={
+					store.mode === 'hsl' ? 'mode-control active' : 'mode-control'
+				}
 				title="switch to hsl"
 				style={store.mode === 'hsl' ? activeStyle : {}}
 			>

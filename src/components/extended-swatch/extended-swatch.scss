@@ -7,17 +7,20 @@
 	.picker-box {
 		display: flex;
 		flex-direction: column;
-		min-width: 500px;
+		min-width: 580px;
 	}
 	.info-box {
+		display: flex;
+		flex-direction: column;
 		background-color: transparent;
 		text-align: center;
+		width: 100%;
 		.color-box-grid {
 			color: #e1ddd7;
-			display: grid;
-			grid-gap: 1rem;
-			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-			padding: 1rem 0.5rem 1rem 0.25rem;
+			display: flex;
+			justify-content: flex-start;
+			flex-wrap: wrap;
+			padding: 1rem 0.45rem 1rem 0.45rem;
 			text-transform: capitalize;
 			width: 100%;
 		}
@@ -25,29 +28,17 @@
 			align-items: center;
 			display: flex;
 			justify-content: flex-start;
+			margin-top: auto;
 			width: 100%;
 		}
 	}
 }
 
 // Large devices (desktops, less than 1920px)
-@media (max-width: 1599.98px) {
+@media (max-width: 1919.98px) {
 	.extended-swatch {
-		.info-box {
-			.color-box-grid {
-				grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-			}
-		}
-	}
-}
-
-// Large devices (desktops, less than 1920px)
-@media (max-width: 1399.98px) {
-	.extended-swatch {
-		.info-box {
-			.color-box-grid {
-				grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-			}
+		.picker-box {
+			min-width: 500px;
 		}
 	}
 }
@@ -55,18 +46,8 @@
 // Large devices (desktops, less than 1200px)
 @media (max-width: 1199.98px) {
 	.extended-swatch {
-		.info-box {
-			width: 100%;
-			.color-box-grid {
-				display: grid;
-				grid-gap: 0.3rem;
-				grid-template-columns: 1fr 1fr 1fr 1fr;
-				padding: 1rem 0.3rem 1rem 0.2rem;
-				width: 100%;
-				.color-box p {
-					font-size: 1rem;
-				}
-			}
+		.picker-box {
+			min-width: 40vw;
 		}
 	}
 }
@@ -74,28 +55,8 @@
 // Medium devices (tablets, less than 992px)
 @media (max-width: 991.98px) {
 	.extended-swatch {
-		flex-direction: column;
 		.picker-box {
-			min-width: unset;
-		}
-		.info-box {
-			align-items: center;
-			display: flex;
-			flex-direction: column-reverse;
-			.color-box-grid {
-				order: 1;
-				grid-template-columns: 1fr 1fr 1fr 1fr;
-				padding: 0;
-			}
-			.controls {
-				display: block;
-				position: sticky;
-				bottom: 0.5rem;
-				width: 90%;
-				.color-saver-controls {
-					width: 100%;
-				}
-			}
+			min-width: 40vw;
 		}
 	}
 }
@@ -103,20 +64,19 @@
 // Small devices (landscape phones, less than 768px)
 @media (max-width: 767.98px) {
 	.extended-swatch {
-		.info-box {
-			.color-box-grid {
-				grid-template-columns: 1fr 1fr 1fr;
-			}
+		flex-direction: column;
+		.picker-box {
+			min-width: 100%;
 		}
-	}
-}
-
-// Extra small devices (portrait phones, less than 576px)
-@media (max-width: 575.98px) {
-	.extended-swatch {
 		.info-box {
-			.color-box-grid {
-				grid-template-columns: 1fr 1fr;
+			align-items: center;
+			display: flex;
+			flex-direction: column;
+			.controls {
+				display: block;
+				position: sticky;
+				bottom: 1.25rem;
+				width: 90%;
 			}
 		}
 	}

@@ -16,9 +16,9 @@ const App: React.FC = () => {
 						alt="logo"
 						style={{ maxHeight: '35px' }}
 					/>
-					<p>Cron Color</p>
-					<nav>
-						<ul>
+					<p className="app-header-title">Cron Color</p>
+					<nav className="nav">
+						<ul className="nav-list">
 							{/* <li>
 								<Link to="/">Color Tool</Link>
 							</li> */}
@@ -40,7 +40,7 @@ const App: React.FC = () => {
 					hideProgressBar={true}
 					enableMultiContainer
 					containerId="toasts-container"
-					position={toast.POSITION.BOTTOM_RIGHT}
+					position={toast.POSITION.TOP_RIGHT}
 				/>
 			</div>
 		</Router>

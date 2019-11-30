@@ -1,12 +1,14 @@
 .color-box {
 	display: flex;
 	flex-direction: column;
-	width: 100%;
-	> div {
+	width: 135px;
+	margin-bottom: 1rem;
+	margin-right: auto;
+	.box-bar-wrapper {
 		border: 1px solid #49515f;
-		box-shadow: 0 1px 8px 1px rgba(125, 125, 125, 0.25);
+		box-shadow: 0 1px 8px 1px rgba(238, 110, 110, 0.25);
 	}
-	p {
+	.box-title {
 		margin: 0;
 	}
 
@@ -18,11 +20,26 @@
 		height: 3.75rem;
 		padding: 0;
 		width: 100%;
-		p {
+		.color-bar-title {
 			font-family: 'Roboto mono', monospace;
-			font-size: 1.125rem;
+			font-size: 0.95rem;
 			margin: 0;
 			text-transform: uppercase;
 		}
+	}
+	// Large devices (desktops, less than 1200px)
+	@media (max-width: 1199.98px) {
+	}
+	// Medium devices (tablets, less than 992px)
+	@media (max-width: 991.98px) {
+		width: 18vw;
+	}
+	// Small devices (landscape phones, less than 768px)
+	@media (max-width: 767.98px) {
+		width: 18vw;
+	}
+	// Extra small devices (portrait phones, less than 576px)
+	@media (max-width: 575.98px) {
+		width: 29vw;
 	}
 }

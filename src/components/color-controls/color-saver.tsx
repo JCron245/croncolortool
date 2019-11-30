@@ -95,8 +95,10 @@ export const ColorSaver: FC<ColorSaver> = (props: ColorSaver) => {
 				options={parsedColors}
 				onChange={selectColor}
 				value={currentValue}
+				className={'color-saver-control-select'}
 				classNamePrefix={'color-saver-control-select'}
 				noOptionsMessage={() => 'No colors saved'}
+				menuPlacement="top"
 			/>
 			<button className="btn save-btn" onClick={saveColor}>
 				Save

@@ -28,8 +28,8 @@ export const ColorBox: FC<ColorBox> = (props: ColorBox) => {
 
 	return (
 		<div className="color-box">
-			<p>{props.name}</p>
-			<div>
+			<p className="box-title">{props.name}</p>
+			<div className="box-bar-wrapper">
 				{props.colors.map((color: string, index: number) => {
 					const value = showValue(color);
 					const contrast = findContrastingColor(color);
