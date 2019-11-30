@@ -20,21 +20,18 @@ export const ColorMode: FC = () => {
 				action: 'changed mode',
 				label: event.currentTarget.value
 			});
-			toast(
-				`Color mode switched to ${savedEvent.currentTarget.value.toUpperCase()}`,
-				{
-					containerId: 'toasts-container',
-					autoClose: 1500,
-					closeButton: false,
-					type: toast.TYPE.SUCCESS,
-					className: css({
-						backgroundColor: store.hex,
-						color: store.contrastColor,
-						border: `1px solid ${store.contrastColor}`,
-						textAlign: 'center'
-					})
-				}
-			);
+			toast(`Color mode switched to ${savedEvent.currentTarget.value.toUpperCase()}`, {
+				containerId: 'toasts-container',
+				autoClose: 1500,
+				closeButton: false,
+				type: toast.TYPE.SUCCESS,
+				className: css({
+					backgroundColor: store.hex,
+					color: store.contrastColor,
+					border: `1px solid ${store.contrastColor}`,
+					textAlign: 'center'
+				})
+			});
 		}
 	};
 
@@ -48,34 +45,25 @@ export const ColorMode: FC = () => {
 			<button
 				value="hex"
 				onClick={changeMode}
-				className={
-					store.mode === 'hex' ? 'mode-control active' : 'mode-control'
-				}
+				className={store.mode === 'hex' ? 'mode-control active' : 'mode-control'}
 				title="switch to hex"
-				style={store.mode === 'hex' ? activeStyle : {}}
-			>
+				style={store.mode === 'hex' ? activeStyle : {}}>
 				Hex
 			</button>
 			<button
 				value="rgb"
 				onClick={changeMode}
-				className={
-					store.mode === 'rgb' ? 'mode-control active' : 'mode-control'
-				}
+				className={store.mode === 'rgb' ? 'mode-control active' : 'mode-control'}
 				title="switch to rgb"
-				style={store.mode === 'rgb' ? activeStyle : {}}
-			>
+				style={store.mode === 'rgb' ? activeStyle : {}}>
 				Rgb
 			</button>
 			<button
 				value="hsl"
 				onClick={changeMode}
-				className={
-					store.mode === 'hsl' ? 'mode-control active' : 'mode-control'
-				}
+				className={store.mode === 'hsl' ? 'mode-control active' : 'mode-control'}
 				title="switch to hsl"
-				style={store.mode === 'hsl' ? activeStyle : {}}
-			>
+				style={store.mode === 'hsl' ? activeStyle : {}}>
 				Hsl
 			</button>
 		</div>

@@ -23,12 +23,7 @@
 	}
 }
 
-.chrome-picker
-	> div:nth-child(2)
-	> div:nth-child(2)
-	> div.flexbox-fix
-	> div
-	> div {
+.chrome-picker > div:nth-child(2) > div:nth-child(2) > div.flexbox-fix > div > div {
 	align-items: center;
 	display: flex;
 	flex-direction: row-reverse;

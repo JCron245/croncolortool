@@ -10,37 +10,27 @@ import chroma from 'chroma-js';
 import tinycolor from 'tinycolor2';
 import ReactGA from 'react-ga';
 
-interface ColorSaver {
-	color: string;
-	contrastColor: string;
-}
-
-export const ColorSaver: FC<ColorSaver> = (props: ColorSaver) => {
+export const ColorSaver: FC = () => {
 	const store: State = useSelector((store: State) => store);
 	const dispatch = useDispatch();
 
 	const selectColor = (event: any) => dispatch(setColor(event.value));
 
 	let colors = localStorage.getItem('saved-colors') || undefined;
-	let parsedColors: { value: string; label: string }[] = colors
-		? JSON.parse(colors)
-		: [];
+	let parsedColors: { value: string; label: string }[] = colors ? JSON.parse(colors) : [];
 
 	const rgb = chroma(store.hex)
 		.rgb()
 		.toString();
 
 	const hsl = tinycolor(store.hex).toHsl();
-	const hslString = `${Math.floor(hsl.h)}, ${Math.floor(
-		hsl.s * 100
-	)}%, ${Math.floor(hsl.l * 100)}%`;
+	const hslString = `${Math.floor(hsl.h)}, ${Math.floor(hsl.s * 100)}%, ${Math.floor(hsl.l * 100)}%`;
 
-	const value =
-		store.mode === 'hex' ? store.hex : store.mode === 'rgb' ? rgb : hslString;
+	const value = store.mode === 'hex' ? store.hex : store.mode === 'rgb' ? rgb : hslString;
 	let currentValue = { value, label: value };
 
 	const saveColor = () => {
-		let toastMsg = '';
+		let toastMsg;
 		if (!parsedColors.find(color => color.value === store.hex)) {
 			parsedColors.push({
 				value: `${store.hex}`,
@@ -72,7 +62,7 @@ export const ColorSaver: FC<ColorSaver> = (props: ColorSaver) => {
 	};
 
 	const deleteColor = () => {
-		let toastMsg = '';
+		let toastMsg;
 		if (parsedColors.find(c => c.value === store.hex)) {
 			toastMsg = `${store.hex} deleted!`;
 			parsedColors = parsedColors.filter(c => c.value !== store.hex);

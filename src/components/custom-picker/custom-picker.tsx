@@ -55,12 +55,7 @@ const MyColorPicker: FC<any> = (props: any) => {
 
 	return (
 		<>
-			<ChromePicker
-				color={props.colorInput}
-				disableAlpha={true}
-				onChange={colorChange}
-				onChangeComplete={colorChange}
-			/>
+			<ChromePicker color={props.colorInput} disableAlpha={true} onChange={colorChange} onChangeComplete={colorChange} />
 			<label className="slider-label">
 				R: {rgb[0]}
 				<input

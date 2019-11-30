@@ -99,7 +99,5 @@ export const createTetradArray = (color: string): any[] => {
 };
 
 export const findContrastingColor = (color: string): string => {
-	return chroma.contrast(color, '#FFF') > chroma.contrast(color, '#000')
-		? '#FFF'
-		: '#000';
+	return chroma.contrast(color, '#FFF') > chroma.contrast(color, '#000') ? '#FFF' : '#000';
 };

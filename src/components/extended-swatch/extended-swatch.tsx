@@ -31,56 +31,16 @@ const ExtendedSwatch: FC = () => {
 			{/* Box of various color information - shades etc */}
 			<div className="info-box">
 				<div className="color-box-grid">
-					<ColorBox
-						name="lighter"
-						show={store.mode}
-						colors={createLightArray(store.hex)}
-					/>
-					<ColorBox
-						name="darker"
-						show={store.mode}
-						colors={createDarkArray(store.hex)}
-					/>
-					<ColorBox
-						name="saturated"
-						show={store.mode}
-						colors={createSaturationArray(store.hex)}
-					/>
-					<ColorBox
-						name="desaturated"
-						show={store.mode}
-						colors={createDesaturationArray(store.hex)}
-					/>
-					<ColorBox
-						name="analgous"
-						show={store.mode}
-						colors={createAnalogousArray(store.hex)}
-					/>
-					<ColorBox
-						name="complementary"
-						show={store.mode}
-						colors={createComplementArray(store.hex)}
-					/>
-					<ColorBox
-						name="split complement"
-						show={store.mode}
-						colors={createSplitComplementArray(store.hex)}
-					/>
-					<ColorBox
-						name="triadic"
-						show={store.mode}
-						colors={createTriadArray(store.hex)}
-					/>
-					<ColorBox
-						name="tetradic"
-						show={store.mode}
-						colors={createTetradArray(store.hex)}
-					/>
-					<ColorBox
-						name="monochromatic"
-						show={store.mode}
-						colors={createMonochromaticArray(store.hex)}
-					/>
+					<ColorBox name="lighter" show={store.mode} colors={createLightArray(store.hex)} />
+					<ColorBox name="darker" show={store.mode} colors={createDarkArray(store.hex)} />
+					<ColorBox name="saturated" show={store.mode} colors={createSaturationArray(store.hex)} />
+					<ColorBox name="desaturated" show={store.mode} colors={createDesaturationArray(store.hex)} />
+					<ColorBox name="analgous" show={store.mode} colors={createAnalogousArray(store.hex)} />
+					<ColorBox name="complementary" show={store.mode} colors={createComplementArray(store.hex)} />
+					<ColorBox name="split complement" show={store.mode} colors={createSplitComplementArray(store.hex)} />
+					<ColorBox name="triadic" show={store.mode} colors={createTriadArray(store.hex)} />
+					<ColorBox name="tetradic" show={store.mode} colors={createTetradArray(store.hex)} />
+					<ColorBox name="monochromatic" show={store.mode} colors={createMonochromaticArray(store.hex)} />
 				</div>
 				<div className="controls">
 					<ColorMode />

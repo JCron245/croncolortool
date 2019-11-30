@@ -17,7 +17,7 @@ export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 		let savedEvent = event;
 		let savedTarget = savedEvent.currentTarget as HTMLInputElement;
 		copy(savedTarget.value.toUpperCase()).then(
-			success => {
+			() => {
 				ReactGA.event({
 					category: 'Color Copy',
 					action: 'Color copied',
@@ -49,13 +49,7 @@ export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 	};
 
 	return (
-		<button
-			onClick={singleClick}
-			value={props.value}
-			className="color-bar"
-			style={colorBarStyle}
-			type="button"
-		>
+		<button onClick={singleClick} value={props.value} className="color-bar" style={colorBarStyle} type="button">
 			<p className="color-bar-title">{props.value}</p>
 		</button>
 	);

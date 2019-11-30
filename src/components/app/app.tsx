@@ -10,12 +10,7 @@ const App: React.FC = () => {
 		<Router>
 			<main className="app">
 				<header className="app-header">
-					<img
-						src={logo}
-						className="app-logo"
-						alt="logo"
-						style={{ maxHeight: '35px' }}
-					/>
+					<img src={logo} className="app-logo" alt="logo" style={{ maxHeight: '35px' }} />
 					<p className="app-header-title">Cron Color</p>
 					<nav className="nav">
 						<ul className="nav-list">
@@ -36,12 +31,7 @@ const App: React.FC = () => {
 						<ExtendedSwatch />
 					</Route>
 				</Switch>
-				<ToastContainer
-					hideProgressBar={true}
-					enableMultiContainer
-					containerId="toasts-container"
-					position={toast.POSITION.TOP_RIGHT}
-				/>
+				<ToastContainer hideProgressBar={true} enableMultiContainer containerId="toasts-container" position={toast.POSITION.TOP_RIGHT} />
 			</main>
 		</Router>
 	);
