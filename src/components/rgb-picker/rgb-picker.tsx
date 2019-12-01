@@ -31,7 +31,7 @@ const RGBPicker: FC<RGBPicker> = (props: RGBPicker) => {
 	return (
 		<>
 			<label className="slider-label">
-				R: {rgb[0]}
+				R {rgb[0]}
 				<input
 					type="range"
 					min="0"
@@ -44,7 +44,7 @@ const RGBPicker: FC<RGBPicker> = (props: RGBPicker) => {
 				/>
 			</label>
 			<label className="slider-label">
-				G: {rgb[1]}
+				G {rgb[1]}
 				<input
 					type="range"
 					min="0"
@@ -57,7 +57,7 @@ const RGBPicker: FC<RGBPicker> = (props: RGBPicker) => {
 				/>
 			</label>
 			<label className="slider-label">
-				B: {rgb[2]}
+				B {rgb[2]}
 				<input
 					type="range"
 					min="0"

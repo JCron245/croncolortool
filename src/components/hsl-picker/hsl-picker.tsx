@@ -31,7 +31,7 @@ const HSLPicker: FC<HSLPicker> = (props: HSLPicker) => {
 	return (
 		<>
 			<label className="slider-label">
-				H: {Math.floor(hsl.h)}
+				H {Math.floor(hsl.h)}
 				<input
 					type="range"
 					min="0"
@@ -44,7 +44,7 @@ const HSLPicker: FC<HSLPicker> = (props: HSLPicker) => {
 				/>
 			</label>
 			<label className="slider-label">
-				S: {Math.floor(hsl.s * 100)}%
+				S {Math.floor(hsl.s * 100)}%
 				<input
 					type="range"
 					min="0"
@@ -57,7 +57,7 @@ const HSLPicker: FC<HSLPicker> = (props: HSLPicker) => {
 				/>
 			</label>
 			<label className="slider-label">
-				L: {Math.floor(hsl.l * 100)}%
+				L {Math.floor(hsl.l * 100)}%
 				<input
 					type="range"
 					min="0"

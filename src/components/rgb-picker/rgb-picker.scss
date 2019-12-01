@@ -11,7 +11,7 @@
 .slider {
 	border: 1px solid rgba(225, 221, 215, 0.25);
 	-webkit-appearance: none;
-	width: 81%;
+	width: calc(100% - 7ch);
 	height: 0.8rem;
 	border-radius: 5px;
 	background: #473333;

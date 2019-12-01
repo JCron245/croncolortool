@@ -97,4 +97,44 @@
 			}
 		}
 	}
+	// Small devices (landscape phones, less than 768px)
+	@media (max-width: 1023.98px) {
+		padding-bottom: 0;
+		.demo-section {
+			grid-auto-rows: auto auto;
+			padding: 0;
+			width: 100%;
+			.summary {
+				font-size: 1.05rem;
+				margin: 2rem 0;
+			}
+		}
+		.input-section {
+			border-radius: 0;
+			padding-bottom: 0;
+			width: 100%;
+			.results {
+				grid-gap: 0.5rem;
+				grid-template-columns: 40% 40%;
+				padding: 1rem 0;
+				.wcag-box {
+					padding: 0.25rem;
+				}
+			}
+		}
+		.colors {
+			grid-gap: 0.5rem;
+			grid-template-columns: 48% 48%;
+			.background-choice,
+			.text-choice {
+				flex-direction: column;
+				input {
+					max-width: 100%;
+				}
+			}
+			.slider {
+				width: calc(100% - 7ch);
+			}
+		}
+	}
 }
