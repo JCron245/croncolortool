@@ -1,35 +1,99 @@
 .contrast-checker {
 	align-items: center;
-	display: flex;
 	color: #fff;
+	display: flex;
+	flex-direction: column;
 	flex-grow: 1;
 	justify-content: center;
-	.test-box {
-		background-color: #473333;
+	padding-bottom: 1rem;
+	.demo-section {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows: 1fr;
-		height: 40vh;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-template-rows: 1fr 0.25fr;
+		padding: 0 0 2rem 0;
+		user-select: none;
 		width: 75vw;
-		.colors {
-			display: flex;
-			height: 100%;
-			flex-direction: column;
-			justify-content: space-around;
-			padding: 1rem;
+		.summary {
+			font-size: 1.25rem;
+			margin-bottom: 4rem;
+			grid-column: 1/5;
+			padding: 0 1rem;
 		}
-		.results {
+		.text-box {
+			text-align: center;
+			width: 100%;
+		}
+		.small {
+			font-size: 10px;
+		}
+		.normal {
+			font-size: 16px;
+		}
+		.large-bold {
+			font-size: 18.66px;
+			font-weight: bold;
+		}
+		.large {
+			font-size: 24px;
+		}
+	}
+	.results {
+		justify-content: space-around;
+		display: grid;
+		grid-gap: 1rem;
+		grid-template-columns: 15rem 15rem;
+		height: 50%;
+		padding: 1rem;
+		.wcag-box {
+			align-items: center;
+			border-radius: 4px;
+			box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 			display: flex;
+			color: #fff;
+			border: 2px solid #fff;
 			flex-direction: column;
+			font-family: 'roboto', sans-serif;
+			font-size: 1.25rem;
+			font-weight: bold;
 			justify-content: space-around;
 			height: 100%;
 			padding: 1rem;
-			.result-boxes {
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				p {
-					margin: 0;
-				}
+			text-align: center;
+		}
+		.bad {
+			background-color: #b60000;
+		}
+		.good {
+			background-color: #006800;
+		}
+	}
+	.input-section {
+		background-color: #473333;
+		border-radius: 4px;
+		color: #e1ddd7;
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+		padding-bottom: 1rem;
+		width: 75vw;
+	}
+	.ratio {
+		flex-grow: 1;
+		font-size: 3rem;
+		text-align: center;
+	}
+	.colors {
+		display: grid;
+		grid-template-columns: 40% 40%;
+		justify-content: space-around;
+		.background-choice,
+		.text-choice {
+			align-items: center;
+			display: flex;
+			margin: 0 0 1rem 0;
+			user-select: none;
+			input {
+				margin-left: auto;
 			}
 		}
 	}

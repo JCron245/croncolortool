@@ -1,3 +1,11 @@
+@import '../../../node_modules/bootstrap/scss/mixins';
+@import '../../../node_modules/bootstrap/scss/functions.scss';
+@import '../../../node_modules/bootstrap/scss/variables';
+@import '../../../node_modules/bootstrap/scss/transitions';
+@import '../../../node_modules/bootstrap/scss/utilities';
+@import '../../../node_modules/bootstrap/scss/nav';
+@import '../../../node_modules/bootstrap/scss/navbar';
+
 .app {
 	background-color: #161d1d;
 	display: flex;
@@ -8,56 +16,34 @@
 	width: 100%;
 }
 
-.app-header {
-	align-items: center;
-	background-color: #473333;
-	color: #e1ddd7;
-	display: flex;
-	font-family: 'Roboto', sans-serif;
-	justify-content: flex-start;
-	padding: 0.2rem 1rem 0.5rem 1rem;
+nav.navbar.bg-dark {
+	background-color: #473333 !important;
 	.app-logo {
-		height: 4rem;
-		margin-right: 0.5rem;
-		pointer-events: none;
+		max-height: 4rem;
 	}
-	.app-header-title {
-		font-size: 1.75rem;
-		line-height: 1.75rem;
-		margin: 0 auto 0 0;
-	}
-	.nav {
-		align-items: center;
-		display: flex;
-		height: 100%;
-		.nav-list {
-			display: flex;
-			list-style: none;
-			margin: 0;
-			li {
-				font-size: 1rem;
-				margin-right: 0.5rem;
-				a {
-					background-color: #0faded;
-					border-radius: 0.5rem;
-					box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-					color: #000;
-					display: block;
-					font-weight: bold;
-					margin: 0;
-					padding: 0.25rem 0.75rem;
-				}
-				a:hover {
-					text-decoration: none;
-				}
-				a:active {
-					background-color: #0089c7;
-					box-shadow: none;
-				}
-			}
+	.navbar-nav {
+		.nav-link {
+			color: #fff;
+			font-size: 1.1rem;
+			margin-right: 0.5rem;
+			text-align: center;
+		}
+		.nav-link:hover {
+			text-decoration: none;
+		}
+		.nav-link.active {
+			background-color: #0faded;
+			border-radius: 4px;
+			color: #000;
 		}
 	}
 }
+
+.navbar-dark .navbar-toggler {
+	color: #fff;
+	border-color: #fff;
+}
+
 @keyframes App-logo-spin {
 	0% {
 		transform: rotate(0deg);
