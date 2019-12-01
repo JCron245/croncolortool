@@ -59,12 +59,18 @@ const ContrastChecker: FC = () => {
 		<div className="contrast-checker" style={currentStyle}>
 			<div className="demo-section">
 				<p className="summary">
-					WCAG 2.0 level AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text. <br />
+					Contrast and color use are vital to accessibility. Users, including users with visual disabilities, must be able to perceive
+					content on the page.
+					<br />
+					<br />
+					WCAG 2.0 AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text.
+					<br />
 					WCAG 2.1 requires a contrast ratio of at least 3:1 for graphics and user interface components (such as form input borders).
 					<br />
-					WCAG Level AAA requires a contrast ratio of at least 7:1 for normal text and 4.5:1 for large text. <br />
+					WCAG AAA requires a contrast ratio of at least 7:1 for normal text and 4.5:1 for large text.
 					<br />
-					Large text is defined as 14 point (typically 18.66px) and bold or larger, or 18 point (typically 24px) or larger.
+					<br />
+					Large text is defined as 14 point+ (typically 18.66px) and bold, or 18 point+ (typically 24px).
 				</p>
 				<span className="text-box small">10px Text</span>
 				<span className="text-box normal">16px Text</span>
@@ -75,22 +81,22 @@ const ContrastChecker: FC = () => {
 				<div className="results">
 					<div className={'wcag-box aa ' + (smallAAValue ? 'good' : 'bad')}>
 						<span>>= 4.5</span>
-						<span>AA Small</span>
+						<span>AA Small Text</span>
 					</div>
 					<div className={'wcag-box aa ' + (largeAAValue ? 'good' : 'bad')}>
 						<span>>= 3.1</span>
-						<span>AA Large</span>
+						<span>AA Large Text</span>
 					</div>
 					<div className={'wcag-box aaa ' + (smallAAAValue ? 'good' : 'bad')}>
 						<span>>= 7</span>
-						<span>AAA Small</span>
+						<span>AAA Small Text</span>
 					</div>
 					<div className={'wcag-box aaa ' + (largeAAAValue ? 'good' : 'bad')}>
 						<span>>= 4.5</span>
-						<span>AAA Large</span>
+						<span>AAA Large Text</span>
 					</div>
 				</div>
-				<div className="ratio">{Number(contrastRatio).toFixed(2)}</div>
+				<div className="ratio">Contrast Ratio: {Number(contrastRatio).toFixed(2)}</div>
 				<div className="colors">
 					<label className="background-choice">
 						{' '}
