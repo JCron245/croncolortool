@@ -7,7 +7,11 @@ import HSLPicker from '../hsl-picker/hsl-picker';
 
 const ContrastChecker: FC = () => {
 	const [backgroundValue, setBackgroundValue] = useState('#0FADED');
+	const [backgroundValueRGB, setBackgroundRGBValue] = useState(chroma('#0FADED').rgb());
+	const [backgroundValueHSL, setBackgroundHSLValue] = useState(tinycolor('#0FADED').toHsl());
 	const [textColorValue, setTextColorValue] = useState('#014');
+	const [textColorValueRGB, setTextColorRGBValue] = useState(chroma('#014').rgb());
+	const [textColorValueHSL, setTextColorHSLValue] = useState(tinycolor('#014').toHsl());
 	const [contrastRatio, setContrastRatio] = useState(7.06);
 
 	const [smallAAValue, setSmallAAValue] = useState(true);
@@ -15,13 +19,10 @@ const ContrastChecker: FC = () => {
 	const [smallAAAValue, setSmallAAAValue] = useState(true);
 	const [largeAAAValue, setLargeAAAValue] = useState(true);
 
-	const backgroundValueRGB = chroma(backgroundValue).rgb();
-	const textColorValueRGB = chroma(textColorValue).rgb();
-	const backgroundValueHSL = tinycolor(backgroundValue).toHsl();
-	const textColorValueHSL = tinycolor(textColorValue).toHsl();
-
-	const updateOne = (value: any) => {
+	const updateBackgroundColor = (value: any) => {
 		setBackgroundValue(value);
+		setBackgroundHSLValue(tinycolor(value).toHsl());
+		setBackgroundRGBValue(chroma(value).rgb());
 		if (chroma.valid(value) && chroma.valid(textColorValue)) {
 			let tmp = chroma.contrast(value, textColorValue);
 			setContrastRatio(tmp);
@@ -29,8 +30,10 @@ const ContrastChecker: FC = () => {
 		}
 	};
 
-	const updateTwo = (event: any) => {
+	const updateTextColor = (event: any) => {
 		setTextColorValue(event);
+		setTextColorHSLValue(tinycolor(event).toHsl());
+		setTextColorRGBValue(chroma(event).rgb());
 		if (chroma.valid(event) && chroma.valid(backgroundValue)) {
 			let tmp = chroma.contrast(backgroundValue, event);
 			setContrastRatio(tmp);
@@ -96,7 +99,7 @@ const ContrastChecker: FC = () => {
 							name="color-one"
 							value={backgroundValue}
 							onChange={e => {
-								updateOne(e.target.value);
+								updateBackgroundColor(e.target.value);
 							}}
 						/>
 					</label>
@@ -107,17 +110,17 @@ const ContrastChecker: FC = () => {
 							name="color-two"
 							value={textColorValue}
 							onChange={e => {
-								updateTwo(e.target.value);
+								updateTextColor(e.target.value);
 							}}
 						/>
 					</label>
 					<div>
-						<RGBPicker rgb={backgroundValueRGB} onChange={updateOne} />
-						<HSLPicker hsl={backgroundValueHSL} onChange={updateOne} />
+						<RGBPicker rgb={backgroundValueRGB} onChange={updateBackgroundColor} />
+						<HSLPicker hsl={backgroundValueHSL} onChange={updateBackgroundColor} />
 					</div>
 					<div>
-						<RGBPicker rgb={textColorValueRGB} onChange={updateTwo} />
-						<HSLPicker hsl={textColorValueHSL} onChange={updateTwo} />
+						<RGBPicker rgb={textColorValueRGB} onChange={updateTextColor} />
+						<HSLPicker hsl={textColorValueHSL} onChange={updateTextColor} />
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from 'react-router-dom';
 import './app.scss';
 import ExtendedSwatch from '../extended-swatch/extended-swatch';
 import { ToastContainer, toast } from 'react-toastify';
@@ -19,7 +19,7 @@ const App: React.FC = () => {
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="ml-auto">
-							<Nav.Link as={NavLink} activeClassName="active" to="/" exact>
+							<Nav.Link as={NavLink} activeClassName="active" to="/color-tool" exact>
 								Color Tool
 							</Nav.Link>
 							<Nav.Link as={NavLink} activeClassName="active" to="/contrast" exact>
@@ -30,7 +30,9 @@ const App: React.FC = () => {
 				</Navbar>
 				<Switch>
 					<Route path="/contrast" component={ContrastChecker} />
-					<Route path="/" component={ExtendedSwatch} />
+					<Route path="/color-tool" component={ExtendedSwatch} />
+					<Redirect exact from="/" to="/color-tool" />
+					<Redirect exact from="*" to="/color-tool" />
 				</Switch>
 				<ToastContainer hideProgressBar={true} enableMultiContainer containerId="toasts-container" position={toast.POSITION.TOP_RIGHT} />
 			</main>
