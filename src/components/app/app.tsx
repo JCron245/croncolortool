@@ -23,7 +23,7 @@ const App: React.FC = () => {
 								Color Tool
 							</Nav.Link>
 							<Nav.Link as={NavLink} activeClassName="active" to="/contrast" exact>
-								Contrast Check
+								Contrast Checker
 							</Nav.Link>
 						</Nav>
 					</Navbar.Collapse>

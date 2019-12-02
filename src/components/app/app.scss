@@ -17,23 +17,29 @@
 }
 
 nav.navbar.bg-dark {
-	background-color: #473333 !important;
+	background-color: #403a3a !important;
+	padding: 0.45rem 1rem;
 	.app-logo {
-		max-height: 4rem;
+		max-height: 3.75rem;
+		margin-bottom: 0.25rem;
+	}
+	.navbar-brand {
+		padding: 0;
 	}
 	.navbar-nav {
 		.nav-link {
-			color: #fff;
+			border: 1px solid #e1ddd7;
+			border-radius: 4px;
+			color: #e1ddd7;
 			font-size: 1.1rem;
-			margin-right: 0.5rem;
+			margin-left: 0.5rem;
 			text-align: center;
 		}
 		.nav-link:hover {
 			text-decoration: none;
 		}
 		.nav-link.active {
-			background-color: #0faded;
-			border-radius: 4px;
+			background-color: #eee;
 			color: #000;
 		}
 	}

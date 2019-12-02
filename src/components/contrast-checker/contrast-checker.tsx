@@ -4,15 +4,16 @@ import chroma from 'chroma-js';
 import tinycolor from 'tinycolor2';
 import RGBPicker from '../rgb-picker/rgb-picker';
 import HSLPicker from '../hsl-picker/hsl-picker';
+import ReactTooltip from 'react-tooltip';
 
 const ContrastChecker: FC = () => {
-	const [backgroundValue, setBackgroundValue] = useState('#0FADED');
-	const [backgroundValueRGB, setBackgroundRGBValue] = useState(chroma('#0FADED').rgb());
-	const [backgroundValueHSL, setBackgroundHSLValue] = useState(tinycolor('#0FADED').toHsl());
-	const [textColorValue, setTextColorValue] = useState('#014');
-	const [textColorValueRGB, setTextColorRGBValue] = useState(chroma('#014').rgb());
-	const [textColorValueHSL, setTextColorHSLValue] = useState(tinycolor('#014').toHsl());
-	const [contrastRatio, setContrastRatio] = useState(7.06);
+	const [backgroundValue, setBackgroundValue] = useState('#CCC');
+	const [backgroundValueRGB, setBackgroundRGBValue] = useState(chroma('#CCC').rgb());
+	const [backgroundValueHSL, setBackgroundHSLValue] = useState(tinycolor('#CCC').toHsl());
+	const [textColorValue, setTextColorValue] = useState('#333');
+	const [textColorValueRGB, setTextColorRGBValue] = useState(chroma('#333').rgb());
+	const [textColorValueHSL, setTextColorHSLValue] = useState(tinycolor('#333').toHsl());
+	const [contrastRatio, setContrastRatio] = useState(chroma.contrast('#CCC', '#333'));
 
 	const [smallAAValue, setSmallAAValue] = useState(true);
 	const [largeAAValue, setLargeAAValue] = useState(true);
@@ -21,9 +22,9 @@ const ContrastChecker: FC = () => {
 
 	const updateBackgroundColor = (value: any) => {
 		setBackgroundValue(value);
-		setBackgroundHSLValue(tinycolor(value).toHsl());
-		setBackgroundRGBValue(chroma(value).rgb());
 		if (chroma.valid(value) && chroma.valid(textColorValue)) {
+			setBackgroundHSLValue(tinycolor(value).toHsl());
+			setBackgroundRGBValue(chroma(value).rgb());
 			let tmp = chroma.contrast(value, textColorValue);
 			setContrastRatio(tmp);
 			wcag(value);
@@ -32,9 +33,9 @@ const ContrastChecker: FC = () => {
 
 	const updateTextColor = (event: any) => {
 		setTextColorValue(event);
-		setTextColorHSLValue(tinycolor(event).toHsl());
-		setTextColorRGBValue(chroma(event).rgb());
 		if (chroma.valid(event) && chroma.valid(backgroundValue)) {
+			setTextColorHSLValue(tinycolor(event).toHsl());
+			setTextColorRGBValue(chroma(event).rgb());
 			let tmp = chroma.contrast(backgroundValue, event);
 			setContrastRatio(tmp);
 			wcag(null, event);
@@ -57,21 +58,71 @@ const ContrastChecker: FC = () => {
 
 	return (
 		<div className="contrast-checker" style={currentStyle}>
+			<ReactTooltip id="wcag143" type="light" className="tooltip">
+				<p className="tooltip-title">1.4.3 Contrast (Minimum)</p>
+				The visual presentation of text and images of text has a contrast ratio of at least 4.5:1, except for the following:
+				<ul>
+					<li>Large Text: Large-scale text and images of large-scale text have a contrast ratio of at least 3:1;</li>
+					<li>
+						Incidental: Text or images of text that are part of an inactive user interface component, that are pure decoration, that are not
+						visible to anyone, or that are part of a picture that contains significant other visual content, have no contrast requirement.
+					</li>
+					<li>Logotypes: Text that is part of a logo or brand name has no minimum contrast requirement.</li>
+				</ul>
+			</ReactTooltip>
+			<ReactTooltip id="wcag1411" type="light" className="tooltip">
+				<p className="tooltip-title">1.4.11 Non-text Contrast</p>
+				The visual presentation of the following have a contrast ratio of at least 3:1 against adjacent color(s):
+				<ul>
+					<li>
+						User Interface Components: Visual information required to identify user interface components and states, except for inactive
+						components or where the appearance of the component is determined by the user agent and not modified by the author;
+					</li>
+					<li>
+						Graphical Objects: Parts of graphics required to understand the content, except when a particular presentation of graphics is
+						essential to the information being conveyed.
+					</li>
+				</ul>
+			</ReactTooltip>
+			<ReactTooltip id="wcag146" type="light" className="tooltip">
+				<p className="tooltip-title">1.4.6 Contrast (Enhanced)</p>
+				The visual presentation of text and images of text has a contrast ratio of at least 7:1, except for the following:
+				<ul>
+					<li>Large Text: Large-scale text and images of large-scale text have a contrast ratio of at least 4.5:1;</li>
+					<li>
+						Incidental: Text or images of text that are part of an inactive user interface component, that are pure decoration, that are not
+						visible to anyone, or that are part of a picture that contains significant other visual content, have no contrast requirement.
+					</li>
+					<li>Logotypes Text that is part of a logo or brand name has no contrast requirement.</li>
+				</ul>
+			</ReactTooltip>
 			<div className="demo-section">
-				<p className="summary">
-					Contrast and color use are vital to accessibility. Users, including users with visual disabilities, must be able to perceive
-					content on the page.
-					<br />
-					<br />
-					WCAG 2.0 AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text.
-					<br />
-					WCAG 2.1 requires a contrast ratio of at least 3:1 for graphics and user interface components (such as form input borders).
-					<br />
-					WCAG AAA requires a contrast ratio of at least 7:1 for normal text and 4.5:1 for large text.
-					<br />
-					<br />
-					Large text is defined as 14 point+ (typically 18.66px) and bold, or 18 point+ (typically 24px).
-				</p>
+				<section className="summary">
+					<p>
+						Contrast and color use are vital to accessibility. Users, including users with visual disabilities, must be able to perceive
+						content on the page. For example Color blindness affects approximately 1 in 12 men (8%) and 1 in 200 women in the world. So a
+						proper amount of contrast must be provided on web pages to ensure it is readable by all users.
+					</p>
+					<p>
+						<button className="tooltip-toggle" data-tip data-for="wcag143">
+							WCAG 2.0 1.4.3 (AA)
+						</button>
+						requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text.
+					</p>
+					<p>
+						<button className="tooltip-toggle" data-tip data-for="wcag1411">
+							WCAG 2.1 1.4.11 Non-text Contrast (AA)
+						</button>
+						requires a contrast ratio of at least 3:1 for graphics and user interface components (such as form input borders).
+					</p>
+					<p>
+						<button className="tooltip-toggle" data-tip data-for="wcag146">
+							WCAG 2.0 1.4.6 Contrast (Enhanced) (AAA)
+						</button>
+						requires a contrast ratio of at least 7:1 for normal text and 4.5:1 for large text.
+					</p>
+					<p>Large text is defined as 14 point+ (typically 18.66px) and bold, or 18 point+ (typically 24px).</p>
+				</section>
 				<span className="text-box small">10px Text</span>
 				<span className="text-box normal">16px Text</span>
 				<span className="text-box large-bold">18.66px Bold Text</span>

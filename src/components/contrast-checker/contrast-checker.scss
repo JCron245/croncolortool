@@ -10,12 +10,16 @@
 		align-items: center;
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr 1fr;
-		grid-template-rows: 330px 60px;
+		grid-template-rows: 400px 60px;
 		user-select: none;
 		width: 80vw;
 		.summary {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
 			font-size: 1.25rem;
 			grid-column: 1/5;
+			height: 100%;
 			padding: 0 1rem;
 		}
 		.text-box {
@@ -67,7 +71,8 @@
 		}
 	}
 	.input-section {
-		background-color: #473333;
+		background-color: #403a3a;
+		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 		border-radius: 4px;
 		color: #e1ddd7;
 		display: flex;
@@ -103,6 +108,25 @@
 			}
 		}
 	}
+	.tooltip-toggle {
+		background-color: transparent;
+		border: none;
+		padding-left: 0;
+		text-decoration: underline;
+	}
+	.tooltip {
+		background-color: #231d1d;
+		border: 1px solid #e1ddd7;
+		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+		color: #eee;
+		font-size: 1.1rem;
+		opacity: 1;
+		width: 40rem;
+		max-width: 33vw;
+		.tooltip-title {
+			font-weight: bold;
+		}
+	}
 	// Small devices (landscape phones, less than 768px)
 	@media (max-width: 1023.98px) {
 		padding-bottom: 0;
@@ -111,12 +135,14 @@
 			padding: 0;
 			width: 100%;
 			.summary {
-				font-size: 1.05rem;
-				margin: 2rem 0;
+				font-size: 1rem;
+				min-height: 525px;
+				padding: 0 0.5rem;
 			}
 		}
 		.input-section {
 			border-radius: 0;
+			box-shadow: none;
 			max-height: unset;
 			padding: 0 0.5rem 0.5rem 0.5rem;
 			width: 100%;
@@ -124,7 +150,7 @@
 				grid-gap: 0.5rem;
 				grid-template-columns: 40% 40%;
 				grid-template-rows: 80px 80px;
-				padding: 1rem 0;
+				padding: 0.75rem 0 1rem 0;
 				.wcag-box {
 					font-size: 1.05rem;
 					height: 80px;
@@ -149,6 +175,12 @@
 			.slider-label {
 				font-size: 0.9rem;
 			}
+		}
+		.tooltip {
+			font-size: 0.85rem;
+			max-width: 70vw;
+			padding: 0.35rem;
+			width: unset;
 		}
 	}
 	// Small devices (landscape phones, less than 768px)
