@@ -1,0 +1,47 @@
+[
+	{
+		"rule": "1.4.3 Contrast (Minimum)",
+		"id": "wcag143",
+		"title": "The visual presentation of text and images of text has a contrast ratio of at least 4.5:1, except for the following:",
+		"items": [
+			{
+				"text": "Large Text: Large-scale text and images of large-scale text have a contrast ratio of at least 3:1;"
+			},
+			{
+				"text": "Incidental: Text or images of text that are part of an inactive user interface component, that are pure decoration, that are not visible to anyone, or that are part of a picture that contains significant other visual content, have no contrast requirement."
+			},
+			{
+				"text": "Logotypes: Text that is part of a logo or brand name has no minimum contrast requirement."
+			}
+		]
+	},
+	{
+		"rule": "1.4.11 Non-text Contrast",
+		"id": "wcag1411",
+		"title": "The visual presentation of the following have a contrast ratio of at least 3:1 against adjacent color(s):",
+		"items": [
+			{
+				"text": "User Interface Components: Visual information required to identify user interface components and states, except for inactive components or where the appearance of the component is determined by the user agent and not modified by the author;"
+			},
+			{
+				"text": "Graphical Objects: Parts of graphics required to understand the content, except when a particular presentation of graphics is essential to the information being conveyed."
+			}
+		]
+	},
+	{
+		"rule": "1.4.6 Contrast (Enhanced)",
+		"id": "wcag146",
+		"title": "The visual presentation of text and images of text has a contrast ratio of at least 7:1, except for the following:",
+		"items": [
+			{
+				"text": "Large Text: Large-scale text and images of large-scale text have a contrast ratio of at least 4.5:1;"
+			},
+			{
+				"text": "Incidental: Text or images of text that are part of an inactive user interface component, that are pure decoration, that are not visible to anyone, or that are part of a picture that contains significant other visual content, have no contrast requirement."
+			},
+			{
+				"text": "Logotypes Text that is part of a logo or brand name has no contrast requirement."
+			}
+		]
+	}
+]

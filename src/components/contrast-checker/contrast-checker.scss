@@ -4,7 +4,8 @@
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
-	justify-content: center;
+	height: 100%;
+	justify-content: space-around;
 	padding-bottom: 1rem;
 	.demo-section {
 		align-items: center;
@@ -17,12 +18,13 @@
 			display: flex;
 			flex-direction: column;
 			justify-content: space-around;
-			font-size: 1.25rem;
+			font-size: 1.05rem;
 			grid-column: 1/5;
 			height: 100%;
 			padding: 0 1rem;
 		}
 		.text-box {
+			align-self: flex-end;
 			text-align: center;
 			width: 100%;
 		}
@@ -44,8 +46,8 @@
 		justify-content: space-around;
 		display: grid;
 		grid-gap: 1rem;
-		grid-template-columns: 15rem 15rem;
-		height: 50%;
+		grid-template-columns: repeat(4, 12rem);
+		height: 25%;
 		padding: 1rem;
 		.wcag-box {
 			align-items: center;
@@ -77,8 +79,7 @@
 		color: #e1ddd7;
 		display: flex;
 		flex-direction: column;
-		flex-grow: 1;
-		max-height: 50vh;
+		min-height: 50vh;
 		padding-bottom: 1rem;
 		width: 75vw;
 	}
@@ -89,6 +90,7 @@
 		font-size: 3rem;
 		line-height: 3rem;
 		justify-content: center;
+		min-height: 10rem;
 		text-align: center;
 	}
 	.colors {
@@ -147,14 +149,14 @@
 			padding: 0 0.5rem 0.5rem 0.5rem;
 			width: 100%;
 			.results {
-				grid-gap: 0.5rem;
-				grid-template-columns: 40% 40%;
+				grid-gap: 0.2rem;
+				grid-template-columns: repeat(4, minmax(22%, 1fr));
 				grid-template-rows: 80px 80px;
 				padding: 0.75rem 0 1rem 0;
 				.wcag-box {
-					font-size: 1.05rem;
-					height: 80px;
-					padding: 0.25rem;
+					font-size: 1rem;
+					height: 95px;
+					padding: 0.2rem;
 				}
 			}
 		}
@@ -186,7 +188,15 @@
 	// Small devices (landscape phones, less than 768px)
 	@media (max-width: 767.98px) {
 		.input-section {
-			padding: 0 0.5rem 1.2rem 0.5rem;
+			padding: 0 0.25rem 1.2rem 0.25rem;
+			.results {
+				grid-gap: 0.2rem;
+				grid-template-columns: repeat(4, minmax(22%, 1fr));
+				grid-template-rows: 1fr;
+			}
+			.ratio {
+				min-height: 8rem;
+			}
 		}
 	}
 }

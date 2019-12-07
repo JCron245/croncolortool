@@ -54,4 +54,9 @@
 
 .viewing-box {
 	flex-grow: 1;
+	margin: 0.5rem;
+	// Extra small devices (portrait phones, less than 576px)
+	@media (max-width: 575.98px) {
+		min-height: 3rem;
+	}
 }

@@ -24,6 +24,7 @@ const ExtendedSwatch: FC = () => {
 
 	return (
 		<div className="extended-swatch">
+			<h1 className="sr-only">Color Tool</h1>
 			{/* Color Picker Box */}
 			<div className="picker-box">
 				<MyColorPicker colorInput={store.hex} />

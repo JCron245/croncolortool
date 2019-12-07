@@ -26,7 +26,9 @@ export const ColorBox: FC<ColorBox> = (props: ColorBox) => {
 
 	return (
 		<div className="color-box">
-			<p className="box-title">{props.name}</p>
+			<p className="box-title" id={props.name.replace(' ', '-') + '-swatch'} aria-label={'Swatch of ' + props.name + ' colors'}>
+				{props.name}
+			</p>
 			<div className="box-bar-wrapper">
 				{props.colors.map((color: string, index: number) => {
 					const value = showValue(color);

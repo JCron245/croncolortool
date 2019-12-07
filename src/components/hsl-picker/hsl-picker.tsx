@@ -29,7 +29,8 @@ const HSLPicker: FC<HSLPicker> = (props: HSLPicker) => {
 	};
 
 	return (
-		<>
+		<fieldset className="slider-fieldset">
+			<legend className="sr-only">HSL Sliders</legend>
 			<label className="slider-label">
 				H {Math.floor(hsl.h)}
 				<input
@@ -69,7 +70,7 @@ const HSLPicker: FC<HSLPicker> = (props: HSLPicker) => {
 					}}
 				/>
 			</label>
-		</>
+		</fieldset>
 	);
 };
 

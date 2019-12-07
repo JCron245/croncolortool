@@ -12,7 +12,7 @@
 	flex-direction: column;
 	height: 100%;
 	min-height: 100vh;
-	max-width: 100vw;
+	max-width: 100%;
 	width: 100%;
 }
 
@@ -25,6 +25,7 @@ nav.navbar.bg-dark {
 	}
 	.navbar-brand {
 		padding: 0;
+		user-select: none;
 	}
 	.navbar-nav {
 		.nav-link {
@@ -34,6 +35,12 @@ nav.navbar.bg-dark {
 			font-size: 1.1rem;
 			margin-left: 0.5rem;
 			text-align: center;
+			user-select: none;
+			&:focus {
+				box-shadow: 0px 0px 5px 1px rgba(225, 221, 215, 1);
+				outline-color: #0145b2;
+				outline-width: 2px;
+			}
 		}
 		.nav-link:hover {
 			text-decoration: none;

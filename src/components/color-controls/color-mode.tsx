@@ -12,15 +12,15 @@ export const ColorMode: FC = () => {
 	const dispatch = useDispatch();
 
 	const changeMode = (event: any) => {
-		const savedEvent = event;
-		if (event.currentTarget.value) {
-			dispatch(setMode(savedEvent.currentTarget.value));
+		const modeChangeEvent = event.currentTarget.value;
+		if (modeChangeEvent && modeChangeEvent !== store.mode) {
+			dispatch(setMode(modeChangeEvent));
 			ReactGA.event({
 				category: 'Color Mode',
 				action: 'changed mode',
-				label: event.currentTarget.value
+				label: modeChangeEvent
 			});
-			toast(`Color mode switched to ${savedEvent.currentTarget.value.toUpperCase()}`, {
+			toast(`Color mode switched to ${modeChangeEvent.toUpperCase()}`, {
 				containerId: 'toasts-container',
 				autoClose: 1500,
 				closeButton: false,
@@ -41,32 +41,41 @@ export const ColorMode: FC = () => {
 	};
 
 	return (
-		<div className="color-mode-controls">
+		<form className="color-mode-controls">
 			<button
 				value="hex"
+				aria-label="Switch Colors To Hex Mode"
 				onClick={changeMode}
 				className={store.mode === 'hex' ? 'mode-control active' : 'mode-control'}
+				aria-pressed={store.mode === 'hex'}
 				title="switch to hex"
-				style={store.mode === 'hex' ? activeStyle : {}}>
+				style={store.mode === 'hex' ? activeStyle : {}}
+				type="button">
 				Hex
 			</button>
 			<button
 				value="rgb"
+				aria-label="Switch Colors To RGB Mode"
+				aria-pressed={store.mode === 'rgb'}
 				onClick={changeMode}
 				className={store.mode === 'rgb' ? 'mode-control active' : 'mode-control'}
 				title="switch to rgb"
-				style={store.mode === 'rgb' ? activeStyle : {}}>
+				style={store.mode === 'rgb' ? activeStyle : {}}
+				type="button">
 				Rgb
 			</button>
 			<button
 				value="hsl"
+				aria-label="Switch Colors To HSL Mode"
+				aria-pressed={store.mode === 'hsl'}
 				onClick={changeMode}
 				className={store.mode === 'hsl' ? 'mode-control active' : 'mode-control'}
 				title="switch to hsl"
-				style={store.mode === 'hsl' ? activeStyle : {}}>
+				style={store.mode === 'hsl' ? activeStyle : {}}
+				type="button">
 				Hsl
 			</button>
-		</div>
+		</form>
 	);
 };
 

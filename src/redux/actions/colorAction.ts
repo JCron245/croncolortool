@@ -11,3 +11,10 @@ export function setColor(color: string) {
 export function setMode(mode: string) {
 	return { type: 'SET_MODE', mode };
 }
+
+export function setCopied(copied: string) {
+	return {
+		type: 'SET_COPIED',
+		copied
+	};
+}

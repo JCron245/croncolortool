@@ -4,6 +4,9 @@
 	width: 135px;
 	margin-bottom: 1rem;
 	margin-right: auto;
+	.box-title {
+		user-select: none;
+	}
 	.box-bar-wrapper {
 		border: 1px solid #49515f;
 		box-shadow: 0 1px 8px 1px rgba(238, 110, 110, 0.25);

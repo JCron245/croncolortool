@@ -29,7 +29,8 @@ const RGBPicker: FC<RGBPicker> = (props: RGBPicker) => {
 	};
 
 	return (
-		<>
+		<fieldset className="slider-fieldset">
+			<legend className="sr-only">RGB Sliders</legend>
 			<label className="slider-label">
 				R {rgb[0]}
 				<input
@@ -69,7 +70,7 @@ const RGBPicker: FC<RGBPicker> = (props: RGBPicker) => {
 					}}
 				/>
 			</label>
-		</>
+		</fieldset>
 	);
 };
 

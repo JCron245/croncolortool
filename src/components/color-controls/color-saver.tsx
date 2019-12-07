@@ -91,7 +91,8 @@ export const ColorSaver: FC = () => {
 	};
 
 	return (
-		<div className="color-saver-controls">
+		<form className="color-saver-controls">
+			<label htmlFor="react-select-2-input">Color Saver</label>
 			<Select
 				options={parsedColors}
 				onChange={selectColor}
@@ -101,13 +102,13 @@ export const ColorSaver: FC = () => {
 				noOptionsMessage={() => 'No colors saved'}
 				menuPlacement="top"
 			/>
-			<button className="btn save-btn" onClick={saveColor}>
+			<button className="btn save-btn" aria-label={'Save color ' + currentValue.value} type="button" onClick={saveColor}>
 				Save
 			</button>
-			<button className="btn delete-btn" onClick={deleteColor}>
+			<button className="btn delete-btn" aria-label={'Delete color ' + currentValue.value} type="button" onClick={deleteColor}>
 				Delete
 			</button>
-		</div>
+		</form>
 	);
 };
 

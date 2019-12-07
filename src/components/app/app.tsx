@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from 'react
 import './app.scss';
 import ExtendedSwatch from '../extended-swatch/extended-swatch';
 import { ToastContainer, toast } from 'react-toastify';
-import logo from '../../assets/cron-color-logo.png';
+import logo from '../../assets/cron-color-logov2.png';
 import ContrastChecker from '../contrast-checker/contrast-checker';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';

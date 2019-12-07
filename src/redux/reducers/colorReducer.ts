@@ -5,7 +5,8 @@ const mode = localStorage.getItem('mode');
 const initialState: State = {
 	hex: '#0faded',
 	contrastColor: '#000',
-	mode: mode || 'hex'
+	mode: mode || 'hex',
+	copied: ''
 };
 
 export function colorReducer(state: any = initialState, action: any) {
@@ -14,6 +15,8 @@ export function colorReducer(state: any = initialState, action: any) {
 			return { ...state, hex: action.hex, contrastColor: action.contrastColor };
 		case 'SET_MODE':
 			return { ...state, mode: action.mode };
+		case 'SET_COPIED':
+			return { ...state, copied: action.hex };
 		default:
 			return state;
 	}

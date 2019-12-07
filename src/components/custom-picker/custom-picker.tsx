@@ -31,10 +31,12 @@ const MyColorPicker: FC<any> = (props: any) => {
 
 	return (
 		<>
-			<ChromePicker color={props.colorInput} disableAlpha={true} onChange={colorChange} onChangeComplete={colorChange} />
-			<RGBPicker rgb={rgb} onChange={rgbChange} />
-			<HSLPicker hsl={hsl} onChange={hslChange} />
-			{/* Empty div for 'viewing' the color */}
+			<form>
+				<ChromePicker color={props.colorInput} disableAlpha={true} onChange={colorChange} onChangeComplete={colorChange} />
+				<RGBPicker rgb={rgb} onChange={rgbChange} />
+				<HSLPicker hsl={hsl} onChange={hslChange} />
+				{/* Empty div for 'viewing' the color */}
+			</form>
 			<div className="viewing-box" style={{ backgroundColor: store.hex }}></div>
 		</>
 	);
