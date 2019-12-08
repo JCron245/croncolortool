@@ -29,13 +29,13 @@ export const ColorBox: FC<ColorBox> = (props: ColorBox) => {
 			<p className="box-title" id={props.name.replace(' ', '-') + '-swatch'} aria-label={'Swatch of ' + props.name + ' colors'}>
 				{props.name}
 			</p>
-			<div className="box-bar-wrapper">
+			<ul className="box-bar-wrapper">
 				{props.colors.map((color: string, index: number) => {
 					const value = showValue(color);
 					const contrast = findContrastingColor(color);
 					return <ColorBar groupName={props.name} hex={color} value={value} contrastColor={contrast} key={index} />;
 				})}
-			</div>
+			</ul>
 		</div>
 	);
 };

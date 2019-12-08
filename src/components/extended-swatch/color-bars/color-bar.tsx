@@ -59,16 +59,18 @@ export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 	};
 
 	return (
-		<button
-			onClick={singleClick}
-			aria-labelledby={props.groupName.replace(' ', '-') + '-swatch'}
-			aria-label={'Select to copy ' + props.value + ' to your clipboard'}
-			value={props.value}
-			className="color-bar"
-			style={colorBarStyle}
-			type="button">
-			<p className="color-bar-title">{props.value}</p>
-		</button>
+		<li className="color-bar-wrap">
+			<button
+				onClick={singleClick}
+				aria-labelledby={props.groupName.replace(' ', '-') + '-swatch'}
+				aria-label={'Select to copy ' + props.value + ' to your clipboard'}
+				value={props.value}
+				className="color-bar"
+				style={colorBarStyle}
+				type="button">
+				<p className="color-bar-title">{props.value}</p>
+			</button>
+		</li>
 	);
 };
 

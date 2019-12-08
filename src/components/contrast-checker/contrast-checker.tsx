@@ -79,8 +79,8 @@ const ContrastChecker: FC = () => {
 
 	return (
 		<div className="contrast-checker" style={currentStyle}>
-			{createTooltips()}
 			<div className="demo-section">
+				{createTooltips()}
 				<section className="summary">
 					<h1>Contrast Color Checker</h1>
 					<p>

@@ -17,7 +17,18 @@ body,
 	font-size: 16px;
 	max-width: 100%;
 	width: 100%;
-	min-height: 100vh;
+	height: 100%;
+
+	// Small devices (landscape phones, less than 768px)
+	@media screen and (max-width: 1200px) {
+		height: unset;
+	}
+	-ms-overflow-style: none; /* Internet Explorer 10+ */
+	scrollbar-width: none; /* Firefox */
+
+	&::-webkit-scrollbar {
+		display: none; /* Safari and Chrome */
+	}
 }
 
 body {

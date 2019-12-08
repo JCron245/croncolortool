@@ -10,7 +10,7 @@
 	background-color: #161d1d;
 	display: flex;
 	flex-direction: column;
-	height: 100%;
+	height: auto;
 	min-height: 100vh;
 	max-width: 100%;
 	width: 100%;
@@ -19,6 +19,7 @@
 nav.navbar.bg-dark {
 	background-color: #403a3a !important;
 	padding: 0.45rem 1rem;
+	width: 100%;
 	.app-logo {
 		max-height: 3.75rem;
 		margin-bottom: 0.25rem;
@@ -57,14 +58,20 @@ nav.navbar.bg-dark {
 	border-color: #fff;
 }
 
-@keyframes App-logo-spin {
-	0% {
-		transform: rotate(0deg);
-	}
-	50% {
-		transform: rotate(360deg);
-	}
-	100% {
-		transform: rotate(0deg);
-	}
+.fade-enter {
+	opacity: 0.1;
+}
+
+.fade-enter.fade-enter-active {
+	opacity: 1;
+	transition: opacity 250ms ease-in;
+}
+
+.fade-exit {
+	opacity: 1;
+}
+
+.fade-exit {
+	opacity: 0.01;
+	transition: opacity 250ms ease-in;
 }

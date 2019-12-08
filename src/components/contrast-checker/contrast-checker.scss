@@ -3,9 +3,8 @@
 	color: #fff;
 	display: flex;
 	flex-direction: column;
-	flex-grow: 1;
-	height: 100%;
 	justify-content: space-around;
+	min-height: calc(100vh - 78.38px);
 	padding-bottom: 1rem;
 	.demo-section {
 		align-items: center;
