@@ -22,24 +22,35 @@ const ContrastChecker: FC = () => {
 	const [largeAAAValue, setLargeAAAValue] = useState(true);
 
 	const updateBackgroundColor = (value: any) => {
-		setBackgroundValue(value);
 		if (chroma.valid(value) && chroma.valid(textColorValue)) {
+			if (value.length > 2 && value.charAt(0) !== '#') {
+				value = `#${value}`;
+			}
+			setBackgroundValue(value);
+			console.log(value);
 			setBackgroundHSLValue(tinycolor(value).toHsl());
 			setBackgroundRGBValue(chroma(value).rgb());
 			let tmp = chroma.contrast(value, textColorValue);
 			setContrastRatio(tmp);
 			wcag(value);
+		} else {
+			setBackgroundValue(value);
 		}
 	};
 
 	const updateTextColor = (event: any) => {
-		setTextColorValue(event);
 		if (chroma.valid(event) && chroma.valid(backgroundValue)) {
+			if (event.length > 2 && event.charAt(0) !== '#') {
+				event = `#${event}`;
+			}
+			setTextColorValue(event);
 			setTextColorHSLValue(tinycolor(event).toHsl());
 			setTextColorRGBValue(chroma(event).rgb());
 			let tmp = chroma.contrast(backgroundValue, event);
 			setContrastRatio(tmp);
 			wcag(null, event);
+		} else {
+			setTextColorValue(event);
 		}
 	};
 
