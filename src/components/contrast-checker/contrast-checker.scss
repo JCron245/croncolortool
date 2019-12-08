@@ -134,7 +134,7 @@
 		}
 	}
 	// Small devices (landscape phones, less than 768px)
-	@media (max-width: 1023.98px) {
+	@media (max-width: 1200px) {
 		padding-bottom: 0;
 		.demo-section {
 			grid-template-rows: auto auto;
@@ -149,13 +149,13 @@
 		.input-section {
 			border-radius: 0;
 			box-shadow: none;
+			margin-top: auto;
 			max-height: unset;
 			padding: 0 0.5rem 0.5rem 0.5rem;
 			width: 100%;
 			.results {
 				grid-gap: 0.2rem;
 				grid-template-columns: repeat(4, minmax(22%, 1fr));
-				grid-template-rows: 80px 80px;
 				padding: 0.75rem 0 1rem 0;
 				.wcag-box {
 					font-size: 1rem;
@@ -166,14 +166,14 @@
 		}
 		.ratio {
 			font-size: 2rem;
-			line-height: 4rem;
+			line-height: 3rem;
+			min-height: 8rem;
 		}
 		.colors {
 			grid-gap: 0.5rem;
 			grid-template-columns: 48% 48%;
 			.background-choice,
 			.text-choice {
-				flex-direction: column;
 				input {
 					max-width: 100%;
 				}
@@ -190,7 +190,7 @@
 		}
 	}
 	// Small devices (landscape phones, less than 768px)
-	@media (max-width: 767.98px) {
+	@media (max-width: 768px) {
 		.input-section {
 			padding: 0 0.25rem 1.2rem 0.25rem;
 			.results {
@@ -200,6 +200,18 @@
 			}
 			.ratio {
 				min-height: 8rem;
+			}
+		}
+	}
+
+	// Small devices (landscape phones, less than 768px)
+	@media (max-width: 576px) {
+		.input-section {
+			.colors {
+				.background-choice,
+				.text-choice {
+					flex-direction: column;
+				}
 			}
 		}
 	}

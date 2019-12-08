@@ -21,7 +21,7 @@
 		&.active {
 			font-weight: bold;
 		} // Extra small devices (portrait phones, less than 576px)
-		@media (max-width: 575.98px) {
+		@media screen and (max-width: 576px) {
 			font-size: 0.75rem;
 		}
 	}
