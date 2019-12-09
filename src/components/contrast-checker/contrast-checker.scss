@@ -11,7 +11,6 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr 1fr;
 		grid-template-rows: 400px 60px;
-		user-select: none;
 		width: 85vw;
 		.summary {
 			display: flex;
@@ -21,6 +20,11 @@
 			grid-column: 1/5;
 			height: 100%;
 			padding: 0 1rem;
+			.wcag-list {
+				border: 1px solid;
+				padding-bottom: 0.25rem;
+				padding-top: 0.25rem;
+			}
 		}
 		.text-box {
 			align-self: flex-end;
@@ -47,7 +51,8 @@
 		grid-gap: 1rem;
 		grid-template-columns: repeat(4, 12rem);
 		height: 25%;
-		padding: 1rem;
+		margin: 0.25rem 0;
+		padding: 2rem;
 		.wcag-box {
 			align-items: center;
 			border-radius: 4px;
@@ -89,7 +94,7 @@
 		font-size: 3rem;
 		line-height: 3rem;
 		justify-content: center;
-		min-height: 10rem;
+		min-height: 9rem;
 		text-align: center;
 	}
 	.colors {
@@ -98,18 +103,24 @@
 		justify-content: space-around;
 		.background-choice,
 		.text-choice {
-			align-items: center;
-			display: flex;
-			margin: 0 0 1rem 0;
 			user-select: none;
-			input {
-				border: none;
-				box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-				margin-left: auto;
-				padding-left: 2px;
-				padding-right: 2px;
-				&:focus {
-					outline: 2px solid #0145b2;
+			.hex-box-wrapper {
+				display: flex;
+				justify-content: space-between;
+				width: 100%;
+				.hex-box-input {
+					border: none;
+					box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+					margin-bottom: 1rem;
+					padding-left: 2px;
+					padding-right: 2px;
+					&:focus {
+						outline: 2px solid #0145b2;
+					}
+				}
+				.color-display-box {
+					height: 26px;
+					width: 26px;
 				}
 			}
 		}
@@ -167,7 +178,7 @@
 		.ratio {
 			font-size: 2rem;
 			line-height: 3rem;
-			min-height: 8rem;
+			min-height: 7rem;
 		}
 		.colors {
 			grid-gap: 0.5rem;
@@ -199,18 +210,20 @@
 				grid-template-rows: 1fr;
 			}
 			.ratio {
-				min-height: 8rem;
+				min-height: 7rem;
 			}
-		}
-	}
-
-	// Small devices (landscape phones, less than 768px)
-	@media (max-width: 576px) {
-		.input-section {
 			.colors {
 				.background-choice,
 				.text-choice {
-					flex-direction: column;
+					.hex-box-wrapper {
+						flex-wrap: wrap;
+						.hex-box-label {
+							width: 100%;
+						}
+						.hex-box-input {
+							max-width: calc(100% - 30px);
+						}
+					}
 				}
 			}
 		}

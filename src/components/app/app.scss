@@ -49,6 +49,11 @@ nav.navbar.bg-dark {
 			background-color: #eee;
 			color: #000;
 		}
+		@media screen and (max-width: 991px) {
+			.nav-link {
+				margin: 0.75rem 0;
+			}
+		}
 	}
 }
 

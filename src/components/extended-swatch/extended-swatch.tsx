@@ -26,11 +26,11 @@ const ExtendedSwatch: FC = () => {
 		<div className="extended-swatch">
 			<h1 className="sr-only">Color Tool</h1>
 			{/* Color Picker Box */}
-			<div className="picker-box">
+			<section className="picker-box">
 				<MyColorPicker colorInput={store.hex} />
-			</div>
+			</section>
 			{/* Box of various color information - shades etc */}
-			<div className="info-box">
+			<section className="info-box">
 				<div className="color-box-grid">
 					<ColorBox name="lighter" show={store.mode} colors={createLightArray(store.hex)} />
 					<ColorBox name="darker" show={store.mode} colors={createDarkArray(store.hex)} />
@@ -47,7 +47,7 @@ const ExtendedSwatch: FC = () => {
 					<ColorMode />
 					<ColorSaver />
 				</div>
-			</div>
+			</section>
 		</div>
 	);
 };
