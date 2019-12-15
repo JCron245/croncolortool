@@ -9,25 +9,25 @@ import { State } from '../../redux/interfaces';
 import chroma from 'chroma-js';
 import tinycolor from 'tinycolor2';
 import ReactGA from 'react-ga';
+import { push } from 'connected-react-router';
 
 export const ColorSaver: FC = () => {
 	const store: State = useSelector((store: State) => store);
 	const dispatch = useDispatch();
-
-	const selectColor = (event: any) => dispatch(setColor(event.value));
-
-	let colors = localStorage.getItem('saved-colors') || undefined;
+	const colors = localStorage.getItem('saved-colors') || undefined;
 	let parsedColors: { value: string; label: string }[] = colors ? JSON.parse(colors) : [];
-
 	const rgb = chroma(store.hex)
 		.rgb()
 		.toString();
-
 	const hsl = tinycolor(store.hex).toHsl();
 	const hslString = `${Math.floor(hsl.h)}, ${Math.floor(hsl.s * 100)}%, ${Math.floor(hsl.l * 100)}%`;
-
 	const value = store.mode === 'hex' ? store.hex : store.mode === 'rgb' ? rgb : hslString;
-	let currentValue = { value, label: value };
+	const currentValue = { value, label: value };
+
+	const selectColor = (event: any) => {
+		dispatch(push(`/color-tool/?color=${event.value}`));
+		dispatch(setColor(event.value));
+	};
 
 	const saveColor = () => {
 		let toastMsg;

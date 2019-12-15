@@ -3,21 +3,23 @@ import { CustomPicker, ChromePicker } from 'react-color';
 import './custom-picker.scss';
 import chroma from 'chroma-js';
 import { useDispatch, useSelector } from 'react-redux';
-import { setColor } from '../../redux/actions/colorAction';
-import { State } from '../../redux/interfaces';
+import { setColor } from '../../../redux/actions/colorAction';
+import { State } from '../../../redux/interfaces';
 import tinycolor from 'tinycolor2';
-import RGBPicker from '../rgb-picker/rgb-picker';
-import HSLPicker from '../hsl-picker/hsl-picker';
+import RGBPicker from '../../rgb-picker/rgb-picker';
+import HSLPicker from '../../hsl-picker/hsl-picker';
+import { push } from 'connected-react-router';
 
 const MyColorPicker: FC<any> = (props: any) => {
-	const store: State = useSelector((store: State) => store);
+	const storeColor: State = useSelector((store: State) => store);
 	const dispatch = useDispatch();
 
-	const rgb = chroma(store.hex).rgb();
+	const rgb = chroma(storeColor.hex).rgb();
 
-	const hsl = tinycolor(store.hex).toHsl();
+	const hsl = tinycolor(storeColor.hex).toHsl();
 
 	const colorChange = (color: any) => {
+		dispatch(push(`/color-tool/?color=${color.hex}`));
 		dispatch(setColor(color.hex));
 	};
 
@@ -37,7 +39,7 @@ const MyColorPicker: FC<any> = (props: any) => {
 				<HSLPicker hsl={hsl} onChange={hslChange} />
 				{/* Empty div for 'viewing' the color */}
 			</form>
-			<div className="viewing-box" style={{ backgroundColor: store.hex }}></div>
+			<div className="viewing-box" style={{ backgroundColor: storeColor.hex }}></div>
 		</>
 	);
 };

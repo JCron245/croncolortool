@@ -1,0 +1,39 @@
+.demo-section {
+	align-items: center;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 400px 60px;
+	width: 85vw;
+	.summary {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		font-size: 1.05rem;
+		grid-column: 1/5;
+		height: 100%;
+		padding: 0 1rem;
+		.wcag-list {
+			border: 1px solid;
+			padding-bottom: 0.25rem;
+			padding-top: 0.25rem;
+		}
+	}
+	.text-box {
+		align-self: flex-end;
+		text-align: center;
+		width: 100%;
+	}
+	.small {
+		font-size: 10px;
+	}
+	.normal {
+		font-size: 16px;
+	}
+	.large-bold {
+		font-size: 18.66px;
+		font-weight: bold;
+	}
+	.large {
+		font-size: 24px;
+	}
+}

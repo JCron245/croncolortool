@@ -3,9 +3,11 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@types/webpack-env": "^1.14.1",
 		"bootstrap": "^4.4.1",
 		"chroma-js": "^2.1.0",
 		"clipboard-copy": "^3.1.0",
+		"connected-react-router": "^6.6.1",
 		"glamor": "^2.20.40",
 		"react": "^16.12.0",
 		"react-bootstrap": "^1.0.0-beta.16",

@@ -1,4 +1,3 @@
-import chroma from 'chroma-js';
 import tinycolor from 'tinycolor2';
 
 export const createLightArray = (color: string): string[] => {
@@ -94,8 +93,4 @@ export const createTetradArray = (color: string): any[] => {
 	return tinycolor(color)
 		.tetrad()
 		.map(color => color.toHexString());
-};
-
-export const findContrastingColor = (color: string): string => {
-	return chroma.contrast(color, '#FFF') > chroma.contrast(color, '#000') ? '#FFF' : '#000';
 };

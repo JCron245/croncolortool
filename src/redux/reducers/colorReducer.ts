@@ -9,7 +9,7 @@ const initialState: State = {
 	copied: ''
 };
 
-export function colorReducer(state: any = initialState, action: any) {
+export function colorReducer(state = initialState, action: any) {
 	switch (action.type) {
 		case 'SET_COLOR':
 			return { ...state, hex: action.hex, contrastColor: action.contrastColor };

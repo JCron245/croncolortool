@@ -1,0 +1,46 @@
+nav.navbar.bg-dark {
+	background-color: #403a3a !important;
+	padding: 0.45rem 1rem;
+	width: 100%;
+	.app-logo {
+		max-height: 3.75rem;
+		margin-bottom: 0.25rem;
+	}
+	.navbar-brand {
+		padding: 0;
+		user-select: none;
+	}
+	.navbar-nav {
+		.nav-link {
+			border: 1px solid #e1ddd7;
+			border-radius: 4px;
+			color: #e1ddd7;
+			font-size: 1.1rem;
+			margin-left: 0.5rem;
+			text-align: center;
+			user-select: none;
+			&:focus {
+				box-shadow: 0px 0px 5px 1px rgba(225, 221, 215, 1);
+				outline-color: #0145b2;
+				outline-width: 2px;
+			}
+		}
+		.nav-link:hover {
+			text-decoration: none;
+		}
+		.nav-link.active {
+			background-color: #eee;
+			color: #000;
+		}
+		@media screen and (max-width: 991px) {
+			.nav-link {
+				margin: 0.75rem 0;
+			}
+		}
+	}
+}
+
+.navbar-dark .navbar-toggler {
+	color: #fff;
+	border-color: #fff;
+}

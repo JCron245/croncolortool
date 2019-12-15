@@ -1,4 +1,4 @@
-import { findContrastingColor } from '../../utils/color-utils';
+import { findContrastingColor } from '../../utils/find-contrast';
 
 export function setColor(color: string) {
 	return {

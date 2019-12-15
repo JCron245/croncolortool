@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import ColorBar from './color-bar';
 import './color-box.scss';
 import chroma from 'chroma-js';
-import { findContrastingColor } from '../../../utils/color-utils';
+import { findContrastingColor } from '../../../utils/find-contrast';
 import tinycolor from 'tinycolor2';
 
 interface ColorBox {
