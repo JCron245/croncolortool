@@ -1,8 +1,8 @@
 import tinycolor from 'tinycolor2';
 
-export const createLightArray = (color: string, step: number = 7): string[] => {
+export const createLightArray = (color: string, step: number = 7.5, limit: number = 10): string[] => {
 	const shades: any[] = [];
-	for (let i = 0; i < 14; i++) {
+	for (let i = 0; i < limit; i++) {
 		const lighten = `#${tinycolor(color)
 			.lighten(step * i)
 			.toHex()}`;
@@ -14,9 +14,9 @@ export const createLightArray = (color: string, step: number = 7): string[] => {
 	return shades;
 };
 
-export const createDarkArray = (color: string, step: number = 7): string[] => {
+export const createDarkArray = (color: string, step: number = 7.5, limit: number = 10): string[] => {
 	const shades: any[] = [];
-	for (let i = 0; i < 14; i++) {
+	for (let i = 0; i < limit; i++) {
 		const darken = `#${tinycolor(color)
 			.darken(step * i)
 			.toHex()}`;
@@ -28,9 +28,9 @@ export const createDarkArray = (color: string, step: number = 7): string[] => {
 	return shades;
 };
 
-export const createSaturationArray = (color: string, step: number = 7): string[] => {
+export const createSaturationArray = (color: string, step: number = 7.5, limit: number = 10): string[] => {
 	const shades: any[] = [];
-	for (let i = 0; i < 14; i++) {
+	for (let i = 0; i < limit; i++) {
 		const saturated = `#${tinycolor(color)
 			.saturate(step * i)
 			.toHex()}`;
@@ -42,9 +42,9 @@ export const createSaturationArray = (color: string, step: number = 7): string[]
 	return shades;
 };
 
-export const createDesaturationArray = (color: string, step: number = 7): string[] => {
+export const createDesaturationArray = (color: string, step: number = 7.5, limit: number = 10): string[] => {
 	const shades: any[] = [];
-	for (let i = 0; i < 14; i++) {
+	for (let i = 0; i < limit; i++) {
 		const desaturated = `#${tinycolor(color)
 			.desaturate(step * i)
 			.toHex()}`;
