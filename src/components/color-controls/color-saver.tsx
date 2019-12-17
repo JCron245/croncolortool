@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { css } from 'glamor';
 import { setColor } from '../../redux/actions/colorAction';
-import { State } from '../../redux/interfaces';
+import { State, Color } from '../../redux/interfaces';
 import chroma from 'chroma-js';
 import tinycolor from 'tinycolor2';
 import ReactGA from 'react-ga';
 import { push } from 'connected-react-router';
 
 export const ColorSaver: FC = () => {
-	const store: State = useSelector((store: State) => store);
+	const store: Color = useSelector((store: State) => store.color);
 	const dispatch = useDispatch();
 	const colors = localStorage.getItem('saved-colors') || undefined;
 	let parsedColors: { value: string; label: string }[] = colors ? JSON.parse(colors) : [];

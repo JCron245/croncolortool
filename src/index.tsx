@@ -3,22 +3,33 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './components/app/app';
 import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { colorReducer } from './redux/reducers/colorReducer';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import ReactGA from 'react-ga';
+import configureStore, { history } from './configureStore';
 
-const store = createStore(colorReducer, composeWithDevTools());
+const store = configureStore();
 
-ReactDOM.render(
-	<Provider store={store}>
-		<App />
-	</Provider>,
-	document.getElementById('root')
-);
+const render = () => {
+	ReactDOM.render(
+		<Provider store={store}>
+			<App history={history} />
+		</Provider>,
+		document.getElementById('root')
+	);
+};
 
+render();
+
+// Init Google Analytics
 ReactGA.initialize('UA-139332644-1');
 
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register();
+
+// Hot reloading
+if (module.hot) {
+	// Reload components
+	module.hot.accept('./components/app/app', () => {
+		render();
+	});
+}

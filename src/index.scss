@@ -188,47 +188,47 @@ main {
 
 /* Shared Slider CSS */
 .slider-label {
-	align-items: center;
+	align-items: flex-start;
 	display: flex;
 	color: #d1cac1;
 	font-family: 'Roboto Mono', monospace;
-	font-size: 0.95rem;
-	margin-bottom: 1rem;
+	font-size: 1rem;
+	padding: 1.1rem 0;
 	user-select: none;
-}
+	text-transform: capitalize !important;
+	.input-range {
+		color: #e1ddd7;
+		font-family: 'Roboto Mono', monospace;
+		margin-left: auto;
+		margin-right: 0.75rem;
+		margin-top: 0.3rem;
+		width: calc(100% - 7ch);
+		.input-range__slider-container,
+		.input-range__track {
+			transition: none;
+		}
+		.input-range__track {
+			height: 0.4rem;
+		}
+		.input-range__label--value {
+			top: -2rem;
+		}
+		.input-range__slider {
+			background: #e1ddd7;
+			border: 1px solid #403a3a;
+			height: 1.5rem;
+			margin-left: -0.71rem;
+			margin-top: -0.9rem;
+			transition: none;
+			width: 1.5rem;
+		}
 
-.slider {
-	border: 1px solid rgba(225, 221, 215, 0.25);
-	-webkit-appearance: none;
-	width: calc(100% - 6.25ch);
-	height: 0.8rem;
-	border-radius: 5px;
-	background: #473333;
-	outline: none;
-	margin-left: auto;
-	&::-webkit-slider-thumb {
-		-webkit-appearance: none;
-		appearance: none;
-		width: 2rem;
-		height: 2rem;
-		border-radius: 50%;
-		background: #e1ddd7;
-		cursor: pointer;
-	}
-
-	&::-moz-range-thumb {
-		width: 2rem;
-		height: 2rem;
-		border-radius: 50%;
-		background: #e1ddd7;
-		cursor: pointer;
-	}
-	&:focus {
-		border: 2px solid #e1ddd7;
-		&::-webkit-slider-thumb {
-			border: 12px solid #e1ddd7;
-			background-color: #0faded;
-			z-index: 10;
+		.input-range__label--min {
+			bottom: -1.8rem;
+		}
+		.input-range__label--max {
+			bottom: -1.8rem;
+			right: 0.5rem;
 		}
 	}
 }

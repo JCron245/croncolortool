@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import './color-tool.scss';
-import { State } from '../../redux/interfaces';
+import { State, Color } from '../../redux/interfaces';
 import { ColorBox } from './color-bars/color-box';
 import MyColorPicker from './custom-picker/custom-picker';
 import {
@@ -20,7 +20,7 @@ import { ColorMode } from '../color-controls/color-mode';
 import ColorSaver from '../color-controls/color-saver';
 
 const ExtendedSwatch: FC = () => {
-	const store: State = useSelector((store: State) => store);
+	const store: Color = useSelector((store: State) => store.color);
 
 	return (
 		<div className="extended-swatch">

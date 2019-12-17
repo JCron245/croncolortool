@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import './color-mode.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { State } from '../../redux/interfaces';
+import { State, Color } from '../../redux/interfaces';
 import { setMode } from '../../redux/actions/colorAction';
 import { toast } from 'react-toastify';
 import { css } from 'glamor';
 import ReactGA from 'react-ga';
 
 export const ColorMode: FC = () => {
-	const store: State = useSelector((store: State) => store);
+	const store: Color = useSelector((store: State) => store.color);
 	const dispatch = useDispatch();
 
 	const changeMode = (event: any) => {

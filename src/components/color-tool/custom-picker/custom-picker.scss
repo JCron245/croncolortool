@@ -25,7 +25,7 @@
 		align-items: center;
 		display: flex;
 		flex-direction: row-reverse;
-		margin-bottom: 1rem !important;
+		margin-bottom: 0 !important;
 		font-family: 'Roboto Mono', monospace !important;
 
 		input,
@@ -50,6 +50,10 @@
 			}
 		}
 	}
+}
+
+.custom-picker-form {
+	padding-bottom: 1rem;
 }
 
 .viewing-box {

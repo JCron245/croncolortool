@@ -1,9 +1,14 @@
-import { State } from '../interfaces';
+import { Color } from '../interfaces';
+import chroma from 'chroma-js';
 
 const mode = localStorage.getItem('mode');
 
-const initialState: State = {
-	hex: '#0faded',
+const urlParams = new URLSearchParams(window.location.search);
+
+const paramColor = urlParams.get('color');
+
+const initialState: Color = {
+	hex: chroma.valid(paramColor) ? `#${paramColor}` : '#0FADED',
 	contrastColor: '#000',
 	mode: mode || 'hex',
 	copied: ''

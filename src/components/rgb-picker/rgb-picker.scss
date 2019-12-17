@@ -1,16 +1,22 @@
-.slider {
+.slider-label {
 	&.red {
-		background: rgb(255, 0, 0);
-		background: linear-gradient(to left, rgba(255, 0, 0, 1) 0%, rgba(255, 0, 0, 0.1) 100%);
+		.input-range__track {
+			background: rgb(255, 0, 0);
+			background: linear-gradient(to left, rgba(255, 0, 0, 1) 0%, rgba(255, 0, 0, 0.125) 100%);
+		}
 	}
 
 	&.green {
-		background: rgb(0, 255, 0);
-		background: linear-gradient(to left, rgba(0, 255, 0, 1) 0%, rgba(0, 255, 0, 0.1) 100%);
+		.input-range__track {
+			background: rgb(0, 255, 0);
+			background: linear-gradient(to left, rgba(0, 255, 0, 1) 0%, rgba(0, 255, 0, 0.125) 100%);
+		}
 	}
 
 	&.blue {
-		background: rgb(0, 0, 255);
-		background: linear-gradient(to left, rgba(0, 0, 255, 1) 0%, rgba(0, 0, 255, 0) 100%);
+		.input-range__track {
+			background: rgb(0, 0, 255);
+			background: linear-gradient(to left, rgba(0, 0, 255, 1) 0%, rgba(0, 0, 255, 0.125) 100%);
+		}
 	}
 }

@@ -1,16 +1,18 @@
 import React, { FC } from 'react';
 import './hsl-picker.scss';
 import tinycolor from 'tinycolor2';
+import InputRange from 'react-input-range';
 
 interface HSLPicker {
 	hsl: any;
 	onChange: any;
+	onChangeComplete?: any;
 }
 
 const HSLPicker: FC<HSLPicker> = (props: HSLPicker) => {
 	const hsl = props.hsl;
 
-	const hslChange = (event: any, part: string) => {
+	const hslChange = (event: any, part: string, complete: boolean = false) => {
 		let newHSL = hsl;
 		switch (part) {
 			case 'h':
@@ -25,48 +27,56 @@ const HSLPicker: FC<HSLPicker> = (props: HSLPicker) => {
 			default:
 				break;
 		}
-		props.onChange(`#${tinycolor(hsl).toHex()}`);
+
+		if (complete) {
+			props.onChangeComplete(`#${tinycolor(hsl).toHex()}`);
+		} else {
+			props.onChange(`#${tinycolor(hsl).toHex()}`);
+		}
 	};
 
 	return (
 		<fieldset className="slider-fieldset">
 			<legend className="sr-only">HSL Sliders</legend>
-			<label className="slider-label">
-				H {Math.floor(hsl.h)}
-				<input
-					type="range"
-					min="0"
-					max="359"
-					className="slider hue"
+			<label className="slider-label hue">
+				Hue
+				<InputRange
+					maxValue={359}
+					minValue={0}
 					value={Math.floor(hsl.h)}
-					onChange={e => {
-						hslChange(e.target.value, 'h');
+					onChange={v => {
+						hslChange(v, 'h');
+					}}
+					onChangeComplete={v => {
+						hslChange(v, 'h', true);
 					}}
 				/>
 			</label>
-			<label className="slider-label">
-				S {Math.floor(hsl.s * 100)}%
-				<input
-					type="range"
-					min="0"
-					max="100"
-					className="slider saturation"
+			<label className="slider-label saturation">
+				Saturation
+				<InputRange
+					maxValue={100}
+					minValue={0}
 					value={Math.floor(hsl.s * 100)}
-					onChange={e => {
-						hslChange(e.target.value, 's');
+					onChange={v => {
+						hslChange(v, 's');
+					}}
+					onChangeComplete={v => {
+						hslChange(v, 's', true);
 					}}
 				/>
 			</label>
-			<label className="slider-label">
-				L {Math.floor(hsl.l * 100)}%
-				<input
-					type="range"
-					min="0"
-					max="100"
-					className="slider lightness"
+			<label className="slider-label lightness">
+				Lightness
+				<InputRange
+					maxValue={100}
+					minValue={0}
 					value={Math.floor(hsl.l * 100)}
-					onChange={e => {
-						hslChange(e.target.value, 'l');
+					onChange={v => {
+						hslChange(v, 'l');
+					}}
+					onChangeComplete={v => {
+						hslChange(v, 'l', true);
 					}}
 				/>
 			</label>

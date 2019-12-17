@@ -16,7 +16,7 @@ interface ColorBar {
 }
 
 export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
-	const store: State = useSelector((store: State) => store);
+	const copied: string = useSelector((store: State) => store.color.copied);
 	const dispatch = useDispatch();
 
 	const singleClick = (event: any) => {
@@ -25,7 +25,7 @@ export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 		copy(savedTarget.value.toUpperCase()).then(
 			() => {
 				// I don't want someone going nuts like me and clicking this a thousand times and saturating my analytics :)
-				if (savedTarget.value !== store.copied) {
+				if (savedTarget.value !== copied) {
 					ReactGA.event({
 						category: 'Color Copy',
 						action: 'Color copied',

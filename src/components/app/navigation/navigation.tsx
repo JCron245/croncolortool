@@ -24,9 +24,9 @@ export const Navigation: FC = () => {
 					<Nav.Link eventKey="2" as={NavLink} activeClassName="active" to="/contrast" exact>
 						Contrast Checker
 					</Nav.Link>
-					<Nav.Link eventKey="3" as={NavLink} activeClassName="active" to="/blender" exact>
+					{/* <Nav.Link eventKey="3" as={NavLink} activeClassName="active" to="/blender" exact>
 						Color Blender
-					</Nav.Link>
+					</Nav.Link> */}
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
