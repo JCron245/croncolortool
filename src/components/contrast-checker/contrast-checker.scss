@@ -3,9 +3,8 @@
 	color: #fff;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: space-between;
 	min-height: calc(100vh - 78.38px);
-	padding-bottom: 1rem;
 
 	.input-section {
 		background-color: #403a3a;
@@ -14,9 +13,9 @@
 		color: #e1ddd7;
 		display: flex;
 		flex-direction: column;
-		min-height: 50vh;
+		min-height: 45vh;
 		padding-bottom: 1rem;
-		width: 80vw;
+		width: 100%;
 	}
 	.colors {
 		display: grid;

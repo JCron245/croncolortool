@@ -95,8 +95,8 @@ const ContrastChecker: FC = () => {
 							/>
 							<div className="color-display-box" style={{ backgroundColor: backgroundValue }}></div>
 						</div>
-						<RGBPicker rgb={backgroundValueRGB} onChange={updateBackgroundColor} />
-						<HSLPicker hsl={backgroundValueHSL} onChange={updateBackgroundColor} />
+						<RGBPicker rgb={backgroundValueRGB} onChange={updateBackgroundColor} onChangeComplete={updateBackgroundColor} />
+						<HSLPicker hsl={backgroundValueHSL} onChange={updateBackgroundColor} onChangeComplete={updateBackgroundColor} />
 					</form>
 					<form className="text-choice">
 						<div className="hex-box-wrapper">
@@ -114,8 +114,8 @@ const ContrastChecker: FC = () => {
 							/>
 							<div className="color-display-box" style={{ backgroundColor: textColorValue }}></div>
 						</div>
-						<RGBPicker rgb={textColorValueRGB} onChange={updateTextColor} />
-						<HSLPicker hsl={textColorValueHSL} onChange={updateTextColor} />
+						<RGBPicker rgb={textColorValueRGB} onChange={updateTextColor} onChangeComplete={updateTextColor} />
+						<HSLPicker hsl={textColorValueHSL} onChange={updateTextColor} onChangeComplete={updateTextColor} />
 					</form>
 				</div>
 			</div>

@@ -2,8 +2,9 @@
 	align-items: center;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
-	grid-template-rows: 400px 60px;
-	width: 85vw;
+	grid-template-rows: 400px minmax(65px, auto);
+	max-width: 1250px;
+	width: 88vw;
 	.summary {
 		display: flex;
 		flex-direction: column;

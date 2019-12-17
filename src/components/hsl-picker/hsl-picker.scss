@@ -1,7 +1,3 @@
-.slider {
-	&.hue {
-	}
-}
 .slider-label {
 	&.hue {
 		.input-range {
@@ -17,10 +13,10 @@
 	&.saturation,
 	&.lightness {
 		.input-range {
-			width: calc(100% - 12ch);
+			width: calc(100% - 13ch);
 		}
 		.input-range__track {
-			background: #403a3a;
+			background: #e1ddd7;
 		}
 	}
 }
