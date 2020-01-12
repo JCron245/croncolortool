@@ -11,7 +11,7 @@ export interface ContrastResults {
 
 const ContrastResults: FC<ContrastResults> = (props: ContrastResults) => {
 	return (
-		<>
+		<div className="contrast-results-wrapper">
 			<div className="ratio">Contrast Ratio: {Number(props.contrastRatio).toFixed(2)}</div>
 			<div className="results">
 				<div className={'wcag-box aa ' + (props.smallAA ? 'good' : 'bad')}>
@@ -31,7 +31,7 @@ const ContrastResults: FC<ContrastResults> = (props: ContrastResults) => {
 					<span>AAA Large Text</span>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 

@@ -4,13 +4,19 @@ import tinycolor from 'tinycolor2';
 import InputRange from 'react-input-range';
 
 interface HSLPicker {
-	hsl: any;
+	hsl?: any;
 	onChange: any;
 	onChangeComplete?: any;
+	hex?: string;
 }
 
 const HSLPicker: FC<HSLPicker> = (props: HSLPicker) => {
-	const hsl = props.hsl;
+	let hsl = props.hsl;
+	if (props.hex) {
+		hsl = tinycolor(props.hex).toHsl();
+	} else if (props.hsl) {
+		hsl = props.hsl;
+	}
 
 	const hslChange = (event: any, part: string, complete: boolean = false) => {
 		let newHSL = hsl;

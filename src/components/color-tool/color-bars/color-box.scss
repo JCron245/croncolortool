@@ -54,4 +54,11 @@
 		margin: 0 0 1rem 0;
 		width: calc(33% - 0.2rem);
 	}
+
+	@media screen and (min-width: 2560px) and (max-width: 2560px) and (min-height: 1440px) and (max-height: 1440px) {
+		width: 160px;
+		.color-bar {
+			height: 5rem;
+		}
+	}
 }

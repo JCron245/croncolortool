@@ -7,6 +7,7 @@ import { ReactComponent as Eye } from '../../../assets/eye.svg';
 export interface ContrastDemo {
 	backgroundColor: string;
 	textColor: string;
+	contrastRatio: any;
 }
 
 const ContrastDemo: FC<ContrastDemo> = (props: ContrastDemo) => {
@@ -33,7 +34,7 @@ const ContrastDemo: FC<ContrastDemo> = (props: ContrastDemo) => {
 	return (
 		<div className="demo-section">
 			{createTooltips()}
-			<section className="summary">
+			<div className="summary">
 				<h1>
 					Contrast Color Checker <span aria-hidden="true">{<Eye style={{ fill: props.textColor }} />}</span>
 				</h1>
@@ -68,11 +69,13 @@ const ContrastDemo: FC<ContrastDemo> = (props: ContrastDemo) => {
 					</li>
 				</ul>
 				<p>Large text is defined as 14 point + (typically 18.66px) and bold, or 18 point + (typically 24px).</p>
-			</section>
-			<span className="text-box small">10px Text</span>
-			<span className="text-box normal">16px Text</span>
-			<span className="text-box large-bold">18.66px Bold Text</span>
-			<span className="text-box large">24px Text</span>
+			</div>
+			<div className="examples">
+				<span className="text-box small">10px Font Size Example Text</span>
+				<span className="text-box normal">16px Font Size Example Text</span>
+				<span className="text-box large-bold">18.66px Bold Font Size Example Text</span>
+				<span className="text-box large">24px Font Size Example Text</span>
+			</div>
 		</div>
 	);
 };

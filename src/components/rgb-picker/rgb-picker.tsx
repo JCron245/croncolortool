@@ -5,13 +5,19 @@ import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
 
 interface RGBPicker {
-	rgb: number[];
+	rgb?: number[];
 	onChange?: any;
 	onChangeComplete?: any;
+	hex?: string;
 }
 
 const RGBPicker: FC<RGBPicker> = (props: RGBPicker) => {
-	const rgb = props.rgb;
+	let rgb: number[] = [];
+	if (props.hex) {
+		rgb = chroma(props.hex).rgb();
+	} else if (props.rgb) {
+		rgb = props.rgb;
+	}
 
 	const rgbChange = (event: any, part: string, complete: boolean = false) => {
 		let newRgb = rgb;
