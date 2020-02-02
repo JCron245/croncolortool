@@ -1,7 +1,7 @@
 .contrast-checker {
 	color: #e1ddd7;
 	display: grid;
-	grid-template-columns: 1fr 0.75fr;
+	grid-template-columns: 1fr 550px;
 	grid-template-rows: repeat(12, 1fr);
 	min-height: calc(100vh - 78.38px);
 	max-height: calc(100vh - 78.38px);
@@ -16,6 +16,10 @@
 		grid-row: 1/13;
 		padding: 1.5rem;
 		width: 100%;
+		form {
+			background-color: #403a3a;
+			padding: 0.5rem;
+		}
 		.colors {
 			width: 100%;
 		}
@@ -43,14 +47,65 @@
 @media (max-width: 1919px) {
 }
 @media (max-width: 1200px) {
+	.contrast-checker {
+		grid-template-columns: 1fr 400px;
+	}
 }
 @media (max-width: 768px) {
+	.contrast-checker {
+		grid-template-columns: 1fr;
+		.demo-section {
+			grid-column: 1;
+			grid-row: 2;
+		}
+		.input-section {
+			grid-column: 1;
+			grid-row: 3;
+		}
+		.contrast-results-wrapper {
+			grid-column: 1;
+			grid-row: 1;
+		}
+	}
 }
 @media screen and (min-width: 2560px) and (max-width: 2560px) and (min-height: 1440px) and (max-height: 1440px) {
+	.contrast-checker {
+		.demo-section {
+			justify-self: center;
+			width: 60%;
+		}
+	}
 }
 @media screen and (min-width: 1680px) and (max-width: 1680px) and (min-height: 1050px) and (max-height: 1050px) {
+	.contrast-checker {
+		.input-section {
+			padding: 1rem;
+		}
+		.demo-section {
+			padding: 2rem 3rem;
+		}
+	}
 }
 @media screen and (min-width: 1440px) and (max-width: 1440px) and (min-height: 900px) and (max-height: 900px) {
+	.contrast-checker {
+		grid-template-columns: 1fr 600px;
+		.demo-section {
+			padding: 0.75rem;
+		}
+		.input-section {
+			padding: 0.75rem;
+			form {
+				background-color: #403a3a;
+				padding: 0.5rem;
+			}
+			.hex-box-wrapper {
+				margin-bottom: 0.25rem;
+			}
+			.slider-label {
+				padding: 0.8rem 0;
+			}
+		}
+	}
 }
 
 .tooltip-toggle {
