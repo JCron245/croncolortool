@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2.5rem" viewBox="0 0 450 450">
-	<circle cx="225" cy="225" r="225" fill={textColorValue} />
-	<g fill={backgroundValue} stroke="#FFF" stroke-width="70">
-		<path d="M106.742 110.083l236.516 236.516M106.742 346.599l236.516-236.515" />
-	</g>
-</svg>

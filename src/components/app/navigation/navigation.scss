@@ -24,13 +24,13 @@ nav.navbar.bg-dark {
 				outline-color: #0145b2;
 				outline-width: 2px;
 			}
-		}
-		.nav-link:hover {
-			text-decoration: none;
-		}
-		.nav-link.active {
-			background-color: #eee;
-			color: #000;
+			&:hover {
+				text-decoration: none;
+			}
+			&.active {
+				background-color: #eee;
+				color: #000;
+			}
 		}
 		@media screen and (max-width: 991px) {
 			.nav-link {

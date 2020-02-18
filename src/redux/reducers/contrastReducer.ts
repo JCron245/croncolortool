@@ -1,9 +1,9 @@
 import { ContrastCheck } from '../interfaces';
 
 const initialState: ContrastCheck = {
-	backgroundColor: '#FFF',
-	textColor: '#000',
-	ratio: 21.0,
+	backgroundColor: '#eeeed6',
+	textColor: '#15140f',
+	ratio: 15.66,
 	wcagPasses: {
 		small: { aa: true, aaa: true },
 		large: { aa: true, aaa: true }

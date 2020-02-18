@@ -14,13 +14,13 @@ interface AppProps {
 	history: History;
 }
 
-const App = ({ history }: AppProps) => {
-	const routes = [
-		{ path: '/contrast', name: '/contrast', Component: ContrastChecker },
-		{ path: '/color-tool', name: '/color-tool', Component: ColorTool },
-		{ path: '/blender', name: '/blender', Component: ColorBlender }
-	];
+const routes = [
+	{ path: '/contrast', name: '/contrast', Component: ContrastChecker },
+	{ path: '/color-tool', name: '/color-tool', Component: ColorTool },
+	{ path: '/blender', name: '/blender', Component: ColorBlender }
+];
 
+const App = ({ history }: AppProps) => {
 	return (
 		<ConnectedRouter history={history}>
 			<div className="app">

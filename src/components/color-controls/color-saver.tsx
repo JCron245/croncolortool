@@ -20,13 +20,26 @@ export const ColorSaver: FC = () => {
 		.rgb()
 		.toString();
 	const hsl = tinycolor(store.hex).toHsl();
-	const hslString = `${Math.floor(hsl.h)}, ${Math.floor(hsl.s * 100)}%, ${Math.floor(hsl.l * 100)}%`;
+	const hslString = `${Math.round(hsl.h)}, ${Math.round(hsl.s * 100)}%, ${Math.round(hsl.l * 100)}%`;
 	const value = store.mode === 'hex' ? store.hex : store.mode === 'rgb' ? rgb : hslString;
 	const currentValue = { value, label: value };
 
 	const selectColor = (event: any) => {
 		dispatch(push(`/color-tool/?color=${event.value}`));
 		dispatch(setColor(event.value));
+	};
+
+	const toastOptions = {
+		containerId: 'toasts-container',
+		autoClose: 1500,
+		closeButton: false,
+		type: toast.TYPE.SUCCESS,
+		className: css({
+			backgroundColor: store.hex,
+			color: store.contrastColor,
+			border: `1px solid ${store.contrastColor}`,
+			textAlign: 'center'
+		})
 	};
 
 	const saveColor = () => {
@@ -47,18 +60,7 @@ export const ColorSaver: FC = () => {
 			toastMsg = `${store.hex.toUpperCase()} Is already saved!`;
 		}
 
-		toast(toastMsg, {
-			containerId: 'toasts-container',
-			autoClose: 1500,
-			closeButton: false,
-			type: toast.TYPE.SUCCESS,
-			className: css({
-				backgroundColor: store.hex,
-				color: store.contrastColor,
-				border: `1px solid ${store.contrastColor}`,
-				textAlign: 'center'
-			})
-		});
+		toast(toastMsg, toastOptions);
 	};
 
 	const deleteColor = () => {
@@ -75,24 +77,15 @@ export const ColorSaver: FC = () => {
 		} else {
 			toastMsg = 'Unable to delete!';
 		}
-		toast(toastMsg, {
-			containerId: 'toasts-container',
-			autoClose: 1500,
-			closeButton: false,
-			type: toast.TYPE.SUCCESS,
-			className: css({
-				backgroundColor: store.hex,
-				color: store.contrastColor,
-				border: `1px solid ${store.contrastColor}`,
-				textAlign: 'center'
-			})
-		});
+		toast(toastMsg, toastOptions);
 		selectColor(parsedColors[0] || { value: '#0FADED' });
 	};
 
 	return (
 		<form className="color-saver-controls">
-			<label htmlFor="react-select-2-input">Color Saver</label>
+			<label className="color-saver-label" htmlFor="react-select-2-input">
+				Color Saver
+			</label>
 			<Select
 				options={parsedColors}
 				onChange={selectColor}

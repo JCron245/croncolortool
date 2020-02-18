@@ -11,6 +11,19 @@ export const ColorMode: FC = () => {
 	const store: Color = useSelector((store: State) => store.color);
 	const dispatch = useDispatch();
 
+	const toastOptions = {
+		containerId: 'toasts-container',
+		autoClose: 1500,
+		closeButton: false,
+		type: toast.TYPE.SUCCESS,
+		className: css({
+			backgroundColor: store.hex,
+			color: store.contrastColor,
+			border: `1px solid ${store.contrastColor}`,
+			textAlign: 'center'
+		})
+	};
+
 	const changeMode = (event: any) => {
 		const modeChangeEvent = event.currentTarget.value;
 		if (modeChangeEvent && modeChangeEvent !== store.mode) {
@@ -20,18 +33,7 @@ export const ColorMode: FC = () => {
 				action: 'changed mode',
 				label: modeChangeEvent
 			});
-			toast(`Color mode switched to ${modeChangeEvent.toUpperCase()}`, {
-				containerId: 'toasts-container',
-				autoClose: 1500,
-				closeButton: false,
-				type: toast.TYPE.SUCCESS,
-				className: css({
-					backgroundColor: store.hex,
-					color: store.contrastColor,
-					border: `1px solid ${store.contrastColor}`,
-					textAlign: 'center'
-				})
-			});
+			toast(`Color mode switched to ${modeChangeEvent.toUpperCase()}`, toastOptions);
 		}
 	};
 

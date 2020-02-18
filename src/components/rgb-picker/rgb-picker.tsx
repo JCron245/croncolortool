@@ -1,42 +1,35 @@
-import React, { FC } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { FC, useState, useEffect } from 'react';
 import chroma from 'chroma-js';
 import './rgb-picker.scss';
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
 
 interface RGBPicker {
-	rgb?: number[];
+	hex: string;
 	onChange?: any;
 	onChangeComplete?: any;
-	hex?: string;
 }
 
 const RGBPicker: FC<RGBPicker> = (props: RGBPicker) => {
-	let rgb: number[] = [];
-	if (props.hex) {
-		rgb = chroma(props.hex).rgb();
-	} else if (props.rgb) {
-		rgb = props.rgb;
-	}
+	const [red, setRed] = useState<any>(1);
+	const [green, setGreen] = useState<any>(1);
+	const [blue, setBlue] = useState<any>(1);
 
-	const rgbChange = (event: any, part: string, complete: boolean = false) => {
-		let newRgb = rgb;
-		switch (part) {
-			case 'r':
-				newRgb[0] = event;
-				break;
-			case 'g':
-				newRgb[1] = event;
-				break;
-			case 'b':
-				newRgb[2] = event;
-				break;
-		}
-		if (complete) {
-			props.onChangeComplete(chroma(rgb).hex());
-		} else {
-			props.onChange(chroma(rgb).hex());
-		}
+	useEffect(() => {
+		const rgb = chroma(props.hex).rgb();
+		setRed(rgb[0]);
+		setGreen(rgb[1]);
+		setBlue(rgb[2]);
+		console.log(props.hex, rgb);
+	}, []);
+
+	useEffect(() => {
+		props.onChange(chroma([red, green, blue]).hex());
+	}, [red, green, blue]);
+
+	const onChangeComplete = () => {
+		props.onChangeComplete(chroma([red, green, blue]).hex());
 	};
 
 	return (
@@ -44,33 +37,15 @@ const RGBPicker: FC<RGBPicker> = (props: RGBPicker) => {
 			<legend className="sr-only">RGB Sliders</legend>
 			<label className="slider-label red">
 				Red
-				<InputRange
-					maxValue={255}
-					minValue={0}
-					value={rgb[0]}
-					onChange={value => rgbChange(value, 'r')}
-					onChangeComplete={value => rgbChange(value, 'r', true)}
-				/>
+				<InputRange maxValue={255} minValue={0} value={red} onChange={setRed} onChangeComplete={onChangeComplete} />
 			</label>
 			<label className="slider-label green">
 				Green
-				<InputRange
-					maxValue={255}
-					minValue={0}
-					value={rgb[1]}
-					onChange={value => rgbChange(value, 'g')}
-					onChangeComplete={value => rgbChange(value, 'g', true)}
-				/>
+				<InputRange maxValue={255} minValue={0} value={green} onChange={setGreen} onChangeComplete={onChangeComplete} />
 			</label>
 			<label className="slider-label blue">
 				Blue
-				<InputRange
-					maxValue={255}
-					minValue={0}
-					value={rgb[2]}
-					onChange={value => rgbChange(value, 'b')}
-					onChangeComplete={value => rgbChange(value, 'b', true)}
-				/>
+				<InputRange maxValue={255} minValue={0} value={blue} onChange={setBlue} onChangeComplete={onChangeComplete} />
 			</label>
 		</fieldset>
 	);

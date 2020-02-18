@@ -1,4 +1,5 @@
-import React, { FC, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { FC, useState, useEffect } from 'react';
 import './contrast-checker.scss';
 import RGBPicker from '../rgb-picker/rgb-picker';
 import HSLPicker from '../hsl-picker/hsl-picker';
@@ -8,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setColors } from '../../redux/actions/contrastActions';
 import chroma from 'chroma-js';
 import ContrastResults from './contrast-results/contrast-results';
+import Helmet from 'react-helmet';
 
 const ContrastChecker: FC = () => {
 	const store: ContrastCheck = useSelector((store: State) => store.contrast);
@@ -16,19 +18,18 @@ const ContrastChecker: FC = () => {
 	const [backgroundValue, setBackgroundValue] = useState(store.backgroundColor);
 	const [textColorValue, setTextColorValue] = useState(store.textColor);
 
-	const updateTextColor = (event: any) => {
-		setTextColorValue(event);
-		if (chroma.valid(event)) {
-			dispatch(setColors(store.backgroundColor, event));
+	useEffect(() => {
+		if (chroma.valid(textColorValue)) {
+			dispatch(setColors(backgroundValue, textColorValue));
 		}
-	};
+	}, [textColorValue]);
 
-	const updateBackgroundColor = (event: any) => {
-		setBackgroundValue(event);
-		if (chroma.valid(event)) {
-			dispatch(setColors(event, store.textColor));
+	useEffect(() => {
+		if (chroma.valid(backgroundValue)) {
+			console.log('suh');
+			dispatch(setColors(backgroundValue, textColorValue));
 		}
-	};
+	}, [backgroundValue]);
 
 	const currentStyle = {
 		backgroundColor: store.backgroundColor,
@@ -37,6 +38,9 @@ const ContrastChecker: FC = () => {
 
 	return (
 		<div className="contrast-checker" style={currentStyle}>
+			<Helmet>
+				<title>Contrast Checker Tool</title>
+			</Helmet>
 			<ContrastDemo contrastRatio={store.ratio} textColor={store.textColor} backgroundColor={store.backgroundColor} />
 			<ContrastResults
 				contrastRatio={store.ratio}
@@ -57,13 +61,13 @@ const ContrastChecker: FC = () => {
 							className="hex-box-input"
 							value={backgroundValue}
 							onChange={e => {
-								updateBackgroundColor(e.target.value);
+								setBackgroundValue(e.target.value);
 							}}
 						/>
 						<div className="color-display-box" style={{ backgroundColor: store.backgroundColor }}></div>
 					</div>
-					<RGBPicker hex={store.backgroundColor} onChange={updateBackgroundColor} onChangeComplete={updateBackgroundColor} />
-					<HSLPicker hex={store.backgroundColor} onChange={updateBackgroundColor} onChangeComplete={updateBackgroundColor} />
+					<RGBPicker hex={backgroundValue} onChange={setBackgroundValue} onChangeComplete={setBackgroundValue} />
+					<HSLPicker hex={backgroundValue} onChange={setBackgroundValue} onChangeComplete={setBackgroundValue} />
 				</form>
 				<form className="text-choice colors">
 					<div className="hex-box-wrapper">
@@ -76,13 +80,13 @@ const ContrastChecker: FC = () => {
 							className="hex-box-input"
 							value={textColorValue}
 							onChange={e => {
-								updateTextColor(e.target.value);
+								setTextColorValue(e.target.value);
 							}}
 						/>
 						<div className="color-display-box" style={{ backgroundColor: store.textColor }}></div>
 					</div>
-					<RGBPicker hex={store.textColor} onChange={updateTextColor} onChangeComplete={updateTextColor} />
-					<HSLPicker hex={store.textColor} onChange={updateTextColor} onChangeComplete={updateTextColor} />
+					<RGBPicker hex={textColorValue} onChange={setTextColorValue} onChangeComplete={setTextColorValue} />
+					<HSLPicker hex={textColorValue} onChange={setTextColorValue} onChangeComplete={setTextColorValue} />
 				</form>
 			</div>
 		</div>

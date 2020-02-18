@@ -19,7 +19,7 @@ const ContrastDemo: FC<ContrastDemo> = (props: ContrastDemo) => {
 					<span>{wcag.title}</span>
 					<ul aria-labelledby={wcag.id + '-title'}>
 						{wcag.items.map((item, index) => {
-							return <li key={wcag.id + '-item-key-' + index}>{item.text}</li>;
+							return <li key={wcag.id + '-item-key-' + index}>{item}</li>;
 						})}
 					</ul>
 				</ReactTooltip>

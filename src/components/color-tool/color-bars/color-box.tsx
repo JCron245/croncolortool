@@ -13,15 +13,17 @@ interface ColorBox {
 
 export const ColorBox: FC<ColorBox> = (props: ColorBox) => {
 	const showValue = (color: any) => {
-		if (props.show === 'hsl') {
-			let hsl = tinycolor(color).toHsl();
-			return `${Math.floor(hsl.h)}, ${Math.floor(hsl.s * 100)}%, ${Math.floor(hsl.l * 100)}%`;
-		}
-		return props.show === 'hex'
-			? color
-			: chroma(color)
+		switch (props.show) {
+			case 'hsl':
+				let hsl = tinycolor(color).toHsl();
+				return `${Math.round(hsl.h)}, ${Math.round(hsl.s * 100)}%, ${Math.round(hsl.l * 100)}%`;
+			case 'hex':
+				return color;
+			default:
+				return chroma(color)
 					.rgb()
 					.toString();
+		}
 	};
 
 	return (
@@ -31,9 +33,15 @@ export const ColorBox: FC<ColorBox> = (props: ColorBox) => {
 			</p>
 			<ul className="box-bar-wrapper">
 				{props.colors.map((color: string, index: number) => {
-					const value = showValue(color);
-					const contrast = findContrastingColor(color);
-					return <ColorBar groupName={props.name} hex={color} value={value} contrastColor={contrast} key={index} />;
+					return (
+						<ColorBar
+							groupName={props.name}
+							hex={color}
+							value={showValue(color)}
+							contrastColor={findContrastingColor(color)}
+							key={`${color}-${index}`}
+						/>
+					);
 				})}
 			</ul>
 		</div>

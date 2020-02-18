@@ -5,10 +5,6 @@ import logo from '../../../assets/cron-color-logov2.png';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
-interface AppProps {
-	history: History;
-}
-
 export const Navigation: FC = () => {
 	return (
 		<Navbar bg="dark" expand="lg" variant="dark" collapseOnSelect>

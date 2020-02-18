@@ -18,12 +18,16 @@ import {
 } from './color-tool-utils';
 import { ColorMode } from '../color-controls/color-mode';
 import ColorSaver from '../color-controls/color-saver';
+import { Helmet } from 'react-helmet';
 
 const ExtendedSwatch: FC = () => {
 	const store: Color = useSelector((store: State) => store.color);
 
 	return (
 		<div className="extended-swatch">
+			<Helmet>
+				<title>Color Manipulation Tool</title>
+			</Helmet>
 			<h1 className="sr-only">Color Tool</h1>
 			{/* Color Picker Box */}
 			<section className="picker-box">
