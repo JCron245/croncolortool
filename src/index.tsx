@@ -9,6 +9,8 @@ import configureStore, { history } from './configureStore';
 
 const store = configureStore();
 
+console.log('If you like this, check out my resume! https://joncornwell.com');
+
 const render = () => {
 	ReactDOM.render(
 		<Provider store={store}>
