@@ -12,9 +12,9 @@ interface RGBPicker {
 }
 
 const RGBPicker: FC<RGBPicker> = (props: RGBPicker) => {
-	const [red, setRed] = useState<any>(1);
-	const [green, setGreen] = useState<any>(1);
-	const [blue, setBlue] = useState<any>(1);
+	const [red, setRed] = useState<any>();
+	const [green, setGreen] = useState<any>();
+	const [blue, setBlue] = useState<any>();
 
 	useEffect(() => {
 		const rgb = chroma(props.hex).rgb();
@@ -24,7 +24,9 @@ const RGBPicker: FC<RGBPicker> = (props: RGBPicker) => {
 	}, []);
 
 	useEffect(() => {
-		props.onChange(chroma([red, green, blue]).hex());
+		if (red && green && blue) {
+			props.onChange(chroma([red, green, blue]).hex());
+		}
 	}, [red, green, blue]);
 
 	const onChangeComplete = () => {
@@ -36,15 +38,15 @@ const RGBPicker: FC<RGBPicker> = (props: RGBPicker) => {
 			<legend className="sr-only">RGB Sliders</legend>
 			<label className="slider-label red">
 				Red
-				<InputRange maxValue={255} minValue={0} value={red} onChange={setRed} onChangeComplete={onChangeComplete} />
+				{red && <InputRange maxValue={255} minValue={0} value={red} onChange={setRed} onChangeComplete={onChangeComplete} />}
 			</label>
 			<label className="slider-label green">
 				Green
-				<InputRange maxValue={255} minValue={0} value={green} onChange={setGreen} onChangeComplete={onChangeComplete} />
+				{green && <InputRange maxValue={255} minValue={0} value={green} onChange={setGreen} onChangeComplete={onChangeComplete} />}
 			</label>
 			<label className="slider-label blue">
 				Blue
-				<InputRange maxValue={255} minValue={0} value={blue} onChange={setBlue} onChangeComplete={onChangeComplete} />
+				{blue && <InputRange maxValue={255} minValue={0} value={blue} onChange={setBlue} onChangeComplete={onChangeComplete} />}
 			</label>
 		</fieldset>
 	);

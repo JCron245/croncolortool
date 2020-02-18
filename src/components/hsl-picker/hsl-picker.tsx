@@ -11,19 +11,21 @@ interface HSLPicker {
 }
 
 const HSLPicker: FC<HSLPicker> = (props: HSLPicker) => {
-	const [hue, setHue] = useState<any>(1);
-	const [saturation, setSaturation] = useState<any>(1);
-	const [lightness, setLightness] = useState<any>(1);
+	const [hue, setHue] = useState<any>();
+	const [saturation, setSaturation] = useState<any>();
+	const [lightness, setLightness] = useState<any>();
 
 	useEffect(() => {
 		const hsl = tinycolor(props.hex).toHsl();
-		setHue(Math.round(hsl.h));
-		setSaturation(Math.round(hsl.s * 100));
-		setLightness(Math.round(hsl.l * 100));
+		setHue(hsl.h);
+		setSaturation(hsl.s * 100);
+		setLightness(hsl.l * 100);
 	}, []);
 
 	useEffect(() => {
-		props.onChange(`#${tinycolor({ h: hue, s: saturation / 100, l: lightness / 100 }).toHex()}`);
+		if (hue && saturation && lightness) {
+			props.onChange(`#${tinycolor({ h: hue, s: saturation / 100, l: lightness / 100 }).toHex()}`);
+		}
 	}, [hue, saturation, lightness]);
 
 	const onChangeComplete = () => {
@@ -35,15 +37,31 @@ const HSLPicker: FC<HSLPicker> = (props: HSLPicker) => {
 			<legend className="sr-only">HSL Sliders</legend>
 			<label className="slider-label hue">
 				Hue
-				<InputRange maxValue={359} minValue={0} value={hue} onChange={setHue} onChangeComplete={onChangeComplete} />
+				{hue && <InputRange maxValue={359} minValue={0} value={Math.round(hue)} onChange={setHue} onChangeComplete={onChangeComplete} />}
 			</label>
 			<label className="slider-label saturation">
 				Saturation
-				<InputRange maxValue={100} minValue={0} value={saturation} onChange={setSaturation} onChangeComplete={onChangeComplete} />
+				{saturation && (
+					<InputRange
+						maxValue={100}
+						minValue={0}
+						value={Math.round(saturation)}
+						onChange={setSaturation}
+						onChangeComplete={onChangeComplete}
+					/>
+				)}
 			</label>
 			<label className="slider-label lightness">
 				Lightness
-				<InputRange maxValue={100} minValue={0} value={lightness} onChange={setLightness} onChangeComplete={onChangeComplete} />
+				{lightness && (
+					<InputRange
+						maxValue={100}
+						minValue={0}
+						value={Math.round(lightness)}
+						onChange={setLightness}
+						onChangeComplete={onChangeComplete}
+					/>
+				)}
 			</label>
 		</fieldset>
 	);
