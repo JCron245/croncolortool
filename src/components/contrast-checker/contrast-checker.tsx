@@ -26,7 +26,6 @@ const ContrastChecker: FC = () => {
 
 	useEffect(() => {
 		if (chroma.valid(backgroundValue)) {
-			console.log('suh');
 			dispatch(setColors(backgroundValue, textColorValue));
 		}
 	}, [backgroundValue]);

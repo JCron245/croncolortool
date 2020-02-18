@@ -21,7 +21,6 @@ const RGBPicker: FC<RGBPicker> = (props: RGBPicker) => {
 		setRed(rgb[0]);
 		setGreen(rgb[1]);
 		setBlue(rgb[2]);
-		console.log(props.hex, rgb);
 	}, []);
 
 	useEffect(() => {
