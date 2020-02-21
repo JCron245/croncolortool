@@ -1,14 +1,16 @@
 import React, { FC } from 'react';
 import './color-mode.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { State, Color } from '../../redux/interfaces';
+import { State } from '../../redux/interfaces';
 import { setMode } from '../../redux/actions/colorAction';
 import { toast } from 'react-toastify';
 import { css } from 'glamor';
 import ReactGA from 'react-ga';
 
 export const ColorMode: FC = () => {
-	const store: Color = useSelector((store: State) => store.color);
+	const hex: string = useSelector((store: State) => store.color.hex);
+	const contrastColor: string = useSelector((store: State) => store.color.contrastColor);
+	const mode: string = useSelector((store: State) => store.color.mode);
 	const dispatch = useDispatch();
 
 	const toastOptions = {
@@ -17,16 +19,16 @@ export const ColorMode: FC = () => {
 		closeButton: false,
 		type: toast.TYPE.SUCCESS,
 		className: css({
-			backgroundColor: store.hex,
-			color: store.contrastColor,
-			border: `1px solid ${store.contrastColor}`,
+			backgroundColor: hex,
+			color: contrastColor,
+			border: `1px solid ${contrastColor}`,
 			textAlign: 'center'
 		})
 	};
 
 	const changeMode = (event: any) => {
 		const modeChangeEvent = event.currentTarget.value;
-		if (modeChangeEvent && modeChangeEvent !== store.mode) {
+		if (modeChangeEvent && modeChangeEvent !== mode) {
 			dispatch(setMode(modeChangeEvent));
 			ReactGA.event({
 				category: 'Color Mode',
@@ -35,11 +37,12 @@ export const ColorMode: FC = () => {
 			});
 			toast(`Color mode switched to ${modeChangeEvent.toUpperCase()}`, toastOptions);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	};
 
 	const activeStyle = {
-		backgroundColor: store.hex,
-		color: store.contrastColor
+		backgroundColor: hex,
+		color: contrastColor
 	};
 
 	return (
@@ -48,32 +51,32 @@ export const ColorMode: FC = () => {
 				value="hex"
 				aria-label="Switch Colors To Hex Mode"
 				onClick={changeMode}
-				className={store.mode === 'hex' ? 'mode-control active' : 'mode-control'}
-				aria-pressed={store.mode === 'hex'}
+				className={mode === 'hex' ? 'mode-control active' : 'mode-control'}
+				aria-pressed={mode === 'hex'}
 				title="switch to hex"
-				style={store.mode === 'hex' ? activeStyle : {}}
+				style={mode === 'hex' ? activeStyle : {}}
 				type="button">
 				Hex
 			</button>
 			<button
 				value="rgb"
 				aria-label="Switch Colors To RGB Mode"
-				aria-pressed={store.mode === 'rgb'}
+				aria-pressed={mode === 'rgb'}
 				onClick={changeMode}
-				className={store.mode === 'rgb' ? 'mode-control active' : 'mode-control'}
+				className={mode === 'rgb' ? 'mode-control active' : 'mode-control'}
 				title="switch to rgb"
-				style={store.mode === 'rgb' ? activeStyle : {}}
+				style={mode === 'rgb' ? activeStyle : {}}
 				type="button">
 				Rgb
 			</button>
 			<button
 				value="hsl"
 				aria-label="Switch Colors To HSL Mode"
-				aria-pressed={store.mode === 'hsl'}
+				aria-pressed={mode === 'hsl'}
 				onClick={changeMode}
-				className={store.mode === 'hsl' ? 'mode-control active' : 'mode-control'}
+				className={mode === 'hsl' ? 'mode-control active' : 'mode-control'}
 				title="switch to hsl"
-				style={store.mode === 'hsl' ? activeStyle : {}}
+				style={mode === 'hsl' ? activeStyle : {}}
 				type="button">
 				Hsl
 			</button>

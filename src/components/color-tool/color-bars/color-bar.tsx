@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
@@ -20,20 +20,19 @@ export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 	const dispatch = useDispatch();
 
 	const singleClick = (event: any) => {
-		let savedEvent = event;
-		let savedTarget = savedEvent.currentTarget as HTMLInputElement;
-		copy(savedTarget.value.toUpperCase()).then(
+		const val = event.currentTarget.value.toUpperCase();
+		copy(val).then(
 			() => {
 				// I don't want someone going nuts like me and clicking this a thousand times and saturating my analytics :)
-				if (savedTarget.value !== copied) {
+				if (val !== copied) {
 					ReactGA.event({
 						category: 'Color Copy',
 						action: 'Color copied',
-						label: savedTarget.value
+						label: val
 					});
-					dispatch(setCopied(savedTarget.value));
+					dispatch(setCopied(val));
 				}
-				toast(`${savedTarget.value.toUpperCase()} copied to clipboard!`, {
+				toast(`${val} copied to clipboard!`, {
 					containerId: 'toasts-container',
 					autoClose: 1500,
 					closeButton: false,
@@ -62,8 +61,8 @@ export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 		<li className="color-bar-wrap">
 			<button
 				onClick={singleClick}
-				aria-labelledby={props.groupName.replace(' ', '-') + '-swatch'}
-				aria-label={'Select to copy ' + props.value + ' to your clipboard'}
+				aria-labelledby={`${props.groupName.replace(' ', '-')}-swatch`}
+				aria-label={`Select to copy ${props.value} to your clipboard`}
 				value={props.value}
 				className="color-bar"
 				style={colorBarStyle}
@@ -74,4 +73,4 @@ export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 	);
 };
 
-export default ColorBar;
+export default memo(ColorBar);

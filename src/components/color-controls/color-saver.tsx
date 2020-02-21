@@ -5,23 +5,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { css } from 'glamor';
 import { setColor } from '../../redux/actions/colorAction';
-import { State, Color } from '../../redux/interfaces';
+import { State } from '../../redux/interfaces';
 import chroma from 'chroma-js';
 import tinycolor from 'tinycolor2';
 import ReactGA from 'react-ga';
 import { push } from 'connected-react-router';
 
 export const ColorSaver: FC = () => {
-	const store: Color = useSelector((store: State) => store.color);
+	const hex: string = useSelector((store: State) => store.color.hex);
+	const contrastColor: string = useSelector((store: State) => store.color.contrastColor);
+	const mode: string = useSelector((store: State) => store.color.mode);
 	const dispatch = useDispatch();
 	const colors = localStorage.getItem('saved-colors') || undefined;
 	let parsedColors: { value: string; label: string }[] = colors ? JSON.parse(colors) : [];
-	const rgb = chroma(store.hex)
+	const rgb = chroma(hex)
 		.rgb()
 		.toString();
-	const hsl = tinycolor(store.hex).toHsl();
+	const hsl = tinycolor(hex).toHsl();
 	const hslString = `${Math.round(hsl.h)}, ${Math.round(hsl.s * 100)}%, ${Math.round(hsl.l * 100)}%`;
-	const value = store.mode === 'hex' ? store.hex : store.mode === 'rgb' ? rgb : hslString;
+	const value = mode === 'hex' ? hex : mode === 'rgb' ? rgb : hslString;
 	const currentValue = { value, label: value };
 
 	const selectColor = (event: any) => {
@@ -35,29 +37,29 @@ export const ColorSaver: FC = () => {
 		closeButton: false,
 		type: toast.TYPE.SUCCESS,
 		className: css({
-			backgroundColor: store.hex,
-			color: store.contrastColor,
-			border: `1px solid ${store.contrastColor}`,
+			backgroundColor: hex,
+			color: contrastColor,
+			border: `1px solid ${contrastColor}`,
 			textAlign: 'center'
 		})
 	};
 
 	const saveColor = () => {
 		let toastMsg;
-		if (!parsedColors.find(color => color.value === store.hex)) {
+		if (!parsedColors.find(color => color.value === hex)) {
 			parsedColors.push({
-				value: `${store.hex}`,
-				label: `Hex: ${store.hex} - Rgb(${rgb})`
+				value: `${hex}`,
+				label: `Hex: ${hex} - Rgb(${rgb})`
 			});
 			localStorage.setItem('saved-colors', JSON.stringify(parsedColors));
-			toastMsg = `${store.hex.toUpperCase()} Saved!`;
+			toastMsg = `${hex.toUpperCase()} Saved!`;
 			ReactGA.event({
 				category: 'Color Saver',
 				action: 'Saved a color',
-				label: store.hex
+				label: hex
 			});
 		} else {
-			toastMsg = `${store.hex.toUpperCase()} Is already saved!`;
+			toastMsg = `${hex.toUpperCase()} Is already saved!`;
 		}
 
 		toast(toastMsg, toastOptions);
@@ -65,14 +67,14 @@ export const ColorSaver: FC = () => {
 
 	const deleteColor = () => {
 		let toastMsg;
-		if (parsedColors.find(c => c.value === store.hex)) {
-			toastMsg = `${store.hex} deleted!`;
-			parsedColors = parsedColors.filter(c => c.value !== store.hex);
+		if (parsedColors.find(c => c.value === hex)) {
+			toastMsg = `${hex} deleted!`;
+			parsedColors = parsedColors.filter(c => c.value !== hex);
 			localStorage.setItem('saved-colors', JSON.stringify(parsedColors));
 			ReactGA.event({
 				category: 'Color Saver',
 				action: 'Deleted a color',
-				label: store.hex
+				label: hex
 			});
 		} else {
 			toastMsg = 'Unable to delete!';
@@ -95,10 +97,10 @@ export const ColorSaver: FC = () => {
 				noOptionsMessage={() => 'No colors saved'}
 				menuPlacement="top"
 			/>
-			<button className="btn save-btn" aria-label={'Save color ' + currentValue.value} type="button" onClick={saveColor}>
+			<button className="btn save-btn" aria-label={`Save color ${currentValue.value}`} type="button" onClick={saveColor}>
 				Save
 			</button>
-			<button className="btn delete-btn" aria-label={'Delete color ' + currentValue.value} type="button" onClick={deleteColor}>
+			<button className="btn delete-btn" aria-label={`Delete color ${currentValue.value}`} type="button" onClick={deleteColor}>
 				Delete
 			</button>
 		</form>

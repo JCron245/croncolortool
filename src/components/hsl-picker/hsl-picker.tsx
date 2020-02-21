@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC } from 'react';
 import './hsl-picker.scss';
 import tinycolor from 'tinycolor2';
 import InputRange from 'react-input-range';
@@ -11,25 +11,22 @@ interface HSLPicker {
 }
 
 const HSLPicker: FC<HSLPicker> = (props: HSLPicker) => {
-	const [hue, setHue] = useState<any>();
-	const [saturation, setSaturation] = useState<any>();
-	const [lightness, setLightness] = useState<any>();
+	const hsl = tinycolor(props.hex).toHsl();
 
-	useEffect(() => {
-		const hsl = tinycolor(props.hex).toHsl();
-		setHue(hsl.h);
-		setSaturation(hsl.s * 100);
-		setLightness(hsl.l * 100);
-	}, []);
+	const setHue = (value: any) => {
+		props.onChange(`#${tinycolor({ h: value, s: hsl.s, l: hsl.l }).toHex()}`);
+	};
 
-	useEffect(() => {
-		if (hue && saturation && lightness) {
-			props.onChange(`#${tinycolor({ h: hue, s: saturation / 100, l: lightness / 100 }).toHex()}`);
-		}
-	}, [hue, saturation, lightness]);
+	const setSaturation = (value: any) => {
+		props.onChange(`#${tinycolor({ h: hsl.h, s: value / 100, l: hsl.l }).toHex()}`);
+	};
+
+	const setLightness = (value: any) => {
+		props.onChange(`#${tinycolor({ h: hsl.h, s: hsl.s, l: value / 100 }).toHex()}`);
+	};
 
 	const onChangeComplete = () => {
-		props.onChangeComplete(`#${tinycolor({ h: hue, s: saturation / 100, l: lightness / 100 }).toHex()}`);
+		props.onChangeComplete(`#${tinycolor({ h: hsl.h, s: hsl.s, l: hsl.l }).toHex()}`);
 	};
 
 	return (
@@ -37,31 +34,27 @@ const HSLPicker: FC<HSLPicker> = (props: HSLPicker) => {
 			<legend className="sr-only">HSL Sliders</legend>
 			<label className="slider-label hue">
 				Hue
-				{hue && <InputRange maxValue={359} minValue={0} value={Math.round(hue)} onChange={setHue} onChangeComplete={onChangeComplete} />}
+				<InputRange maxValue={359} minValue={0} value={Math.round(hsl.h)} onChange={setHue} onChangeComplete={onChangeComplete} />
 			</label>
 			<label className="slider-label saturation">
 				Saturation
-				{saturation && (
-					<InputRange
-						maxValue={100}
-						minValue={0}
-						value={Math.round(saturation)}
-						onChange={setSaturation}
-						onChangeComplete={onChangeComplete}
-					/>
-				)}
+				<InputRange
+					maxValue={100}
+					minValue={0}
+					value={Math.round(hsl.s * 100)}
+					onChange={setSaturation}
+					onChangeComplete={onChangeComplete}
+				/>
 			</label>
 			<label className="slider-label lightness">
 				Lightness
-				{lightness && (
-					<InputRange
-						maxValue={100}
-						minValue={0}
-						value={Math.round(lightness)}
-						onChange={setLightness}
-						onChangeComplete={onChangeComplete}
-					/>
-				)}
+				<InputRange
+					maxValue={100}
+					minValue={0}
+					value={Math.round(hsl.l * 100)}
+					onChange={setLightness}
+					onChangeComplete={onChangeComplete}
+				/>
 			</label>
 		</fieldset>
 	);
