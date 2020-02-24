@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import './color-mode.scss';
+import './colorMode.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { State } from '../../redux/interfaces';
 import { setMode } from '../../redux/actions/colorAction';
@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { css } from 'glamor';
 import ReactGA from 'react-ga';
 
-export const ColorMode: FC = () => {
+const ColorMode: FC = () => {
 	const hex: string = useSelector((store: State) => store.color.hex);
 	const contrastColor: string = useSelector((store: State) => store.color.contrastColor);
 	const mode: string = useSelector((store: State) => store.color.mode);

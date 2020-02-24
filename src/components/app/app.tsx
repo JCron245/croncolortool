@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import './app.scss';
-import ColorTool from '../color-tool/color-tool';
+import ColorTool from '../colorTool/ColorTool';
 import { ToastContainer, toast } from 'react-toastify';
-import ContrastChecker from '../contrast-checker/contrast-checker';
+import ContrastChecker from '../contrastCompare/ContrastCompare';
 import { CSSTransition } from 'react-transition-group';
-import { Navigation } from './navigation/navigation';
-import ColorBlender from '../color-blender/color-blender';
+import Header from '../header/Header';
+import ColorBlender from '../colorBlender/ColorBlender';
 import { ConnectedRouter } from 'connected-react-router';
 import { History } from 'history';
 
@@ -24,7 +24,7 @@ const App = ({ history }: AppProps) => {
 	return (
 		<ConnectedRouter history={history}>
 			<div className="app">
-				<Navigation />
+				<Header />
 				<Route exact path="/">
 					<Redirect to="/color-tool" />
 				</Route>

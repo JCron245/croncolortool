@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import './contrast-demo.scss';
+import './compareDemo.scss';
 import ReactTooltip from 'react-tooltip';
 import wcagInfo from './wcag-info.json';
 import { ReactComponent as Eye } from '../../../assets/eye.svg';
@@ -10,7 +10,7 @@ export interface ContrastDemo {
 	contrastRatio: any;
 }
 
-const ContrastDemo: FC<ContrastDemo> = (props: ContrastDemo) => {
+const ContrastCompareDemo: FC<ContrastDemo> = (props: ContrastDemo) => {
 	const createTooltips = (): ReactElement[] => {
 		return wcagInfo.map(wcag => {
 			return (
@@ -80,4 +80,4 @@ const ContrastDemo: FC<ContrastDemo> = (props: ContrastDemo) => {
 	);
 };
 
-export default ContrastDemo;
+export default ContrastCompareDemo;

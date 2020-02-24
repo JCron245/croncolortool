@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import './contrast-results.scss';
+import './contrastCompareResults.scss';
 
 export interface ContrastResults {
 	contrastRatio: number;
@@ -9,7 +9,7 @@ export interface ContrastResults {
 	largeAAA: boolean;
 }
 
-const ContrastResults: FC<ContrastResults> = (props: ContrastResults) => {
+const ContrastCompareResults: FC<ContrastResults> = (props: ContrastResults) => {
 	return (
 		<div className="contrast-results-wrapper">
 			<div className="ratio">Contrast Ratio: {Number(props.contrastRatio).toFixed(2)}</div>
@@ -35,4 +35,4 @@ const ContrastResults: FC<ContrastResults> = (props: ContrastResults) => {
 	);
 };
 
-export default ContrastResults;
+export default ContrastCompareResults;

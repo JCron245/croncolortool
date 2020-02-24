@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC } from 'react';
-import './hsl-picker.scss';
-import tinycolor from 'tinycolor2';
+import './hslPicker.scss';
 import InputRange from 'react-input-range';
+import { TinyColor } from '@ctrl/tinycolor';
 
 interface HSLPicker {
 	hex?: any;
@@ -11,22 +11,22 @@ interface HSLPicker {
 }
 
 const HSLPicker: FC<HSLPicker> = (props: HSLPicker) => {
-	const hsl = tinycolor(props.hex).toHsl();
+	const hsl = new TinyColor(props.hex).toHsl();
 
 	const setHue = (value: any) => {
-		props.onChange(`#${tinycolor({ h: value, s: hsl.s, l: hsl.l }).toHex()}`);
+		props.onChange(new TinyColor({ h: value, s: hsl.s, l: hsl.l }).toHexString());
 	};
 
 	const setSaturation = (value: any) => {
-		props.onChange(`#${tinycolor({ h: hsl.h, s: value / 100, l: hsl.l }).toHex()}`);
+		props.onChange(new TinyColor({ h: hsl.h, s: value / 100, l: hsl.l }).toHexString());
 	};
 
 	const setLightness = (value: any) => {
-		props.onChange(`#${tinycolor({ h: hsl.h, s: hsl.s, l: value / 100 }).toHex()}`);
+		props.onChange(new TinyColor({ h: hsl.h, s: hsl.s, l: value / 100 }).toHexString());
 	};
 
 	const onChangeComplete = () => {
-		props.onChangeComplete(`#${tinycolor({ h: hsl.h, s: hsl.s, l: hsl.l }).toHex()}`);
+		props.onChangeComplete(new TinyColor({ h: hsl.h, s: hsl.s, l: hsl.l }).toHexString());
 	};
 
 	return (

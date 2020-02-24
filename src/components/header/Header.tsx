@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import './navigation.scss';
-import logo from '../../../assets/cron-color-logov2.png';
+import './header.scss';
+import logo from '../../assets/cron-color-logov2.png';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
-export const Navigation: FC = () => {
+const Header: FC = () => {
 	return (
 		<Navbar bg="dark" expand="lg" variant="dark" collapseOnSelect>
 			<Navbar.Brand>
@@ -29,4 +29,4 @@ export const Navigation: FC = () => {
 	);
 };
 
-export default Navigation;
+export default Header;

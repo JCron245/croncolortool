@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import App from './components/app/app';
+import App from './components/app/App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import ReactGA from 'react-ga';
@@ -31,7 +31,7 @@ serviceWorker.register();
 // Hot reloading
 if (module.hot) {
 	// Reload components
-	module.hot.accept('./components/app/app', () => {
+	module.hot.accept('./components/app/App', () => {
 		render();
 	});
 }

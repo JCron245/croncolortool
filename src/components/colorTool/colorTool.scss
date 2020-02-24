@@ -1,4 +1,4 @@
-.extended-swatch {
+.swatch {
 	display: flex;
 	height: 100%;
 	min-height: calc(100vh - 78.38px);
@@ -129,5 +129,33 @@
 	@media screen and (min-width: 1440px) and (max-width: 1440px) and (min-height: 900px) and (max-height: 900px) {
 		min-width: 0;
 		width: 30%;
+	}
+}
+
+/// picker
+.chrome-picker {
+	background-color: transparent !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+	width: 100% !important;
+
+	> div:nth-child(2) {
+		display: none;
+	}
+}
+
+.custom-picker-form {
+	padding-bottom: 1rem;
+}
+
+.viewing-box {
+	flex-grow: 1;
+	// Extra small devices (portrait phones, less than 576px)
+	@media (max-width: 768px) {
+		min-height: 7rem;
+		margin-bottom: 1rem;
+	}
+	@media (max-width: 576px) {
+		min-height: 3rem;
 	}
 }

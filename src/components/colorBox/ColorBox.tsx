@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
-import ColorBar from './color-bar';
-import './color-box.scss';
+import ColorBar from '../colorBar/ColorBar';
+import './colorBox.scss';
 import { useSelector } from 'react-redux';
-import { State } from '../../../redux/interfaces';
+import { State } from '../../redux/interfaces';
 
 interface ColorBox {
 	colors: any[];
 	name: string;
 }
 
-export const ColorBox: FC<ColorBox> = (props: ColorBox) => {
+const ColorBox: FC<ColorBox> = (props: ColorBox) => {
 	const mode: string = useSelector((store: State) => store.color.mode);
 	const { colors, name } = props;
 

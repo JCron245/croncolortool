@@ -5,8 +5,8 @@ import { css } from 'glamor';
 import copy from 'clipboard-copy';
 import ReactGA from 'react-ga';
 import { useSelector, useDispatch } from 'react-redux';
-import { State } from '../../../redux/interfaces';
-import { setCopied } from '../../../redux/actions/colorAction';
+import { State } from '../../redux/interfaces';
+import { setCopied } from '../../redux/actions/colorAction';
 
 interface ColorBar {
 	hex: string;
@@ -15,7 +15,7 @@ interface ColorBar {
 	contrastColor: string;
 }
 
-export const ColorBar: FC<ColorBar> = (props: ColorBar) => {
+const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 	const copied: string = useSelector((store: State) => store.color.copied);
 	const dispatch = useDispatch();
 

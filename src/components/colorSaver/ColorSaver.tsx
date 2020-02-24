@@ -1,27 +1,24 @@
 import React, { FC } from 'react';
 import Select from 'react-select';
-import './color-saver.scss';
+import './colorSaver.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { css } from 'glamor';
 import { setColor } from '../../redux/actions/colorAction';
 import { State } from '../../redux/interfaces';
-import chroma from 'chroma-js';
-import tinycolor from 'tinycolor2';
 import ReactGA from 'react-ga';
 import { push } from 'connected-react-router';
+import { TinyColor } from '@ctrl/tinycolor';
 
-export const ColorSaver: FC = () => {
+const ColorSaver: FC = () => {
 	const hex: string = useSelector((store: State) => store.color.hex);
 	const contrastColor: string = useSelector((store: State) => store.color.contrastColor);
 	const mode: string = useSelector((store: State) => store.color.mode);
 	const dispatch = useDispatch();
 	const colors = localStorage.getItem('saved-colors') || undefined;
 	let parsedColors: { value: string; label: string }[] = colors ? JSON.parse(colors) : [];
-	const rgb = chroma(hex)
-		.rgb()
-		.toString();
-	const hsl = tinycolor(hex).toHsl();
+	const rgb = new TinyColor(hex).toRgbString();
+	const hsl = new TinyColor(hex).toHsl();
 	const hslString = `${Math.round(hsl.h)}, ${Math.round(hsl.s * 100)}%, ${Math.round(hsl.l * 100)}%`;
 	const value = mode === 'hex' ? hex : mode === 'rgb' ? rgb : hslString;
 	const currentValue = { value, label: value };
@@ -49,7 +46,7 @@ export const ColorSaver: FC = () => {
 		if (!parsedColors.find(color => color.value === hex)) {
 			parsedColors.push({
 				value: `${hex}`,
-				label: `Hex: ${hex} - Rgb(${rgb})`
+				label: `Hex: ${hex} - ${rgb}`
 			});
 			localStorage.setItem('saved-colors', JSON.stringify(parsedColors));
 			toastMsg = `${hex.toUpperCase()} Saved!`;

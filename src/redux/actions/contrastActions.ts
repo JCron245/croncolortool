@@ -1,4 +1,4 @@
-import { getContrastRatio } from '../../utils/get-contrast-ratio';
+import { getContrastRatio } from '../../utils/getContrastRatio';
 
 export function setColors(backgroundColor: string, textColor: string) {
 	let ratio = getContrastRatio(backgroundColor, textColor);

@@ -1,5 +1,5 @@
 import { Color } from '../interfaces';
-import chroma from 'chroma-js';
+import { TinyColor } from '@ctrl/tinycolor';
 
 const mode = localStorage.getItem('mode');
 
@@ -8,7 +8,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const paramColor = urlParams.get('color');
 
 const initialState: Color = {
-	hex: chroma.valid(paramColor) ? `#${paramColor}` : '#0FADED',
+	hex: new TinyColor(paramColor || '').isValid ? `#${paramColor}` : '#0FADED',
 	contrastColor: '#000',
 	mode: mode || 'hex',
 	copied: ''
