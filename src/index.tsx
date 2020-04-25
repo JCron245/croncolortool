@@ -23,7 +23,7 @@ const render = () => {
 render();
 
 // Init Google Analytics
-ReactGA.initialize('UA-139332644-1');
+ReactGA.initialize('');
 
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register();
