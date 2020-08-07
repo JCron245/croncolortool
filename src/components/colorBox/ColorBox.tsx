@@ -1,33 +1,25 @@
 import React, { FC } from 'react';
 import ColorBar from '../colorBar/ColorBar';
 import './colorBox.scss';
-import { useSelector } from 'react-redux';
-import { State } from '../../redux/interfaces';
+import { ColorObject } from '../colorTool/colorToolUtils';
 
 interface ColorBox {
-	colors: any[];
+	colors?: ColorObject[];
 	name: string;
 }
 
 const ColorBox: FC<ColorBox> = (props: ColorBox) => {
-	const mode: string = useSelector((store: State) => store.color.mode);
 	const { colors, name } = props;
-
-	if (!colors) {
-		return null;
-	}
+	const colorBars = colors?.map((c: any, index: number) => {
+		return <ColorBar groupName={name} hex={c.color} value={c.showValue} contrastColor={c.contrast} key={`${c.color}-${name}-${index}`} />;
+	});
 
 	return (
 		<div className="color-box">
 			<p className="box-title" id={name.replace(' ', '-') + '-swatch'} aria-label={'Swatch of ' + name + ' colors'}>
 				{name}
 			</p>
-			<ul className="box-bar-wrapper">
-				{colors.map((c: any, index: number) => {
-					const showValue = mode === 'hex' ? c.color : mode === 'hsl' ? c.hsl : c.rgb;
-					return <ColorBar groupName={name} hex={c.color} value={showValue} contrastColor={c.contrast} key={`${c.color}-${index}`} />;
-				})}
-			</ul>
+			<ul className="box-bar-wrapper">{colorBars}</ul>
 		</div>
 	);
 };

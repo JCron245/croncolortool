@@ -1,19 +1,10 @@
-@import '../../../node_modules/bootstrap/scss/mixins';
-@import '../../../node_modules/bootstrap/scss/functions.scss';
-@import '../../../node_modules/bootstrap/scss/variables';
-@import '../../../node_modules/bootstrap/scss/transitions';
-@import '../../../node_modules/bootstrap/scss/utilities';
-@import '../../../node_modules/bootstrap/scss/nav';
-@import '../../../node_modules/bootstrap/scss/navbar';
-
 .app {
 	background-color: #161d1d;
 	display: flex;
 	flex-direction: column;
-	min-height: 100%;
-	height: auto;
-	max-width: 100%;
-	width: 100%;
+	min-height: 100vh;
+	max-width: 100vw;
+	width: 100vw;
 }
 
 .fade-enter {
@@ -22,14 +13,10 @@
 
 .fade-enter.fade-enter-active {
 	opacity: 1;
-	transition: opacity 250ms ease-in;
+	transition: opacity 200ms linear;
 }
 
 .fade-exit {
-	opacity: 1;
-}
-
-.fade-exit {
-	opacity: 0.01;
-	transition: opacity 250ms ease-in;
+	opacity: 0;
+	transition: opacity 200ms linear;
 }

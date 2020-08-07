@@ -6,8 +6,8 @@ const initialState: ContrastCheck = {
 	ratio: 15.66,
 	wcagPasses: {
 		small: { aa: true, aaa: true },
-		large: { aa: true, aaa: true }
-	}
+		large: { aa: true, aaa: true },
+	},
 };
 
 export function contrastReducer(state = initialState, action: any) {
@@ -18,7 +18,7 @@ export function contrastReducer(state = initialState, action: any) {
 				backgroundColor: action.backgroundColor,
 				textColor: action.textColor,
 				ratio: action.ratio,
-				wcagPasses: action.wcagPasses
+				wcagPasses: action.wcagPasses,
 			};
 		default:
 			return state;

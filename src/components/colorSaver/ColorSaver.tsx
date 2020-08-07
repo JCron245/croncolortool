@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { css } from 'glamor';
 import { setColor } from '../../redux/actions/colorAction';
 import { State } from '../../redux/interfaces';
-import ReactGA from 'react-ga';
+import { event as ReactGAEvent } from 'react-ga';
 import { push } from 'connected-react-router';
 import { TinyColor } from '@ctrl/tinycolor';
 
@@ -37,23 +37,23 @@ const ColorSaver: FC = () => {
 			backgroundColor: hex,
 			color: contrastColor,
 			border: `1px solid ${contrastColor}`,
-			textAlign: 'center'
-		})
+			textAlign: 'center',
+		}).toString(),
 	};
 
 	const saveColor = () => {
 		let toastMsg;
-		if (!parsedColors.find(color => color.value === hex)) {
+		if (!parsedColors.find((color) => color.value === hex)) {
 			parsedColors.push({
 				value: `${hex}`,
-				label: `Hex: ${hex} - ${rgb}`
+				label: `Hex: ${hex} - ${rgb}`,
 			});
 			localStorage.setItem('saved-colors', JSON.stringify(parsedColors));
 			toastMsg = `${hex.toUpperCase()} Saved!`;
-			ReactGA.event({
+			ReactGAEvent({
 				category: 'Color Saver',
 				action: 'Saved a color',
-				label: hex
+				label: hex,
 			});
 		} else {
 			toastMsg = `${hex.toUpperCase()} Is already saved!`;
@@ -64,14 +64,14 @@ const ColorSaver: FC = () => {
 
 	const deleteColor = () => {
 		let toastMsg;
-		if (parsedColors.find(c => c.value === hex)) {
+		if (parsedColors.find((c) => c.value === hex)) {
 			toastMsg = `${hex} deleted!`;
-			parsedColors = parsedColors.filter(c => c.value !== hex);
+			parsedColors = parsedColors.filter((c) => c.value !== hex);
 			localStorage.setItem('saved-colors', JSON.stringify(parsedColors));
-			ReactGA.event({
+			ReactGAEvent({
 				category: 'Color Saver',
 				action: 'Deleted a color',
-				label: hex
+				label: hex,
 			});
 		} else {
 			toastMsg = 'Unable to delete!';
@@ -82,7 +82,7 @@ const ColorSaver: FC = () => {
 
 	return (
 		<form className="color-saver-controls">
-			<label className="color-saver-label" htmlFor="react-select-2-input">
+			<label className="color-saver-label" htmlFor="react-select-3-input">
 				Color Saver
 			</label>
 			<Select

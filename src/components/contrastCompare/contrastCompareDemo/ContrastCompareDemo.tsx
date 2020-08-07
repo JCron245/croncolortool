@@ -12,14 +12,14 @@ export interface ContrastDemo {
 
 const ContrastCompareDemo: FC<ContrastDemo> = (props: ContrastDemo) => {
 	const createTooltips = (): ReactElement[] => {
-		return wcagInfo.map(wcag => {
+		return wcagInfo.map((wcag) => {
 			return (
-				<ReactTooltip key={wcag.id + '-key'} id={wcag.id} type="light" className="tooltip" role="tooltip">
+				<ReactTooltip key={wcag.id + '-key'} id={wcag.id} type="light" className="tooltip">
 					<p className="tooltip-title">{wcag.rule}</p>
 					<span>{wcag.title}</span>
 					<ul aria-labelledby={wcag.id + '-title'}>
-						{wcag.items.map((item, index) => {
-							return <li key={wcag.id + '-item-key-' + index}>{item}</li>;
+						{wcag.items.map((item) => {
+							return <li key={wcag.id + '-item-key'}>{item}</li>;
 						})}
 					</ul>
 				</ReactTooltip>
@@ -28,15 +28,18 @@ const ContrastCompareDemo: FC<ContrastDemo> = (props: ContrastDemo) => {
 	};
 
 	const textStyle = {
-		color: props.textColor
+		color: props.textColor,
 	};
 
 	return (
 		<div className="demo-section">
-			{createTooltips()}
+			{createTooltips}
 			<div className="summary">
 				<h1>
-					Contrast Color Checker <span aria-hidden="true">{<Eye style={{ fill: props.textColor }} />}</span>
+					Contrast Color Checker{' '}
+					<span aria-hidden="true">
+						<Eye style={{ fill: props.textColor }} />
+					</span>
 				</h1>
 				<p>
 					Contrast and color use are vital to accessibility. Users, including users with visual disabilities, must be able to perceive
@@ -45,7 +48,7 @@ const ContrastCompareDemo: FC<ContrastDemo> = (props: ContrastDemo) => {
 				</p>
 				<p>
 					You can use the tool below to simulate a background and text color to get the contrast ratio between the two as a numerical value
-					as well as to see for yourself just how well the colors contrast togther.
+					as well as to see for yourself just how well the colors contrast together.
 				</p>
 				<div id="wcag-contrast">WCAG Contrast Rules:</div>
 				<ul aria-labelledby="wcag-contrast" className="wcag-list">

@@ -17,13 +17,7 @@ interface HexBox {
 const HexBox: FC<HexBox> = (props: HexBox) => {
 	const [color, setColor] = useState(props.hex);
 	const [label] = useState(`${props.label ? props.label : 'Hex'}`);
-	const [id] = useState(
-		props.id
-			? `${props.id}`
-			: `${label}${Math.random()
-					.toFixed(3)
-					.replace('.', '')}`
-	);
+	const [id] = useState(props.id ? `${props.id}` : `${label}${Math.random().toFixed(3).replace('.', '')}`);
 	const [width] = useState(`${label.length + 4}ch`);
 
 	useEffect(() => {

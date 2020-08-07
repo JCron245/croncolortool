@@ -8,7 +8,6 @@ import { ContrastCheck, State } from '../../redux/interfaces';
 import { useDispatch, useSelector } from 'react-redux';
 import { setColors } from '../../redux/actions/contrastActions';
 import ContrastResults from './contrastCompareResults/ContrastCompareResults';
-import Helmet from 'react-helmet';
 import { TinyColor } from '@ctrl/tinycolor';
 import HexBox from '../hexBox/HexBox';
 
@@ -32,14 +31,11 @@ const ContrastChecker: FC = () => {
 
 	const currentStyle = {
 		backgroundColor: backgroundColor,
-		color: textColor
+		color: textColor,
 	};
 
 	return (
 		<div className="contrast-checker" style={currentStyle}>
-			<Helmet>
-				<title>Contrast Checker Tool</title>
-			</Helmet>
 			<ContrastDemo contrastRatio={store.ratio} textColor={textColor} backgroundColor={backgroundColor} />
 			<ContrastResults
 				contrastRatio={store.ratio}

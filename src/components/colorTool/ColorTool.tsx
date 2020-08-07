@@ -1,12 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './colorTool.scss';
 import { State } from '../../redux/interfaces';
 import ColorBox from '../colorBox/ColorBox';
-import * as Utils from './colorToolUtils';
 import ColorMode from '../colorMode/ColorMode';
 import ColorSaver from '../colorSaver/ColorSaver';
-import { Helmet } from 'react-helmet';
 import { ChromePicker } from 'react-color';
 import RGBPicker from '../rgbPicker/RgbPicker';
 import HSLPicker from '../hslPicker/HslPicker';
@@ -14,40 +13,17 @@ import { useDispatch } from 'react-redux';
 import { setColor } from '../../redux/actions/colorAction';
 import { push } from 'connected-react-router';
 import HexBox from '../hexBox/HexBox';
+import { getColors, ColorSets } from './colorToolUtils';
 
 const ColorTool: FC = () => {
 	const hex: string = useSelector((store: State) => store.color.hex);
+	const mode: string = useSelector((store: State) => store.color.mode);
 	const dispatch = useDispatch();
-	const [lightArray, setLightArray] = useState();
-	const [darkArray, setDarkArray] = useState();
-	const [tintArray, setTintArray] = useState();
-	const [shadeArray, setShadeArray] = useState();
-	const [saturationArray, setSaturationArray] = useState();
-	const [desaturationArray, setDesaturationArray] = useState();
-	const [analogousArray, setAnalogousArray] = useState();
-	const [complementArray, setComplementArray] = useState();
-	const [splitComplementArray, setSplitComplementArray] = useState();
-	const [triadArray, setTriadArray] = useState();
-	const [tetradArray, setTetradArray] = useState();
-	const [pentadArray, setPentadArray] = useState();
-	const [monochromaticArray, setMonochromaticArray] = useState();
+	const [colorArrays, setColorArrays] = useState<ColorSets>();
 
 	useEffect(() => {
-		setLightArray(Utils.createLightArray(hex));
-		setDarkArray(Utils.createDarkArray(hex));
-		setTintArray(Utils.createTintArray(hex));
-		setShadeArray(Utils.createShadeArray(hex));
-		setSaturationArray(Utils.createSaturationArray(hex));
-		setDesaturationArray(Utils.createDesaturationArray(hex));
-		setAnalogousArray(Utils.createAnalogousArray(hex));
-		setComplementArray(Utils.createComplementArray(hex));
-		setSplitComplementArray(Utils.createSplitComplementArray(hex));
-		setTriadArray(Utils.createTriadArray(hex));
-		setTetradArray(Utils.createTetradArray(hex));
-		setPentadArray(Utils.createPentadArray(hex));
-		setMonochromaticArray(Utils.createMonochromaticArray(hex));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [hex]);
+		setColorArrays(getColors(hex, mode));
+	}, [hex, mode]);
 
 	const colorUpdate = (value: string, complete: boolean = false) => {
 		if (value !== hex) {
@@ -66,9 +42,6 @@ const ColorTool: FC = () => {
 
 	return (
 		<div className="swatch">
-			<Helmet>
-				<title>Color Manipulation Tool</title>
-			</Helmet>
 			<h1 className="sr-only">Color Tool</h1>
 			{/* Color Picker Box */}
 			<section className="picker-box">
@@ -83,19 +56,19 @@ const ColorTool: FC = () => {
 			{/* Box of various color information - shades etc */}
 			<section className="info-box">
 				<div className="color-box-grid">
-					<ColorBox name="lighter" colors={lightArray} />
-					<ColorBox name="darker" colors={darkArray} />
-					<ColorBox name="tint" colors={tintArray} />
-					<ColorBox name="shade" colors={shadeArray} />
-					<ColorBox name="saturated" colors={saturationArray} />
-					<ColorBox name="desaturated" colors={desaturationArray} />
-					<ColorBox name="analogous" colors={analogousArray} />
-					<ColorBox name="complementary" colors={complementArray} />
-					<ColorBox name="split complement" colors={splitComplementArray} />
-					<ColorBox name="triadic" colors={triadArray} />
-					<ColorBox name="tetradic" colors={tetradArray} />
-					<ColorBox name="pentadic" colors={pentadArray} />
-					<ColorBox name="monochromatic" colors={monochromaticArray} />
+					<ColorBox name="lighter" colors={colorArrays?.lighter} />
+					<ColorBox name="darker" colors={colorArrays?.darker} />
+					<ColorBox name="tint" colors={colorArrays?.tint} />
+					<ColorBox name="shade" colors={colorArrays?.shade} />
+					<ColorBox name="saturated" colors={colorArrays?.saturated} />
+					<ColorBox name="desaturated" colors={colorArrays?.desaturated} />
+					<ColorBox name="analogous" colors={colorArrays?.analogous} />
+					<ColorBox name="complementary" colors={colorArrays?.complementary} />
+					<ColorBox name="split complement" colors={colorArrays?.split} />
+					<ColorBox name="triadic" colors={colorArrays?.triadic} />
+					<ColorBox name="tetradic" colors={colorArrays?.tetradic} />
+					<ColorBox name="pentadic" colors={colorArrays?.pentadic} />
+					<ColorBox name="monochromatic" colors={colorArrays?.monochromatic} />
 				</div>
 				<div className="controls">
 					<ColorMode />

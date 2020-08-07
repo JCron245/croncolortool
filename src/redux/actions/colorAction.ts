@@ -4,7 +4,7 @@ export function setColor(color: string) {
 	return {
 		type: 'SET_COLOR',
 		hex: color,
-		contrastColor: findContrastingColor(color)
+		contrastColor: findContrastingColor(color),
 	};
 }
 
@@ -15,6 +15,6 @@ export function setMode(mode: string) {
 export function setCopied(copied: string) {
 	return {
 		type: 'SET_COPIED',
-		copied
+		copied,
 	};
 }

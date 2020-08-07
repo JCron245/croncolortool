@@ -1,45 +1,74 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React, { ReactElement, FC, useState, useEffect, Suspense, lazy } from 'react';
+import { Route, Redirect, useLocation } from 'react-router-dom';
 import './app.scss';
-import ColorTool from '../colorTool/ColorTool';
 import { ToastContainer, toast } from 'react-toastify';
-import ContrastChecker from '../contrastCompare/ContrastCompare';
 import { CSSTransition } from 'react-transition-group';
-import Header from '../header/Header';
-import ColorBlender from '../colorBlender/ColorBlender';
-import { ConnectedRouter } from 'connected-react-router';
-import { History } from 'history';
+import { Header } from '../header/Header';
+import { Helmet } from 'react-helmet';
+import { initialize as ReactGAInit } from 'react-ga';
 
-interface AppProps {
-	history: History;
+const ColorTool = lazy(() => import('../colorTool/ColorTool'));
+const ContrastChecker = lazy(() => import('../contrastCompare/ContrastCompare'));
+const ColorBlender = lazy(() => import('../colorBlender/ColorBlender'));
+
+if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
+	ReactGAInit('');
+	console.log('If you like this, check out my resume! https://joncornwell.com');
+} else {
+	console.log('[DEV MODE]');
 }
 
-const routes = [
-	{ path: '/contrast', name: '/contrast', Component: ContrastChecker },
+interface AppRoute {
+	path: string;
+	name: string;
+	Component: FC;
+}
+
+const appRoutes = [
 	{ path: '/color-tool', name: '/color-tool', Component: ColorTool },
-	{ path: '/blender', name: '/blender', Component: ColorBlender }
+	{ path: '/contrast', name: '/contrast', Component: ContrastChecker },
+	{ path: '/blender', name: '/blender', Component: ColorBlender },
 ];
 
-const App = ({ history }: AppProps) => {
+const Routes = (): ReactElement => {
+	const routeList = appRoutes.map(
+		({ path, Component }: AppRoute): ReactElement => (
+			<Route exact={true} key={path} path={path}>
+				{({ match }) => (
+					<CSSTransition in={match != null} timeout={200} classNames="fade" unmountOnExit>
+						<Component />
+					</CSSTransition>
+				)}
+			</Route>
+		)
+	);
+
+	routeList.push(
+		<Route key={'home'} exact path="/">
+			<Redirect to="/color-tool" />
+		</Route>
+	);
+
+	return <>{routeList}</>;
+};
+
+const App = (): ReactElement => {
+	const location = useLocation();
+	const [title, setTitle] = useState<string>();
+
+	useEffect(() => {
+		setTitle(location.pathname === '/color-tool' ? 'Color Manipulation Tool' : 'Contrast Checker Tool');
+	}, [location]);
+
 	return (
-		<ConnectedRouter history={history}>
-			<div className="app">
-				<Header />
-				<Route exact path="/">
-					<Redirect to="/color-tool" />
-				</Route>
-				{routes.map(({ path, Component }: any) => (
-					<Route key={path} path={path}>
-						{({ match }) => (
-							<CSSTransition in={match != null} timeout={250} classNames="fade" unmountOnExit>
-								<Component />
-							</CSSTransition>
-						)}
-					</Route>
-				))}
-				<ToastContainer hideProgressBar={true} enableMultiContainer containerId="toasts-container" position={toast.POSITION.TOP_RIGHT} />
-			</div>
-		</ConnectedRouter>
+		<div className="app">
+			<Helmet title={title} />
+			<Header />
+			<Suspense fallback={<div>Loading...</div>}>
+				<Routes />
+			</Suspense>
+			<ToastContainer hideProgressBar={true} enableMultiContainer containerId="toasts-container" position={toast.POSITION.TOP_RIGHT} />
+		</div>
 	);
 };
 

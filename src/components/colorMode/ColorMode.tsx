@@ -5,7 +5,7 @@ import { State } from '../../redux/interfaces';
 import { setMode } from '../../redux/actions/colorAction';
 import { toast } from 'react-toastify';
 import { css } from 'glamor';
-import ReactGA from 'react-ga';
+import { event as ReactGAEvent } from 'react-ga';
 
 const ColorMode: FC = () => {
 	const hex: string = useSelector((store: State) => store.color.hex);
@@ -22,27 +22,26 @@ const ColorMode: FC = () => {
 			backgroundColor: hex,
 			color: contrastColor,
 			border: `1px solid ${contrastColor}`,
-			textAlign: 'center'
-		})
+			textAlign: 'center',
+		}).toString(),
 	};
 
 	const changeMode = (event: any) => {
 		const modeChangeEvent = event.currentTarget.value;
-		if (modeChangeEvent && modeChangeEvent !== mode) {
+		if (modeChangeEvent !== mode) {
 			dispatch(setMode(modeChangeEvent));
-			ReactGA.event({
+			ReactGAEvent({
 				category: 'Color Mode',
 				action: 'changed mode',
-				label: modeChangeEvent
+				label: modeChangeEvent,
 			});
 			toast(`Color mode switched to ${modeChangeEvent.toUpperCase()}`, toastOptions);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	};
 
 	const activeStyle = {
 		backgroundColor: hex,
-		color: contrastColor
+		color: contrastColor,
 	};
 
 	return (

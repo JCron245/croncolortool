@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC } from 'react';
 import './rgbPicker.scss';
 import InputRange from 'react-input-range';

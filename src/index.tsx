@@ -4,26 +4,25 @@ import './index.scss';
 import App from './components/app/App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import ReactGA from 'react-ga';
 import configureStore, { history } from './configureStore';
+import { ConnectedRouter } from 'connected-react-router';
 
 const store = configureStore();
 
-console.log('If you like this, check out my resume! https://joncornwell.com');
-
 const render = () => {
 	ReactDOM.render(
-		<Provider store={store}>
-			<App history={history} />
-		</Provider>,
+		<React.StrictMode>
+			<Provider store={store}>
+				<ConnectedRouter history={history}>
+					<App />
+				</ConnectedRouter>
+			</Provider>
+		</React.StrictMode>,
 		document.getElementById('root')
 	);
 };
 
 render();
-
-// Init Google Analytics
-ReactGA.initialize('');
 
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register();

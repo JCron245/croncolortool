@@ -9,7 +9,7 @@ export function setColors(backgroundColor: string, textColor: string) {
 		ratio,
 		wcagPasses: {
 			small: { aa: ratio >= 4.5, aaa: ratio >= 7 },
-			large: { aa: ratio >= 3.1, aaa: ratio >= 4.5 }
-		}
+			large: { aa: ratio >= 3.1, aaa: ratio >= 4.5 },
+		},
 	};
 }

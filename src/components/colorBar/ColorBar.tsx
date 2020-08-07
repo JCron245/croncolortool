@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { css } from 'glamor';
 import copy from 'clipboard-copy';
-import ReactGA from 'react-ga';
+import { event as ReactGAEVent } from 'react-ga';
 import { useSelector, useDispatch } from 'react-redux';
 import { State } from '../../redux/interfaces';
 import { setCopied } from '../../redux/actions/colorAction';
@@ -25,10 +25,10 @@ const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 			() => {
 				// I don't want someone going nuts like me and clicking this a thousand times and saturating my analytics :)
 				if (val !== copied) {
-					ReactGA.event({
+					ReactGAEVent({
 						category: 'Color Copy',
 						action: 'Color copied',
-						label: val
+						label: val,
 					});
 					dispatch(setCopied(val));
 				}
@@ -41,20 +41,19 @@ const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 						backgroundColor: props.hex,
 						color: props.contrastColor,
 						border: `2px solid ${props.contrastColor}`,
-						textAlign: 'center'
-					})
+						textAlign: 'center',
+					}).toString(),
 				});
 			},
-			err => {
+			(err) => {
 				console.error('[ERROR] ', err);
 			}
 		);
 	};
 
 	const colorBarStyle = {
-		outlineColor: props.contrastColor,
 		backgroundColor: props.hex,
-		color: props.contrastColor
+		color: props.contrastColor,
 	};
 
 	return (
@@ -67,7 +66,7 @@ const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 				className="color-bar"
 				style={colorBarStyle}
 				type="button">
-				<p className="color-bar-title">{props.value}</p>
+				{props.value}
 			</button>
 		</li>
 	);

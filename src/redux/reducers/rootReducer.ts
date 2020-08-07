@@ -8,7 +8,7 @@ const createRootReducer = (history: History) =>
 	combineReducers({
 		color: colorReducer,
 		contrast: contrastReducer,
-		router: connectRouter(history)
+		router: connectRouter(history),
 	});
 
 export default createRootReducer;
