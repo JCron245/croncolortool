@@ -3,14 +3,17 @@
 	height: 100%;
 	flex-grow: 1;
 	min-height: calc(100vh - 78.38px);
-	max-height: calc(100vh - 78.38px);
 	padding: 0.5rem;
 	width: 100vw;
 
+	@media (max-width: 1919px) {
+		max-height: unset;
+	}
 	// Small devices (landscape phones, less than 768px)
 	@media (max-width: 768px) {
 		padding: 0;
 		flex-direction: column;
+		max-height: unset;
 	}
 }
 

@@ -14,7 +14,7 @@ const initialState: Color = {
 	copied: '',
 };
 
-export function colorReducer(state = initialState, action: any) {
+export const colorReducer = (state = initialState, action: any) => {
 	switch (action.type) {
 		case 'SET_COLOR':
 			return { ...state, hex: action.hex, contrastColor: action.contrastColor };
@@ -25,6 +25,4 @@ export function colorReducer(state = initialState, action: any) {
 		default:
 			return state;
 	}
-}
-
-export default colorReducer;
+};

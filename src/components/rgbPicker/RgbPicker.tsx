@@ -10,7 +10,7 @@ interface RGBPicker {
 	onChangeComplete?: any;
 }
 
-const RGBPicker: FC<RGBPicker> = (props: RGBPicker) => {
+export const RGBPicker: FC<RGBPicker> = (props: RGBPicker) => {
 	const rgb = new TinyColor(props.hex).toRgb();
 
 	const setRed = (value: any) => {
@@ -47,5 +47,3 @@ const RGBPicker: FC<RGBPicker> = (props: RGBPicker) => {
 		</fieldset>
 	);
 };
-
-export default RGBPicker;

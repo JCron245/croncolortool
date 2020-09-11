@@ -5,18 +5,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import { CSSTransition } from 'react-transition-group';
 import { Header } from '../header/Header';
 import { Helmet } from 'react-helmet';
-import { initialize as ReactGAInit } from 'react-ga';
 
-const ColorTool = lazy(() => import('../colorTool/ColorTool'));
-const ContrastChecker = lazy(() => import('../contrastCompare/ContrastCompare'));
-const ColorBlender = lazy(() => import('../colorBlender/ColorBlender'));
-
-if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
-	ReactGAInit('');
-	console.log('If you like this, check out my resume! https://joncornwell.com');
-} else {
-	console.log('[DEV MODE]');
-}
+const ColorTool = lazy(() => import('../colorTool/ColorTool').then((module) => ({ default: module.ColorTool })));
+const ContrastChecker = lazy(() => import('../contrastCompare/ContrastCompare').then((module) => ({ default: module.ContrastChecker })));
+const ColorBlender = lazy(() => import('../colorBlender/ColorBlender').then((module) => ({ default: module.ColorBlender })));
 
 interface AppRoute {
 	path: string;
@@ -52,7 +44,7 @@ const Routes = (): ReactElement => {
 	return <>{routeList}</>;
 };
 
-const App = (): ReactElement => {
+export const App = (): ReactElement => {
 	const location = useLocation();
 	const [title, setTitle] = useState<string>();
 
@@ -71,5 +63,3 @@ const App = (): ReactElement => {
 		</div>
 	);
 };
-
-export default App;

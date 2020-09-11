@@ -10,7 +10,7 @@ import { event as ReactGAEvent } from 'react-ga';
 import { push } from 'connected-react-router';
 import { TinyColor } from '@ctrl/tinycolor';
 
-const ColorSaver: FC = () => {
+export const ColorSaver: FC = () => {
 	const hex: string = useSelector((store: State) => store.color.hex);
 	const contrastColor: string = useSelector((store: State) => store.color.contrastColor);
 	const mode: string = useSelector((store: State) => store.color.mode);
@@ -46,7 +46,7 @@ const ColorSaver: FC = () => {
 		if (!parsedColors.find((color) => color.value === hex)) {
 			parsedColors.push({
 				value: `${hex}`,
-				label: `Hex: ${hex} - ${rgb}`,
+				label: `${hex}`,
 			});
 			localStorage.setItem('saved-colors', JSON.stringify(parsedColors));
 			toastMsg = `${hex.toUpperCase()} Saved!`;
@@ -103,5 +103,3 @@ const ColorSaver: FC = () => {
 		</form>
 	);
 };
-
-export default ColorSaver;

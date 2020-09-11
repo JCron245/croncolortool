@@ -15,7 +15,7 @@ interface ColorBar {
 	contrastColor: string;
 }
 
-const ColorBar: FC<ColorBar> = (props: ColorBar) => {
+export const ColorBar: FC<ColorBar> = memo((props: ColorBar) => {
 	const copied: string = useSelector((store: State) => store.color.copied);
 	const dispatch = useDispatch();
 
@@ -70,6 +70,4 @@ const ColorBar: FC<ColorBar> = (props: ColorBar) => {
 			</button>
 		</li>
 	);
-};
-
-export default memo(ColorBar);
+});

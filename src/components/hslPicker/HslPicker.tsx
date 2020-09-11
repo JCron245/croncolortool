@@ -9,7 +9,7 @@ interface HSLPicker {
 	onChangeComplete?: any;
 }
 
-const HSLPicker: FC<HSLPicker> = (props: HSLPicker) => {
+export const HSLPicker: FC<HSLPicker> = (props: HSLPicker) => {
 	const hsl = new TinyColor(props.hex).toHsl();
 
 	const setHue = (value: any) => {
@@ -58,5 +58,3 @@ const HSLPicker: FC<HSLPicker> = (props: HSLPicker) => {
 		</fieldset>
 	);
 };
-
-export default HSLPicker;

@@ -10,7 +10,7 @@ export interface ContrastDemo {
 	contrastRatio: any;
 }
 
-const ContrastCompareDemo: FC<ContrastDemo> = (props: ContrastDemo) => {
+export const ContrastCompareDemo: FC<ContrastDemo> = (props: ContrastDemo) => {
 	const createTooltips = (): ReactElement[] => {
 		return wcagInfo.map((wcag) => {
 			return (
@@ -82,5 +82,3 @@ const ContrastCompareDemo: FC<ContrastDemo> = (props: ContrastDemo) => {
 		</div>
 	);
 };
-
-export default ContrastCompareDemo;

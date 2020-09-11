@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import ColorBar from '../colorBar/ColorBar';
+import { ColorBar } from '../colorBar/ColorBar';
 import './colorBox.scss';
 import { ColorObject } from '../colorTool/colorToolUtils';
 
@@ -8,7 +8,7 @@ interface ColorBox {
 	name: string;
 }
 
-const ColorBox: FC<ColorBox> = (props: ColorBox) => {
+export const ColorBox: FC<ColorBox> = (props: ColorBox) => {
 	const { colors, name } = props;
 	const colorBars = colors?.map((c: any, index: number) => {
 		return <ColorBar groupName={name} hex={c.color} value={c.showValue} contrastColor={c.contrast} key={`${c.color}-${name}-${index}`} />;
@@ -23,5 +23,3 @@ const ColorBox: FC<ColorBox> = (props: ColorBox) => {
 		</div>
 	);
 };
-
-export default ColorBox;

@@ -24,6 +24,7 @@ export interface ColorSets {
 }
 
 const getColors = (color: string, mode: string): ColorSets => {
+	color = new TinyColor(color).toHexString();
 	const createColorObject = (color: string): ColorObject => {
 		return {
 			color,

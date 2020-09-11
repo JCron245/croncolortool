@@ -10,7 +10,7 @@ const initialState: ContrastCheck = {
 	},
 };
 
-export function contrastReducer(state = initialState, action: any) {
+export const contrastReducer = (state = initialState, action: any) => {
 	switch (action.type) {
 		case 'SET_COLORS':
 			return {
@@ -23,6 +23,4 @@ export function contrastReducer(state = initialState, action: any) {
 		default:
 			return state;
 	}
-}
-
-export default contrastReducer;
+};

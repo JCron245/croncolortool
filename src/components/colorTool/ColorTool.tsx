@@ -3,19 +3,19 @@ import React, { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './colorTool.scss';
 import { State } from '../../redux/interfaces';
-import ColorBox from '../colorBox/ColorBox';
-import ColorMode from '../colorMode/ColorMode';
-import ColorSaver from '../colorSaver/ColorSaver';
+import { ColorBox } from '../colorBox/ColorBox';
+import { ColorMode } from '../colorMode/ColorMode';
+import { ColorSaver } from '../colorSaver/ColorSaver';
 import { ChromePicker } from 'react-color';
-import RGBPicker from '../rgbPicker/RgbPicker';
-import HSLPicker from '../hslPicker/HslPicker';
+import { RGBPicker } from '../rgbPicker/RgbPicker';
+import { HSLPicker } from '../hslPicker/HslPicker';
 import { useDispatch } from 'react-redux';
 import { setColor } from '../../redux/actions/colorAction';
 import { push } from 'connected-react-router';
-import HexBox from '../hexBox/HexBox';
+import { HexBox } from '../hexBox/HexBox';
 import { getColors, ColorSets } from './colorToolUtils';
 
-const ColorTool: FC = () => {
+export const ColorTool: FC = () => {
 	const hex: string = useSelector((store: State) => store.color.hex);
 	const mode: string = useSelector((store: State) => store.color.mode);
 	const dispatch = useDispatch();
@@ -78,5 +78,3 @@ const ColorTool: FC = () => {
 		</div>
 	);
 };
-
-export default ColorTool;

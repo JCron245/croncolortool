@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { css } from 'glamor';
 import { event as ReactGAEvent } from 'react-ga';
 
-const ColorMode: FC = () => {
+export const ColorMode: FC = () => {
 	const hex: string = useSelector((store: State) => store.color.hex);
 	const contrastColor: string = useSelector((store: State) => store.color.contrastColor);
 	const mode: string = useSelector((store: State) => store.color.mode);
@@ -82,5 +82,3 @@ const ColorMode: FC = () => {
 		</form>
 	);
 };
-
-export default ColorMode;

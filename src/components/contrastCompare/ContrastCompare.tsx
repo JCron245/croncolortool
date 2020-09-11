@@ -1,17 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC, useState, useEffect } from 'react';
 import './contrastCompare.scss';
-import RGBPicker from '../rgbPicker/RgbPicker';
-import HSLPicker from '../hslPicker/HslPicker';
-import ContrastDemo from './contrastCompareDemo/ContrastCompareDemo';
+import { RGBPicker } from '../rgbPicker/RgbPicker';
+import { HSLPicker } from '../hslPicker/HslPicker';
+import { ContrastCompareDemo } from './contrastCompareDemo/ContrastCompareDemo';
 import { ContrastCheck, State } from '../../redux/interfaces';
 import { useDispatch, useSelector } from 'react-redux';
 import { setColors } from '../../redux/actions/contrastActions';
-import ContrastResults from './contrastCompareResults/ContrastCompareResults';
+import { ContrastCompareResults } from './contrastCompareResults/ContrastCompareResults';
 import { TinyColor } from '@ctrl/tinycolor';
-import HexBox from '../hexBox/HexBox';
+import { HexBox } from '../hexBox/HexBox';
 
-const ContrastChecker: FC = () => {
+export const ContrastChecker: FC = () => {
 	const store: ContrastCheck = useSelector((store: State) => store.contrast);
 	const dispatch = useDispatch();
 	const [backgroundColor, setBackgroundColor] = useState(store.backgroundColor);
@@ -36,8 +36,8 @@ const ContrastChecker: FC = () => {
 
 	return (
 		<div className="contrast-checker" style={currentStyle}>
-			<ContrastDemo contrastRatio={store.ratio} textColor={textColor} backgroundColor={backgroundColor} />
-			<ContrastResults
+			<ContrastCompareDemo contrastRatio={store.ratio} textColor={textColor} backgroundColor={backgroundColor} />
+			<ContrastCompareResults
 				contrastRatio={store.ratio}
 				smallAA={store.wcagPasses.small.aa}
 				smallAAA={store.wcagPasses.small.aaa}
@@ -59,5 +59,3 @@ const ContrastChecker: FC = () => {
 		</div>
 	);
 };
-
-export default ContrastChecker;

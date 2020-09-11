@@ -14,7 +14,7 @@ interface HexBox {
 	inputStyle?: any;
 }
 
-const HexBox: FC<HexBox> = (props: HexBox) => {
+export const HexBox: FC<HexBox> = memo((props: HexBox) => {
 	const [color, setColor] = useState(props.hex);
 	const [label] = useState(`${props.label ? props.label : 'Hex'}`);
 	const [id] = useState(props.id ? `${props.id}` : `${label}${Math.random().toFixed(3).replace('.', '')}`);
@@ -52,6 +52,4 @@ const HexBox: FC<HexBox> = (props: HexBox) => {
 			{props.display && <div className="color-display-box" style={{ backgroundColor: color }}></div>}
 		</div>
 	);
-};
-
-export default memo(HexBox);
+});
