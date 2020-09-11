@@ -1,6 +1,6 @@
 {
 	"name": "cron-color-tool",
-	"version": "0.4.1",
+	"version": "0.4.2",
 	"private": true,
 	"dependencies": {
 		"@ctrl/tinycolor": "^3.1.4",
