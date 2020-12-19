@@ -1,84 +1,35 @@
 import React, { FC } from 'react';
 import './colorMode.scss';
-import { useSelector, useDispatch } from 'react-redux';
-import { State } from '../../redux/interfaces';
-import { setMode } from '../../redux/actions/colorAction';
-import { toast } from 'react-toastify';
-import { css } from 'glamor';
-import { event as ReactGAEvent } from 'react-ga';
+import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Typography } from '@material-ui/core';
 
-export const ColorMode: FC = () => {
-	const hex: string = useSelector((store: State) => store.color.hex);
-	const contrastColor: string = useSelector((store: State) => store.color.contrastColor);
-	const mode: string = useSelector((store: State) => store.color.mode);
-	const dispatch = useDispatch();
+export interface ColorModeProps {
+	mode: string;
+	onChangeMode: any;
+	disableAlpha?: boolean;
+}
 
-	const toastOptions = {
-		containerId: 'toasts-container',
-		autoClose: 1500,
-		closeButton: false,
-		type: toast.TYPE.SUCCESS,
-		className: css({
-			backgroundColor: hex,
-			color: contrastColor,
-			border: `1px solid ${contrastColor}`,
-			textAlign: 'center',
-		}).toString(),
-	};
-
-	const changeMode = (event: any) => {
-		const modeChangeEvent = event.currentTarget.value;
-		if (modeChangeEvent !== mode) {
-			dispatch(setMode(modeChangeEvent));
-			ReactGAEvent({
-				category: 'Color Mode',
-				action: 'changed mode',
-				label: modeChangeEvent,
-			});
-			toast(`Color mode switched to ${modeChangeEvent.toUpperCase()}`, toastOptions);
-		}
-	};
-
-	const activeStyle = {
-		backgroundColor: hex,
-		color: contrastColor,
-	};
+export const ColorMode: FC<ColorModeProps> = (props: ColorModeProps) => {
+	const { mode, onChangeMode, disableAlpha } = props;
 
 	return (
-		<form className="color-mode-controls">
-			<button
-				value="hex"
-				aria-label="Switch Colors To Hex Mode"
-				onClick={changeMode}
-				className={mode === 'hex' ? 'mode-control active' : 'mode-control'}
-				aria-pressed={mode === 'hex'}
-				title="switch to hex"
-				style={mode === 'hex' ? activeStyle : {}}
-				type="button">
-				Hex
-			</button>
-			<button
-				value="rgb"
-				aria-label="Switch Colors To RGB Mode"
-				aria-pressed={mode === 'rgb'}
-				onClick={changeMode}
-				className={mode === 'rgb' ? 'mode-control active' : 'mode-control'}
-				title="switch to rgb"
-				style={mode === 'rgb' ? activeStyle : {}}
-				type="button">
-				Rgb
-			</button>
-			<button
-				value="hsl"
-				aria-label="Switch Colors To HSL Mode"
-				aria-pressed={mode === 'hsl'}
-				onClick={changeMode}
-				className={mode === 'hsl' ? 'mode-control active' : 'mode-control'}
-				title="switch to hsl"
-				style={mode === 'hsl' ? activeStyle : {}}
-				type="button">
-				Hsl
-			</button>
-		</form>
+		<FormControl component="fieldset">
+			<FormLabel component="legend">
+				<Typography>Color Mode</Typography>
+			</FormLabel>
+			<RadioGroup row aria-label="Color Mode Selector" name="colorMode" value={mode} onChange={onChangeMode}>
+				<FormControlLabel labelPlacement={'top'} value="hex" control={<Radio color={'primary'} size="small" />} label="HEX" />
+				{!disableAlpha && (
+					<FormControlLabel labelPlacement={'top'} value="hex8" control={<Radio color={'primary'} size="small" />} label="HEX8" />
+				)}
+				<FormControlLabel labelPlacement={'top'} value="rgb" control={<Radio color={'primary'} size="small" />} label="RGB" />
+				{!disableAlpha && (
+					<FormControlLabel labelPlacement={'top'} value="rgba" control={<Radio color={'primary'} size="small" />} label="RGBA" />
+				)}
+				<FormControlLabel labelPlacement={'top'} value="hsl" control={<Radio color={'primary'} size="small" />} label="HSL" />
+				{!disableAlpha && (
+					<FormControlLabel labelPlacement={'top'} value="hsla" control={<Radio color={'primary'} size="small" />} label="HSLA" />
+				)}
+			</RadioGroup>
+		</FormControl>
 	);
 };

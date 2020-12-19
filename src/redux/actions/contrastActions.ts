@@ -1,15 +1,27 @@
-import { getContrastRatio } from '../../utils/getContrastRatio';
-
-export function setColors(backgroundColor: string, textColor: string) {
-	let ratio = getContrastRatio(backgroundColor, textColor);
+export function setBackgroundColor(backgroundColor: string) {
 	return {
-		type: 'SET_COLORS',
+		type: 'SET_BACKGROUND_COLOR',
 		backgroundColor,
+	};
+}
+
+export function setBackgroundMode(mode: string) {
+	return {
+		type: 'SET_BACKGROUND_MODE',
+		mode,
+	};
+}
+
+export function setTextColor(textColor: string) {
+	return {
+		type: 'SET_TEXT_COLOR',
 		textColor,
-		ratio,
-		wcagPasses: {
-			small: { aa: ratio >= 4.5, aaa: ratio >= 7 },
-			large: { aa: ratio >= 3.1, aaa: ratio >= 4.5 },
-		},
+	};
+}
+
+export function setTextColorMode(mode: string) {
+	return {
+		type: 'SET_TEXTCOLOR_MODE',
+		mode,
 	};
 }

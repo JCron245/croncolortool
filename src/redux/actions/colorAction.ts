@@ -1,10 +1,21 @@
-import { findContrastingColor } from '../../utils/findContrast';
-
-export function setColor(color: string) {
+export function setColorHex(color: string) {
 	return {
 		type: 'SET_COLOR',
 		hex: color,
-		contrastColor: findContrastingColor(color),
+	};
+}
+
+export function setColorRGBA(color: string) {
+	return {
+		type: 'SET_COLOR_RGBA',
+		rgba: color,
+	};
+}
+
+export function setColorHSLA(color: string) {
+	return {
+		type: 'SET_COLOR_HSLA',
+		hsla: color,
 	};
 }
 
@@ -17,4 +28,8 @@ export function setCopied(copied: string) {
 		type: 'SET_COPIED',
 		copied,
 	};
+}
+
+export function setShow(show: boolean) {
+	return { type: 'SET_SHOW', show };
 }
