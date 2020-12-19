@@ -137,10 +137,10 @@ const createSaturationArray = (
 
 const createDesaturationArray = (
 	color: TinyColor,
-	step: number = 15,
+	step: number = 7.5,
 	mode: string,
 	isAlphaMode: boolean,
-	limit: number = 6
+	limit: number = 10
 ): ColorObject[] => {
 	const shades: any[] = [createColorObject(color, mode, isAlphaMode)];
 	for (let i = 1; i < limit; i++) {
