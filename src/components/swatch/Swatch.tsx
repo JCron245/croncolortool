@@ -61,7 +61,7 @@ export const Swatch: FC<SwatchProps> = (props: SwatchProps) => {
 	});
 
 	return (
-		<Grid item xs>
+		<Grid item xs className={'swatch'}>
 			<Typography aria-label={boxAriaLabel} className="box-title" id={boxID}>
 				{name}
 			</Typography>

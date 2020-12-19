@@ -69,7 +69,7 @@ export const ColorTool: FC = () => {
 	);
 
 	return (
-		<Grid container spacing={2}>
+		<Grid container style={{ minHeight: 'calc(100vh - 75px)' }}>
 			<h1 className="sr-only">Color Tool</h1>
 			<Grid container item xs={12} sm={4} lg={3} xl={3}>
 				<ColorControl
@@ -86,7 +86,7 @@ export const ColorTool: FC = () => {
 					showLabels={showLabels}
 				/>
 			</Grid>
-			<Grid container item xs={12} sm={8} lg={9} xl={9} spacing={2}>
+			<Grid container justify={'space-evenly'} item xs={12} sm={8} lg={9} xl={9}>
 				<SwatchContainer />
 			</Grid>
 		</Grid>
