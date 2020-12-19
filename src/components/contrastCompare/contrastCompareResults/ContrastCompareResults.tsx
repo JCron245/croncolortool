@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import './contrastCompareResults.scss';
+import { FormControl, FormLabel, FormGroup, FormControlLabel, Checkbox } from '@material-ui/core';
 
 export interface ContrastResults {
 	contrastRatio: number;
@@ -9,28 +9,25 @@ export interface ContrastResults {
 	largeAAA: boolean;
 }
 
+const GREEN = '#4BD878';
+const YELLOW = '#FFF08F';
+const RED = '#FF8486';
+
 export const ContrastCompareResults: FC<ContrastResults> = (props: ContrastResults) => {
+	const { contrastRatio, smallAA, largeAA, smallAAA, largeAAA } = props;
+	const colorRating = contrastRatio >= 7 ? GREEN : contrastRatio >= 3 ? YELLOW : RED;
+
 	return (
-		<div className="contrast-results-wrapper">
-			<div className="ratio">Contrast Ratio: {Number(props.contrastRatio).toFixed(2)}</div>
-			<div className="results">
-				<div className={'wcag-box aa ' + (props.smallAA ? 'good' : 'bad')}>
-					<span>{'>= 4.5'}</span>
-					<span>AA Small Text</span>
-				</div>
-				<div className={'wcag-box aaa ' + (props.smallAAA ? 'good' : 'bad')}>
-					<span>{'>= 7'}</span>
-					<span>AAA Small Text</span>
-				</div>
-				<div className={'wcag-box aa ' + (props.largeAA ? 'good' : 'bad')}>
-					<span>{'>= 3.1'}</span>
-					<span>AA Large Text</span>
-				</div>
-				<div className={'wcag-box aaa ' + (props.largeAAA ? 'good' : 'bad')}>
-					<span>{'>= 4.5'}</span>
-					<span>AAA Large Text</span>
-				</div>
-			</div>
-		</div>
+		<FormControl component="form">
+			<FormLabel>
+				Contrast Ratio: <span style={{ color: colorRating }}>{Number(contrastRatio).toFixed(2)}</span>
+			</FormLabel>
+			<FormGroup row>
+				<FormControlLabel control={<Checkbox style={{ color: smallAA ? GREEN : RED }} checked={smallAA} />} label="AA Small Text" />
+				<FormControlLabel control={<Checkbox style={{ color: smallAAA ? GREEN : RED }} checked={smallAAA} />} label="AAA Small Text" />
+				<FormControlLabel control={<Checkbox style={{ color: largeAA ? GREEN : RED }} checked={largeAA} />} label="AA Large Text" />
+				<FormControlLabel control={<Checkbox style={{ color: largeAAA ? GREEN : RED }} checked={largeAAA} />} label="AAA Large Text" />
+			</FormGroup>
+		</FormControl>
 	);
 };

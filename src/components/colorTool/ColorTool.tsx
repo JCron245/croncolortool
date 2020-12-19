@@ -1,80 +1,94 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { FC, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { FC } from 'react';
 import './colorTool.scss';
-import { State } from '../../redux/interfaces';
-import { ColorBox } from '../colorBox/ColorBox';
-import { ColorMode } from '../colorMode/ColorMode';
-import { ColorSaver } from '../colorSaver/ColorSaver';
-import { ChromePicker } from 'react-color';
-import { RGBPicker } from '../rgbPicker/RgbPicker';
-import { HSLPicker } from '../hslPicker/HslPicker';
-import { useDispatch } from 'react-redux';
-import { setColor } from '../../redux/actions/colorAction';
+import { RootState } from '../../redux/interfaces';
 import { push } from 'connected-react-router';
-import { HexBox } from '../hexBox/HexBox';
-import { getColors, ColorSets } from './colorToolUtils';
+import useDebouncy from 'use-debouncy';
+import { Grid } from '@material-ui/core';
+import { ColorControl } from '../colorControl/ColorControl';
+import { SwatchContainer } from '../swatchContainer/SwatchContainer';
+import { setColorRGBA, setColorHex, setColorHSLA, setShow } from '../../redux/actions/colorAction';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { setMode } from '../../redux/actions/colorAction';
+import { toast } from 'react-toastify';
+import { event as ReactGAEvent } from 'react-ga';
+import { toastOptions } from '../../utils/getToastOptions';
 
 export const ColorTool: FC = () => {
-	const hex: string = useSelector((store: State) => store.color.hex);
-	const mode: string = useSelector((store: State) => store.color.mode);
+	const hex: string = useSelector((store: RootState) => store.color.hex);
+	const hsla: string = useSelector((store: RootState) => store.color.hsla);
+	const isAlpha: boolean = useSelector((store: RootState) => store.color.alphaEnabled);
+	const mode: string = useSelector((store: RootState) => store.color.mode);
+	const rgba: string = useSelector((store: RootState) => store.color.rgba);
 	const dispatch = useDispatch();
-	const [colorArrays, setColorArrays] = useState<ColorSets>();
+	const contrastColor: string = useSelector((store: RootState) => store.color.contrastColor);
+	const showLabels: boolean = useSelector((store: RootState) => store.color.showLabels);
 
-	useEffect(() => {
-		setColorArrays(getColors(hex, mode));
-	}, [hex, mode]);
+	const changeMode = (event: any) => {
+		const modeChangeEvent = event.currentTarget.value;
+		if (modeChangeEvent !== mode) {
+			dispatch(setMode(modeChangeEvent));
+			ReactGAEvent({
+				category: 'Color Mode',
+				action: 'changed mode',
+				label: modeChangeEvent,
+			});
 
-	const colorUpdate = (value: string, complete: boolean = false) => {
-		if (value !== hex) {
-			dispatch(setColor(value));
-		}
-		if (complete) {
-			dispatch(push(`/color-tool?color=${value.substring(1)}`));
+			toast(`Color mode switched to ${modeChangeEvent.toUpperCase()}`, toastOptions(hex, contrastColor));
 		}
 	};
 
-	const colorUpdateComplete = (value: string) => colorUpdate(value, true);
+	const toggleLabels = (show: boolean) => {
+		dispatch(setShow(show));
+	};
 
-	const chromePickerChange = (colorObj: any) => colorUpdate(colorObj.hex);
+	const colorUpdateRgba = (value: string) => {
+		if (value !== rgba) {
+			dispatch(setColorRGBA(value));
+		}
+	};
 
-	const chromePickerChangeComplete = (colorObj: any) => colorUpdate(colorObj.hex, true);
+	const colorUpdate = (value: string) => {
+		if (value !== hex) {
+			dispatch(setColorHex(value));
+		}
+	};
+
+	const colorUpdateHSLA = (value: string) => {
+		if (value !== hsla) {
+			dispatch(setColorHSLA(value));
+		}
+	};
+
+	useDebouncy(
+		() => {
+			dispatch(push(`/color-tool?color=${hex.substring(1)}`));
+		},
+		400,
+		[hex]
+	);
 
 	return (
-		<div className="swatch">
+		<Grid container style={{ minHeight: 'calc(100vh - 75px)' }}>
 			<h1 className="sr-only">Color Tool</h1>
-			{/* Color Picker Box */}
-			<section className="picker-box">
-				<form className="custom-picker-form">
-					<ChromePicker color={hex} disableAlpha={true} onChange={chromePickerChange} onChangeComplete={chromePickerChangeComplete} />
-					<HexBox hex={hex} onChange={colorUpdate} />
-					<RGBPicker hex={hex} onChange={colorUpdate} onChangeComplete={colorUpdateComplete} />
-					<HSLPicker hex={hex} onChange={colorUpdate} onChangeComplete={colorUpdateComplete} />
-				</form>
-				<div className="viewing-box" style={{ backgroundColor: hex }}></div>
-			</section>
-			{/* Box of various color information - shades etc */}
-			<section className="info-box">
-				<div className="color-box-grid">
-					<ColorBox name="lighter" colors={colorArrays?.lighter} />
-					<ColorBox name="darker" colors={colorArrays?.darker} />
-					<ColorBox name="tint" colors={colorArrays?.tint} />
-					<ColorBox name="shade" colors={colorArrays?.shade} />
-					<ColorBox name="saturated" colors={colorArrays?.saturated} />
-					<ColorBox name="desaturated" colors={colorArrays?.desaturated} />
-					<ColorBox name="analogous" colors={colorArrays?.analogous} />
-					<ColorBox name="complementary" colors={colorArrays?.complementary} />
-					<ColorBox name="split complement" colors={colorArrays?.split} />
-					<ColorBox name="triadic" colors={colorArrays?.triadic} />
-					<ColorBox name="tetradic" colors={colorArrays?.tetradic} />
-					<ColorBox name="pentadic" colors={colorArrays?.pentadic} />
-					<ColorBox name="monochromatic" colors={colorArrays?.monochromatic} />
-				</div>
-				<div className="controls">
-					<ColorMode />
-					<ColorSaver />
-				</div>
-			</section>
-		</div>
+			<Grid container item xs={12} sm={4} lg={3} xl={3}>
+				<ColorControl
+					hex={hex}
+					hsla={hsla}
+					isAlpha={isAlpha}
+					mode={mode}
+					onColorUpdateHex={colorUpdate}
+					onColorUpdateHSLA={colorUpdateHSLA}
+					onColorUpdateRgba={colorUpdateRgba}
+					onModeChange={changeMode}
+					rgba={rgba}
+					onShowLabelChange={toggleLabels}
+					showLabels={showLabels}
+				/>
+			</Grid>
+			<Grid container justify={'space-evenly'} item xs={12} sm={8} lg={9} xl={9}>
+				<SwatchContainer />
+			</Grid>
+		</Grid>
 	);
 };
