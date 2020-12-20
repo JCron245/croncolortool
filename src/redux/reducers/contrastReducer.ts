@@ -8,20 +8,20 @@ const txtMode: 'hex' | 'rgb' | 'hsl' = (localStorage.getItem('contrast-txt-mode'
 
 const initialState: ContrastCheckState = {
 	backgroundColor: {
-		hex: '#eeeed6',
-		rgb: 'rgb(238,238,214)',
-		hsl: 'hsl(0,0%,100%)',
+		hex: '#0FADED',
+		rgb: 'rgb(15,173,237)',
+		hsl: 'hsl(197,88%,49%)',
 		contrastColor: '#000',
 		mode: bgMode,
 	},
 	textColor: {
-		hex: '#15140f',
-		rgb: 'rgb(21,20,15)',
-		hsl: 'hsl(50,17%,7%)',
+		hex: '#2C0E02',
+		rgb: 'rgb(44,14,2)',
+		hsl: 'hsl(17,91%,9%)',
 		contrastColor: '#fff',
 		mode: txtMode,
 	},
-	ratio: 15.66,
+	ratio: 7.02,
 	wcagPasses: {
 		small: { aa: true, aaa: true },
 		large: { aa: true, aaa: true },
@@ -34,7 +34,7 @@ export const contrastReducer = (state = initialState, action: any): ContrastChec
 	switch (action.type) {
 		case 'SET_BACKGROUND_COLOR':
 			ratio = getContrastRatio(action.backgroundColor, state.textColor.hex);
-			isHex = !action.backgroundColor.startsWith('r') || !action.backgroundColor.startsWith('h');
+			isHex = !action.backgroundColor.startsWith('rgb') && !action.backgroundColor.startsWith('hsl');
 			const backgroundColorTC = new TinyColor(action.backgroundColor);
 			return {
 				...state,
@@ -53,7 +53,7 @@ export const contrastReducer = (state = initialState, action: any): ContrastChec
 			};
 		case 'SET_TEXT_COLOR':
 			ratio = getContrastRatio(state.backgroundColor.hex, action.textColor);
-			isHex = !(action.textColor.startsWith('r') || action.textColor.startsWith('h'));
+			isHex = !(action.textColor.startsWith('rgb') && action.textColor.startsWith('hsl'));
 			const textColorTC = new TinyColor(action.textColor);
 			return {
 				...state,

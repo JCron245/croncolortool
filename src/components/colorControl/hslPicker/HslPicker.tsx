@@ -20,11 +20,13 @@ export const HSLPicker: FC<HSLPickerProps> = (props: HSLPickerProps) => {
 	};
 
 	const setSaturation = (event: any, newValue: number | number[]) => {
-		props.onChange(`hsla(${hsla.h},${(newValue as number) / 100},${hsla.l},${hsla.a})`);
+		newValue = Math.round(newValue as number);
+		props.onChange(`hsla(${hsla.h},${newValue / 100},${hsla.l},${hsla.a})`);
 	};
 
 	const setLightness = (event: any, newValue: number | number[]) => {
-		props.onChange(`hsla(${hsla.h},${hsla.s},${(newValue as number) / 100},${hsla.a})`);
+		newValue = Math.round(newValue as number);
+		props.onChange(`hsla(${hsla.h},${hsla.s},${newValue / 100},${hsla.a})`);
 	};
 
 	const setAlpha = (event: any, newValue: number | number[]) => {
