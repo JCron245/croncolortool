@@ -39,6 +39,9 @@ const Header: FC = () => {
 							<MenuItem component={NavLink} to={'/random'} onClick={handleClose}>
 								Random Color
 							</MenuItem>
+							<Typography className={'version'} aria-label={`Version Number: ${process.env.REACT_APP_VERSION}`}>
+								v: {process.env.REACT_APP_VERSION}
+							</Typography>
 						</Menu>
 					</div>
 				</Toolbar>
