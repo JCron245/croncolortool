@@ -8,7 +8,6 @@ import { toastOptions } from '../../utils/getToastOptions';
 import './swatch.scss';
 import { List, Typography, Grid } from '@material-ui/core';
 import copy from 'clipboard-copy';
-import { event as ReactGAEVent } from 'react-ga';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -25,22 +24,17 @@ export const Swatch: FC<SwatchProps> = (props: SwatchProps) => {
 	const copied: string = useSelector((store: RootState) => store.color.copied);
 	const dispatch = useDispatch();
 
-	const singleClick = useCallback((hex: string, contrastColor: string) => {
+	const singleClick = useCallback((hex: any, contrastColor: string) => {
 		copy(hex).then(
 			() => {
 				// I don't want someone going nuts like me and clicking this a thousand times and saturating my analytics :)
 				if (hex !== copied) {
-					ReactGAEVent({
-						category: 'Color Copy',
-						action: 'Color copied',
-						label: hex,
-					});
 					dispatch(setCopied(hex));
 				}
 				toast(`${hex} copied to clipboard!`, toastOptions(hex, contrastColor));
 			},
 			(err) => {
-				console.log('[ERROR] Copy Error: ', err);
+				dispatch(setCopied(`ERROR: ${err}`));
 			}
 		);
 	}, []);

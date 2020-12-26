@@ -11,7 +11,6 @@ import { setColorRGBA, setColorHex, setColorHSLA, setShow } from '../../redux/ac
 import { useSelector, useDispatch } from 'react-redux';
 import { setMode } from '../../redux/actions/colorAction';
 import { toast } from 'react-toastify';
-import { event as ReactGAEvent } from 'react-ga';
 import { toastOptions } from '../../utils/getToastOptions';
 
 export const ColorTool: FC = () => {
@@ -28,12 +27,6 @@ export const ColorTool: FC = () => {
 		const modeChangeEvent = event.currentTarget.value;
 		if (modeChangeEvent !== mode) {
 			dispatch(setMode(modeChangeEvent));
-			ReactGAEvent({
-				category: 'Color Mode',
-				action: 'changed mode',
-				label: modeChangeEvent,
-			});
-
 			toast(`Color mode switched to ${modeChangeEvent.toUpperCase()}`, toastOptions(hex, contrastColor));
 		}
 	};

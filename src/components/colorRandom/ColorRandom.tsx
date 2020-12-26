@@ -8,28 +8,45 @@ import { findContrastingColor } from '../../utils/findContrast';
 import copy from 'clipboard-copy';
 import { toast } from 'react-toastify';
 import { toastOptions } from '../../utils/getToastOptions';
+import ReactGA from 'react-ga';
+
+const gaCategory = 'Random Color Generator';
 
 export const RandomColor: FC = () => {
 	const [currentColor, setCurrentColor] = React.useState('#0FADED');
 	const [currentContrast, setCurrentContrast] = React.useState('#000');
-	const [hue, setHue] = React.useState<RandomOptions['hue']>();
-	const [luminosity, setLuminosity] = React.useState<RandomOptions['luminosity'] | 'none'>();
+	const [hue, setHue] = React.useState<RandomOptions['hue']>('');
+	const [luminosity, setLuminosity] = React.useState<RandomOptions['luminosity'] | 'none' | ''>('');
 
 	const singleClick = () => {
 		copy(currentColor).then(
 			() => {
+				ReactGA.event({
+					category: gaCategory,
+					action: 'Color Copied',
+					label: `${currentColor}`,
+				});
 				toast(`${currentColor.toUpperCase()} copied to clipboard!`, toastOptions(currentColor, currentContrast));
 			},
-			(err) => {
-				console.log('[ERROR] Copy Error: ', err);
+			() => {
+				ReactGA.event({
+					category: gaCategory,
+					action: 'Color Failed To Copy',
+					label: `${currentColor}`,
+				});
 			}
 		);
 	};
 
 	const generateRandomColor = () => {
-		setCurrentColor(
-			random({ hue: hue === 'none' ? undefined : hue, luminosity: luminosity === 'none' ? undefined : luminosity }).toHexString()
-		);
+		let lm = luminosity === 'none' || luminosity === '' ? undefined : luminosity;
+		let newColor = random({ hue: hue === 'none' ? undefined : hue, luminosity: lm }).toHexString();
+		setCurrentColor(newColor);
+		ReactGA.event({
+			category: gaCategory,
+			action: 'Random Color Generated',
+			label: `${newColor}`,
+		});
 	};
 
 	useEffect(() => {

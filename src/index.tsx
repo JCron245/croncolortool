@@ -6,12 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { configureStore, history } from './configureStore';
 import { ConnectedRouter } from 'connected-react-router';
-import * as ReactGa from 'react-ga';
 
-if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
-	ReactGa.initialize('');
-	console.log('If you like this, check out my resume! https://joncornwell.com');
-}
+console.log('If you like this, check out my resume! https://joncornwell.com');
 
 const store = configureStore();
 

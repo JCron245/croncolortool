@@ -6,10 +6,12 @@ import { Header } from '../header/Header';
 import { Helmet } from 'react-helmet';
 import { ThemeProvider, CssBaseline, createMuiTheme } from '@material-ui/core';
 import { Routes } from '../routes/Routes';
+import { usePageTracking } from '../routes/Tracker';
 
 export const App = (): ReactElement => {
 	const location = useLocation();
 	const [title, setTitle] = useState<string>();
+	usePageTracking();
 
 	const theme = React.useMemo(
 		() =>

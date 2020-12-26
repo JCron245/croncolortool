@@ -2,6 +2,7 @@ import { ColorState } from '../interfaces';
 import { TinyColor } from '@ctrl/tinycolor';
 import { findContrastingColor } from '../../utils/findContrast';
 import { getColors } from '../../utils/colorToolUtils';
+import ReactGA from 'react-ga';
 
 const mode: 'hex' | 'rgb' | 'hsl' | 'hex8' | 'rgba' = (localStorage.getItem('mode') as any) || 'hex';
 
@@ -10,6 +11,49 @@ const urlParams = new URLSearchParams(window.location.search);
 const paramColor = urlParams.get('color');
 
 const initColor = new TinyColor(paramColor || '#0FADED');
+
+const gaCategory = 'Color Tool';
+
+const buildCopyEvent = (color: string, mode: string) => {
+	let gaLabel = '';
+	let gaAction = 'Color Copied';
+	let tc = new TinyColor(color);
+
+	if (color.startsWith('ERROR')) {
+		gaAction = 'Color Failed To Copy';
+		gaLabel = `${color}`;
+	} else if (!tc.isValid) {
+		gaAction = 'Color Copied: With Warnings';
+		gaLabel = `Invalid Color: ${color}`;
+	} else {
+		switch (mode) {
+			case 'hex':
+				gaLabel = tc.toHexString();
+				break;
+			case 'hex8':
+				gaLabel = tc.toHex8String();
+				break;
+			case 'rgb':
+			case 'rgba':
+				gaLabel = tc.toRgbString();
+				break;
+			case 'hsl':
+			case 'hsla':
+				gaLabel = tc.toHslString();
+				break;
+			default:
+				gaAction = 'Color Copied: With Warnings';
+				gaLabel = `Invalid Mode: ${color}`;
+				break;
+		}
+	}
+
+	return {
+		category: gaCategory,
+		action: gaAction,
+		label: gaLabel,
+	};
+};
 
 const alphaCheck = (mode: string) => {
 	return mode === 'hex8' || mode === 'rgba' || mode === 'hsla';
@@ -65,6 +109,11 @@ export const colorReducer = (state = initialState, action: any): ColorState => {
 			tc = new TinyColor(state.hex);
 			tc.setAlpha(1);
 			window.localStorage.setItem('mode', action.mode);
+			ReactGA.event({
+				category: gaCategory,
+				action: 'Set Mode',
+				label: `${action.mode}`,
+			});
 			if (isAlpha !== state.alphaEnabled) {
 				return {
 					...state,
@@ -79,8 +128,14 @@ export const colorReducer = (state = initialState, action: any): ColorState => {
 				return { ...state, mode: action.mode, colorSets: getColors(tc, action.mode, isAlpha), alphaEnabled: isAlpha };
 			}
 		case 'SET_COPIED':
-			return { ...state, copied: action.hex };
+			ReactGA.event(buildCopyEvent(action.copied, state.mode));
+			return { ...state, copied: action.copied };
 		case 'SET_SHOW':
+			ReactGA.event({
+				category: gaCategory,
+				action: 'Set Labels',
+				label: `${action.show}`,
+			});
 			return {
 				...state,
 				showLabels: action.show,

@@ -1,7 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC, useState, useEffect } from 'react';
 import './colorBlender.scss';
 import { Grid, Paper, TextField } from '@material-ui/core';
 import { TinyColor } from '@ctrl/tinycolor';
+import ReactGA from 'react-ga';
+
+const gaCategory = 'Color Blender';
 
 export const ColorBlender: FC = () => {
 	const [first, setFirst] = useState('#0FADED');
@@ -14,7 +18,15 @@ export const ColorBlender: FC = () => {
 		let c1 = new TinyColor(first);
 		let c2 = new TinyColor(second);
 		if (c1.isValid && c2.isValid) {
-			setBlend(c1.mix(c2, 50).toHexString());
+			let mix = c1.mix(c2, 50).toHexString();
+			if (mix !== blend) {
+				ReactGA.event({
+					category: gaCategory,
+					action: 'Color Blend Generated',
+					label: `${mix}`,
+				});
+			}
+			setBlend(mix);
 		}
 	}, [first, second]);
 
@@ -63,7 +75,7 @@ export const ColorBlender: FC = () => {
 						</Paper>
 					</Grid>
 				</Grid>
-				<Grid justify={'center'} item xs={6} sm={1} md={2}>
+				<Grid container justify={'center'} item xs={6} sm={1} md={2}>
 					<Paper component={'form'} className={'color-output'}>
 						<TextField fullWidth InputProps={{ readOnly: true }} label="Blended Color" value={blend} />
 					</Paper>
