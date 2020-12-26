@@ -19,8 +19,8 @@ interface SwatchProps {
 
 export const Swatch: FC<SwatchProps> = (props: SwatchProps) => {
 	const { colors, name, showLabels } = props;
-	const boxID = `${name.replace(' ', '-')}-swatch`;
 	const boxAriaLabel = `Swatch of ${name} colors`;
+	const boxID = `${name.replace(' ', '-')}-swatch`;
 	const copied: string = useSelector((store: RootState) => store.color.copied);
 	const dispatch = useDispatch();
 
@@ -43,13 +43,13 @@ export const Swatch: FC<SwatchProps> = (props: SwatchProps) => {
 		const key = `${c.color}-${name}-${index}`;
 		return (
 			<SwatchBar
+				contrastColor={c.contrast}
 				groupName={name}
 				hex={c.color}
-				showValue={c.showValue}
-				contrastColor={c.contrast}
 				key={key}
 				onClick={singleClick}
 				showLabels={showLabels}
+				showValue={c.showValue}
 			/>
 		);
 	});

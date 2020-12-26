@@ -40,8 +40,8 @@ export interface ColorState {
 
 export interface ContrastCheckState {
 	backgroundColor: ContrastCheckStateColor;
-	textColor: ContrastCheckStateColor;
 	ratio: number;
+	textColor: ContrastCheckStateColor;
 	wcagPasses: {
 		small: WCAGRule;
 		large: WCAGRule;
@@ -49,11 +49,11 @@ export interface ContrastCheckState {
 }
 
 export interface ContrastCheckStateColor {
-	hex: string;
-	rgb: string;
-	hsl: string;
 	contrastColor: string;
+	hex: string;
+	hsl: string;
 	mode: 'rgb' | 'hsl' | 'hex';
+	rgb: string;
 }
 
 export interface WCAGRule {

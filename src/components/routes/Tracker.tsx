@@ -8,7 +8,7 @@ export const usePageTracking = () => {
 	const [initialized, setInitialized] = useState(false);
 
 	useEffect(() => {
-		if (!window.location.href.includes('localhost') || true) {
+		if (!window.location.href.includes('localhost')) {
 			ReactGA.initialize(`${process.env.REACT_APP_GA_TOKEN}`);
 			setInitialized(true);
 		}

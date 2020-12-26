@@ -73,10 +73,10 @@
 		]
 	},
 	"prettier": {
-		"useTabs": true,
-		"tabWidth": 2,
-		"singleQuote": true,
 		"jsxBracketSameLine": true,
-		"printWidth": 140
+		"printWidth": 140,
+		"singleQuote": true,
+		"tabWidth": 2,
+		"useTabs": true
 	}
 }

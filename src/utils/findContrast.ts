@@ -4,8 +4,8 @@ const difference = (a: number, b: number) => {
 	return Math.abs(a - b);
 };
 
-const WHITE = '#FFF';
 const BLACK = '#000';
+const WHITE = '#FFF';
 
 /**
  * Takes a color and determines the readability score of it against a black and white

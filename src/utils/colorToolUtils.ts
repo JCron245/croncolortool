@@ -8,19 +8,19 @@ export interface ColorObject {
 }
 
 export interface ColorSets {
-	lighter: ColorObject[];
-	darker: ColorObject[];
-	tint: ColorObject[];
-	shade: ColorObject[];
-	saturated: ColorObject[];
-	desaturated: ColorObject[];
 	analogous: ColorObject[];
 	complementary: ColorObject[];
-	split?: ColorObject[];
-	triadic?: ColorObject[];
-	tetradic?: ColorObject[];
-	pentadic?: ColorObject[];
+	darker: ColorObject[];
+	desaturated: ColorObject[];
+	lighter: ColorObject[];
 	monochromatic: ColorObject[];
+	pentadic?: ColorObject[];
+	saturated: ColorObject[];
+	shade: ColorObject[];
+	split?: ColorObject[];
+	tetradic?: ColorObject[];
+	tint: ColorObject[];
+	triadic?: ColorObject[];
 }
 
 const toRgbString = (tc: TinyColor, isAlphaMode: boolean = false): string => {
@@ -201,19 +201,19 @@ const getColors = (color: TinyColor, mode: string, isAlphaMode: boolean): ColorS
 	color = new TinyColor(color);
 
 	return {
-		lighter: createLightArray(color, undefined, mode, isAlphaMode),
-		darker: createDarkArray(color, undefined, mode, isAlphaMode),
-		tint: createTintArray(color, undefined, mode, isAlphaMode),
-		shade: createShadeArray(color, undefined, mode, isAlphaMode),
-		saturated: createSaturationArray(color, undefined, mode, isAlphaMode),
-		desaturated: createDesaturationArray(color, undefined, mode, isAlphaMode),
 		analogous: createAnalogousArray(color, mode, isAlphaMode),
 		complementary: createComplementArray(color, mode, isAlphaMode),
-		split: createSplitComplementArray(color, mode, isAlphaMode),
-		triadic: createTriadArray(color, mode, isAlphaMode),
-		tetradic: createTetradArray(color, mode, isAlphaMode),
-		pentadic: createPentadArray(color, mode, isAlphaMode),
+		darker: createDarkArray(color, undefined, mode, isAlphaMode),
+		desaturated: createDesaturationArray(color, undefined, mode, isAlphaMode),
+		lighter: createLightArray(color, undefined, mode, isAlphaMode),
 		monochromatic: createMonochromaticArray(color, mode, isAlphaMode),
+		pentadic: createPentadArray(color, mode, isAlphaMode),
+		saturated: createSaturationArray(color, undefined, mode, isAlphaMode),
+		shade: createShadeArray(color, undefined, mode, isAlphaMode),
+		split: createSplitComplementArray(color, mode, isAlphaMode),
+		tetradic: createTetradArray(color, mode, isAlphaMode),
+		tint: createTintArray(color, undefined, mode, isAlphaMode),
+		triadic: createTriadArray(color, mode, isAlphaMode),
 	};
 };
 

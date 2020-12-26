@@ -14,10 +14,10 @@ interface AppRoute {
 }
 
 const appRoutes = [
+	{ path: '/blender', name: '/blender', Component: ColorBlender },
 	{ path: '/color-tool', name: '/color-tool', Component: ColorTool },
 	{ path: '/contrast', name: '/contrast', Component: ContrastChecker },
 	{ path: '/random', name: '/random', Component: ColorRandom },
-	{ path: '/blender', name: '/blender', Component: ColorBlender },
 ];
 
 export const Routes = (): ReactElement => {

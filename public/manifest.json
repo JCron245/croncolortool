@@ -1,11 +1,6 @@
 {
-	"short_name": "Cron Color",
-	"name": "Cron Color Tool",
-	"theme_color": "#0faded",
 	"background_color": "#473333",
 	"display": "fullscreen",
-	"orientation": "portrait",
-	"lang": "en-US",
 	"icons": [
 		{
 			"src": "favicon.ico",
@@ -23,5 +18,10 @@
 			"type": "image/png"
 		}
 	],
-	"start_url": "."
+	"lang": "en-US",
+	"name": "Cron Color Tool",
+	"orientation": "portrait",
+	"short_name": "Cron Color",
+	"start_url": ".",
+	"theme_color": "#0faded"
 }

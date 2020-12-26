@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, ChangeEvent } from 'react';
 import './colorBlender.scss';
 import { Grid, Paper, TextField } from '@material-ui/core';
 import { TinyColor } from '@ctrl/tinycolor';
@@ -8,11 +8,11 @@ import ReactGA from 'react-ga';
 const gaCategory = 'Color Blender';
 
 export const ColorBlender: FC = () => {
+	const [blend, setBlend] = useState('#7e7e7e');
 	const [first, setFirst] = useState('#0FADED');
 	const [firstValid, setFirstValid] = useState(true);
 	const [second, setSecond] = useState('#ed4f0f');
 	const [secondValid, setSecondValid] = useState(true);
-	const [blend, setBlend] = useState('#7e7e7e');
 
 	useEffect(() => {
 		let c1 = new TinyColor(first);
@@ -30,13 +30,13 @@ export const ColorBlender: FC = () => {
 		}
 	}, [first, second]);
 
-	const checkFirst = (event: any) => {
+	const checkFirst = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const tc = new TinyColor(event.target.value);
 		setFirstValid(tc.isValid);
 		setFirst(event.target.value);
 	};
 
-	const checkSecond = (event: any) => {
+	const checkSecond = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const tc = new TinyColor(event.target.value);
 		setSecondValid(tc.isValid);
 		setSecond(event.target.value);
@@ -53,24 +53,24 @@ export const ColorBlender: FC = () => {
 					<Grid item xs={5} sm={1} md={2}>
 						<Paper component={'form'} className={'color-input'}>
 							<TextField
-								fullWidth
-								label="First Color"
-								helperText={!firstValid ? 'Invalid Hex' : ''}
 								error={!firstValid}
-								value={first}
+								fullWidth
+								helperText={!firstValid ? 'Invalid Hex' : ''}
+								label="First Color"
 								onChange={checkFirst}
+								value={first}
 							/>
 						</Paper>
 					</Grid>
 					<Grid item xs={5} sm={1} md={2}>
 						<Paper component={'form'} className={'color-input'}>
 							<TextField
-								fullWidth
-								label="Second Color"
-								helperText={!secondValid ? 'Invalid Hex' : ''}
 								error={!secondValid}
-								value={second}
+								fullWidth
+								helperText={!secondValid ? 'Invalid Hex' : ''}
+								label="Second Color"
 								onChange={checkSecond}
+								value={second}
 							/>
 						</Paper>
 					</Grid>

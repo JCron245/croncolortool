@@ -60,14 +60,14 @@ const alphaCheck = (mode: string) => {
 };
 
 const initialState: ColorState = {
-	hex: initColor.toHex8String(),
-	rgba: initColor.toRgbString(),
-	hsla: initColor.toHslString(),
-	contrastColor: '#000',
-	mode: mode,
 	alphaEnabled: alphaCheck(mode),
-	copied: '',
 	colorSets: getColors(initColor, mode, alphaCheck(mode)),
+	contrastColor: '#000',
+	copied: '',
+	hex: initColor.toHex8String(),
+	hsla: initColor.toHslString(),
+	mode: mode,
+	rgba: initColor.toRgbString(),
 	showLabels: true,
 };
 
@@ -78,31 +78,31 @@ export const colorReducer = (state = initialState, action: any): ColorState => {
 			tc = new TinyColor(action.hsla);
 			return {
 				...state,
-				hex: tc.toHex8String(),
-				contrastColor: findContrastingColor(action.rgba, tc.getAlpha()),
 				colorSets: getColors(tc, state.mode, alphaCheck(state.mode)),
-				rgba: tc.toRgbString(),
+				contrastColor: findContrastingColor(action.rgba, tc.getAlpha()),
+				hex: tc.toHex8String(),
 				hsla: action.hsla,
+				rgba: tc.toRgbString(),
 			};
 		case 'SET_COLOR_RGBA':
 			tc = new TinyColor(action.rgba);
 			return {
 				...state,
-				hex: tc.toHex8String(),
-				contrastColor: findContrastingColor(action.rgba, tc.getAlpha()),
 				colorSets: getColors(tc, state.mode, alphaCheck(state.mode)),
-				rgba: action.rgba,
+				contrastColor: findContrastingColor(action.rgba, tc.getAlpha()),
+				hex: tc.toHex8String(),
 				hsla: tc.toHslString(),
+				rgba: action.rgba,
 			};
 		case 'SET_COLOR':
 			tc = new TinyColor(action.hex);
 			return {
 				...state,
-				hex: action.hex,
-				contrastColor: findContrastingColor(action.hex, tc.getAlpha()),
 				colorSets: getColors(tc, state.mode, alphaCheck(state.mode)),
-				rgba: tc.toRgbString(),
+				contrastColor: findContrastingColor(action.hex, tc.getAlpha()),
+				hex: action.hex,
 				hsla: tc.toHslString(),
+				rgba: tc.toRgbString(),
 			};
 		case 'SET_MODE':
 			const isAlpha = alphaCheck(action.mode);
@@ -117,12 +117,12 @@ export const colorReducer = (state = initialState, action: any): ColorState => {
 			if (isAlpha !== state.alphaEnabled) {
 				return {
 					...state,
+					alphaEnabled: isAlpha,
+					colorSets: getColors(tc, action.mode, isAlpha),
 					hex: tc.toHex8String(),
-					rgba: tc.toRgbString(),
 					hsla: tc.toHslString(),
 					mode: action.mode,
-					colorSets: getColors(tc, action.mode, isAlpha),
-					alphaEnabled: isAlpha,
+					rgba: tc.toRgbString(),
 				};
 			} else {
 				return { ...state, mode: action.mode, colorSets: getColors(tc, action.mode, isAlpha), alphaEnabled: isAlpha };

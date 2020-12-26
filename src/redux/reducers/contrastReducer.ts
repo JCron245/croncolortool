@@ -8,18 +8,18 @@ const txtMode: 'hex' | 'rgb' | 'hsl' = (localStorage.getItem('contrast-txt-mode'
 
 const initialState: ContrastCheckState = {
 	backgroundColor: {
-		hex: '#0FADED',
-		rgb: 'rgb(15,173,237)',
-		hsl: 'hsl(197,88%,49%)',
 		contrastColor: '#000',
+		hex: '#0FADED',
+		hsl: 'hsl(197,88%,49%)',
 		mode: bgMode,
+		rgb: 'rgb(15,173,237)',
 	},
 	textColor: {
-		hex: '#2C0E02',
-		rgb: 'rgb(44,14,2)',
-		hsl: 'hsl(17,91%,9%)',
 		contrastColor: '#fff',
+		hex: '#2C0E02',
+		hsl: 'hsl(17,91%,9%)',
 		mode: txtMode,
+		rgb: 'rgb(44,14,2)',
 	},
 	ratio: 7.02,
 	wcagPasses: {
@@ -39,11 +39,11 @@ export const contrastReducer = (state = initialState, action: any): ContrastChec
 			return {
 				...state,
 				backgroundColor: {
-					hex: isHex ? action.backgroundColor : backgroundColorTC.toHexString(),
-					rgb: backgroundColorTC.toRgbString(),
-					hsl: backgroundColorTC.toHslString(),
 					contrastColor: findContrastingColor(action.backgroundColor),
+					hex: isHex ? action.backgroundColor : backgroundColorTC.toHexString(),
+					hsl: backgroundColorTC.toHslString(),
 					mode: state.backgroundColor.mode,
+					rgb: backgroundColorTC.toRgbString(),
 				},
 				ratio: ratio,
 				wcagPasses: {
@@ -58,11 +58,11 @@ export const contrastReducer = (state = initialState, action: any): ContrastChec
 			return {
 				...state,
 				textColor: {
-					hex: isHex ? action.textColor : textColorTC.toHexString(),
-					rgb: textColorTC.toRgbString(),
-					hsl: textColorTC.toHslString(),
 					contrastColor: findContrastingColor(action.textColor),
+					hex: isHex ? action.textColor : textColorTC.toHexString(),
+					hsl: textColorTC.toHslString(),
 					mode: state.textColor.mode,
+					rgb: textColorTC.toRgbString(),
 				},
 				ratio: ratio,
 				wcagPasses: {

@@ -3,9 +3,9 @@ import './colorMode.scss';
 import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Typography } from '@material-ui/core';
 
 export interface ColorModeProps {
+	disableAlpha?: boolean;
 	mode: string;
 	onChangeMode: any;
-	disableAlpha?: boolean;
 }
 
 export const ColorMode: FC<ColorModeProps> = (props: ColorModeProps) => {

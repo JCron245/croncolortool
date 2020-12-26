@@ -7,20 +7,19 @@ import { Grid } from '@material-ui/core';
 import { ColorControl } from '../colorControl/ColorControl';
 import { SwatchContainer } from '../swatchContainer/SwatchContainer';
 import { setColorRGBA, setColorHex, setColorHSLA, setShow } from '../../redux/actions/colorAction';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { setMode } from '../../redux/actions/colorAction';
 import { toast } from 'react-toastify';
 import { toastOptions } from '../../utils/getToastOptions';
 
 export const ColorTool: FC = () => {
+	const contrastColor: string = useSelector((store: RootState) => store.color.contrastColor);
+	const dispatch = useDispatch();
 	const hex: string = useSelector((store: RootState) => store.color.hex);
 	const hsla: string = useSelector((store: RootState) => store.color.hsla);
 	const isAlpha: boolean = useSelector((store: RootState) => store.color.alphaEnabled);
 	const mode: string = useSelector((store: RootState) => store.color.mode);
 	const rgba: string = useSelector((store: RootState) => store.color.rgba);
-	const dispatch = useDispatch();
-	const contrastColor: string = useSelector((store: RootState) => store.color.contrastColor);
 	const showLabels: boolean = useSelector((store: RootState) => store.color.showLabels);
 
 	const changeMode = (event: any) => {
@@ -70,12 +69,12 @@ export const ColorTool: FC = () => {
 					hsla={hsla}
 					isAlpha={isAlpha}
 					mode={mode}
-					onColorUpdateHex={colorUpdate}
 					onColorUpdateHSLA={colorUpdateHSLA}
+					onColorUpdateHex={colorUpdate}
 					onColorUpdateRgba={colorUpdateRgba}
 					onModeChange={changeMode}
-					rgba={rgba}
 					onShowLabelChange={toggleLabels}
+					rgba={rgba}
 					showLabels={showLabels}
 				/>
 			</Grid>

@@ -9,8 +9,8 @@ import { setBackgroundMode, setTextColorMode, setBackgroundColor, setTextColor }
 import { TinyColor } from '@ctrl/tinycolor';
 
 export const ContrastChecker: FC = () => {
-	const store: ContrastCheckState = useSelector((store: RootState) => store.contrast);
 	const backgroundColorObject: ContrastCheckStateColor = useSelector((store: RootState) => store.contrast.backgroundColor);
+	const store: ContrastCheckState = useSelector((store: RootState) => store.contrast);
 	const textColorObject: ContrastCheckStateColor = useSelector((store: RootState) => store.contrast.textColor);
 	const dispatch = useDispatch();
 
@@ -33,59 +33,59 @@ export const ContrastChecker: FC = () => {
 			<h1 className="sr-only">Contrast Compare Tool</h1>
 			<Grid container item className={'contrast-controls'} xs={12} sm={4} lg={3}>
 				<ColorControl
+					disableAlpha={true}
 					hex={backgroundColorObject.hex}
-					rgba={backgroundColorObject.rgb}
 					hsla={backgroundColorObject.hsl}
 					mode={backgroundColorObject.mode}
-					disableAlpha={true}
-					onModeChange={(event: any) => dispatch(setBackgroundMode(event.currentTarget.value))}
-					onColorUpdateHex={backgroundColorUpdate}
 					onColorUpdateHSLA={backgroundColorUpdate}
+					onColorUpdateHex={backgroundColorUpdate}
 					onColorUpdateRgba={backgroundColorUpdate}
+					onModeChange={(event: any) => dispatch(setBackgroundMode(event.currentTarget.value))}
+					rgba={backgroundColorObject.rgb}
 					title={'Background Color'}
 				/>
 				<ColorControl
+					disableAlpha={true}
 					hex={textColorObject.hex}
-					rgba={textColorObject.rgb}
 					hsla={textColorObject.hsl}
 					mode={textColorObject.mode}
-					disableAlpha={true}
-					onModeChange={(event: any) => dispatch(setTextColorMode(event.currentTarget.value))}
-					onColorUpdateHex={textColorUpdate}
 					onColorUpdateHSLA={textColorUpdate}
+					onColorUpdateHex={textColorUpdate}
 					onColorUpdateRgba={textColorUpdate}
+					onModeChange={(event: any) => dispatch(setTextColorMode(event.currentTarget.value))}
+					rgba={textColorObject.rgb}
 					title={'Text Color'}
 				/>
 			</Grid>
 			<Grid container item xs={12} sm={8} lg={9}>
 				<Grid
+					alignItems={'center'}
 					container
 					item
-					alignItems={'center'}
 					justify={'space-evenly'}
-					xs={12}
 					style={{
 						backgroundColor: backgroundColorObject.hex,
 						color: textColorObject.hex,
 						height: '75%',
-					}}>
+					}}
+					xs={12}>
 					<ContrastCompareDemo textColor={textColorObject.hex} backgroundColor={backgroundColorObject.hex} />
 				</Grid>
 				<Grid
+					alignItems={'center'}
 					container
 					item
-					alignItems={'center'}
 					justify={'center'}
-					xs={12}
 					style={{
 						height: '25%',
-					}}>
+					}}
+					xs={12}>
 					<ContrastCompareResults
 						contrastRatio={store.ratio}
-						smallAA={store.wcagPasses.small.aa}
-						smallAAA={store.wcagPasses.small.aaa}
 						largeAA={store.wcagPasses.large.aa}
 						largeAAA={store.wcagPasses.large.aaa}
+						smallAA={store.wcagPasses.small.aa}
+						smallAAA={store.wcagPasses.small.aaa}
 					/>
 				</Grid>
 			</Grid>

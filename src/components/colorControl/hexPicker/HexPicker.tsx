@@ -24,9 +24,9 @@ const modeCheck = (hex: string, mode: string) => {
 
 export const HEXPicker: FC<HEXPickerProps> = (props: HEXPickerProps) => {
 	const { hex, mode, onChange } = props;
-	const [rgba, setRgba] = useState<Numberify<RGBA>>();
 	const [inputHex, setInputHex] = useState(hex);
 	const [isValid, setIsValid] = useState<boolean>();
+	const [rgba, setRgba] = useState<Numberify<RGBA>>();
 
 	useEffect(() => {
 		if (hex) {
@@ -71,12 +71,12 @@ export const HEXPicker: FC<HEXPickerProps> = (props: HEXPickerProps) => {
 					<Typography>Hex</Typography>
 				</FormLabel>
 				<TextField
-					fullWidth
-					variant="outlined"
-					value={inputHex}
-					onChange={hexInputChange}
 					error={!isValid}
+					fullWidth
 					helperText={!isValid ? 'Invalid Hex' : ''}
+					onChange={hexInputChange}
+					value={inputHex}
+					variant="outlined"
 				/>
 			</FormControl>
 			{rgba && mode === 'hex8' && (
@@ -85,17 +85,17 @@ export const HEXPicker: FC<HEXPickerProps> = (props: HEXPickerProps) => {
 						<Typography>Alpha</Typography>
 					</FormLabel>
 					<CronSlider
-						min={0}
-						max={1.0}
-						step={0.01}
-						value={Number(rgba?.a?.toFixed(2))}
-						onChange={setAlpha}
-						valueLabelDisplay="auto"
-						className={'input-slider-alpha'}
 						aria-label={'Alpha Slider'}
+						className={'input-slider-alpha'}
+						max={1.0}
+						min={0}
+						onChange={setAlpha}
+						step={0.01}
 						style={{
 							background: `linear-gradient(to right, rgba(${rgba?.r},${rgba?.g},${rgba?.b},0) 0%, rgba(${rgba?.r},${rgba?.g},${rgba?.b},1) 100%)`,
 						}}
+						value={Number(rgba?.a?.toFixed(2))}
+						valueLabelDisplay="auto"
 					/>
 				</FormControl>
 			)}

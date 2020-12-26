@@ -47,46 +47,46 @@ export const HSLPicker: FC<HSLPickerProps> = (props: HSLPickerProps) => {
 				Hue
 			</Typography>
 			<CronSlider
-				min={0}
+				aria-label={'Red Slider'}
+				className={'input-slider-hue'}
 				max={359}
+				min={0}
+				onChange={setHue}
 				step={1}
 				value={Math.round(hsla.h)}
-				onChange={setHue}
 				valueLabelDisplay="auto"
-				className={'input-slider-hue'}
-				aria-label={'Red Slider'}
 			/>
 			<Typography id="input-slider" gutterBottom>
 				Saturation
 			</Typography>
 			<CronSlider
-				min={0}
-				max={100}
-				step={1}
-				value={Math.round(hsla.s * 100)}
-				onChange={setSaturation}
-				valueLabelDisplay="auto"
-				className={'input-slider-sat'}
 				aria-label={'Green Slider'}
+				className={'input-slider-sat'}
+				max={100}
+				min={0}
+				onChange={setSaturation}
+				step={1}
 				style={{
 					background: `linear-gradient(to right, ${backgroundColors.saturationLeft}, ${backgroundColors.saturationRight})`,
 				}}
+				value={Math.round(hsla.s * 100)}
+				valueLabelDisplay="auto"
 			/>
 			<Typography id="input-slider" gutterBottom>
 				Lightness
 			</Typography>
 			<CronSlider
-				min={0}
-				max={100}
-				step={1}
-				value={Math.round(hsla.l * 100)}
-				onChange={setLightness}
-				valueLabelDisplay="auto"
-				className={'input-slider-lit'}
 				aria-label={'Blue Slider'}
+				className={'input-slider-lit'}
+				max={100}
+				min={0}
+				onChange={setLightness}
+				step={1}
 				style={{
 					background: `linear-gradient(to right, #000, ${backgroundColors.lightMiddle}, #FFF)`,
 				}}
+				value={Math.round(hsla.l * 100)}
+				valueLabelDisplay="auto"
 			/>
 			{isAlpha && (
 				<>
@@ -94,18 +94,18 @@ export const HSLPicker: FC<HSLPickerProps> = (props: HSLPickerProps) => {
 						Alpha
 					</Typography>
 					<CronSlider
-						min={0}
-						max={1.0}
-						step={0.01}
-						value={hsla.a}
-						onChange={setAlpha}
-						valueLabelDisplay="auto"
-						className={'input-slider-alpha'}
 						aria-label={'Alpha Slider'}
+						className={'input-slider-alpha'}
+						max={1.0}
+						min={0}
+						onChange={setAlpha}
+						step={0.01}
 						style={{
 							background: `linear-gradient(to right, ${backgroundColors.alphaLeft}, ${backgroundColors.alphaRight})`,
 						}}
-					/>{' '}
+						value={hsla.a}
+						valueLabelDisplay="auto"
+					/>
 				</>
 			)}
 		</>

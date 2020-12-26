@@ -27,6 +27,9 @@ const Header: FC = () => {
 							Menu
 						</Button>
 						<Menu anchorEl={anchorEl} className="header-menu" id="simple-menu" keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+							<MenuItem component={NavLink} to={'/blender'} onClick={handleClose}>
+								Color Blender
+							</MenuItem>
 							<MenuItem component={NavLink} to={'/color-tool'} onClick={handleClose}>
 								Color Tool
 							</MenuItem>
@@ -35,9 +38,6 @@ const Header: FC = () => {
 							</MenuItem>
 							<MenuItem component={NavLink} to={'/random'} onClick={handleClose}>
 								Random Color
-							</MenuItem>
-							<MenuItem component={NavLink} to={'/blender'} onClick={handleClose}>
-								Color Blender
 							</MenuItem>
 						</Menu>
 					</div>

@@ -28,13 +28,13 @@ export const SwatchBar: FC<SwatchBarProps> = memo((props: SwatchBarProps) => {
 	return (
 		<li className="color-bar">
 			<button
-				onClick={handleClick}
-				aria-labelledby={labelledby}
 				aria-label={ariaLabel}
-				value={showValue}
+				aria-labelledby={labelledby}
 				className="color-bar-button"
+				onClick={handleClick}
 				style={swatchBarStyle}
-				type="button">
+				type="button"
+				value={showValue}>
 				{label}
 			</button>
 		</li>

@@ -83,14 +83,14 @@ export const RandomColor: FC = () => {
 							<InputLabel id="random-hue-control">Hue</InputLabel>
 							<Select labelId="random-hue-control" value={hue} onChange={handleChangeHue}>
 								<MenuItem value={'none'}>None</MenuItem>
-								<MenuItem value={'red'}>Red</MenuItem>
-								<MenuItem value={'orange'}>Orange</MenuItem>
-								<MenuItem value={'yellow'}>Yellow</MenuItem>
-								<MenuItem value={'green'}>Green</MenuItem>
 								<MenuItem value={'blue'}>Blue</MenuItem>
-								<MenuItem value={'purple'}>Purple</MenuItem>
-								<MenuItem value={'pink'}>Pink</MenuItem>
+								<MenuItem value={'green'}>Green</MenuItem>
 								<MenuItem value={'monochrome'}>Monochrome</MenuItem>
+								<MenuItem value={'orange'}>Orange</MenuItem>
+								<MenuItem value={'pink'}>Pink</MenuItem>
+								<MenuItem value={'purple'}>Purple</MenuItem>
+								<MenuItem value={'red'}>Red</MenuItem>
+								<MenuItem value={'yellow'}>Yellow</MenuItem>
 							</Select>
 						</FormControl>
 					</Grid>
@@ -99,10 +99,10 @@ export const RandomColor: FC = () => {
 							<InputLabel id="random-luminosity-control">Luminosity</InputLabel>
 							<Select labelId="random-luminosity-control" value={luminosity} onChange={handleChangeLuminosity}>
 								<MenuItem value={'none'}>None</MenuItem>
-								<MenuItem value={'random'}>Random</MenuItem>
 								<MenuItem value={'bright'}>Bright</MenuItem>
-								<MenuItem value={'light'}>Light</MenuItem>
 								<MenuItem value={'dark'}>Dark</MenuItem>
+								<MenuItem value={'light'}>Light</MenuItem>
+								<MenuItem value={'random'}>Random</MenuItem>
 							</Select>
 						</FormControl>
 					</Grid>

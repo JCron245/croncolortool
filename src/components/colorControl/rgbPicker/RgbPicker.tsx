@@ -6,9 +6,9 @@ import { Typography } from '@material-ui/core';
 
 interface RGBPickerProps {
 	hex?: string;
-	rgba?: string;
 	isAlpha?: boolean;
 	onChange?: any;
+	rgba?: string;
 }
 
 export const RGBPicker: FC<RGBPickerProps> = (props: RGBPickerProps) => {
@@ -37,37 +37,37 @@ export const RGBPicker: FC<RGBPickerProps> = (props: RGBPickerProps) => {
 				Red
 			</Typography>
 			<CronSlider
-				min={0}
-				max={255}
-				value={rgba.r}
-				onChange={setRed}
-				valueLabelDisplay="auto"
-				className={'input-slider-red'}
 				aria-label={'Red Slider'}
+				className={'input-slider-red'}
+				max={255}
+				min={0}
+				onChange={setRed}
+				value={rgba.r}
+				valueLabelDisplay="auto"
 			/>
 			<Typography id="input-slider-hue" gutterBottom>
 				Green
 			</Typography>
 			<CronSlider
-				min={0}
-				max={255}
-				value={rgba.g}
-				onChange={setGreen}
-				valueLabelDisplay="auto"
-				className={'input-slider-green'}
 				aria-label={'Green Slider'}
+				className={'input-slider-green'}
+				max={255}
+				min={0}
+				onChange={setGreen}
+				value={rgba.g}
+				valueLabelDisplay="auto"
 			/>
 			<Typography id="input-slider-hue" gutterBottom>
 				Blue
 			</Typography>
 			<CronSlider
-				min={0}
-				max={255}
-				value={rgba.b}
-				onChange={setBlue}
-				valueLabelDisplay="auto"
-				className={'input-slider-blue'}
 				aria-label={'Blue Slider'}
+				className={'input-slider-blue'}
+				max={255}
+				min={0}
+				onChange={setBlue}
+				value={rgba.b}
+				valueLabelDisplay="auto"
 			/>
 			{isAlpha && (
 				<>
@@ -75,17 +75,17 @@ export const RGBPicker: FC<RGBPickerProps> = (props: RGBPickerProps) => {
 						Alpha
 					</Typography>
 					<CronSlider
-						min={0}
-						max={1.0}
-						step={0.01}
-						value={rgba.a}
-						onChange={setAlpha}
-						valueLabelDisplay="auto"
-						className={'input-slider-alpha'}
 						aria-label={'Alpha Slider'}
+						className={'input-slider-alpha'}
+						max={1.0}
+						min={0}
+						onChange={setAlpha}
+						step={0.01}
 						style={{
 							background: `linear-gradient(to right, rgba(${rgba.r},${rgba.g},${rgba.b},0) 0%, rgba(${rgba.r},${rgba.g},${rgba.b},1) 100%)`,
 						}}
+						value={rgba.a}
+						valueLabelDisplay="auto"
 					/>
 				</>
 			)}

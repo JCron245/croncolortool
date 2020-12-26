@@ -7,38 +7,38 @@ import { HSLPicker } from './hslPicker/HslPicker';
 import { ColorMode } from '../colorMode/ColorMode';
 
 interface ColorControlProps {
-	rgba?: any;
-	mode?: any;
-	hex?: any;
-	hsla?: any;
-	isAlpha?: any;
-	onColorUpdateHex?: any;
-	onColorUpdateRgba?: any;
-	onColorUpdateHSLA?: any;
-	onModeChange?: any;
 	disableAlpha?: boolean;
-	title?: string;
+	hex: string;
+	hsla?: string;
+	isAlpha?: boolean;
+	mode?: string;
+	onColorUpdateHSLA?: (v: string) => void;
+	onColorUpdateHex?: (v: string) => void;
+	onColorUpdateRgba?: (v: string) => void;
+	onModeChange?: (v: string) => void;
 	onShowLabelChange?: (v: boolean) => void;
+	rgba?: string;
 	showLabels?: boolean;
+	title?: string;
 }
 
 export const ColorControl: FC<ColorControlProps> = (props: ColorControlProps) => {
 	const {
 		disableAlpha,
-		rgba,
-		mode,
 		hex,
 		hsla,
 		isAlpha,
-		onColorUpdateHex,
+		mode,
 		onColorUpdateHSLA,
+		onColorUpdateHex,
 		onColorUpdateRgba,
 		onModeChange,
-		title,
 		onShowLabelChange,
+		rgba,
 		showLabels,
+		title,
 	} = props;
-	const backgroundColorHex = hex.startsWith('#') ? hex : `#${hex}`;
+	const backgroundColorHex = hex?.startsWith('#') ? hex : `#${hex}`;
 
 	return (
 		<Grid container direction="column" style={{ backgroundColor: backgroundColorHex, width: '100%' }}>

@@ -3,18 +3,18 @@ import { FormControl, FormLabel, FormGroup, FormControlLabel, Checkbox } from '@
 
 export interface ContrastResults {
 	contrastRatio: number;
-	smallAA: boolean;
 	largeAA: boolean;
-	smallAAA: boolean;
 	largeAAA: boolean;
+	smallAA: boolean;
+	smallAAA: boolean;
 }
 
 const GREEN = '#4BD878';
-const YELLOW = '#FFF08F';
 const RED = '#FF8486';
+const YELLOW = '#FFF08F';
 
 export const ContrastCompareResults: FC<ContrastResults> = (props: ContrastResults) => {
-	const { contrastRatio, smallAA, largeAA, smallAAA, largeAAA } = props;
+	const { contrastRatio, largeAA, largeAAA, smallAA, smallAAA } = props;
 	const colorRating = contrastRatio >= 7 ? GREEN : contrastRatio >= 3 ? YELLOW : RED;
 
 	return (
