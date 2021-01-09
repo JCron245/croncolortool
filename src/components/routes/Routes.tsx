@@ -1,6 +1,8 @@
 import React, { ReactElement, FC, lazy } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
+import { Palette } from '../colorPalette/ColorPalette';
+import { About } from '../about/About';
 
 const ColorTool = lazy(() => import('../colorTool/ColorTool').then((module) => ({ default: module.ColorTool })));
 const ContrastChecker = lazy(() => import('../contrastCompare/ContrastCompare').then((module) => ({ default: module.ContrastChecker })));
@@ -18,6 +20,8 @@ const appRoutes = [
 	{ path: '/color-tool', name: '/color-tool', Component: ColorTool },
 	{ path: '/contrast', name: '/contrast', Component: ContrastChecker },
 	{ path: '/random', name: '/random', Component: ColorRandom },
+	{ path: '/palette', name: '/palette', Component: Palette },
+	{ path: '/about', name: '/about', Component: About },
 ];
 
 export const Routes = (): ReactElement => {

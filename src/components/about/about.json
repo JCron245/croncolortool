@@ -1,0 +1,167 @@
+[
+	{
+		"image": "npm",
+		"imageTitle": "NPM Logo",
+		"title": "NPM Packages",
+		"description": ["The following are a few really awesome NPM packages I am using to create this!"],
+		"lists": [
+			{
+				"title": "main packages",
+				"value": [
+					{ "title": "material-ui", "description": "React UI framework", "link": "https://material-ui.com/" },
+					{
+						"title": "react",
+						"description": "React is an open-source, front end, JavaScript library for building user interfaces or UI components.",
+						"link": "https://reactjs.org/"
+					},
+					{
+						"title": "react-colorful",
+						"description": "react-colorful is a tiny color picker component for React and Preact apps.",
+						"link": "https://github.com/omgovich/react-colorful"
+					},
+					{
+						"title": "react-ga",
+						"description": "Library used to include Google Analytics tracking code in a website or app that uses React.",
+						"link": "https://github.com/react-ga/react-ga"
+					},
+					{
+						"title": "redux",
+						"description": "Redux is an open-source JavaScript library for managing application state.",
+						"link": "https://redux.js.org/"
+					},
+					{
+						"title": "tinycolor",
+						"description": "TinyColor is a small library for color manipulation and conversion.",
+						"link": "https://www.npmjs.com/package/@ctrl/tinycolor"
+					}
+				]
+			},
+			{
+				"title": "dev tooling",
+				"value": [
+					{
+						"title": "craco",
+						"description": "Create React App Configuration Override is an easy and comprehensible configuration layer for create-react-app.",
+						"link": "https://github.com/gsoft-inc/craco"
+					},
+					{
+						"title": "create-react-app",
+						"description": "Officially supported way to get started creating a single-page React application",
+						"link": "https://github.com/facebook/create-react-app"
+					},
+					{
+						"title": "postcss-purgecss",
+						"description": "PurgeCSS analyzes your content and your css files. It removes unused selectors from your css, resulting in smaller css files.",
+						"link": "https://github.com/FullHuman/purgecss"
+					},
+					{
+						"title": "eslint",
+						"description": "ESLint is a static code analysis tool for identifying problematic patterns found in JavaScript code.",
+						"link": "https://eslint.org/"
+					},
+					{
+						"title": "husky",
+						"description": "Husky provides easy to use script running with git hooks.",
+						"link": "https://github.com/typicode/husky"
+					},
+					{
+						"title": "lint-staged",
+						"description": "Run linters against staged git files",
+						"link": "https://www.npmjs.com/package/lint-staged"
+					},
+					{ "title": "prettier", "description": "An opinionated code formatter", "link": "https://prettier.io/" },
+					{
+						"title": "redux-devtools-extension",
+						"description": "Developer Tools to power-up Redux development workflow.",
+						"link": "https://github.com/reduxjs/redux-devtools"
+					}
+				]
+			}
+		]
+	},
+	{
+		"image": "tool",
+		"imageTitle": "Color Tool Page Screenshot",
+		"title": "Color Tool",
+		"description": [
+			"This was part of the original inspiration of this app. Allows for switching between different color representation formats, this lets you easily convert from one format to another. Also this tool generates various palettes based on your input color so you can find the perfect color you are looking for."
+		],
+		"lists": [
+			{
+				"title": "Generated Palettes",
+				"value": [
+					{ "title": "Lighter", "description": "Generates a palette that progressively gets lighter with each swatch." },
+					{ "title": "Darker", "description": "Generates a palette that progressively gets darker with each swatch." },
+					{ "title": "Tint", "description": "Generates a palette a palette of tints based on your color." },
+					{ "title": "Shade", "description": "Generates a palette a palette of shades based on your color." },
+					{ "title": "Saturated", "description": "Generates a palette that gets more saturated with each swatch." },
+					{ "title": "Desaturated", "description": "Generates a palette that gets more desaturated with each swatch." },
+					{
+						"title": "Analogous",
+						"description": "Analogous color schemes use colors that are next to each other on the color wheel. They usually match well and create serene and comfortable designs."
+					},
+					{
+						"title": "Complementary",
+						"description": "Colors that are opposite each other on the color wheel are considered to be complementary colors (example: red and green)."
+					},
+					{
+						"title": "Split Complement",
+						"description": "The split-complementary color scheme is a variation of the complementary color scheme. In addition to the base color, it uses the two colors adjacent to its complement."
+					},
+					{ "title": "Triadic", "description": "A triadic color scheme uses colors that are evenly spaced around the color wheel." },
+					{
+						"title": "Tetradic",
+						"description": "The rectangle or tetradic color scheme uses four colors arranged into two complementary pairs."
+					},
+					{
+						"title": "Monochromatic",
+						"description": "Monochromatic schemes use different tones from the same angle on the color wheel (the same hue)."
+					}
+				]
+			},
+			{
+				"title": "Color Formats",
+				"value": [
+					{ "title": "Hex", "description": "Example: #0FADED" },
+					{ "title": "Hex 8", "description": "Example: #0FADEDFF" },
+					{ "title": "RGB", "description": "Example: rgb(15, 173, 237)" },
+					{ "title": "RGBA", "description": "Example: rgba(15, 173, 237, 1)" },
+					{ "title": "HSL", "description": "Example: hsl(197, 88%, 49%)" },
+					{ "title": "HSLA", "description": "Example: hsla(197, 88%, 49%, 1)" }
+				]
+			}
+		]
+	},
+	{
+		"image": "blender",
+		"imageTitle": "Color Blender Page Screenshot",
+		"title": "Color Blender",
+		"description": ["A tool to take two colors then finding the resulting mix of the two."]
+	},
+	{
+		"image": "contrast",
+		"imageTitle": "Contrast Checker Page Screenshot",
+		"title": "Contrast Checker",
+		"description": [
+			"A tool to compare the contrast ratio between two colors. Has a live demonstration of how the colors look in contrast with each other using some mock webpage components.",
+			"Also gives you a table of passing scores so you can see if your color choices pass AA or AAA criteria for WCAG."
+		]
+	},
+	{
+		"image": "palette",
+		"imageTitle": "Color Palette Page Screenshot",
+		"title": "Color Palette",
+		"description": [
+			"A tool to add colors to a virtual palette, up to 8 swatches can be added to the page.",
+			"Each swatch provides custom controls to change the color using any of the 6 color formats. As well as easy to use copy and delete buttons."
+		]
+	},
+	{
+		"image": "random",
+		"imageTitle": "Random Color Page Screenshot",
+		"title": "Random Color",
+		"description": [
+			"A tool to generate a random color. Allows for setting a hue and luminosity to generate a color within a defined set of parameters."
+		]
+	}
+]

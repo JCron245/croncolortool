@@ -14,7 +14,6 @@ export interface ColorSets {
 	desaturated: ColorObject[];
 	lighter: ColorObject[];
 	monochromatic: ColorObject[];
-	pentadic?: ColorObject[];
 	saturated: ColorObject[];
 	shade: ColorObject[];
 	split?: ColorObject[];
@@ -190,13 +189,6 @@ const createTetradArray = (color: TinyColor, mode: string, isAlphaMode: boolean)
 	});
 };
 
-const createPentadArray = (color: TinyColor, mode: string, isAlphaMode: boolean): ColorObject[] => {
-	return new TinyColor(color).polyad(5).map((c) => {
-		c.setAlpha(color.getAlpha());
-		return createColorObject(c, mode, isAlphaMode);
-	});
-};
-
 const getColors = (color: TinyColor, mode: string, isAlphaMode: boolean): ColorSets => {
 	color = new TinyColor(color);
 
@@ -207,7 +199,6 @@ const getColors = (color: TinyColor, mode: string, isAlphaMode: boolean): ColorS
 		desaturated: createDesaturationArray(color, undefined, mode, isAlphaMode),
 		lighter: createLightArray(color, undefined, mode, isAlphaMode),
 		monochromatic: createMonochromaticArray(color, mode, isAlphaMode),
-		pentadic: createPentadArray(color, mode, isAlphaMode),
 		saturated: createSaturationArray(color, undefined, mode, isAlphaMode),
 		shade: createShadeArray(color, undefined, mode, isAlphaMode),
 		split: createSplitComplementArray(color, mode, isAlphaMode),

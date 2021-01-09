@@ -21,7 +21,6 @@ export const SwatchContainer: FC = () => {
 			<Swatch name="split complement" showLabels={showLabels} colors={colorArrays?.split} />
 			<Swatch name="triadic" showLabels={showLabels} colors={colorArrays?.triadic} />
 			<Swatch name="tetradic" showLabels={showLabels} colors={colorArrays?.tetradic} />
-			<Swatch name="pentadic" showLabels={showLabels} colors={colorArrays?.pentadic} />
 			<Swatch name="monochromatic" showLabels={showLabels} colors={colorArrays?.monochromatic} />
 		</>
 	);
