@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import { App } from './components/app/App';
@@ -13,13 +13,13 @@ const store = configureStore();
 
 const render = () => {
 	ReactDOM.render(
-		<React.StrictMode>
+		<StrictMode>
 			<Provider store={store}>
 				<ConnectedRouter history={history}>
 					<App />
 				</ConnectedRouter>
 			</Provider>
-		</React.StrictMode>,
+		</StrictMode>,
 		document.getElementById('root')
 	);
 };

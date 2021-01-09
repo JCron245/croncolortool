@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FC, useState, useEffect, ChangeEvent } from 'react';
+import { FC, useState, useEffect, ChangeEvent } from 'react';
 import './colorBlender.scss';
 import { Grid, Paper, TextField } from '@material-ui/core';
 import { TinyColor } from '@ctrl/tinycolor';
@@ -44,14 +44,14 @@ export const ColorBlender: FC = () => {
 
 	return (
 		<div
-			className={'color-blender'}
+			className="color-blender"
 			style={{
 				background: `linear-gradient(90deg, ${first} 0%, ${first} 30%, ${blend} 30%, ${blend} 70%, ${second} 70%, ${second} 100%)`,
 			}}>
-			<Grid container className={'color-blend-grid'} justify={'space-evenly'} alignItems={'center'}>
-				<Grid justify={'space-evenly'} container item xs={12}>
+			<Grid container className="color-blend-grid" justify="space-evenly" alignItems="center">
+				<Grid justify="space-evenly" container item xs={12}>
 					<Grid item xs={5} sm={1} md={2}>
-						<Paper component={'form'} className={'color-input'}>
+						<Paper component="form" className="color-input">
 							<TextField
 								error={!firstValid}
 								fullWidth
@@ -63,7 +63,7 @@ export const ColorBlender: FC = () => {
 						</Paper>
 					</Grid>
 					<Grid item xs={5} sm={1} md={2}>
-						<Paper component={'form'} className={'color-input'}>
+						<Paper component="form" className="color-input">
 							<TextField
 								error={!secondValid}
 								fullWidth
@@ -75,8 +75,8 @@ export const ColorBlender: FC = () => {
 						</Paper>
 					</Grid>
 				</Grid>
-				<Grid container justify={'center'} item xs={6} sm={1} md={2}>
-					<Paper component={'form'} className={'color-output'}>
+				<Grid container justify="center" item xs={6} sm={1} md={2}>
+					<Paper component="form" className="color-output">
 						<TextField fullWidth InputProps={{ readOnly: true }} label="Blended Color" value={blend} />
 					</Paper>
 				</Grid>

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FC, useState, useEffect, useCallback } from 'react';
+import { FC, useState, useEffect, useCallback } from 'react';
 import { TinyColor, Numberify, RGBA } from '@ctrl/tinycolor';
 import { CronSlider } from '../cronSlider/cronSlider';
 import Typography from '@material-ui/core/Typography';
@@ -85,8 +85,8 @@ export const HEXPicker: FC<HEXPickerProps> = (props: HEXPickerProps) => {
 						<Typography>Alpha</Typography>
 					</FormLabel>
 					<CronSlider
-						aria-label={'Alpha Slider'}
-						className={'input-slider-alpha'}
+						aria-label="Alpha Slider"
+						className="input-slider-alpha"
 						max={1.0}
 						min={0}
 						onChange={setAlpha}

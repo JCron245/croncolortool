@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Card, Typography, CardContent, CardActions, Button, withStyles, CardActionArea, CardMedia } from '@material-ui/core';
 import random from '../../../assets/cc-random.png';
 import blender from '../../../assets/cc-blender.png';

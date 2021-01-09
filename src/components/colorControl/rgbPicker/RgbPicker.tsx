@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import './rgbPicker.scss';
 import { TinyColor } from '@ctrl/tinycolor';
 import { CronSlider } from '../cronSlider/cronSlider';
@@ -37,8 +37,8 @@ export const RGBPicker: FC<RGBPickerProps> = (props: RGBPickerProps) => {
 				Red
 			</Typography>
 			<CronSlider
-				aria-label={'Red Slider'}
-				className={'input-slider-red'}
+				aria-label="Red Slider"
+				className="input-slider-red"
 				max={255}
 				min={0}
 				onChange={setRed}
@@ -49,8 +49,8 @@ export const RGBPicker: FC<RGBPickerProps> = (props: RGBPickerProps) => {
 				Green
 			</Typography>
 			<CronSlider
-				aria-label={'Green Slider'}
-				className={'input-slider-green'}
+				aria-label="Green Slider"
+				className="input-slider-green"
 				max={255}
 				min={0}
 				onChange={setGreen}
@@ -61,8 +61,8 @@ export const RGBPicker: FC<RGBPickerProps> = (props: RGBPickerProps) => {
 				Blue
 			</Typography>
 			<CronSlider
-				aria-label={'Blue Slider'}
-				className={'input-slider-blue'}
+				aria-label="Blue Slider"
+				className="input-slider-blue"
 				max={255}
 				min={0}
 				onChange={setBlue}
@@ -75,8 +75,8 @@ export const RGBPicker: FC<RGBPickerProps> = (props: RGBPickerProps) => {
 						Alpha
 					</Typography>
 					<CronSlider
-						aria-label={'Alpha Slider'}
-						className={'input-slider-alpha'}
+						aria-label="Alpha Slider"
+						className="input-slider-alpha"
 						max={1.0}
 						min={0}
 						onChange={setAlpha}

@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
+
+import * as React from 'react';
 import './colorRandom.scss';
 import { Paper, Button, FormControl, InputLabel, Select, MenuItem, Typography, Grid } from '@material-ui/core';
 import { RandomOptions } from '@ctrl/tinycolor';
@@ -62,15 +64,15 @@ export const RandomColor: FC = () => {
 
 	return (
 		<div
-			className={'color-random'}
+			className="color-random"
 			style={{
 				backgroundColor: currentColor,
 			}}>
-			<Paper component={'form'} style={{ maxWidth: '20rem', minHeight: '20rem', padding: '1rem' }}>
-				<Grid container justify={'space-evenly'} className={'color-random-grid'} spacing={1}>
+			<Paper component="form" style={{ maxWidth: '20rem', minHeight: '20rem', padding: '1rem' }}>
+				<Grid container justify="space-evenly" className="color-random-grid" spacing={1}>
 					<Grid item xs={12}>
 						<Typography
-							className={'current-color'}
+							className="current-color"
 							style={{
 								backgroundColor: currentColor,
 								color: currentContrast,
@@ -82,15 +84,15 @@ export const RandomColor: FC = () => {
 						<FormControl fullWidth>
 							<InputLabel id="random-hue-control">Hue</InputLabel>
 							<Select labelId="random-hue-control" value={hue} onChange={handleChangeHue}>
-								<MenuItem value={'none'}>None</MenuItem>
-								<MenuItem value={'blue'}>Blue</MenuItem>
-								<MenuItem value={'green'}>Green</MenuItem>
-								<MenuItem value={'monochrome'}>Monochrome</MenuItem>
-								<MenuItem value={'orange'}>Orange</MenuItem>
-								<MenuItem value={'pink'}>Pink</MenuItem>
-								<MenuItem value={'purple'}>Purple</MenuItem>
-								<MenuItem value={'red'}>Red</MenuItem>
-								<MenuItem value={'yellow'}>Yellow</MenuItem>
+								<MenuItem value="none">None</MenuItem>
+								<MenuItem value="blue">Blue</MenuItem>
+								<MenuItem value="green">Green</MenuItem>
+								<MenuItem value="monochrome">Monochrome</MenuItem>
+								<MenuItem value="orange">Orange</MenuItem>
+								<MenuItem value="pink">Pink</MenuItem>
+								<MenuItem value="purple">Purple</MenuItem>
+								<MenuItem value="red">Red</MenuItem>
+								<MenuItem value="yellow">Yellow</MenuItem>
 							</Select>
 						</FormControl>
 					</Grid>
@@ -98,11 +100,11 @@ export const RandomColor: FC = () => {
 						<FormControl fullWidth>
 							<InputLabel id="random-luminosity-control">Luminosity</InputLabel>
 							<Select labelId="random-luminosity-control" value={luminosity} onChange={handleChangeLuminosity}>
-								<MenuItem value={'none'}>None</MenuItem>
-								<MenuItem value={'bright'}>Bright</MenuItem>
-								<MenuItem value={'dark'}>Dark</MenuItem>
-								<MenuItem value={'light'}>Light</MenuItem>
-								<MenuItem value={'random'}>Random</MenuItem>
+								<MenuItem value="none">None</MenuItem>
+								<MenuItem value="bright">Bright</MenuItem>
+								<MenuItem value="dark">Dark</MenuItem>
+								<MenuItem value="light">Light</MenuItem>
+								<MenuItem value="random">Random</MenuItem>
 							</Select>
 						</FormControl>
 					</Grid>

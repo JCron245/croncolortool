@@ -1,17 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Typography, List, ListItem, ListItemIcon, ListItemText, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/Inbox';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-const getIcon = (icon: string): string => {
-	switch (icon) {
-		case 'test':
-			return '';
-		default:
-			return '';
-	}
-};
 
 export interface AboutCardListProps {
 	item: any;

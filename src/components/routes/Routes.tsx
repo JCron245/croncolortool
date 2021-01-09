@@ -1,4 +1,4 @@
-import React, { ReactElement, FC, lazy } from 'react';
+import { ReactElement, FC, lazy } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import { Palette } from '../colorPalette/ColorPalette';
@@ -38,7 +38,7 @@ export const Routes = (): ReactElement => {
 	);
 
 	routeList.push(
-		<Route key={'home'} exact path="/">
+		<Route key="home" exact path="/">
 			<Redirect to="/color-tool" />
 		</Route>
 	);

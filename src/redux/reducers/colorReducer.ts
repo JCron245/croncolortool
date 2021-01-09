@@ -15,7 +15,7 @@ const initColor = new TinyColor(paramColor || '#0FADED');
 const gaCategory = 'Color Tool';
 
 const buildCopyEvent = (color: string, mode: string) => {
-	let gaLabel = '';
+	let gaLabel;
 	let gaAction = 'Color Copied';
 	let tc = new TinyColor(color);
 

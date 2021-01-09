@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FC, useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import { SwatchBar } from './swatchBar/SwatchBar';
 import { ColorObject } from '../../utils/colorToolUtils';
 import { RootState } from '../../redux/interfaces';
@@ -55,7 +55,7 @@ export const Swatch: FC<SwatchProps> = (props: SwatchProps) => {
 	});
 
 	return (
-		<Grid item xs className={'swatch'}>
+		<Grid item xs className="swatch">
 			<Typography aria-label={boxAriaLabel} className="box-title" id={boxID}>
 				{name}
 			</Typography>

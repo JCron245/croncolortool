@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import './hslPicker.scss';
 import { TinyColor } from '@ctrl/tinycolor';
 import { CronSlider } from '../cronSlider/cronSlider';
@@ -47,8 +47,8 @@ export const HSLPicker: FC<HSLPickerProps> = (props: HSLPickerProps) => {
 				Hue
 			</Typography>
 			<CronSlider
-				aria-label={'Red Slider'}
-				className={'input-slider-hue'}
+				aria-label="Red Slider"
+				className="input-slider-hue"
 				max={359}
 				min={0}
 				onChange={setHue}
@@ -60,8 +60,8 @@ export const HSLPicker: FC<HSLPickerProps> = (props: HSLPickerProps) => {
 				Saturation
 			</Typography>
 			<CronSlider
-				aria-label={'Green Slider'}
-				className={'input-slider-sat'}
+				aria-label="Green Slider"
+				className="input-slider-sat"
 				max={100}
 				min={0}
 				onChange={setSaturation}
@@ -76,8 +76,8 @@ export const HSLPicker: FC<HSLPickerProps> = (props: HSLPickerProps) => {
 				Lightness
 			</Typography>
 			<CronSlider
-				aria-label={'Blue Slider'}
-				className={'input-slider-lit'}
+				aria-label="Blue Slider"
+				className="input-slider-lit"
 				max={100}
 				min={0}
 				onChange={setLightness}
@@ -94,8 +94,8 @@ export const HSLPicker: FC<HSLPickerProps> = (props: HSLPickerProps) => {
 						Alpha
 					</Typography>
 					<CronSlider
-						aria-label={'Alpha Slider'}
-						className={'input-slider-alpha'}
+						aria-label="Alpha Slider"
+						className="input-slider-alpha"
 						max={1.0}
 						min={0}
 						onChange={setAlpha}

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { FormControl, FormLabel, FormGroup, FormControlLabel, Checkbox } from '@material-ui/core';
 
 export interface ContrastResults {

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Grid, Paper, Typography, Checkbox, FormControl, FormLabel, FormGroup, FormControlLabel } from '@material-ui/core';
 import { HexColorPicker } from 'react-colorful';
 import { HEXPicker } from './hexPicker/HexPicker';
@@ -42,7 +42,7 @@ export const ColorControl: FC<ColorControlProps> = (props: ColorControlProps) =>
 
 	return (
 		<Grid container direction="column" style={{ backgroundColor: backgroundColorHex, width: '100%' }}>
-			<Paper component={'form'} className="picker-form">
+			<Paper component="form" className="picker-form">
 				{title && <Typography component="h2">{title}</Typography>}
 				<HexColorPicker color={hex} onChange={onColorUpdateHex} className="custom-color-picker" />
 				{mode && <ColorMode onChangeMode={onModeChange} mode={mode} disableAlpha={disableAlpha} />}
@@ -50,7 +50,7 @@ export const ColorControl: FC<ColorControlProps> = (props: ColorControlProps) =>
 					<FormControl component="fieldset">
 						<FormLabel component="legend">Labels</FormLabel>
 						<FormGroup onChange={(event: any) => onShowLabelChange(event.target.checked)}>
-							<FormControlLabel control={<Checkbox color={'primary'} checked={showLabels} name="Show Labels" />} label="Show Labels" />
+							<FormControlLabel control={<Checkbox color="primary" checked={showLabels} name="Show Labels" />} label="Show Labels" />
 						</FormGroup>
 					</FormControl>
 				)}

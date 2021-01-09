@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import './colorTool.scss';
 import { RootState } from '../../redux/interfaces';
 import { push } from 'connected-react-router';
@@ -78,7 +78,7 @@ export const ColorTool: FC = () => {
 					showLabels={showLabels}
 				/>
 			</Grid>
-			<Grid container justify={'space-evenly'} item xs={12} sm={8} lg={9} xl={9}>
+			<Grid container justify="space-evenly" item xs={12} sm={8} lg={9} xl={9}>
 				<SwatchContainer />
 			</Grid>
 		</Grid>

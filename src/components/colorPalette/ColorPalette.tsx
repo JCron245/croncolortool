@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FC, useState, useCallback } from 'react';
+import { FC, useState, useCallback } from 'react';
 import './colorPalette.scss';
 import { Button, GridList, GridListTile, withStyles, InputBase } from '@material-ui/core';
 import { random, TinyColor } from '@ctrl/tinycolor';
@@ -50,26 +50,33 @@ export const Palette: FC = () => {
 		{ value: '#ed4f0f', valid: true, contrast: '#000' },
 		{ value: '#3eed0f', valid: true, contrast: '#000' },
 	]);
+	const [btnContrast, setBtnContrast] = useState('#000');
 
 	const addSwatch = () => {
 		if (swatches.length >= SWATCH_LIMIT) return;
 		const newColor = random().toHex8String();
-		setSwatches([...swatches, { value: newColor, valid: true, contrast: findContrastingColor(newColor) }]);
+		const newColorContrast = findContrastingColor(newColor);
+		setSwatches([...swatches, { value: newColor, valid: true, contrast: newColorContrast }]);
+		setBtnContrast(newColorContrast);
 	};
 
 	const updateSwatch = (newVal: any, index: number) => {
-		let value = newVal.target.value;
-		let valid = new TinyColor(value).isValid;
-		let contrast = valid ? findContrastingColor(value) : '#FFF';
+		const value = newVal.target.value;
+		const valid = new TinyColor(value).isValid;
 		const swatchCopy = JSON.parse(JSON.stringify(swatches));
+		const contrast = valid ? findContrastingColor(value) : value.length === 0 ? '#0FADED' : swatchCopy[index].contrast;
 		swatchCopy[index] = { value, valid, contrast };
 		setSwatches(swatchCopy);
+		if (index === swatchCopy.length - 1) {
+			setBtnContrast(contrast);
+		}
 	};
 
 	const deleteSwatch = (index: number) => {
 		let swatchCopy = JSON.parse(JSON.stringify(swatches));
 		swatchCopy.splice(index, 1);
 		setSwatches(swatchCopy);
+		setBtnContrast(swatchCopy[swatchCopy.length - 1].contrast);
 	};
 
 	const copyColor = useCallback((color: any, contrastColor: string) => {
@@ -77,24 +84,24 @@ export const Palette: FC = () => {
 			() => {
 				toast(`${color} copied to clipboard!`, toastOptions(color, contrastColor));
 			},
-			(err) => {
+			() => {
 				toast(`${color} failed to copy!`, toastOptions(color, contrastColor));
 			}
 		);
 	}, []);
 
 	return (
-		<div className={'color-palette'}>
+		<div className="color-palette">
 			<GridList style={{ height: '100%', width: '100%' }} cols={swatches.length}>
 				{swatches.map((swatch: any, index: number): any => {
 					return (
 						<CronGridListStyle style={{ backgroundColor: swatch.value, color: swatch.contrast, height: '100%' }}>
 							<CronTextField value={swatch.value} onChange={(v: any) => updateSwatch(v, index)} />
-							<CronButton onClick={() => copyColor(swatch.value, swatch.contrast)} title={'Copy color'} style={{ color: 'currentColor' }}>
+							<CronButton onClick={() => copyColor(swatch.value, swatch.contrast)} title="Copy color" style={{ color: 'currentColor' }}>
 								<FileCopyIcon />
 							</CronButton>
 							{swatches.length > 1 && (
-								<CronButton onClick={() => deleteSwatch(index)} title={'Delete color swatch'} style={{ color: 'currentColor' }}>
+								<CronButton onClick={() => deleteSwatch(index)} title="Delete color swatch" style={{ color: 'currentColor' }}>
 									<DeleteIcon />
 								</CronButton>
 							)}
@@ -103,16 +110,16 @@ export const Palette: FC = () => {
 				})}
 			</GridList>
 			<Button
-				title={'Add Another Swatch'}
+				title="Add Another Swatch"
 				onClick={addSwatch}
-				variant={'outlined'}
+				variant="outlined"
 				disabled={swatches.length >= SWATCH_LIMIT}
 				style={{
 					position: 'fixed',
 					right: '1rem',
 					bottom: '1rem',
-					color: swatches[swatches.length - 1].contrast,
-					borderColor: swatches[swatches.length - 1].contrast,
+					color: btnContrast,
+					borderColor: btnContrast,
 				}}>
 				Add
 			</Button>

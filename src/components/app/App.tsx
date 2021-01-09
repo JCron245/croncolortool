@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect, Suspense } from 'react';
+import { ReactElement, useState, useEffect, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 import './app.scss';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,24 +8,20 @@ import { ThemeProvider, CssBaseline, createMuiTheme } from '@material-ui/core';
 import { Routes } from '../routes/Routes';
 import { usePageTracking } from '../routes/Tracker';
 
+const theme = createMuiTheme({
+	palette: {
+		primary: { main: '#0FADED' },
+		type: 'dark',
+		background: {
+			paper: '#161d1d',
+		},
+	},
+});
+
 export const App = (): ReactElement => {
 	const location = useLocation();
 	const [title, setTitle] = useState<string>();
 	usePageTracking();
-
-	const theme = React.useMemo(
-		() =>
-			createMuiTheme({
-				palette: {
-					primary: { main: '#0FADED' },
-					type: 'dark',
-					background: {
-						paper: '#161d1d',
-					},
-				},
-			}),
-		[]
-	);
 
 	useEffect(() => {
 		switch (location.pathname) {
