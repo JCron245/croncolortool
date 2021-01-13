@@ -17,7 +17,7 @@ export const SwatchBar: FC<SwatchBarProps> = memo((props: SwatchBarProps) => {
 	const label = showLabels ? showValue : '';
 
 	const handleClick = () => {
-		onClick(hex, contrastColor);
+		onClick(showValue, contrastColor);
 	};
 
 	const swatchBarStyle = {

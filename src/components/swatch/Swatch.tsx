@@ -27,18 +27,18 @@ export const Swatch: FC<SwatchProps> = (props: SwatchProps) => {
 	const copied: string = useSelector((store: RootState) => store.color.copied);
 	const dispatch = useDispatch();
 
-	const singleClick = useCallback((hex: any, contrastColor: string) => {
-		copy(hex).then(
+	const singleClick = useCallback((color: any, contrastColor: string) => {
+		copy(color).then(
 			() => {
 				// I don't want someone going nuts like me and clicking this a thousand times and saturating my analytics :)
-				if (hex !== copied) {
-					dispatch(setCopied(hex));
-					copyEvent(true, gaCategory, hex);
+				if (color !== copied) {
+					dispatch(setCopied(color));
+					copyEvent(true, gaCategory, color);
 				}
-				toast(`${hex} copied to clipboard!`, toastOptions(hex, contrastColor));
+				toast(`${color} copied to clipboard!`, toastOptions(color, contrastColor));
 			},
 			(err) => {
-				copyEvent(false, gaCategory, hex);
+				copyEvent(false, gaCategory, color);
 			}
 		);
 	}, []);
