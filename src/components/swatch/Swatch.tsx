@@ -63,7 +63,7 @@ export const Swatch: FC<SwatchProps> = (props: SwatchProps) => {
 			<Typography aria-label={boxAriaLabel} className="box-title" id={boxID}>
 				{name}
 			</Typography>
-			<List aria-label="main mailbox folders" className="box-list" component="nav">
+			<List aria-label="main mailbox folders" className="box-list">
 				{Swatches}
 			</List>
 		</Grid>
