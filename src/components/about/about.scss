@@ -1,8 +1,15 @@
 .about {
 	background-color: #303030;
-	justify-content: space-evenly;
-	display: flex;
-	min-height: calc(100vh - 75px);
-	flex-direction: row;
-	flex-wrap: wrap;
+	height: 100%;
+	padding: 0.5rem 1rem;
+}
+
+.about-card-media {
+	background-size: cover;
+	height: 16rem;
+	width: 100%;
+}
+
+.card-list-anchor {
+	color: #0faded;
 }

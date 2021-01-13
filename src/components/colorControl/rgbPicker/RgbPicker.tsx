@@ -14,6 +14,7 @@ interface RGBPickerProps {
 export const RGBPicker: FC<RGBPickerProps> = (props: RGBPickerProps) => {
 	const rgba = new TinyColor(props.rgba || props.hex).toRgb();
 	const isAlpha = props.isAlpha;
+	const alphaGradient = `linear-gradient(to right, rgba(${rgba.r},${rgba.g},${rgba.b},0) 0%, rgba(${rgba.r},${rgba.g},${rgba.b},1) 100%)`;
 
 	const setRed = (event: any, newValue: number | number[]) => {
 		props.onChange(`rgba(${newValue},${rgba.g},${rgba.b},${rgba.a})`);
@@ -82,7 +83,7 @@ export const RGBPicker: FC<RGBPickerProps> = (props: RGBPickerProps) => {
 						onChange={setAlpha}
 						step={0.01}
 						style={{
-							background: `linear-gradient(to right, rgba(${rgba.r},${rgba.g},${rgba.b},0) 0%, rgba(${rgba.r},${rgba.g},${rgba.b},1) 100%)`,
+							background: alphaGradient,
 						}}
 						value={rgba.a}
 						valueLabelDisplay="auto"

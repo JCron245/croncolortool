@@ -1,12 +1,40 @@
 [
 	{
+		"image": "logo",
+		"imageTitle": "About Page",
+		"title": "Cron Color",
+		"description": [
+			"A collection of tools for use when working with color. Includes everything from a random color generator to a tool to compare the contrast between colors.",
+			"I kept looking for color conversion tools online when I needed to do something like convert a HEX color to an RGB one. So I ended up creating my own, starting with what I now call the color tool.",
+			"This project has provided a nice place for me to work on new frameworks, tools, and libraries that I want to learn about.",
+			"I have recreated this tool multiple times now using; Vue, Foundation, React, Materializecss, and Material UI. Each iteration has been a blast to make and experiment with!"
+		],
+		"lists": [
+			{
+				"title": "Links",
+				"value": [
+					{ "title": "Github", "link": "https://github.com/JCron245/croncolortool", "description": "Check out the project on my github" },
+					{
+						"title": "File An Issue Or Feature Request",
+						"link": "https://github.com/JCron245/croncolortool/issues/new/choose",
+						"description": "File an issue if you encounter a bug or display issue. Or you can file a feature request if something is missing"
+					},
+					{ "title": "Linkedin", "link": "https://www.linkedin.com/in/jonathon-r-cornwell/", "description": "Check out my linkedin" }
+				]
+			}
+		]
+	},
+	{
 		"image": "npm",
 		"imageTitle": "NPM Logo",
 		"title": "NPM Packages",
-		"description": ["The following are a few really awesome NPM packages I am using to create this!"],
+		"description": [
+			"The following lists contains a few really awesome NPM packages I am using to create this.",
+			"This website wouldn't be possible without the awesome work of the wider community. Please consider checking out the following projects and lending your support to OSS when possible."
+		],
 		"lists": [
 			{
-				"title": "main packages",
+				"title": "Main Packages",
 				"value": [
 					{ "title": "material-ui", "description": "React UI framework", "link": "https://material-ui.com/" },
 					{
@@ -37,7 +65,7 @@
 				]
 			},
 			{
-				"title": "dev tooling",
+				"title": "Dev Tooling",
 				"value": [
 					{
 						"title": "craco",
@@ -130,13 +158,17 @@
 					{ "title": "HSLA", "description": "Example: hsla(197, 88%, 49%, 1)" }
 				]
 			}
-		]
+		],
+		"link": "color-tool"
 	},
 	{
 		"image": "blender",
 		"imageTitle": "Color Blender Page Screenshot",
 		"title": "Color Blender",
-		"description": ["A tool to take two colors then finding the resulting mix of the two."]
+		"description": [
+			"A tool to take two colors then finding the resulting mix of the two.",
+			"The inputs should allow any color format you would normally use ina browser; hex, hex8, rgb, rgba, hsl, hsla, and named colors."
+		]
 	},
 	{
 		"image": "contrast",

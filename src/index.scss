@@ -81,3 +81,11 @@ body,
 .MuiInputBase-input {
 	text-transform: uppercase;
 }
+
+.full-page {
+	align-items: center;
+	display: flex;
+	height: calc(100vh - 75px);
+	justify-content: center;
+	width: 100%;
+}

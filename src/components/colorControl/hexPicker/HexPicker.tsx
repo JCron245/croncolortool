@@ -15,8 +15,7 @@ const modeCheck = (hex: string, mode: string) => {
 	hex = hex.replace('#', '');
 	if (mode === 'hex' && hex.length > 6) {
 		return false;
-	}
-	if (mode === 'hex8' && hex.length > 8) {
+	} else if (mode === 'hex8' && hex.length > 8) {
 		return false;
 	}
 	return true;
@@ -27,6 +26,7 @@ export const HEXPicker: FC<HEXPickerProps> = (props: HEXPickerProps) => {
 	const [inputHex, setInputHex] = useState(hex);
 	const [isValid, setIsValid] = useState<boolean>();
 	const [rgba, setRgba] = useState<Numberify<RGBA>>();
+	const [gradient, setGradient] = useState<string>();
 
 	useEffect(() => {
 		if (hex) {
@@ -40,8 +40,10 @@ export const HEXPicker: FC<HEXPickerProps> = (props: HEXPickerProps) => {
 			} else {
 				setInputHex(hex);
 			}
-			setRgba(tc.toRgb());
+			const rgb = tc.toRgb();
+			setRgba(rgb);
 			setIsValid(tc.isValid);
+			setGradient(`linear-gradient(to right, rgba(${rgb?.r},${rgb?.g},${rgb?.b},0) 0%, rgba(${rgb?.r},${rgb?.g},${rgb?.b},1) 100%)`);
 		}
 	}, [hex, mode]);
 
@@ -79,7 +81,7 @@ export const HEXPicker: FC<HEXPickerProps> = (props: HEXPickerProps) => {
 					variant="outlined"
 				/>
 			</FormControl>
-			{rgba && mode === 'hex8' && (
+			{mode === 'hex8' && (
 				<FormControl component="fieldset" fullWidth>
 					<FormLabel component="legend">
 						<Typography>Alpha</Typography>
@@ -92,7 +94,7 @@ export const HEXPicker: FC<HEXPickerProps> = (props: HEXPickerProps) => {
 						onChange={setAlpha}
 						step={0.01}
 						style={{
-							background: `linear-gradient(to right, rgba(${rgba?.r},${rgba?.g},${rgba?.b},0) 0%, rgba(${rgba?.r},${rgba?.g},${rgba?.b},1) 100%)`,
+							background: gradient,
 						}}
 						value={Number(rgba?.a?.toFixed(2))}
 						valueLabelDisplay="auto"

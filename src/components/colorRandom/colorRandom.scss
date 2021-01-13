@@ -1,15 +1,14 @@
-.color-random {
-	align-items: center;
-	display: flex;
-	height: calc(100vh - 75px);
-	justify-content: center;
-	.color-random-grid {
-		min-height: 20rem;
-	}
-	.current-color {
-		line-height: 2rem;
-		min-height: 2rem;
-		text-align: center;
-		text-transform: uppercase;
-	}
+.color-random-paper {
+	max-width: 20rem;
+	min-height: 20rem;
+	padding: 1rem;
+}
+.color-random-grid {
+	min-height: 20rem;
+}
+.current-color {
+	line-height: 2rem;
+	min-height: 2rem;
+	text-align: center;
+	text-transform: uppercase;
 }

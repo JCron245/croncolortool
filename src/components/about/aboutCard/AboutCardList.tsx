@@ -24,7 +24,7 @@ export const AboutCardList: FC<AboutCardListProps> = (props: AboutCardListProps)
 				<List>
 					{list.value.map((listItem: any) => {
 						return listItem.link ? (
-							<ListItem component="a" href={listItem.link}>
+							<ListItem className="card-list-anchor" component="a" href={listItem.link}>
 								<ListItemIcon>
 									<InboxIcon />
 								</ListItemIcon>

@@ -11,9 +11,25 @@ interface HSLPickerProps {
 	onChange: any;
 }
 
+const createBgColors = (hsla: any) => {
+	const s = (hsla.s * 100).toFixed();
+	const l = (hsla.l * 100).toFixed();
+	return {
+		alphaLeft: new TinyColor(`hsla(${hsla.h},${s}%,${l}%, 0)`).toRgbString(),
+		alphaRight: new TinyColor(`hsla(${hsla.h},${s}%,${l}%, 1)`).toRgbString(),
+		saturationLeft: new TinyColor(`hsl(${hsla.h},0%,${l}%)`).toRgbString(),
+		saturationRight: new TinyColor(`hsl(${hsla.h},100%,${l}%)`).toRgbString(),
+		lightMiddle: new TinyColor(`hsl(${hsla.h},${s}%,50%)`).toRgbString(),
+	};
+};
+
 export const HSLPicker: FC<HSLPickerProps> = (props: HSLPickerProps) => {
 	const hsla = new TinyColor(props.hsla || props.hex).toHsl();
 	const isAlpha = props.isAlpha;
+	const backgroundColors = createBgColors(hsla);
+	const satGradient = `linear-gradient(to right, ${backgroundColors.saturationLeft}, ${backgroundColors.saturationRight})`;
+	const lightGradient = `linear-gradient(to right, #000, ${backgroundColors.lightMiddle}, #FFF)`;
+	const alphaGradient = `linear-gradient(to right, ${backgroundColors.alphaLeft}, ${backgroundColors.alphaRight})`;
 
 	const setHue = (event: any, newValue: number | number[]) => {
 		props.onChange(`hsla(${newValue},${hsla.s},${hsla.l},${hsla.a})`);
@@ -31,14 +47,6 @@ export const HSLPicker: FC<HSLPickerProps> = (props: HSLPickerProps) => {
 
 	const setAlpha = (event: any, newValue: number | number[]) => {
 		props.onChange(`hsla(${hsla.h},${hsla.s},${hsla.l},${newValue})`);
-	};
-
-	const backgroundColors = {
-		alphaLeft: new TinyColor(`hsla(${hsla.h},${(hsla.s * 100).toFixed()}%,${hsla.l * 100}%, 0)`).toRgbString(),
-		alphaRight: new TinyColor(`hsla(${hsla.h},${(hsla.s * 100).toFixed()}%,${hsla.l * 100}%, 1)`).toRgbString(),
-		saturationLeft: new TinyColor(`hsl(${hsla.h},0%,${hsla.l * 100}%)`).toRgbString(),
-		saturationRight: new TinyColor(`hsl(${hsla.h},100%,${hsla.l * 100}%)`).toRgbString(),
-		lightMiddle: new TinyColor(`hsl(${hsla.h.toFixed()},${(hsla.s * 100).toFixed()}%,50%)`).toRgbString(),
 	};
 
 	return (
@@ -67,7 +75,7 @@ export const HSLPicker: FC<HSLPickerProps> = (props: HSLPickerProps) => {
 				onChange={setSaturation}
 				step={1}
 				style={{
-					background: `linear-gradient(to right, ${backgroundColors.saturationLeft}, ${backgroundColors.saturationRight})`,
+					background: satGradient,
 				}}
 				value={Math.round(hsla.s * 100)}
 				valueLabelDisplay="auto"
@@ -83,7 +91,7 @@ export const HSLPicker: FC<HSLPickerProps> = (props: HSLPickerProps) => {
 				onChange={setLightness}
 				step={1}
 				style={{
-					background: `linear-gradient(to right, #000, ${backgroundColors.lightMiddle}, #FFF)`,
+					background: lightGradient,
 				}}
 				value={Math.round(hsla.l * 100)}
 				valueLabelDisplay="auto"
@@ -101,7 +109,7 @@ export const HSLPicker: FC<HSLPickerProps> = (props: HSLPickerProps) => {
 						onChange={setAlpha}
 						step={0.01}
 						style={{
-							background: `linear-gradient(to right, ${backgroundColors.alphaLeft}, ${backgroundColors.alphaRight})`,
+							background: alphaGradient,
 						}}
 						value={hsla.a}
 						valueLabelDisplay="auto"

@@ -10,12 +10,15 @@ import { List, Typography, Grid } from '@material-ui/core';
 import copy from 'clipboard-copy';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { copyEvent } from '../routes/Tracker';
 
 interface SwatchProps {
 	colors?: ColorObject[];
 	name: string;
 	showLabels: boolean;
 }
+
+const gaCategory = 'Color Tool';
 
 export const Swatch: FC<SwatchProps> = (props: SwatchProps) => {
 	const { colors, name, showLabels } = props;
@@ -30,11 +33,12 @@ export const Swatch: FC<SwatchProps> = (props: SwatchProps) => {
 				// I don't want someone going nuts like me and clicking this a thousand times and saturating my analytics :)
 				if (hex !== copied) {
 					dispatch(setCopied(hex));
+					copyEvent(true, gaCategory, hex);
 				}
 				toast(`${hex} copied to clipboard!`, toastOptions(hex, contrastColor));
 			},
 			(err) => {
-				dispatch(setCopied(`ERROR: ${err}`));
+				copyEvent(false, gaCategory, hex);
 			}
 		);
 	}, []);

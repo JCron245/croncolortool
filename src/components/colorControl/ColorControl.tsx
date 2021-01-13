@@ -5,6 +5,7 @@ import { HEXPicker } from './hexPicker/HexPicker';
 import { RGBPicker } from './rgbPicker/RgbPicker';
 import { HSLPicker } from './hslPicker/HslPicker';
 import { ColorMode } from '../colorMode/ColorMode';
+import './colorControl.scss';
 
 interface ColorControlProps {
 	disableAlpha?: boolean;
@@ -41,7 +42,7 @@ export const ColorControl: FC<ColorControlProps> = (props: ColorControlProps) =>
 	const backgroundColorHex = hex?.startsWith('#') ? hex : `#${hex}`;
 
 	return (
-		<Grid container direction="column" style={{ backgroundColor: backgroundColorHex, width: '100%' }}>
+		<Grid container direction="column" className="color-control-grid" style={{ backgroundColor: backgroundColorHex }}>
 			<Paper component="form" className="picker-form">
 				{title && <Typography component="h2">{title}</Typography>}
 				<HexColorPicker color={hex} onChange={onColorUpdateHex} className="custom-color-picker" />

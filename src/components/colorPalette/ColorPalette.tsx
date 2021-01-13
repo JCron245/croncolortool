@@ -1,16 +1,15 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { FC, useState, useCallback } from 'react';
+import { FC, useState } from 'react';
 import './colorPalette.scss';
 import { Button, GridList, GridListTile, withStyles, InputBase } from '@material-ui/core';
 import { random, TinyColor } from '@ctrl/tinycolor';
 import { findContrastingColor } from '../../utils/findContrast';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import DeleteIcon from '@material-ui/icons/Delete';
-import copy from 'clipboard-copy';
-import { toast } from 'react-toastify';
-import { toastOptions } from '../../utils/getToastOptions';
+import { copyColor } from '../../utils/copy';
 
 const SWATCH_LIMIT = 8;
+const WHITE = '#FFF';
+const BLACK = '#000';
 
 const CronTextField = withStyles({
 	root: {
@@ -45,12 +44,12 @@ const CronButton = withStyles({
 
 export const Palette: FC = () => {
 	const [swatches, setSwatches] = useState<any>([
-		{ value: '#0FADED', valid: true, contrast: '#000' },
-		{ value: '#be0fed', valid: true, contrast: '#FFF' },
-		{ value: '#ed4f0f', valid: true, contrast: '#000' },
-		{ value: '#3eed0f', valid: true, contrast: '#000' },
+		{ value: '#0FADED', valid: true, contrast: BLACK },
+		{ value: '#be0fed', valid: true, contrast: WHITE },
+		{ value: '#ed4f0f', valid: true, contrast: BLACK },
+		{ value: '#3eed0f', valid: true, contrast: BLACK },
 	]);
-	const [btnContrast, setBtnContrast] = useState('#000');
+	const [btnContrast, setBtnContrast] = useState(BLACK);
 
 	const addSwatch = () => {
 		if (swatches.length >= SWATCH_LIMIT) return;
@@ -79,25 +78,17 @@ export const Palette: FC = () => {
 		setBtnContrast(swatchCopy[swatchCopy.length - 1].contrast);
 	};
 
-	const copyColor = useCallback((color: any, contrastColor: string) => {
-		copy(color).then(
-			() => {
-				toast(`${color} copied to clipboard!`, toastOptions(color, contrastColor));
-			},
-			() => {
-				toast(`${color} failed to copy!`, toastOptions(color, contrastColor));
-			}
-		);
-	}, []);
-
 	return (
-		<div className="color-palette">
-			<GridList style={{ height: '100%', width: '100%' }} cols={swatches.length}>
+		<>
+			<GridList className="full-page" cols={swatches.length}>
 				{swatches.map((swatch: any, index: number): any => {
 					return (
 						<CronGridListStyle style={{ backgroundColor: swatch.value, color: swatch.contrast, height: '100%' }}>
 							<CronTextField value={swatch.value} onChange={(v: any) => updateSwatch(v, index)} />
-							<CronButton onClick={() => copyColor(swatch.value, swatch.contrast)} title="Copy color" style={{ color: 'currentColor' }}>
+							<CronButton
+								onClick={() => copyColor(swatch.value, swatch.contrast, 'Color Palette')}
+								title="Copy color"
+								style={{ color: 'currentColor' }}>
 								<FileCopyIcon />
 							</CronButton>
 							{swatches.length > 1 && (
@@ -123,6 +114,6 @@ export const Palette: FC = () => {
 				}}>
 				Add
 			</Button>
-		</div>
+		</>
 	);
 };

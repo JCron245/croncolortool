@@ -20,3 +20,19 @@ export const usePageTracking = () => {
 		}
 	}, [initialized, location]);
 };
+
+export const copyEvent = (success: boolean, category: string, color: string) => {
+	ReactGA.event({
+		category: category,
+		action: success ? 'Color Copied' : 'Color Failed To Copy',
+		label: `${color}`,
+	});
+};
+
+export const genericColorEvent = (category: string, action: string, color: string) => {
+	ReactGA.event({
+		category: category,
+		action: `${action}`,
+		label: `${color}`,
+	});
+};

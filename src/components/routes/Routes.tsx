@@ -1,13 +1,13 @@
 import { ReactElement, FC, lazy } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
-import { Palette } from '../colorPalette/ColorPalette';
-import { About } from '../about/About';
 
 const ColorTool = lazy(() => import('../colorTool/ColorTool').then((module) => ({ default: module.ColorTool })));
 const ContrastChecker = lazy(() => import('../contrastCompare/ContrastCompare').then((module) => ({ default: module.ContrastChecker })));
 const ColorBlender = lazy(() => import('../colorBlender/ColorBlender').then((module) => ({ default: module.ColorBlender })));
 const ColorRandom = lazy(() => import('../colorRandom/ColorRandom').then((module) => ({ default: module.RandomColor })));
+const Palette = lazy(() => import('../colorPalette/ColorPalette').then((module) => ({ default: module.Palette })));
+const About = lazy(() => import('../about/About').then((module) => ({ default: module.About })));
 
 interface AppRoute {
 	path: string;

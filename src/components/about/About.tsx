@@ -1,18 +1,19 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { FC } from 'react';
 import './about.scss';
-import { Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import pages from './about.json';
 import { AboutCard } from './aboutCard/AboutCard';
 
 export const About: FC = () => {
 	return (
-		<div className="about">
-			<Typography style={{ width: '100%' }}>This is a summary of why I did this</Typography>
-
+		<Grid container className="about full-page" justify="space-evenly" alignItems="center">
 			{pages.map((item: any) => {
-				return <AboutCard item={item} />;
+				return (
+					<Grid item>
+						<AboutCard item={item} />
+					</Grid>
+				);
 			})}
-		</div>
+		</Grid>
 	);
 };

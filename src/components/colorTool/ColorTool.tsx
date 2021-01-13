@@ -61,7 +61,7 @@ export const ColorTool: FC = () => {
 	);
 
 	return (
-		<Grid container style={{ minHeight: 'calc(100vh - 75px)' }}>
+		<Grid className="color-tool-grid" container>
 			<h1 className="sr-only">Color Tool</h1>
 			<Grid container item xs={12} sm={4} lg={3} xl={3}>
 				<ColorControl
