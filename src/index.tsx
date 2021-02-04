@@ -2,7 +2,6 @@ import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import { App } from './components/app/App';
-import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { configureStore, history } from './configureStore';
 import { ConnectedRouter } from 'connected-react-router';
@@ -17,6 +16,7 @@ const render = () => {
 			<Provider store={store}>
 				<ConnectedRouter history={history}>
 					<App />
+					fart
 				</ConnectedRouter>
 			</Provider>
 		</StrictMode>,
@@ -25,9 +25,6 @@ const render = () => {
 };
 
 render();
-
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.register();
 
 // Hot reloading
 if (module.hot) {
