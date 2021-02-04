@@ -16,7 +16,6 @@ const render = () => {
 			<Provider store={store}>
 				<ConnectedRouter history={history}>
 					<App />
-					fart
 				</ConnectedRouter>
 			</Provider>
 		</StrictMode>,
