@@ -45,7 +45,7 @@ const CronButton = withStyles({
 export const Palette: FC = () => {
 	const [swatches, setSwatches] = useState<any>([
 		{ value: '#0FADED', valid: true, contrast: BLACK },
-		{ value: '#be0fed', valid: true, contrast: WHITE },
+		{ value: '#be0fed', valid: true, contrast: WHITE }, // #bd193c
 		{ value: '#ed4f0f', valid: true, contrast: BLACK },
 		{ value: '#3eed0f', valid: true, contrast: BLACK },
 	]);
@@ -83,7 +83,9 @@ export const Palette: FC = () => {
 			<GridList className="full-page" cols={swatches.length}>
 				{swatches.map((swatch: any, index: number): any => {
 					return (
-						<CronGridListStyle style={{ backgroundColor: swatch.value, color: swatch.contrast, height: '100%' }}>
+						<CronGridListStyle
+							key={`${swatch.value}-${index}`}
+							style={{ backgroundColor: swatch.value, color: swatch.contrast, height: '100%' }}>
 							<CronTextField value={swatch.value} onChange={(v: any) => updateSwatch(v, index)} />
 							<CronButton
 								onClick={() => copyColor(swatch.value, swatch.contrast, 'Color Palette')}

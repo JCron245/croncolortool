@@ -8,7 +8,7 @@ import { TextField, FormControl, FormLabel } from '@material-ui/core';
 interface HEXPickerProps {
 	hex?: string;
 	mode: string;
-	onChange: any;
+	onChange: (color: string) => void;
 }
 
 const modeCheck = (hex: string, mode: string) => {
@@ -81,7 +81,7 @@ export const HEXPicker: FC<HEXPickerProps> = (props: HEXPickerProps) => {
 					variant="outlined"
 				/>
 			</FormControl>
-			{mode === 'hex8' && (
+			{mode === 'hex8' && rgba && (
 				<FormControl component="fieldset" fullWidth>
 					<FormLabel component="legend">
 						<Typography>Alpha</Typography>

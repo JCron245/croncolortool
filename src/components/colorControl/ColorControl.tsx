@@ -14,7 +14,7 @@ interface ColorControlProps {
 	isAlpha?: boolean;
 	mode?: string;
 	onColorUpdateHSLA?: (v: string) => void;
-	onColorUpdateHex?: (v: string) => void;
+	onColorUpdateHex: (v: string) => void;
 	onColorUpdateRgba?: (v: string) => void;
 	onModeChange?: (v: string) => void;
 	onShowLabelChange?: (v: boolean) => void;

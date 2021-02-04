@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC } from 'react';
+import { FC, ReactElement } from 'react';
 import { Card, Typography, CardContent, CardActions, Button, withStyles, CardActionArea, CardMedia } from '@material-ui/core';
 import random from '../../../assets/cc-random.png';
 import blender from '../../../assets/cc-blender.png';
@@ -9,11 +9,11 @@ import npm from '../../../assets/cc-npm.png';
 import tool from '../../../assets/cc-tool.png';
 import logo from '../../../assets/logo.png';
 import { AboutCardList } from './AboutCardList';
+import { CardInfo, CardList } from '../About';
 
 const CronCard = withStyles({
 	root: {
 		marginBottom: '2rem',
-		maxWidth: `485px`,
 		height: 'fit-content',
 		padding: '.5rem',
 	},
@@ -41,41 +41,43 @@ const getImgSrc = (image: string): string => {
 };
 
 export interface AboutCardProps {
-	item: any;
+	card: CardInfo;
 }
 
 export const AboutCard: FC<AboutCardProps> = (props: AboutCardProps) => {
-	const { item } = props;
-	const mediaSrc = getImgSrc(item.image);
+	const { card } = props;
+	const mediaSrc = getImgSrc(card.image);
 
 	return (
-		<CronCard elevation={3} key={item.title}>
+		<CronCard elevation={3} key={card.title}>
 			{mediaSrc &&
-				(item.link ? (
+				(card.link ? (
 					<CardActionArea>
-						<CardMedia className="about-card-media" image={mediaSrc} title={item.imageTitle} style={{ border: '1px solid #444' }} />
+						<CardMedia className="about-card-media" image={mediaSrc} title={card.imageTitle} style={{ border: '1px solid #444' }} />
 					</CardActionArea>
 				) : (
-					<CardMedia className="about-card-media" image={mediaSrc} title={item.imageTitle} style={{ border: '1px solid #444' }} />
+					<CardMedia className="about-card-media" image={mediaSrc} title={card.imageTitle} style={{ border: '1px solid #444' }} />
 				))}
 			<CardContent>
 				<Typography gutterBottom variant="h5" component="h2">
-					{item.title}
+					{card.title}
 				</Typography>
-				{item.description.map((paragraph: string) => {
+				{card.description.map((paragraph: string, index: number) => {
 					return (
-						<Typography variant="body2" color="textSecondary" component="p">
+						<Typography key={`${card.image}-description-${index}`} variant="body2" color="textSecondary" component="p">
 							{paragraph}
 						</Typography>
 					);
 				})}
 			</CardContent>
 			<CardContent>
-				{item.lists?.map((list: any): any => {
-					return <AboutCardList item={item} list={list} />;
-				})}
+				{card.lists?.map(
+					(list: CardList, index: number): ReactElement => {
+						return <AboutCardList key={`${card.image}-list-${index}`} list={list} />;
+					}
+				)}
 			</CardContent>
-			{item.link && (
+			{card.link && (
 				<CardActions>
 					<Button size="small" color="primary">
 						Try It Out

@@ -3,10 +3,10 @@ import { useLocation } from 'react-router-dom';
 import './app.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import { Header } from '../header/Header';
-import { Helmet } from 'react-helmet';
 import { ThemeProvider, CssBaseline, createMuiTheme } from '@material-ui/core';
 import { Routes } from '../routes/Routes';
 import { usePageTracking } from '../routes/Tracker';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const theme = createMuiTheme({
 	palette: {
@@ -18,10 +18,15 @@ const theme = createMuiTheme({
 	},
 });
 
+export interface MetaTag {
+	name: string;
+	content: string;
+}
+
 export const App = (): ReactElement => {
 	const location = useLocation();
 	const [title, setTitle] = useState<string>();
-	const [meta, setMeta] = useState<any>();
+	const [meta, setMeta] = useState<MetaTag[]>();
 	usePageTracking();
 
 	useEffect(() => {
@@ -70,14 +75,16 @@ export const App = (): ReactElement => {
 	}, [location]);
 
 	return (
-		<ThemeProvider theme={theme}>
-			<CssBaseline />
-			<Helmet title={title} meta={meta} />
-			<Header />
-			<Suspense fallback={<div>Loading...</div>}>
-				<Routes />
-			</Suspense>
-			<ToastContainer hideProgressBar={true} enableMultiContainer containerId="toasts-container" position={toast.POSITION.TOP_RIGHT} />
-		</ThemeProvider>
+		<HelmetProvider>
+			<ThemeProvider theme={theme}>
+				<CssBaseline />
+				<Helmet title={title} meta={meta} />
+				<Header />
+				<Suspense fallback={<div>Loading...</div>}>
+					<Routes />
+				</Suspense>
+				<ToastContainer hideProgressBar={true} enableMultiContainer containerId="toasts-container" position={toast.POSITION.TOP_RIGHT} />
+			</ThemeProvider>
+		</HelmetProvider>
 	);
 };

@@ -5,9 +5,9 @@ import { createRootReducer } from './redux/reducers/rootReducer';
 
 export const history = createBrowserHistory();
 
-export function configureStore(preloadedState?: any) {
+export function configureStore() {
 	const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-	const store = createStore(createRootReducer(history), preloadedState, composeEnhancer(applyMiddleware(routerMiddleware(history))));
+	const store = createStore(createRootReducer(history), undefined, composeEnhancer(applyMiddleware(routerMiddleware(history))));
 
 	// Hot reloading
 	if (module.hot) {

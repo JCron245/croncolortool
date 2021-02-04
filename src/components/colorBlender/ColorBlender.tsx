@@ -14,7 +14,7 @@ export const ColorBlender: FC = () => {
 	const [second, setSecond] = useState('#ed4f0f');
 	const [secondValid, setSecondValid] = useState(true);
 	const [gradient, setGradient] = useState(
-		'background: linear-gradient(90deg, rgb(15, 173, 237) 0%, rgb(15, 173, 237) 30%, rgb(126, 126, 126) 30%, rgb(126, 126, 126) 70%, rgb(237, 79, 15) 70%, rgb(237, 79, 15) 100%);'
+		'background: linear-gradient(90deg, rgb(15, 173, 237) 0%, rgb(15, 173, 237) 30%, rgb(126, 126, 126) 30%, rgb(126, 126, 126) 70%, rgb(237, 79, 15) 70%, rgb(237, 79, 15) 100%)'
 	);
 
 	useEffect(() => {
